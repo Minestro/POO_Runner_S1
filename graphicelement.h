@@ -1,8 +1,12 @@
 #ifndef GRAPHICELEMENT_H
 #define GRAPHICELEMENT_H
 
-class GraphicElement
+#include <SFML/Graphics.hpp>
+
+class GraphicElement:sf::Sprite
 {
+private:
+
 public:
     GraphicElement();
 };

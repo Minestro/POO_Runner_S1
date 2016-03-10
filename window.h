@@ -9,6 +9,7 @@ class Window: public sf::RenderWindow
 private:
 
 public:
+    Window(std::string title, int style);
     void saveConfig() const;
     void loadConfig();
 };

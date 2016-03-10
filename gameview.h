@@ -7,12 +7,12 @@
 #include "game.h"
 #include "window.h"
 
-class GameView:Window
+class GameView
 {
 private:
     Game *m_gameModel;
     std::map <MovableElement*, GraphicElement*> m_elementToGraphicElement;
-    RenderWindow *m_renderWindow;
+    Window *m_window;
 public:
     void draw() const;
     void treatEvent();

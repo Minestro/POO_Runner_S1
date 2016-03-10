@@ -5,11 +5,11 @@
 #include "menu.h"
 #include "window.h"
 
-class MenuView:Window
+class MenuView
 {
 private:
     Menu *m_menuModel;
-    RenderWindow *m_renderWindow;
+    Window *m_window;
 public:
     MenuView();
     void setModel(const Menu *model);

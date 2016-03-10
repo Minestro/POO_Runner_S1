@@ -11,10 +11,13 @@ SOURCES += main.cpp \
     menuview.cpp \
     movableelement.cpp \
     button.cpp \
-    renderwindow.cpp \
     obstacle.cpp \
     bonus.cpp \
-    menupage.cpp
+    menupage.cpp \
+    slidingbackground.cpp \
+    graphicelement.cpp \
+    gamecharacter.cpp \
+    window.cpp
 
 HEADERS += \
     game.h \
@@ -24,10 +27,13 @@ HEADERS += \
     menuview.h \
     movableelement.h \
     button.h \
-    renderwindow.h \
     obstacle.h \
     bonus.h \
-    menupage.h
+    menupage.h \
+    slidingbackground.h \
+    graphicelement.h \
+    gamecharacter.h \
+    window.h
 
 LIBS           += -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra

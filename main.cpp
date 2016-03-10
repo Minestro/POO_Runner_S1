@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    Window::RenderWindow superfenetre{sf::VideoMode(800, 600, 32), "Runner", sf::Style::Close};
+    Window superfenetre{"kikou", sf::Style::Resize};
     while (true)
     {
         superfenetre.clear();
