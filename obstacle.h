@@ -1,10 +1,14 @@
 #ifndef OBSTACLE_H
 #define OBSTACLE_H
 
-class Obstacle
+#include "movableelement.h"
+
+class Obstacle:Mov
 {
+private:
+    unsigned int m_dammage; //Le nombre de points de vie qu'enlève l'obstacle.
 public:
-    Obstacle();
+    unsigned int getDammage() const;
 };
 
 #endif // OBSTACLE_H

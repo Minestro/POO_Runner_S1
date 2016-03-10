@@ -1,10 +1,14 @@
 #ifndef BONUS_H
 #define BONUS_H
 
+#include "movableelement.h"
+
 class Bonus
 {
+private:
+    unsigned int m_type;    //Le type de bonus ou de maluce !!!
 public:
-    Bonus();
+    unsigned int getType() const;
 };
 
 #endif // BONUS_H
