@@ -14,10 +14,10 @@ private:
     std::time_t m_startTime;
     GameCharacter *m_character;
     Player *m_player;
-    std::vector<*MovableElement> m_objects;
+    std::vector<MovableElement*> m_objects;
 
 public:
-
+    void nextStep();
 };
 
 #endif // GAME_H
