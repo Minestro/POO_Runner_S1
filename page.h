@@ -4,7 +4,7 @@
 #include <vector>
 #include <button.h>
 
-class MenuPage
+class Page
 {
 private:
     std::vector <Button*> m_buttonsList;

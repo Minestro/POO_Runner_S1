@@ -2,4 +2,5 @@
 
 SlidingBackground::SlidingBackground()
 {
+
 }

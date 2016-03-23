@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    Window superfenetre{"kikou", sf::Style::Resize};
+    Window superfenetre{"kikou", sf::Style::Default};
     while (true)
     {
         superfenetre.clear();

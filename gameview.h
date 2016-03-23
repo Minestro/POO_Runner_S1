@@ -11,6 +11,7 @@ class GameView
 {
 private:
     Game *m_gameModel;
+
     std::map <MovableElement*, GraphicElement*> m_elementToGraphicElement;
     Window *m_window;
 public:
