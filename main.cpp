@@ -12,6 +12,7 @@ int main()
 {
     bool quitter = false;
     Window superfenetre{"Runner", sf::Style::Close};
+    GraphicElement::loadTextures();
     Game gameModel{};
     GameView gameView{};
     Menu menuModel;
@@ -22,6 +23,7 @@ int main()
     menuView.setWindow(&superfenetre);
     while (!quitter)
     {
+        gameView.synchronise();
         gameView.draw();
         quitter = gameView.treatEvent();
     }

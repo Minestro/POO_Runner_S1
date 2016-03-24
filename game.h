@@ -15,17 +15,20 @@ class Game
 {
 private:
     unsigned int m_score;
-    bool needGraphicElementsListUpdate;
     std::pair<float, float> m_size;
     std::time_t m_gameTime;
     GameCharacter *m_character;
     Player *m_player;
     std::vector<Obstacle*> m_obstacles;
     std::vector<Bonus*> m_bonus;
+    std::vector<const Element*> m_newElements;
+    std::vector<const Element*> m_deletedElements;
 
 public:
-    Game()=default;
+    Game();
     void nextStep();
+    std::vector<const Element*> &getDeletedElements();
+    std::vector<const Element*> &getNewElements();
 };
 
 #endif // GAME_H

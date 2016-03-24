@@ -1,5 +1,5 @@
 #include "graphicelement.h"
-#include "iostream"
+#include <iostream>
 
 std::vector<sf::Texture*> GraphicElement::m_listTextures;
 
@@ -7,6 +7,7 @@ GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, f
 {
     setTexture(*texture);
     setPosition(x, y);
+    //rescale();
 }
 
 GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, const sf::IntRect &textRect) : sf::Sprite::Sprite{}, m_size{width, height}, m_zIndex{zIndex}
@@ -14,6 +15,7 @@ GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, f
     setTexture(*texture);
     setTextureRect(textRect);
     setPosition(x, y);
+    //rescale();
 }
 
 void GraphicElement::rescale()
@@ -34,13 +36,15 @@ void GraphicElement::setSize(float width, float height)
 {
    m_size.first = width;
    m_size.second = height;
+   rescale();
 }
 
 
 void GraphicElement::loadTextures(std::string themeName)
 {
+    m_listTextures.clear();
     std::vector<sf::Texture*>::iterator iterator = m_listTextures.begin();
-    for (unsigned int i=0; i<sizeof(FILES_LIST)/sizeof(std::string); i++)
+    for (unsigned int i=0; i<2; i++)
     {
         iterator = m_listTextures.insert(iterator, new sf::Texture);
         if (!((*iterator)->loadFromFile("Textures/" + themeName + "/" + FILES_LIST[i])))

@@ -12,13 +12,14 @@ class GameView
 {
 private:
     Game *m_gameModel;
-    std::map <Element*, GraphicElement*> m_elementToGraphicElement;
-    std::set <GraphicElement*> m_graphicElementsList;
+    std::map <const Element*, GraphicElement*> m_elementToGraphicElement;
+    std::set <const GraphicElement*> m_graphicElementsList;
     Window *m_window;
 public:
     GameView();
-    void draw() const;
+    void draw();
     bool treatEvent();
+    void fillGraphicElementsList();
     void synchronise();
     void setModel(Game *model);
     void setWindow(Window *window);
