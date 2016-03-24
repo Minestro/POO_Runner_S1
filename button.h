@@ -14,6 +14,7 @@ private:
     bool m_isClickable; //On peut immaginer que le bouton soit non cliquable par exemple qu'il soir grisé.
 public:
     bool isHover(std::pair <float, float>) const;   //Prend la position de la souris et retourne vraie si la souris se trouve sur le bouton
+    void onClick();
 };
 
 #endif // BUTTON_H

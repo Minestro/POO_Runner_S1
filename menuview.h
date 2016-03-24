@@ -12,7 +12,8 @@ private:
     Window *m_window;
 public:
     MenuView();
-    void setModel(const Menu *model);
+    void setModel(Menu *model);
+    void setWindow(Window *window);
     void treatEvent();
     void draw() const;
 };

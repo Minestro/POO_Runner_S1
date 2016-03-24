@@ -1,25 +1,29 @@
 #include <iostream>
 #include "window.h"
+#include "game.h"
+#include "gameview.h"
+#include "graphicelement.h"
+#include "menu.h"
+#include "menuview.h"
 
 using namespace std;
 
 int main()
 {
-    bool yolo = true;
-    Window superfenetre{"kikou", sf::Style::Default};
-    sf::Event event;
-    while (yolo)
+    bool quitter = false;
+    Window superfenetre{"Runner", sf::Style::Close};
+    Game gameModel{};
+    GameView gameView{};
+    Menu menuModel;
+    MenuView menuView;
+    gameView.setModel(&gameModel);
+    gameView.setWindow(&superfenetre);
+    menuView.setModel(&menuModel);
+    menuView.setWindow(&superfenetre);
+    while (!quitter)
     {
-        while (superfenetre.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-            {
-                superfenetre.close();
-                yolo = false;
-            }
-        }
-        superfenetre.clear();
-        superfenetre.display();
+        gameView.draw();
+        quitter = gameView.treatEvent();
     }
     return 0;
 }

@@ -11,13 +11,14 @@ class GameView
 {
 private:
     Game *m_gameModel;
-
     std::map <MovableElement*, GraphicElement*> m_elementToGraphicElement;
     Window *m_window;
 public:
+    GameView();
     void draw() const;
-    void treatEvent();
-    void setModel(const Game *model);
+    bool treatEvent();
+    void setModel(Game *model);
+    void setWindow(Window *window);
 };
 
 #endif // GAMEVIEW_H

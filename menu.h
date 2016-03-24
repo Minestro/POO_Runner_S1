@@ -3,12 +3,13 @@
 
 #include "page.h"
 
-#define accueil 0
-#define options 1
+const int MENU_SIZE_W = 800;
+const int MENU_SIZE_H = 600;
 
 class Menu
 {
 private:
+    std::pair<float, float> m_size;
     std::vector <Page*> m_pageList;
     int m_activePage;
 public:
