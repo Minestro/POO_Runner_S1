@@ -3,17 +3,30 @@
 
 std::vector<sf::Texture*> GraphicElement::m_listTextures;
 
-GraphicElement::GraphicElement(float width, float height, float x, float y, const sf::Texture &texture) : sf::Sprite::Sprite{}, m_size{width, height}
+GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture) : sf::Sprite::Sprite{}, m_size{width, height}, m_zIndex{zIndex}
 {
-    setTexture(texture);
+    setTexture(*texture);
+    setPosition(x, y);
+}
+
+GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, const sf::IntRect &textRect) : sf::Sprite::Sprite{}, m_size{width, height}, m_zIndex{zIndex}
+{
+    setTexture(*texture);
+    setTextureRect(textRect);
     setPosition(x, y);
 }
 
 void GraphicElement::rescale()
 {
     sf::FloatRect bb = this->getLocalBounds();
-    int width_factor = m_size.first / bb.width;
     int height_factor = m_size.second / bb.height;
+    int width_factor;
+    if (this->getTexture()->isRepeated())
+    {
+        width_factor = (m_size.first / bb.width)/2;
+    } else {
+        width_factor = m_size.first / bb.width;
+    }
     this->setScale(width_factor, height_factor);
 }
 
@@ -33,6 +46,8 @@ void GraphicElement::loadTextures(std::string themeName)
         if (!((*iterator)->loadFromFile("Textures/" + themeName + "/" + FILES_LIST[i])))
         {
             std::cout << "Erreur lors du chargement de l'image" << "Textures/" << themeName << "/" << FILES_LIST[i];
+        } else {
+            (*iterator)->setSmooth(true);
         }
     }
 }
@@ -46,4 +61,23 @@ void GraphicElement::clearTextures()
         ++iterator;
     }
     m_listTextures.clear();
+}
+
+std::pair<float, float> GraphicElement::getSize() const
+{
+    return m_size;
+}
+
+unsigned int GraphicElement::getZIndex() const
+{
+    return m_zIndex;
+}
+
+bool GraphicElement::operator==(const GraphicElement &ge) const
+{
+    return (this->getTexture() == ge.getTexture() && this->getSize() == ge.getSize() && this->getPosition() == ge.getPosition() && this->getTexture()->isRepeated() == ge.getTexture()->isRepeated() && this->m_zIndex == ge.m_zIndex);
+}
+bool GraphicElement::operator<(const GraphicElement &ge) const
+{
+    return(this->m_zIndex < ge.m_zIndex);
 }

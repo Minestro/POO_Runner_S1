@@ -15,8 +15,9 @@ class Game
 {
 private:
     unsigned int m_score;
+    bool needGraphicElementsListUpdate;
     std::pair<float, float> m_size;
-    std::time_t m_startTime;
+    std::time_t m_gameTime;
     GameCharacter *m_character;
     Player *m_player;
     std::vector<Obstacle*> m_obstacles;

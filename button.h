@@ -1,14 +1,13 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
+#include "element.h"
 #include <vector>
 #include <string>
 
-class Button
+class Button: public Element
 {
 private:
-    std::pair <float, float> m_size;    //first : w, second : h
-    std::pair <float, float> m_position;    //first : x, second : y
     std::string m_text;
     unsigned int m_actionOnClick;   //Code de l'action à réaliser après etre cliqué.
     bool m_isClickable; //On peut immaginer que le bouton soit non cliquable par exemple qu'il soir grisé.

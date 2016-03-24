@@ -1,13 +1,13 @@
 #include "window.h"
 #include <iostream>
 
-Window::Window(std::string title, int style): Window::RenderWindow{}
+Window::Window(std::string title, int style): Window::RenderWindow{}, m_fullScreen{0}
 {
     GraphicElement::loadTextures();
     sf::Vector2u size;
     size.x = sf::VideoMode::getDesktopMode().width;
     size.y = sf::VideoMode::getDesktopMode().height;
-    loadConfig();
+    //loadConfig();
     if (m_fullScreen)
     {
         this->create(sf::VideoMode(size.x, size.y), title, sf::Style::Fullscreen);
