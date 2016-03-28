@@ -7,7 +7,7 @@ GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, f
 {
     setTexture(*texture);
     setPosition(x, y);
-    //rescale();
+    rescale();
 }
 
 GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, const sf::IntRect &textRect) : sf::Sprite::Sprite{}, m_size{width, height}, m_zIndex{zIndex}
@@ -15,14 +15,14 @@ GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, f
     setTexture(*texture);
     setTextureRect(textRect);
     setPosition(x, y);
-    //rescale();
+    rescale();
 }
 
 void GraphicElement::rescale()
 {
     sf::FloatRect bb = this->getLocalBounds();
-    int height_factor = m_size.second / bb.height;
-    int width_factor;
+    float height_factor = m_size.second / bb.height;
+    float width_factor;
     if (this->getTexture()->isRepeated())
     {
         width_factor = (m_size.first / bb.width)/2;

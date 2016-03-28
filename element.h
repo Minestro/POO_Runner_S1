@@ -9,13 +9,15 @@ class Element
 private:
     std::pair <float, float> m_position; //first : x, second : y
     std::pair <float, float> m_size;  //first : w, second : h
+    unsigned int m_zIndex;
     unsigned int m_spriteID;
 public:
     Element()= default;
-    Element(float x, float y, float w, float h, unsigned int spriteID);
+    Element(int zIndex, float x, float y, float w, float h, unsigned int spriteID);
     std::pair<float, float> getSize() const;
     std::pair<float, float> getPosition() const;
     unsigned int getSpriteID() const;
+    unsigned int getzIndex() const;
 };
 
 #endif // ELEMENT_H

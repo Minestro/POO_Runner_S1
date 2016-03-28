@@ -44,23 +44,24 @@ void GameView::draw()
         m_window->draw(**iterator);
         ++iterator;
     }
-    GraphicElement ge{0, 800, 100, 0, 0, GraphicElement::m_listTextures[0]};
-    m_window->draw(ge);
     m_window->display();
 }
 
 void GameView::synchronise()
 {
+    //Si le gameModel contient des nouveaux élements on les ajoutes à la liste elementToGraphicElement en lui associant un GraphicElement
     if (m_gameModel->getNewElements().size() > 0)
     {
         std::vector<const Element*>::const_iterator iterator = m_gameModel->getNewElements().begin();
         while (iterator != m_gameModel->getNewElements().end())
         {
-            m_elementToGraphicElement.insert(std::make_pair(*iterator, new GraphicElement{0, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures[(**iterator).getSpriteID()]}));
+            m_elementToGraphicElement.insert(std::make_pair(*iterator, new GraphicElement{(**iterator).getzIndex(), (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures[(**iterator).getSpriteID()]}));
             ++iterator;
         }
-        m_gameModel->getDeletedElements().clear();
+        m_gameModel->getNewElements().clear();
     }
+
+    //Pareil mais si des élements ont été supprimés
     if (m_gameModel->getDeletedElements().size() > 0)
     {
         std::vector<const Element*>::const_iterator iterator = m_gameModel->getDeletedElements().begin();
@@ -77,6 +78,8 @@ void GameView::synchronise()
         }
         m_gameModel->getDeletedElements().clear();
     }
+
+    //Une fois que l'on a mis à jour notre tableau de correspondance elementToGraphicElement on met à jour leurs positions et leurs tailles
     std::map <const Element*, GraphicElement*>::const_iterator iterator = m_elementToGraphicElement.begin();
     while(iterator != m_elementToGraphicElement.end())
     {
@@ -88,11 +91,12 @@ void GameView::synchronise()
 
 void GameView::fillGraphicElementsList()
 {
+    //Cette fonction ajoute dans un set tous les graphicElements du tableau de correspondance elementToGraphicElement et qui seront triés suivant leur z-index
     m_graphicElementsList.clear();
     std::map <const Element*, GraphicElement*>::const_iterator iterator = m_elementToGraphicElement.begin();
     while(iterator != m_elementToGraphicElement.end())
     {
-        m_graphicElementsList.insert(m_graphicElementsList.begin(), iterator->second);
+        m_graphicElementsList.insert(iterator->second);
         ++iterator;
     }
 }
