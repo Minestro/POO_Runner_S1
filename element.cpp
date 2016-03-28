@@ -1,6 +1,6 @@
 #include "element.h"
 
-Element::Element(int zIndex, float x, float y, float w, float h, unsigned int spriteID): m_position{x, y}, m_size{w, h}, m_spriteID{spriteID}, m_zIndex{zIndex}
+Element::Element(float x, float y, float w, float h, unsigned int spriteID, unsigned int zIndex, bool isAnimated): m_isAnimated{isAnimated}, m_position{x, y}, m_size{w, h}, m_zIndex{zIndex}, m_spriteID{spriteID}
 {
 
 }
@@ -22,4 +22,9 @@ unsigned int Element::getSpriteID() const
 unsigned int Element::getzIndex() const
 {
     return m_zIndex;
+}
+
+bool Element::isAnimated() const
+{
+    return m_isAnimated;
 }

@@ -8,14 +8,14 @@
 #include "obstacle.h"
 #include "bonus.h"
 
-const int GAME_SIZE_W = 800;
-const int GAME_SIZE_H = 600;
+const int GAME_SIZE_W = 1280;
+const int GAME_SIZE_H = 720;
 
 class Game
 {
 private:
     unsigned int m_score;
-    std::pair<float, float> m_size;
+    std::pair<int, int> m_size;
     std::time_t m_gameTime;
     GameCharacter *m_character;
     Player *m_player;
@@ -27,6 +27,7 @@ private:
 public:
     Game();
     void nextStep();
+    std::pair<int, int> getSize() const;
     std::vector<const Element*> &getDeletedElements();
     std::vector<const Element*> &getNewElements();
 };

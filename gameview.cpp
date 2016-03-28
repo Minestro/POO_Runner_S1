@@ -17,6 +17,9 @@ bool GameView::treatEvent()
             m_window->close();
             quitter = true;
             break;
+        case sf::Event::Resized :
+            synchronise();
+            break;
         default:
             break;
         }
@@ -49,13 +52,22 @@ void GameView::draw()
 
 void GameView::synchronise()
 {
+    std::pair<float, float> viewRatio;
+    viewRatio.first = (m_window->getSize().x * 1.0) / (m_gameModel->getSize().first * 1.0);
+    viewRatio.second = (m_window->getSize().y * 1.0) / (m_gameModel->getSize().second * 1.0);
+
     //Si le gameModel contient des nouveaux élements on les ajoutes à la liste elementToGraphicElement en lui associant un GraphicElement
     if (m_gameModel->getNewElements().size() > 0)
     {
         std::vector<const Element*>::const_iterator iterator = m_gameModel->getNewElements().begin();
         while (iterator != m_gameModel->getNewElements().end())
         {
-            m_elementToGraphicElement.insert(std::make_pair(*iterator, new GraphicElement{(**iterator).getzIndex(), (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures[(**iterator).getSpriteID()]}));
+            if ((**iterator).isAnimated())
+            {
+
+            } else {
+                m_elementToGraphicElement.insert(std::make_pair(*iterator, new GraphicElement{(**iterator).getzIndex(), (**iterator).getSize().first * viewRatio.first, (**iterator).getSize().second * viewRatio.second, (**iterator).getPosition().first * viewRatio.first, (**iterator).getPosition().second * viewRatio.second, GraphicElement::m_listTextures[(**iterator).getSpriteID()]}));
+            }
             ++iterator;
         }
         m_gameModel->getNewElements().clear();
@@ -83,8 +95,8 @@ void GameView::synchronise()
     std::map <const Element*, GraphicElement*>::const_iterator iterator = m_elementToGraphicElement.begin();
     while(iterator != m_elementToGraphicElement.end())
     {
-        iterator->second->setSize(iterator->first->getSize().first, iterator->first->getSize().second);
-        iterator->second->setPosition(iterator->first->getPosition().first, iterator->first->getPosition().second);
+        iterator->second->setSize(iterator->first->getSize().first * viewRatio.first, iterator->first->getSize().second * viewRatio.second);
+        iterator->second->setPosition(iterator->first->getPosition().first * viewRatio.first, iterator->first->getPosition().second * viewRatio.second);
         ++iterator;
     }
 }

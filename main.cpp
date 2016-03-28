@@ -11,7 +11,7 @@ using namespace std;
 int main()
 {
     bool quitter = false;
-    Window superfenetre{"Runner", sf::Style::Close};
+    Window superfenetre{"Runner", sf::Style::Default};
     GraphicElement::loadTextures();
     Game gameModel{};
     GameView gameView{};
