@@ -14,7 +14,7 @@ private:
     bool m_fullScreen;
 public:
     Window()=default;
-    Window(std::string title, int style);
+    Window(std::string title, int style, float modelSizeW, float modelSizeH);
     ~Window();
     sf::Event *getEvent();
     void saveConfig() const;
