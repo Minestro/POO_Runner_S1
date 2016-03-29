@@ -11,10 +11,7 @@
 
 struct compGraphicElement
 {
-    bool operator()(const GraphicElement *g1, const GraphicElement *g2) const
-    {
-        return (*g1)<(*g2);
-    }
+    bool operator()(const GraphicElement *g1, const GraphicElement *g2) const;
 };
 
 class GameView

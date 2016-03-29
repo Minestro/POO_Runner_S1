@@ -112,3 +112,10 @@ void GameView::fillGraphicElementsList()
         ++iterator;
     }
 }
+
+bool compGraphicElement::operator ()(const GraphicElement *g1, const GraphicElement *g2) const
+{
+    {
+        return (*g1)<(*g2);
+    }
+}
