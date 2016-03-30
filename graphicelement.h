@@ -1,16 +1,14 @@
 #ifndef GRAPHICELEMENT_H
 #define GRAPHICELEMENT_H
-#define BACKGROUND_TEXTURE 0
-#define BUTTON_TEXTURE 1
 
 #include <SFML/Graphics.hpp>
 #include <list>
 
-const std::string FILES_LIST[] = {"city.png", "background.png"};
+const std::string FILES_LIST[] = {"city.png", "city_1.png", "city_2.png", "background.png", "character.png", "bonus.png", "buttons.png", "obstacles.png", "obstacles_block.png", "dead.png", "life.png", "logo.jpeg"};
 
 class GraphicElement: public sf::Sprite
 {
-private:
+protected:
     std::pair<float, float> m_size;
     unsigned int m_zIndex;
 public:
@@ -24,7 +22,7 @@ public:
     bool operator==(const GraphicElement &ge) const;
     bool operator<(const GraphicElement &ge) const;
 
-    static std::vector<sf::Texture*> m_listTextures;
+    static std::map<std::string, sf::Texture*> m_listTextures;
     static void loadTextures(std::string themeName="Default");
     static void clearTextures();
 };

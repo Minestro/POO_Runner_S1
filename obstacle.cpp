@@ -9,3 +9,8 @@ unsigned int Obstacle::getType() const
 {
     return m_type;
 }
+
+std::string Obstacle::getClassName() const
+{
+    return "Obstacle";
+}

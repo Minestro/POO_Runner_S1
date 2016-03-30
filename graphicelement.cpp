@@ -1,7 +1,7 @@
 #include "graphicelement.h"
 #include <iostream>
 
-std::vector<sf::Texture*> GraphicElement::m_listTextures;
+std::map<std::string, sf::Texture*> GraphicElement::m_listTextures;
 
 GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture) : sf::Sprite::Sprite{}, m_size{width, height}, m_zIndex{zIndex}
 {
@@ -20,7 +20,7 @@ GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, f
 
 void GraphicElement::rescale()
 {
-    sf::FloatRect bb = this->getLocalBounds();
+    /*sf::FloatRect bb = this->getLocalBounds();
     float height_factor = m_size.second / bb.height;
     float width_factor;
     if (this->getTexture()->isRepeated())
@@ -29,7 +29,7 @@ void GraphicElement::rescale()
     } else {
         width_factor = m_size.first / bb.width;
     }
-    this->setScale(width_factor, height_factor);
+    this->setScale(width_factor, height_factor);*/
 }
 
 void GraphicElement::setSize(float width, float height)
@@ -43,25 +43,25 @@ void GraphicElement::setSize(float width, float height)
 void GraphicElement::loadTextures(std::string themeName)
 {
     m_listTextures.clear();
-    std::vector<sf::Texture*>::iterator iterator = m_listTextures.begin();
-    for (unsigned int i=0; i<2; i++)
+    std::map<std::string, sf::Texture*>::iterator iterator = m_listTextures.begin();
+    for (unsigned int i=0; i<12; i++)
     {
-        iterator = m_listTextures.insert(iterator, new sf::Texture);
-        if (!((*iterator)->loadFromFile("Textures/" + themeName + "/" + FILES_LIST[i])))
+        iterator = m_listTextures.insert(iterator, std::make_pair(FILES_LIST[i], new sf::Texture));
+        if (!(iterator->second->loadFromFile("Textures/" + themeName + "/" + FILES_LIST[i])))
         {
             std::cout << "Erreur lors du chargement de l'image" << "Textures/" << themeName << "/" << FILES_LIST[i];
         } else {
-            (*iterator)->setSmooth(true);
+            iterator->second->setSmooth(true);
         }
     }
 }
 
 void GraphicElement::clearTextures()
 {
-    std::vector<sf::Texture*>::iterator iterator = m_listTextures.begin();
+    std::map<std::string, sf::Texture*>::iterator iterator = m_listTextures.begin();
     while (iterator != m_listTextures.end())
     {
-        delete *iterator;
+        delete iterator->second;
         ++iterator;
     }
     m_listTextures.clear();

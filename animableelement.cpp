@@ -1,9 +1,10 @@
 #include "animableelement.h"
+#include <iostream>
 
-AnimableElement::AnimableElement(unsigned int zIndex, int nbLignes, int nbColonnes, float width, float height, float x, float y, const sf::Texture *texture)
-    : GraphicElement::GraphicElement{zIndex, width, height, x, y, texture}, m_nbLignes{nbLignes}, m_nbColonnes{nbColonnes}, m_activeLigne{1}, m_activeColonne{1}
+AnimableElement::AnimableElement(unsigned int zIndex, int nbLignes, int nbColonnes, float width, float height, float x, float y, const sf::Texture *texture,  int activeLigne, int activeColonne)
+    : GraphicElement::GraphicElement{zIndex, width, height, x, y, texture, sf::IntRect{(int)((activeColonne-1) * (texture->getSize().x / nbColonnes)), (int) ((activeLigne-1) * (texture->getSize().y / nbLignes)), (int)texture->getSize().x / nbColonnes, (int)texture->getSize().y / nbLignes}}, m_nbLignes{nbLignes}, m_nbColonnes{nbColonnes}, m_activeLigne{activeLigne}, m_activeColonne{activeColonne}
 {
-    setTextureRect(sf::IntRect{0, 0, texture->getSize().x / m_nbLignes, texture->getSize().y / m_nbColonnes});
+
 }
 void AnimableElement::animate()
 {

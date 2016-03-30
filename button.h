@@ -14,6 +14,7 @@ private:
 public:
     bool isHover(std::pair <float, float>) const;   //Prend la position de la souris et retourne vraie si la souris se trouve sur le bouton
     void onClick();
+    std::string getClassName() const override;
 };
 
 #endif // BUTTON_H

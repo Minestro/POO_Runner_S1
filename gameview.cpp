@@ -58,14 +58,21 @@ void GameView::synchronise()
         std::vector<const Element*>::const_iterator iterator = m_gameModel->getNewElements().begin();
         while (iterator != m_gameModel->getNewElements().end())
         {
-            switch (typeid(**iterator).name())
+            std::string className = (**iterator).getClassName();
+            if (className == "GameCharacter")
             {
-                case "Element":
-                    m_elementToGraphicElement.insert(std::make_pair(*iterator, new GraphicElement{10, 1, 1, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures[(**iterator).getSpriteID()]}));
-                break;
-                case "GameCharacter":
-                    m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures[(**iterator).getSpriteID()]}));
-                break;
+                m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, 1, 8, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["character.png"]}));
+            } else if (className == "Obstacle")
+            {
+                m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, 1, 1, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["city.png"]}));
+            } else if (className == "MovableElement")
+            {
+                m_elementToGraphicElement.insert(std::make_pair(*iterator, new GraphicElement{10, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["city.png"]}));
+            } else if (className == "Element")
+            {
+                m_elementToGraphicElement.insert(std::make_pair(*iterator, new GraphicElement{10, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["city.png"]}));
+            } else {
+
             }
             ++iterator;
         }

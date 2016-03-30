@@ -9,6 +9,7 @@ private:
     unsigned int m_type;    //Le type de bonus ou de maluce !!!
 public:
     unsigned int getType() const;
+    std::string getClassName() const override;
 };
 
 #endif // BONUS_H
