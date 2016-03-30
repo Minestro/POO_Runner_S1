@@ -60,8 +60,11 @@ void GameView::synchronise()
         {
             switch (typeid(**iterator).name())
             {
+                case "Element":
+                    m_elementToGraphicElement.insert(std::make_pair(*iterator, new GraphicElement{10, 1, 1, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures[(**iterator).getSpriteID()]}));
+                break;
                 case "GameCharacter":
-                    m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, 1, 1, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures[(**iterator).getSpriteID()]}));
+                    m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures[(**iterator).getSpriteID()]}));
                 break;
             }
             ++iterator;

@@ -1,6 +1,6 @@
 #include "element.h"
 
-Element::Element(float x, float y, float w, float h, unsigned int spriteID, unsigned int zIndex, bool isAnimated): m_isAnimated{isAnimated}, m_position{x, y}, m_size{w, h}, m_zIndex{zIndex}, m_spriteID{spriteID}
+Element::Element(float x, float y, float w, float h): m_position{x, y}, m_size{w, h}
 {
 
 }
