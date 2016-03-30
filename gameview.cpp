@@ -52,21 +52,17 @@ void GameView::draw()
 
 void GameView::synchronise()
 {
-    /*std::pair<float, float> viewRatio;
-    viewRatio.first = (m_window->getSize().x * 1.0) / (m_gameModel->getSize().first * 1.0);
-    viewRatio.second = (m_window->getSize().y * 1.0) / (m_gameModel->getSize().second * 1.0);*/
-
     //Si le gameModel contient des nouveaux élements on les ajoutes à la liste elementToGraphicElement en lui associant un GraphicElement
     if (m_gameModel->getNewElements().size() > 0)
     {
         std::vector<const Element*>::const_iterator iterator = m_gameModel->getNewElements().begin();
         while (iterator != m_gameModel->getNewElements().end())
         {
-            if ((**iterator).isAnimated())
+            switch (typeid(**iterator).name())
             {
-
-            } else {
-                m_elementToGraphicElement.insert(std::make_pair(*iterator, new GraphicElement{(**iterator).getzIndex(), (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures[(**iterator).getSpriteID()]}));
+                case "GameCharacter":
+                    m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, 1, 1, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures[(**iterator).getSpriteID()]}));
+                break;
             }
             ++iterator;
         }

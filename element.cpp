@@ -13,18 +13,3 @@ std::pair<float, float> Element::getPosition() const
 {
     return m_position;
 }
-
-unsigned int Element::getSpriteID() const
-{
-    return m_spriteID;
-}
-
-unsigned int Element::getzIndex() const
-{
-    return m_zIndex;
-}
-
-bool Element::isAnimated() const
-{
-    return m_isAnimated;
-}

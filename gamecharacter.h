@@ -3,7 +3,7 @@
 
 #include "movableelement.h"
 
-class GameCharacter:MovableElement
+class GameCharacter: public MovableElement
 {
 private:
     unsigned int m_life;

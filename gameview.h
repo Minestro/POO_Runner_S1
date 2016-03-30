@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <set>
+#include <typeinfo>
 #include "movableelement.h"
 #include "animableelement.h"
 #include "element.h"

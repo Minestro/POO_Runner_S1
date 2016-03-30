@@ -3,7 +3,7 @@
 
 #include "movableelement.h"
 
-class Bonus
+class Bonus: public MovableElement
 {
 private:
     unsigned int m_type;    //Le type de bonus ou de maluce !!!
