@@ -15,7 +15,7 @@ public:
     virtual std::string getClassName() const;
     std::pair<float, float> getSize() const;
     std::pair<float, float> getPosition() const;
-    bool collision(const *Element) const;
+    bool collision(const Element *el) const;
 };
 
 #endif // ELEMENT_H

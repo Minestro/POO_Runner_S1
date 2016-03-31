@@ -8,13 +8,15 @@ AnimableElement::AnimableElement(unsigned int zIndex, int nbLignes, int nbColonn
 }
 void AnimableElement::animate()
 {
-
-    if( (m_activeColonne%m_nbColonnes) <0 )
+    if( (m_activeColonne%m_nbColonnes) > 0 )
     {
         m_activeColonne++;
     }
     else
+    {
         m_activeColonne=1;
+    }
+    setTextureRect(sf::IntRect{(int)((m_activeColonne-1) * (getTexture()->getSize().x / m_nbColonnes)), (int) ((m_activeLigne-1) * (getTexture()->getSize().y / m_nbLignes)), (int)getTexture()->getSize().x / m_nbColonnes, (int)getTexture()->getSize().y / m_nbLignes});
 }
 
 void AnimableElement::setRectPos(int ligne, int colonne)

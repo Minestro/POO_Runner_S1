@@ -103,6 +103,7 @@ void GameView::synchronise()
     {
         iterator->second->setSize(iterator->first->getSize().first, iterator->first->getSize().second);
         iterator->second->setPosition(iterator->first->getPosition().first, iterator->first->getPosition().second);
+        iterator->second->animate();
         ++iterator;
     }
 }

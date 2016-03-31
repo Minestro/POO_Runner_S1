@@ -20,7 +20,7 @@ GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, f
 
 void GraphicElement::rescale()
 {
-    /*sf::FloatRect bb = this->getLocalBounds();
+    sf::FloatRect bb = this->getLocalBounds();
     float height_factor = m_size.second / bb.height;
     float width_factor;
     if (this->getTexture()->isRepeated())
@@ -29,7 +29,7 @@ void GraphicElement::rescale()
     } else {
         width_factor = m_size.first / bb.width;
     }
-    this->setScale(width_factor, height_factor);*/
+    this->setScale(width_factor, height_factor);
 }
 
 void GraphicElement::setSize(float width, float height)
@@ -81,7 +81,13 @@ bool GraphicElement::operator==(const GraphicElement &ge) const
 {
     return (this->getTexture() == ge.getTexture() && this->getSize() == ge.getSize() && this->getPosition() == ge.getPosition() && this->getTexture()->isRepeated() == ge.getTexture()->isRepeated() && this->m_zIndex == ge.m_zIndex);
 }
+
 bool GraphicElement::operator<(const GraphicElement &ge) const
 {
     return(this->m_zIndex < ge.m_zIndex);
+}
+
+void GraphicElement::animate()
+{
+
 }

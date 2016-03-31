@@ -15,8 +15,9 @@ public:
     GraphicElement() = default;
     GraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture);
     GraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, const sf::IntRect &textRect);
-    void rescale();
+    virtual void rescale();
     void setSize(float width, float height);
+    virtual void animate();
     std::pair<float, float> getSize() const;
     unsigned int getZIndex() const;
     bool operator==(const GraphicElement &ge) const;

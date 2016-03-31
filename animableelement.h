@@ -13,7 +13,7 @@ private:
 public:
     AnimableElement() = default;
     AnimableElement(unsigned int zIndex, int nbLignes, int nbColonnes, float width, float height, float x, float y, const sf::Texture *texture, int activeLigne = 1, int activeColonne = 1);
-    void animate();
+    void animate() override;
     void setRectPos(int ligne, int colonne);
 };
 
