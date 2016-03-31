@@ -12,7 +12,7 @@ protected:
 public:
     MovableElement(float x, float y, float w, float h, float mx, float my);
     virtual std::string getClassName() const =0;
-    void move() const;
+    virtual void move();
 };
 
 #endif // MOVABLEELEMENT_H

@@ -9,9 +9,12 @@ class Background: public Element
 private:
     bool m_isSliding;
     std::string  m_backgroundFileName;
+    sf::Clock m_speedClock;
+    unsigned int m_speedPeriod;
 public:
-    Background(std::string backgroundFileName, bool isSliding = 0);
+    Background(std::string backgroundFileName, bool isSliding = 0, unsigned int speedPeriod = 0);
     std::string getBackgroundFileName() const;
+    void slide();
     std::string getClassName() const;
 };
 

@@ -8,9 +8,7 @@
 #include "obstacle.h"
 #include "bonus.h"
 #include "background.h"
-
-const int GAME_SIZE_W = 1280;
-const int GAME_SIZE_H = 720;
+#include "const.h"
 
 class Game
 {
@@ -31,6 +29,7 @@ public:
     std::pair<int, int> getSize() const;
     std::vector<const Element*> &getDeletedElements();
     std::vector<const Element*> &getNewElements();
+    GameCharacter *getCharacter();
 };
 
 #endif // GAME_H

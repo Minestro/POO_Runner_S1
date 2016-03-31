@@ -14,6 +14,7 @@ public:
     Element(float x, float y, float w, float h);
     virtual std::string getClassName() const=0;
     std::pair<float, float> getSize() const;
+    void setSize(float w, float h);
     std::pair<float, float> getPosition() const;
     bool collision(const Element *el) const;
 };

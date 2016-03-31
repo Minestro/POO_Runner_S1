@@ -10,7 +10,7 @@ SimpleGraphicElement::SimpleGraphicElement(unsigned int zIndex, float width, flo
 
 }
 
-void SimpleGraphicElement::animate()
+std::string SimpleGraphicElement::getClassName() const
 {
-
+    return "SimpleGraphicElement";
 }

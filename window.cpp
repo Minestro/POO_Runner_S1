@@ -14,6 +14,7 @@ Window::Window(std::string title, int style, float modelSizeW, float modelSizeH)
         this->create(sf::VideoMode(size.x, size.y), title, style);
     }
     this->setFramerateLimit(FPS);
+
     this->setPosition(sf::Vector2i{0, 0});
     this->setView(sf::View{sf::FloatRect{0, 0, modelSizeW, modelSizeH}});
 }

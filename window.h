@@ -4,8 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "graphicelement.h"
-
-const int FPS = 60;
+#include "const.h"
 
 class Window: public sf::RenderWindow
 {

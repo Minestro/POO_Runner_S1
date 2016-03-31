@@ -2,12 +2,14 @@
 #define GAMECHARACTER_H
 
 #include "movableelement.h"
-
-const unsigned int MAX_LIFE = 100;
+#include "const.h"
 
 class GameCharacter: public MovableElement
 {
 private:
+    bool m_movingLeft;
+    bool m_movingRight;
+    bool m_doubleJumpUsed;
     unsigned int m_life;
     bool m_doubleJumpActive;
     bool m_invincibilityActive;
@@ -17,9 +19,10 @@ public:
     void addLife (unsigned int life) const;
     void removeLife (unsigned int life) const;
     void jump();
-    void crouch();
-    void leftMove();
-    void rightMove();
+    //void crouch(bool c); a voir plus tard
+    void leftMove(bool ml);
+    void rightMove(bool mr);
+    void move() override;
     std::string getClassName() const;
 };
 

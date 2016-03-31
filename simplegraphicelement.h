@@ -10,7 +10,7 @@ private:
 public:
     SimpleGraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture);
     SimpleGraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, const sf::IntRect &textRect);
-    void animate();
+    std::string getClassName() const;
 };
 
 #endif // SIMPLEGRAPHICELEMENT_H

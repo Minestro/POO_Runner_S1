@@ -23,6 +23,7 @@ int main()
     menuView.setWindow(&superfenetre);
     while (!quitter)
     {
+        gameModel.nextStep();
         gameView.synchronise();
         gameView.draw();
         quitter = gameView.treatEvent();

@@ -3,8 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <list>
-
-const std::string FILES_LIST[] = {"city.png", "city_1.png", "city_2.png", "background.png", "character.png", "bonus.png", "buttons.png", "obstacles.png", "obstacles_block.png", "dead.png", "life.png", "logo.jpeg"};
+#include "const.h"
 
 class GraphicElement: public sf::Sprite
 {
@@ -15,11 +14,11 @@ public:
     GraphicElement() = default;
     GraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture);
     GraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, const sf::IntRect &textRect);
-    virtual void rescale();
-    virtual void animate()=0;
+    void rescale();
     void setSize(float width, float height);
     std::pair<float, float> getSize() const;
     unsigned int getZIndex() const;
+    virtual std::string getClassName() const=0;
     bool operator==(const GraphicElement &ge) const;
     bool operator<(const GraphicElement &ge) const;
 

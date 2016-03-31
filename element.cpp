@@ -13,3 +13,9 @@ std::pair<float, float> Element::getPosition() const
 {
     return m_position;
 }
+
+void Element::setSize(float w, float h)
+{
+    m_size.first = w;
+    m_size.second = h;
+}

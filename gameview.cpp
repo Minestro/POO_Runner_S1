@@ -20,6 +20,34 @@ bool GameView::treatEvent()
         case sf::Event::Resized :
             synchronise();
             break;
+        case sf::Event::KeyPressed :
+            switch (m_window->getEvent()->key.code)
+            {
+            case sf::Keyboard::Right :
+                m_gameModel->getCharacter()->rightMove(1);
+                break;
+            case sf::Keyboard::Left :
+                m_gameModel->getCharacter()->leftMove(1);
+                break;
+            case sf::Keyboard::Up :
+                m_gameModel->getCharacter()->jump();
+            break;
+            default:
+                break;
+            }
+            break;
+        case sf::Event::KeyReleased :
+            switch (m_window->getEvent()->key.code) {
+            case sf::Keyboard::Left:
+                m_gameModel->getCharacter()->leftMove(0);
+                break;
+            case sf::Keyboard::Right:
+                m_gameModel->getCharacter()->rightMove(0);
+                break;
+            default:
+                break;
+            }
+            break;
         default:
             break;
         }
@@ -67,7 +95,8 @@ void GameView::synchronise()
                 m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, 1, 1, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["obstacles.png"], 100}));
             } else if (className == "Background")
             {
-                m_elementToGraphicElement.insert(std::make_pair(*iterator, new SimpleGraphicElement{0, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["city.png"]}));
+                const Background *bckg = dynamic_cast<const Background*>(*iterator);
+                m_elementToGraphicElement.insert(std::make_pair(*iterator, new SimpleGraphicElement{0, bckg->getSize().first, bckg->getSize().second, bckg->getPosition().first, bckg->getPosition().second, GraphicElement::m_listTextures[bckg->getBackgroundFileName()]}));
             } else {
 
             }
@@ -100,7 +129,11 @@ void GameView::synchronise()
     {
         iterator->second->setSize(iterator->first->getSize().first, iterator->first->getSize().second);
         iterator->second->setPosition(iterator->first->getPosition().first, iterator->first->getPosition().second);
-        iterator->second->animate();
+        if (iterator->second->getClassName() == "AnimableElement")
+        {
+            AnimableElement *elem = dynamic_cast<AnimableElement*>(iterator->second);
+            elem->animate();
+        }
         ++iterator;
     }
 }
