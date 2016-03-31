@@ -11,7 +11,7 @@ private:
 public:
     unsigned int getDammage() const;
     unsigned int getType() const;
-    std::string getClassName() const override;
+    std::string getClassName() const;
 };
 
 #endif // OBSTACLE_H

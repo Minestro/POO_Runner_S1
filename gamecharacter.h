@@ -20,7 +20,7 @@ public:
     void crouch();
     void leftMove();
     void rightMove();
-    std::string getClassName() const override;
+    std::string getClassName() const;
 };
 
 #endif // GAMECHARACTER_H

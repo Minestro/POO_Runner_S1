@@ -3,9 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <set>
-#include "movableelement.h"
 #include "animableelement.h"
-#include "element.h"
+#include "simplegraphicelement.h"
 #include "game.h"
 #include "window.h"
 

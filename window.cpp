@@ -3,7 +3,6 @@
 
 Window::Window(std::string title, int style, float modelSizeW, float modelSizeH): Window::RenderWindow{}, m_fullScreen{0}
 {
-    GraphicElement::loadTextures();
     sf::Vector2u size;
     size.x = sf::VideoMode::getDesktopMode().width;
     size.y = sf::VideoMode::getDesktopMode().height;

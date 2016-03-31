@@ -7,6 +7,7 @@
 #include "player.h"
 #include "obstacle.h"
 #include "bonus.h"
+#include "background.h"
 
 const int GAME_SIZE_W = 1280;
 const int GAME_SIZE_H = 720;

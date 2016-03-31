@@ -13,8 +13,3 @@ std::pair<float, float> Element::getPosition() const
 {
     return m_position;
 }
-
-std::string Element::getClassName() const
-{
-    return "Element";
-}

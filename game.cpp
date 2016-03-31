@@ -3,6 +3,7 @@
 Game::Game()
 {
     m_size = std::pair<int, int>{GAME_SIZE_W, GAME_SIZE_H};
+    m_newElements.push_back(new Background{"city.png"});
     m_newElements.push_back(new GameCharacter{0, 0, 20, 20, 0, 0});
 }
 

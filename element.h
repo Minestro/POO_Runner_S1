@@ -12,7 +12,7 @@ protected:
 public:
     Element()= default;
     Element(float x, float y, float w, float h);
-    virtual std::string getClassName() const;
+    virtual std::string getClassName() const=0;
     std::pair<float, float> getSize() const;
     std::pair<float, float> getPosition() const;
     bool collision(const Element *el) const;
