@@ -2,6 +2,7 @@
 #define ANIMABLEELEMENT_H
 #include "graphicelement.h"
 #include <SFML/System/Clock.hpp>
+#include <chrono>
 
 class AnimableElement: public GraphicElement
 {
@@ -10,7 +11,7 @@ private:
     int m_nbColonnes;
     int m_activeLigne;
     int m_activeColonne;
-    sf::Clock m_clock;
+    std::chrono::time_point<std::chrono::system_clock> m_lastAnimateCall;
     int m_animatePeriod;
 public:
     AnimableElement() = default;

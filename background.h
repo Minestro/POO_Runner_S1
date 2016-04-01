@@ -2,16 +2,17 @@
 #define BACKGROUND_H
 
 #include "element.h"
+#include <chrono>
 
 class Background: public Element
 {
 private:
     bool m_isSliding;
     std::string  m_backgroundFileName;
-    sf::Clock m_speedClock;
-    unsigned int m_speedPeriod;
+    std::chrono::time_point<std::chrono::system_clock> m_lastSlideCall;
+    int m_slidePeriod;
 public:
-    Background(std::string backgroundFileName, bool isSliding = 0, unsigned int speedPeriod = 0);
+    Background(std::string backgroundFileName, bool isSliding = 0, int speedPeriod = 0);
     std::string getBackgroundFileName() const;
     bool isSliding() const;
     void slide();
