@@ -68,7 +68,13 @@ void GraphicElement::rescale()
 {
     sf::FloatRect bb = this->getLocalBounds();
     float height_factor = m_size.second / bb.height;
-    float width_factor = m_size.first / bb.width;
+    float width_factor;
+    if (getTexture()->isRepeated())                         //on considére que seul les sliding backgrounds ont leurs textures en repeated
+    {
+        width_factor = (m_size.first / bb.width) *2;
+    } else {
+        width_factor = m_size.first / bb.width;
+    }
     this->setScale(width_factor, height_factor);
 }
 
