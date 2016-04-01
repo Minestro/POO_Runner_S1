@@ -17,6 +17,7 @@ private:
     std::pair<int, int> m_size;
     std::time_t m_gameTime;
     GameCharacter *m_character;
+    Background *m_background;
     Player *m_player;
     std::vector<Obstacle*> m_obstacles;
     std::vector<Bonus*> m_bonus;

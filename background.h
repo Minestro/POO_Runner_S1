@@ -2,7 +2,6 @@
 #define BACKGROUND_H
 
 #include "element.h"
-#include "game.h"
 
 class Background: public Element
 {
@@ -14,6 +13,7 @@ private:
 public:
     Background(std::string backgroundFileName, bool isSliding = 0, unsigned int speedPeriod = 0);
     std::string getBackgroundFileName() const;
+    bool isSliding() const;
     void slide();
     std::string getClassName() const;
 };

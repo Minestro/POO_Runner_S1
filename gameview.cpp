@@ -96,7 +96,14 @@ void GameView::synchronise()
             } else if (className == "Background")
             {
                 const Background *bckg = dynamic_cast<const Background*>(*iterator);
-                m_elementToGraphicElement.insert(std::make_pair(*iterator, new SimpleGraphicElement{0, bckg->getSize().first, bckg->getSize().second, bckg->getPosition().first, bckg->getPosition().second, GraphicElement::m_listTextures[bckg->getBackgroundFileName()]}));
+                if (bckg->isSliding())
+                {
+                    sf::Texture *texture = GraphicElement::m_listTextures[bckg->getBackgroundFileName()];
+                    texture->setRepeated(1);
+                    m_elementToGraphicElement.insert(std::make_pair(*iterator, new SimpleGraphicElement{0, bckg->getSize().first, bckg->getSize().second, bckg->getPosition().first, bckg->getPosition().second, texture}));
+                } else {
+                    m_elementToGraphicElement.insert(std::make_pair(*iterator, new SimpleGraphicElement{0, bckg->getSize().first, bckg->getSize().second, bckg->getPosition().first, bckg->getPosition().second, GraphicElement::m_listTextures[bckg->getBackgroundFileName()]}));
+                }
             } else {
 
             }

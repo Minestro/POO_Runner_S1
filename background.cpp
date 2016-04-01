@@ -26,3 +26,8 @@ void Background::slide()
         m_speedClock.restart();
     }
 }
+
+bool Background::isSliding() const
+{
+    return m_isSliding;
+}

@@ -3,9 +3,10 @@
 Game::Game()
 {
     m_size = std::pair<int, int>{GAME_SIZE_W, GAME_SIZE_H};
-    m_newElements.push_back(new Background{"city.png"});
+    this->m_background = new Background{"city.png", 1, 100};
     this->m_character = new GameCharacter{0, HAUTEUR_SOL, 40, 40, 0, 0};
     m_newElements.push_back(m_character);
+    m_newElements.push_back(m_background);
 
 }
 
@@ -31,5 +32,6 @@ GameCharacter *Game::getCharacter()
 
 void Game::nextStep()
 {
+    m_background->slide();
     m_character->move();
 }
