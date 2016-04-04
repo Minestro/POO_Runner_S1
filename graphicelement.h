@@ -21,6 +21,7 @@ public:
     virtual std::string getClassName() const=0;
     bool operator==(const GraphicElement &ge) const;
     bool operator<(const GraphicElement &ge) const;
+    virtual void animate()=0;
 
     static std::map<std::string, sf::Texture*> m_listTextures;
     static void loadTextures(std::string themeName="Default");

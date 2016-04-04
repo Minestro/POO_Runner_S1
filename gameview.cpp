@@ -138,11 +138,7 @@ void GameView::synchronise()
     {
         iterator->second->setSize(iterator->first->getSize().first, iterator->first->getSize().second);
         iterator->second->setPosition(iterator->first->getPosition().first, iterator->first->getPosition().second);
-        if (iterator->second->getClassName() == "AnimableElement")
-        {
-            AnimableElement *elem = dynamic_cast<AnimableElement*>(iterator->second);
-            elem->animate();
-        }
+        iterator->second->animate();
         ++iterator;
     }
 }

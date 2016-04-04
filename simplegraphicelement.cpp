@@ -14,3 +14,8 @@ std::string SimpleGraphicElement::getClassName() const
 {
     return "SimpleGraphicElement";
 }
+
+void SimpleGraphicElement::animate()
+{
+    // On ne fait rien car element statique
+}

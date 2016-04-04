@@ -11,6 +11,7 @@ public:
     SimpleGraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture);
     SimpleGraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, const sf::IntRect &textRect);
     std::string getClassName() const;
+    void animate() override;
 };
 
 #endif // SIMPLEGRAPHICELEMENT_H
