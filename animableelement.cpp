@@ -6,6 +6,7 @@ AnimableElement::AnimableElement(unsigned int zIndex, int nbLignes, int nbColonn
 {
 
 }
+
 void AnimableElement::animate()
 {
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastAnimateCall).count() > m_animatePeriod)

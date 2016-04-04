@@ -11,7 +11,7 @@ protected:
 
 public:
     MovableElement(float x, float y, float w, float h, float mx, float my);
-    virtual ~MovableElement();
+    virtual ~MovableElement() = default;
     virtual std::string getClassName() const =0;
     virtual void move();
 };

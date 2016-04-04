@@ -100,7 +100,7 @@ void GameView::synchronise()
                 {
                     sf::Texture *texture = GraphicElement::m_listTextures[bckg->getBackgroundFileName()];
                     texture->setRepeated(1);
-                    SimpleGraphicElement *ge = new SimpleGraphicElement{0, bckg->getSize().first, bckg->getSize().second, bckg->getPosition().first, bckg->getPosition().second, texture};
+                    SimpleGraphicElement *ge = new SimpleGraphicElement{(unsigned int)bckg->getZIndex(), bckg->getSize().first, bckg->getSize().second, bckg->getPosition().first, bckg->getPosition().second, texture};
                     m_elementToGraphicElement.insert(std::make_pair(*iterator, ge));
                     ge->setTextureRect(sf::IntRect{ge->getTextureRect().left, ge->getTextureRect().top, ge->getTextureRect().width * 2, ge->getTextureRect().height});
                 } else {

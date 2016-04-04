@@ -8,7 +8,7 @@ class Bonus: public MovableElement
 private:
     unsigned int m_type;    //Le type de bonus ou de maluce !!!
 public:
-    virtual ~Bonus();
+    virtual ~Bonus() = default;
     unsigned int getType() const;
     std::string getClassName() const;
 };

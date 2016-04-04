@@ -9,7 +9,7 @@ class Page
 private:
     std::vector <Element*> m_elementsList;
 public:
-    std::vector<Element*> &getElementsList() const;
+    std::vector<Element*> &getElementsList();
 };
 
 #endif // MENUPAGE_H

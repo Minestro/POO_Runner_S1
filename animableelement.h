@@ -16,6 +16,7 @@ private:
 public:
     AnimableElement() = default;
     AnimableElement(unsigned int zIndex, int nbLignes, int nbColonnes, float width, float height, float x, float y, const sf::Texture *texture, int animatePeriod, int activeLigne = 1, int activeColonne = 1);
+    virtual ~AnimableElement() = default;
     std::string getClassName() const;
     void animate() override;
     void setRectPos(int ligne, int colonne);

@@ -6,8 +6,6 @@
 #include "menu.h"
 #include "menuview.h"
 
-using namespace std;
-
 void wait (int time)
 {
     std::chrono::time_point<std::chrono::system_clock> begin;
@@ -20,6 +18,9 @@ void wait (int time)
 
 int main()
 {
+    std::chrono::time_point<std::chrono::system_clock> loopTime;
+    loopTime = std::chrono::system_clock::now();
+    int drawPeriod = (1.0f / FPS)*1000000;
     bool quitter = false;
     Window superfenetre{"Runner", sf::Style::Default, GAME_SIZE_W, GAME_SIZE_H};
     GraphicElement::loadTextures();
@@ -36,7 +37,11 @@ int main()
         wait(1);
         gameModel.nextStep();
         gameView.synchronise();
-        gameView.draw();
+        if (std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now()-loopTime).count() > drawPeriod)
+        {
+            gameView.draw();
+            loopTime = std::chrono::system_clock::now();
+        }
         quitter = gameView.treatEvent();
     }
     return 0;

@@ -16,7 +16,7 @@ private:
     bool m_slowTimeActive;
 public:
     GameCharacter(float x, float y, float w, float h, float mx, float my, unsigned int life = MAX_LIFE);
-    virtual ~GameCharacter();
+    virtual ~GameCharacter() = default;
     void addLife (unsigned int life) const;
     void removeLife (unsigned int life) const;
     void jump();
