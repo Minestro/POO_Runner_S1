@@ -12,6 +12,7 @@ protected:
 public:
     Element()= default;
     Element(float x, float y, float w, float h);
+    virtual ~Element();
     virtual std::string getClassName() const=0;
     std::pair<float, float> getSize() const;
     void setSize(float w, float h);

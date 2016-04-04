@@ -14,11 +14,14 @@ class Game
 {
 private:
     unsigned int m_score;
+    int m_speedPeriod;
+    std::chrono::time_point<std::chrono::system_clock> m_lastNextStepCall;
+    std::chrono::time_point<std::chrono::system_clock> m_beginGameTime;
+    int m_pauseTime;
     std::pair<int, int> m_size;
-    std::time_t m_gameTime;
     GameCharacter *m_character;
-    Background *m_background;
     Player *m_player;
+    std::vector<Background*> m_backgrounds;
     std::vector<Obstacle*> m_obstacles;
     std::vector<Bonus*> m_bonus;
     std::vector<const Element*> m_newElements;
@@ -26,6 +29,7 @@ private:
 
 public:
     Game();
+    ~Game();
     void nextStep();
     std::pair<int, int> getSize() const;
     std::vector<const Element*> &getDeletedElements();

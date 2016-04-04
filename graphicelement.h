@@ -14,6 +14,7 @@ public:
     GraphicElement() = default;
     GraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture);
     GraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, const sf::IntRect &textRect);
+    virtual ~GraphicElement();
     void rescale();
     void setSize(float width, float height);
     std::pair<float, float> getSize() const;

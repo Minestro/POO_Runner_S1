@@ -7,10 +7,9 @@
 class Page
 {
 private:
-    std::vector <Button*> m_buttonsList;
-    unsigned int m_backgroundId;    //Quel background pour cette page du menu?
+    std::vector <Element*> m_elementsList;
 public:
-
+    std::vector<Element*> &getElementsList() const;
 };
 
 #endif // MENUPAGE_H
