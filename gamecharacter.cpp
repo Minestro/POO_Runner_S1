@@ -71,6 +71,7 @@ void GameCharacter::move()
                 {
                     m_movement.first -= (ACCELERATION_CHARACTER/2);
                 } else {
+                    //Moins vite si la balle est en l'air
                     m_movement.first -= (ACCELERATION_CHARACTER/8);
                 }
             } else if (m_movement.first < 0)
@@ -81,8 +82,6 @@ void GameCharacter::move()
                 } else {
                     m_movement.first += (ACCELERATION_CHARACTER/8);
                 }
-            } else if (std::abs(m_movement.first) < ACCELERATION_CHARACTER) {
-                m_movement.first = 0;
             }
         }
 
@@ -92,9 +91,11 @@ void GameCharacter::move()
             m_movement.second += GRAVITY;
         }
 
+        //On deplace la position de la balle
         m_position.first += m_movement.first;
         m_position.second += m_movement.second;
 
+        //Test des collisions avec les bords de l'écran et le sol
         if (m_position.first + m_size.first > GAME_SIZE_W)
         {
             m_position.first = GAME_SIZE_W - m_size.first;
@@ -110,6 +111,7 @@ void GameCharacter::move()
             m_movement.second = 0;
             m_doubleJumpUsed = false;
         }
+
         m_lastMoveCall = std::chrono::system_clock::now();
     }
 }
