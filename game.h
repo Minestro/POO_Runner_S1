@@ -14,8 +14,6 @@ class Game
 {
 private:
     unsigned int m_score;
-    int m_speedPeriod;
-    std::chrono::time_point<std::chrono::system_clock> m_lastNextStepCall;
     std::chrono::time_point<std::chrono::system_clock> m_beginGameTime;
     int m_pauseTime;
     std::pair<int, int> m_size;

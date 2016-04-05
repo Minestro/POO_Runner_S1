@@ -13,7 +13,7 @@ private:
     int m_slidePeriod;
     int m_zIndex;
 public:
-    Background(std::string backgroundFileName, int zIndex, bool isSliding = 0, int speedPeriod = 0);
+    Background(std::string backgroundFileName, int zIndex, bool isSliding = 0, int speedPeriodMicroSec = 0);
     virtual ~Background() = default;
     std::string getBackgroundFileName() const;
     int getZIndex() const;
