@@ -3,14 +3,17 @@
 
 #include "element.h"
 #include <vector>
+#include <chrono>
 
 class MovableElement: public Element
 {
 protected:
     std::pair <float, float> m_movement; //first : x, second : y
+    std::chrono::time_point<std::chrono::system_clock> m_lastMoveCall;
+    int m_movePeriod;
 
 public:
-    MovableElement(float x, float y, float w, float h, float mx, float my);
+    MovableElement(float x, float y, float w, float h, float mx, float my, int movePeriod);
     virtual ~MovableElement() = default;
     virtual std::string getClassName() const =0;
     virtual void move();

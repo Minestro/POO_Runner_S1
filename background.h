@@ -1,24 +1,21 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
-#include "element.h"
-#include <chrono>
+#include "movableelement.h"
 
-class Background: public Element
+class Background: public MovableElement
 {
 private:
     bool m_isSliding;
     std::string  m_backgroundFileName;
-    std::chrono::time_point<std::chrono::system_clock> m_lastSlideCall;
-    int m_slidePeriod;
     int m_zIndex;
 public:
-    Background(std::string backgroundFileName, int zIndex, bool isSliding = 0, int speedPeriodMicroSec = 0);
+    Background(std::string backgroundFileName, int zIndex, bool isSliding = 0, int movePeriodMicroSec = 0);
     virtual ~Background() = default;
     std::string getBackgroundFileName() const;
     int getZIndex() const;
     bool isSliding() const;
-    void slide();
+    void move() override;
     std::string getClassName() const;
 };
 

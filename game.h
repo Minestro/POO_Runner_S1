@@ -15,7 +15,7 @@ class Game
 private:
     unsigned int m_score;
     std::chrono::time_point<std::chrono::system_clock> m_beginGameTime;
-    int m_pauseTime;
+    long int m_pauseTime;
     std::pair<int, int> m_size;
     GameCharacter *m_character;
     Player *m_player;
