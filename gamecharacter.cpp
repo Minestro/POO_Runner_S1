@@ -47,7 +47,8 @@ void GameCharacter::move()
 {
     if (std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() > m_movePeriod)
     {
-        if (m_movingLeft || m_movingRight && m_position.second + m_size.second == HAUTEUR_SOL)
+        // Si la touche gauche ou droite est appuyé et que la balle est au sol, on la déplace
+        if ((m_movingLeft || m_movingRight) && m_position.second + m_size.second == HAUTEUR_SOL)
         {
             if (m_movingRight && m_movement.first < CHARACTER_MAX_SPEED)
             {
@@ -57,26 +58,43 @@ void GameCharacter::move()
                 m_movement.first -= ACCELERATION_CHARACTER;
             }
         } else {
+            // Sinon : Si le vecteur mouvement est très faible (< Acceleration du perso), on considère que la balle ne doit plus bouger
             if (std::abs(m_movement.first) < ACCELERATION_CHARACTER)
             {
                 m_movement.first = 0;
             }
+
+            //Si le vecteur mouvement x est supérieur à 0, on décelère la balle
             if (m_movement.first > 0)
             {
-                m_movement.first -= (ACCELERATION_CHARACTER/2);
+                if (m_position.second + m_size.second == HAUTEUR_SOL)
+                {
+                    m_movement.first -= (ACCELERATION_CHARACTER/2);
+                } else {
+                    m_movement.first -= (ACCELERATION_CHARACTER/8);
+                }
             } else if (m_movement.first < 0)
             {
-                m_movement.first += (ACCELERATION_CHARACTER/2);
+                if (m_position.second + m_size.second == HAUTEUR_SOL)
+                {
+                    m_movement.first += (ACCELERATION_CHARACTER/2);
+                } else {
+                    m_movement.first += (ACCELERATION_CHARACTER/8);
+                }
             } else if (std::abs(m_movement.first) < ACCELERATION_CHARACTER) {
                 m_movement.first = 0;
             }
         }
+
+        // Si la balle est en lair, on applique la gravité
         if (m_position.second + m_size.second < HAUTEUR_SOL)
         {
             m_movement.second += GRAVITY;
         }
+
         m_position.first += m_movement.first;
         m_position.second += m_movement.second;
+
         if (m_position.first + m_size.first > GAME_SIZE_W)
         {
             m_position.first = GAME_SIZE_W - m_size.first;
