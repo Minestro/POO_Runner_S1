@@ -69,7 +69,7 @@ void GameView::draw()
 {
     m_window->clear();
     fillGraphicElementsList();
-    std::set <const GraphicElement*>::const_iterator iterator = m_graphicElementsList.begin();
+    std::vector <const GraphicElement*>::const_iterator iterator = m_graphicElementsList.begin();
     while (iterator != m_graphicElementsList.end())
     {
         m_window->draw(**iterator);
@@ -92,7 +92,6 @@ void GameView::synchronise()
                 m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, 1, 8, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["character.png"], 100}));
             } else if (className == "Obstacle")
             {
-                std::cout << "obstacle créé" << std::endl;
                 m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, 1, 2, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["obstacles_block.png"], 100}));
             } else if (className == "Background")
             {
@@ -153,14 +152,13 @@ void GameView::fillGraphicElementsList()
     std::map <const Element*, GraphicElement*>::const_iterator iterator = m_elementToGraphicElement.begin();
     while(iterator != m_elementToGraphicElement.end())
     {
-        m_graphicElementsList.insert(iterator->second);
+        std::vector<const GraphicElement*>::iterator it = m_graphicElementsList.begin();
+        while(it != m_graphicElementsList.end() && **it < *(iterator->second))
+        {
+            ++it;
+        }
+        m_graphicElementsList.insert(it, iterator->second);
         ++iterator;
     }
 }
 
-bool compGraphicElement::operator ()(const GraphicElement *g1, const GraphicElement *g2) const
-{
-    {
-        return (*g1)<(*g2);
-    }
-}

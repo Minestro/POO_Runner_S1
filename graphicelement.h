@@ -20,7 +20,6 @@ public:
     std::pair<float, float> getSize() const;
     unsigned int getZIndex() const;
     virtual std::string getClassName() const=0;
-    bool operator==(const GraphicElement &ge) const;
     bool operator<(const GraphicElement &ge) const;
     virtual void animate()=0;
 

@@ -60,13 +60,12 @@ void Game::nextStep()
         int aleatoire= rand()% 2 ;
         if (aleatoire == 1)
         {
-            Obstacle* ob = new Obstacle(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -3,0,15000,5,1);
-            m_newElements.push_back(ob);
+            Obstacle* ob = new Obstacle(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -3, 0, 15000, 5, 1);
             m_obstacles.push_back(ob);
+            m_newElements.push_back(ob);
 
         }
         m_lastObstacleCreate=  std::chrono::system_clock::now();
-        std::cout<< aleatoire<< std::endl;
     }
     std::vector<Obstacle *>::iterator iterator1 = m_obstacles.begin();
     while (iterator1 != m_obstacles.end())

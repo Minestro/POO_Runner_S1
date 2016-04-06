@@ -9,17 +9,13 @@
 #include "game.h"
 #include "window.h"
 
-struct compGraphicElement
-{
-    bool operator()(const GraphicElement *g1, const GraphicElement *g2) const;
-};
 
 class GameView
 {
 private:
     Game *m_gameModel;
     std::map <const Element*, GraphicElement*> m_elementToGraphicElement;
-    std::set <const GraphicElement*, compGraphicElement> m_graphicElementsList;
+    std::vector <const GraphicElement*> m_graphicElementsList;
     Window *m_window;
 public:
     GameView();

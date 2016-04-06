@@ -78,12 +78,6 @@ void GraphicElement::rescale()
     this->setScale(width_factor, height_factor);
 }
 
-
-bool GraphicElement::operator==(const GraphicElement &ge) const
-{
-    return (this->getTexture() == ge.getTexture() && this->getSize() == ge.getSize() && this->getPosition() == ge.getPosition() && this->getTexture()->isRepeated() == ge.getTexture()->isRepeated() && this->m_zIndex == ge.m_zIndex);
-}
-
 bool GraphicElement::operator<(const GraphicElement &ge) const
 {
     return(this->m_zIndex < ge.m_zIndex);
