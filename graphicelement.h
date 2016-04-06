@@ -19,9 +19,9 @@ public:
     void setSize(float width, float height);
     std::pair<float, float> getSize() const;
     unsigned int getZIndex() const;
-    virtual std::string getClassName() const=0;
+    virtual std::string getClassName() const;
     bool operator<(const GraphicElement &ge) const;
-    virtual void animate()=0;
+    virtual void animate();
 
     static std::map<std::string, sf::Texture*> m_listTextures;
     static void loadTextures(std::string themeName="Default");

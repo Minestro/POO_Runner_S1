@@ -71,7 +71,18 @@ void Game::nextStep()
     while (iterator1 != m_obstacles.end())
     {
         (**iterator1).move();
-        ++iterator1;
+        if ((**iterator1).collision(m_character))
+        {
+            m_character->removeLife((**iterator1).getDammage());
+            m_deletedElements.push_back(*iterator1);
+            m_obstacles.erase(iterator1);
+        } else if ((**iterator1).getPosition().first < -(**iterator1).getSize().first)
+        {
+            m_deletedElements.push_back(*iterator1);
+            m_obstacles.erase(iterator1);
+        } else
+        {
+            ++iterator1;
+        }
     }
-
 }

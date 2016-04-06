@@ -1,7 +1,6 @@
 #ifndef ANIMABLEELEMENT_H
 #define ANIMABLEELEMENT_H
 #include "graphicelement.h"
-#include <SFML/System/Clock.hpp>
 #include <chrono>
 
 class AnimableElement: public GraphicElement

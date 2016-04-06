@@ -18,6 +18,7 @@ GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, f
     rescale();
 }
 
+
 void GraphicElement::setSize(float width, float height)
 {
    m_size.first = width;
@@ -75,7 +76,7 @@ void GraphicElement::rescale()
     } else {
         width_factor = m_size.first / bb.width;
     }
-    this->setScale(width_factor, height_factor);
+    setScale(width_factor, height_factor);
 }
 
 bool GraphicElement::operator<(const GraphicElement &ge) const
@@ -83,3 +84,12 @@ bool GraphicElement::operator<(const GraphicElement &ge) const
     return(this->m_zIndex < ge.m_zIndex);
 }
 
+std::string GraphicElement::getClassName() const
+{
+    return "GraphicElement";
+}
+
+void GraphicElement::animate()
+{
+
+}

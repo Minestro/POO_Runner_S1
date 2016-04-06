@@ -43,6 +43,21 @@ void GameCharacter::jump()
     }
 }*/
 
+unsigned int GameCharacter::getLife() const
+{
+    return m_life;
+}
+
+void GameCharacter::removeLife(unsigned int life)
+{
+    if ((int)(m_life - life) < 0)
+    {
+        m_life = 0;
+    } else {
+        m_life -= life;
+    }
+}
+
 void GameCharacter::move()
 {
     if (std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() > m_movePeriod)

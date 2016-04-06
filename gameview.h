@@ -5,7 +5,6 @@
 #include <set>
 #include <typeinfo>
 #include "animableelement.h"
-#include "simplegraphicelement.h"
 #include "game.h"
 #include "window.h"
 

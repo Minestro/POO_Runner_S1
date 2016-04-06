@@ -17,8 +17,9 @@ private:
 public:
     GameCharacter(float x, float y, float w, float h, float mx, float my, unsigned int life = MAX_LIFE);
     virtual ~GameCharacter() = default;
-    void addLife (unsigned int life) const;
-    void removeLife (unsigned int life) const;
+    void addLife (unsigned int life);
+    void removeLife (unsigned int life);
+    unsigned int getLife() const;
     void jump();
     //void crouch(bool c); a voir plus tard
     void leftMove(bool ml);
