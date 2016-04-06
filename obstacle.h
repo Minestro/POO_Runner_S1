@@ -9,6 +9,7 @@ private:
     unsigned int m_dammage; //Le nombre de points de vie qu'enlève l'obstacle.
     unsigned int m_type;
 public:
+    Obstacle(float x, float y, float w, float h, float mx, float my, int movePeriod,unsigned int dammage, unsigned int type);
     virtual ~Obstacle() = default;
     unsigned int getDammage() const;
     unsigned int getType() const;

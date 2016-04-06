@@ -92,7 +92,8 @@ void GameView::synchronise()
                 m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, 1, 8, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["character.png"], 100}));
             } else if (className == "Obstacle")
             {
-                m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, 1, 1, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["obstacles.png"], 100}));
+                std::cout << "obstacle créé" << std::endl;
+                m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, 1, 2, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["obstacles_block.png"], 100}));
             } else if (className == "Background")
             {
                 const Background *bckg = dynamic_cast<const Background*>(*iterator);
@@ -125,7 +126,9 @@ void GameView::synchronise()
             if (it != m_elementToGraphicElement.end())
             {
                 delete it->second;
+                delete it->first;
                 m_elementToGraphicElement.erase(it);
+
             }
             ++iterator;;
         }
