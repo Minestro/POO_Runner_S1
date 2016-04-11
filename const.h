@@ -14,6 +14,8 @@ const float GRAVITY = 0.1;
 const float CHARACTER_MAX_SPEED = 5;
 const float ACCELERATION_CHARACTER = 0.2;
 const int FPS = 60;
+const int STARTSPEEDPERIODGAME = 15000;
+const float PI = 3.14159265359;
 
 
 #endif // CONST_H

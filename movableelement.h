@@ -17,6 +17,8 @@ public:
     virtual ~MovableElement() = default;
     virtual std::string getClassName() const =0;
     virtual void move();
+    void setMovePeriod(float movePeriod);
+    std::pair<float, float> getPixelSpeed() const override;
 };
 
 #endif // MOVABLEELEMENT_H

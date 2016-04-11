@@ -24,3 +24,8 @@ bool Element::collision(const Element *el) const
 {
     return ((el->getPosition().first < m_position.first + m_size.first && el->getPosition().first + el->getSize().first > m_position.first) && (el->getPosition().second < m_position.second + m_size.second && el->getPosition().second + el->getSize().second > m_position.second));
 }
+
+std::pair<float, float> Element::getPixelSpeed() const
+{
+    return (std::make_pair<float, float>(0.0, 0.0));
+}

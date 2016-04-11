@@ -16,6 +16,7 @@ private:
     std::map <const Element*, GraphicElement*> m_elementToGraphicElement;
     std::vector <const GraphicElement*> m_graphicElementsList;
     Window *m_window;
+    void insertGraphicElementIntoList(GraphicElement *ge);
 public:
     GameView();
     void draw();

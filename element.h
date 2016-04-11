@@ -18,6 +18,7 @@ public:
     void setSize(float w, float h);
     std::pair<float, float> getPosition() const;
     bool collision(const Element *el) const;
+    virtual std::pair<float, float> getPixelSpeed() const;
 };
 
 #endif // ELEMENT_H

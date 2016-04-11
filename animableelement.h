@@ -6,10 +6,6 @@
 class AnimableElement: public GraphicElement
 {
 private:
-    int m_nbLignes;
-    int m_nbColonnes;
-    int m_activeLigne;
-    int m_activeColonne;
     std::chrono::time_point<std::chrono::system_clock> m_lastAnimateCall;
     int m_animatePeriod;
 public:
@@ -18,8 +14,7 @@ public:
     virtual ~AnimableElement() = default;
     std::string getClassName() const;
     void animate();
-    void setRectPos(int ligne, int colonne);
-    void setAnimatePeriod();
+    void setAnimatePeriod(float a) override;
 };
 
 #endif // ANIMABLEELEMENT_H

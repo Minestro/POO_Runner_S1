@@ -3,21 +3,12 @@
 
 std::map<std::string, sf::Texture*> GraphicElement::m_listTextures;
 
-GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture) : sf::Sprite::Sprite{}, m_size{width, height}, m_zIndex{zIndex}
+GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, int nbLignes, int nbColonnes, int activeLigne, int activeColonne) : sf::Sprite::Sprite{}, m_size{width, height}, m_zIndex{zIndex}, m_nbLignes{nbLignes}, m_nbColonnes{nbColonnes}, m_activeLigne{activeLigne}, m_activeColonne{activeColonne}
 {
     setTexture(*texture);
     setPosition(x, y);
     rescale();
 }
-
-GraphicElement::GraphicElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, const sf::IntRect &textRect) : sf::Sprite::Sprite{}, m_size{width, height}, m_zIndex{zIndex}
-{
-    setTexture(*texture);
-    setTextureRect(textRect);
-    setPosition(x, y);
-    rescale();
-}
-
 
 void GraphicElement::setSize(float width, float height)
 {
@@ -26,6 +17,10 @@ void GraphicElement::setSize(float width, float height)
    rescale();
 }
 
+void GraphicElement::refreshTextRect()
+{
+    setTextureRect(sf::IntRect{(int)((m_activeColonne-1) * (getTexture()->getSize().x / m_nbColonnes)), (int) ((m_activeLigne-1) * (getTexture()->getSize().y / m_nbLignes)), (int)getTexture()->getSize().x / m_nbColonnes, (int)getTexture()->getSize().y / m_nbLignes});
+}
 
 void GraphicElement::loadTextures(std::string themeName)
 {
@@ -79,6 +74,14 @@ void GraphicElement::rescale()
     setScale(width_factor, height_factor);
 }
 
+
+void GraphicElement::setRectPos(int ligne, int colonne)
+{
+    m_activeColonne= colonne;
+    m_activeLigne = ligne;
+    refreshTextRect();
+}
+
 bool GraphicElement::operator<(const GraphicElement &ge) const
 {
     return(this->m_zIndex < ge.m_zIndex);
@@ -92,4 +95,19 @@ std::string GraphicElement::getClassName() const
 void GraphicElement::animate()
 {
 
+}
+
+void GraphicElement::setAnimatePeriod(float a)
+{
+
+}
+
+int GraphicElement::getNbLignes() const
+{
+    return m_nbLignes;
+}
+
+int GraphicElement::getActiveColonne() const
+{
+    return m_activeColonne;
 }

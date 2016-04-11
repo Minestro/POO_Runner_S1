@@ -24,7 +24,7 @@ int main()
     bool quitter = false;
     Window superfenetre{"Runner", sf::Style::Default, GAME_SIZE_W, GAME_SIZE_H};
     GraphicElement::loadTextures();
-    Game gameModel{};
+    Game gameModel{STARTSPEEDPERIODGAME};
     GameView gameView{};
     Menu menuModel;
     MenuView menuView;

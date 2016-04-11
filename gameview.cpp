@@ -6,6 +6,17 @@ GameView::GameView()
 
 }
 
+
+void GameView::insertGraphicElementIntoList(GraphicElement *ge)
+{
+    std::vector<const GraphicElement*>::iterator it = m_graphicElementsList.begin();
+    while(it != m_graphicElementsList.end() && **it < *ge)
+    {
+        ++it;
+    }
+    m_graphicElementsList.insert(it, ge);
+}
+
 bool GameView::treatEvent()
 {
     bool quitter = false;
@@ -89,7 +100,7 @@ void GameView::synchronise()
             std::string className = (**iterator).getClassName();
             if (className == "GameCharacter")
             {
-                m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, 1, 8, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["character.png"], 100}));
+                m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, 2, 8, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["character.png"], 100}));
             } else if (className == "Obstacle")
             {
                 m_elementToGraphicElement.insert(std::make_pair(*iterator, new AnimableElement{10, 1, 2, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["obstacles_block.png"], 100}));
@@ -138,11 +149,24 @@ void GameView::synchronise()
     std::map <const Element*, GraphicElement*>::const_iterator iterator = m_elementToGraphicElement.begin();
     while(iterator != m_elementToGraphicElement.end())
     {
+        if (iterator->first->getClassName() == "GameCharacter")
+        {
+            float vitesseBalle = iterator->first->getPixelSpeed().first - m_gameModel->getPixelSpeed();
+            if (vitesseBalle >= 0)
+            {
+                iterator->second->setRectPos(1, iterator->second->getActiveColonne());
+            } else {
+                iterator->second->setRectPos(2, iterator->second->getActiveColonne());
+            }
+            float perimetreBalle = PI * iterator->first->getSize().first;
+            iterator->second->setAnimatePeriod(std::abs((1/(vitesseBalle/perimetreBalle))/iterator->second->getNbLignes())*1000);
+        }
         iterator->second->setSize(iterator->first->getSize().first, iterator->first->getSize().second);
         iterator->second->setPosition(iterator->first->getPosition().first, iterator->first->getPosition().second);
         iterator->second->animate();
         ++iterator;
     }
+
 }
 
 void GameView::fillGraphicElementsList()
@@ -152,12 +176,7 @@ void GameView::fillGraphicElementsList()
     std::map <const Element*, GraphicElement*>::const_iterator iterator = m_elementToGraphicElement.begin();
     while(iterator != m_elementToGraphicElement.end())
     {
-        std::vector<const GraphicElement*>::iterator it = m_graphicElementsList.begin();
-        while(it != m_graphicElementsList.end() && **it < *(iterator->second))
-        {
-            ++it;
-        }
-        m_graphicElementsList.insert(it, iterator->second);
+        insertGraphicElementIntoList(iterator->second);
         ++iterator;
     }
 }
