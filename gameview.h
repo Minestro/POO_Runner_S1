@@ -14,7 +14,7 @@ class GameView
 private:
     Game *m_gameModel;
     std::map <const Element*, GraphicElement*> m_elementToGraphicElement;
-    std::vector <const GraphicElement*> m_graphicElementsList;
+    std::vector <const GraphicElement*> m_drawableElementsList;
     Window *m_window;
     void insertGraphicElementIntoList(GraphicElement *ge);
 public:

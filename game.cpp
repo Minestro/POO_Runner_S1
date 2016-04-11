@@ -47,7 +47,7 @@ GameCharacter *Game::getCharacter()
 
 float Game::getPixelSpeed() const
 {
-    return ((-3.0 / m_movePeriod) * 1000000);
+    return (((float) -PIXELPERBACKGROUNDMOVE / m_movePeriod) * 1000);
 }
 
 void Game::nextStep()
@@ -67,7 +67,7 @@ void Game::nextStep()
         int aleatoire= rand()% 2 ;
         if (aleatoire == 1)
         {
-            Obstacle* ob = new Obstacle(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -3, 0, m_movePeriod, 5, 1);
+            Obstacle* ob = new Obstacle(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -PIXELPERBACKGROUNDMOVE, 0, m_movePeriod, 5, 1);
             m_obstacles.push_back(ob);
             m_newElements.push_back(ob);
 

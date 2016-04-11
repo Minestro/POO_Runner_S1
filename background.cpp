@@ -1,6 +1,6 @@
 #include "background.h"
 
-Background::Background(std::string backgroundFileName, int zIndex, float coefSpeed, bool isSliding, int movePeriodMicroSec):MovableElement{0, 0, GAME_SIZE_W, GAME_SIZE_H, -3, 0, movePeriodMicroSec}, m_isSliding{isSliding}, m_backgroundFileName{backgroundFileName}, m_zIndex{zIndex}, m_coefSpeed{coefSpeed}
+Background::Background(std::string backgroundFileName, int zIndex, float coefSpeed, bool isSliding, int movePeriodMicroSec):MovableElement{0, 0, GAME_SIZE_W, GAME_SIZE_H, -PIXELPERBACKGROUNDMOVE, 0, movePeriodMicroSec}, m_isSliding{isSliding}, m_backgroundFileName{backgroundFileName}, m_zIndex{zIndex}, m_coefSpeed{coefSpeed}
 {
 
 }
@@ -17,7 +17,7 @@ std::string Background::getBackgroundFileName() const
 
 void Background::move()
 {
-    if (std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() > m_movePeriod && m_isSliding)
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() > m_movePeriod && m_isSliding)
     {
         if (m_position.first - 10 > -m_size.first)
         {

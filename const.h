@@ -13,8 +13,10 @@ const unsigned int HAUTEUR_SOL = 520;
 const float GRAVITY = 0.1;
 const float CHARACTER_MAX_SPEED = 5;
 const float ACCELERATION_CHARACTER = 0.2;
+const int CHARACTERSPEEDPERIOD = 10;
 const int FPS = 60;
-const int STARTSPEEDPERIODGAME = 15000;
+const int STARTSPEEDPERIODGAME = 15;
+const int PIXELPERBACKGROUNDMOVE = 3;
 const float PI = 3.14159265359;
 
 

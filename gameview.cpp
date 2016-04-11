@@ -9,12 +9,12 @@ GameView::GameView()
 
 void GameView::insertGraphicElementIntoList(GraphicElement *ge)
 {
-    std::vector<const GraphicElement*>::iterator it = m_graphicElementsList.begin();
-    while(it != m_graphicElementsList.end() && **it < *ge)
+    std::vector<const GraphicElement*>::iterator it = m_drawableElementsList.begin();
+    while(it != m_drawableElementsList.end() && **it < *ge)
     {
         ++it;
     }
-    m_graphicElementsList.insert(it, ge);
+    m_drawableElementsList.insert(it, ge);
 }
 
 bool GameView::treatEvent()
@@ -80,8 +80,8 @@ void GameView::draw()
 {
     m_window->clear();
     fillGraphicElementsList();
-    std::vector <const GraphicElement*>::const_iterator iterator = m_graphicElementsList.begin();
-    while (iterator != m_graphicElementsList.end())
+    std::vector <const GraphicElement*>::const_iterator iterator = m_drawableElementsList.begin();
+    while (iterator != m_drawableElementsList.end())
     {
         m_window->draw(**iterator);
         ++iterator;
@@ -172,7 +172,7 @@ void GameView::synchronise()
 void GameView::fillGraphicElementsList()
 {
     //Cette fonction ajoute dans un set tous les graphicElements du tableau de correspondance elementToGraphicElement et qui seront triés suivant leur z-index
-    m_graphicElementsList.clear();
+    m_drawableElementsList.clear();
     std::map <const Element*, GraphicElement*>::const_iterator iterator = m_elementToGraphicElement.begin();
     while(iterator != m_elementToGraphicElement.end())
     {

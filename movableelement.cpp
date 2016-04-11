@@ -12,7 +12,7 @@ std::string MovableElement::getClassName() const
 
 void MovableElement::move()
 {
-    if (std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() > m_movePeriod)
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() > m_movePeriod)
     {
         m_position.first += m_movement.first;
         m_position.second += m_movement.second;
@@ -23,7 +23,7 @@ void MovableElement::move()
 //Retourne la vitesse de l'objet par rapport à la vue en pixels/seconde
 std::pair<float, float> MovableElement::getPixelSpeed() const
 {
-    return std::make_pair<float, float>((m_movement.first / m_movePeriod) * 1000000, (m_movement.second / m_movePeriod) * 1000000);
+    return std::make_pair<float, float>((m_movement.first / m_movePeriod) * 1000, (m_movement.second / m_movePeriod) * 1000);
 }
 
 void MovableElement::setMovePeriod(float movePeriod)
