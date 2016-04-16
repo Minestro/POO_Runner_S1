@@ -1,8 +1,11 @@
 #ifndef CONST_H
 #define CONST_H
 
+#include <string>
 
 const std::string FILES_LIST[] = {"city.png", "city_1.png", "city_2.png", "background.png", "character.png", "bonus.png", "buttons.png", "obstacles.png", "obstacles_block.png", "dead.png", "life.png", "logo.jpeg"};
+
+const std::string FONTS_LIST[] = {"score.ttf"};
 
 const int GAME_SIZE_W = 1280;
 const int GAME_SIZE_H = 720;

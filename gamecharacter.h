@@ -2,11 +2,12 @@
 #define GAMECHARACTER_H
 
 #include "movableelement.h"
-#include "const.h"
+#include <math.h>
 
 class GameCharacter: public MovableElement
 {
 private:
+    unsigned int m_score;
     bool m_movingLeft;
     bool m_movingRight;
     bool m_doubleJumpUsed;

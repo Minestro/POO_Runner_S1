@@ -2,7 +2,7 @@
 #include "window.h"
 #include "game.h"
 #include "gameview.h"
-#include "graphicelement.h"
+#include "textelement.h"
 #include "menu.h"
 #include "menuview.h"
 
@@ -14,6 +14,7 @@ int main()
     bool quitter = false;
     Window superfenetre{"Runner", sf::Style::Default, GAME_SIZE_W, GAME_SIZE_H};
     GraphicElement::loadTextures();
+    TextElement::loadFonts();
     Game gameModel{STARTSPEEDPERIODGAME};
     GameView gameView{};
     Menu menuModel;
@@ -34,5 +35,7 @@ int main()
         }
         quitter = gameView.treatEvent();
     }
+    GraphicElement::clearTextures();
+    TextElement::clearFonts();
     return 0;
 }

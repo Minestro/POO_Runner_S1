@@ -2,7 +2,7 @@
 #define ELEMENT_H
 
 #include <vector>
-#include "graphicelement.h"
+#include <string>
 
 class Element
 {

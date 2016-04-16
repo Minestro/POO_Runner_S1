@@ -13,7 +13,6 @@
 class Game
 {
 private:
-    unsigned int m_score;
     std::chrono::time_point<std::chrono::system_clock> m_beginGameTime;
     std::chrono::time_point<std::chrono::system_clock> m_lastObstacleCreate;
     std::chrono::time_point<std::chrono::system_clock> m_lastMoveCall;

@@ -4,16 +4,20 @@
 #include <SFML/Graphics.hpp>
 #include <set>
 #include <typeinfo>
-#include "animableelement.h"
 #include "game.h"
 #include "window.h"
+#include "spriteelement.h"
+#include "circleshapeelement.h"
+#include "rectangleshapeelement.h"
+#include "lifebar.h"
+#include "textelement.h"
 
 
 class GameView
 {
 private:
     Game *m_gameModel;
-    std::map <const Element*, GraphicElement*> m_elementToGraphicElement;
+    std::map <const Element*, std::list<GraphicElement*> > m_elementToGraphicElement;
     std::vector <const GraphicElement*> m_drawableElementsList;
     Window *m_window;
     void insertGraphicElementIntoList(GraphicElement *ge);
