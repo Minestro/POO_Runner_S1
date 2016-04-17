@@ -13,9 +13,9 @@ void SpriteElement::rescale(float width, float height)
     sf::FloatRect bb = this->getLocalBounds();
     float height_factor = height / bb.height;
     float width_factor;
-    if (getTexture()->isRepeated())                         //on considére que seul les sliding backgrounds ont leurs textures en repeated
+    if (getTexture()->isRepeated())
     {
-        width_factor = (width / bb.width);
+        width_factor = (width / bb.width) * 2;
     } else {
         width_factor = width / bb.width;
     }
@@ -59,7 +59,10 @@ void SpriteElement::setRectPos(int ligne, int colonne)
 {
     m_activeColonne = colonne;
     m_activeLigne = ligne;
-    refreshTextRect();
+    if (m_nbLignes > 1 || m_nbColonnes > 1)
+    {
+        refreshTextRect();
+    }
 }
 
 void SpriteElement::animate()
@@ -98,8 +101,9 @@ void SpriteElement::setPosition(float x, float y)
     sf::Sprite::setPosition(x, y);
 }
 
-void SpriteElement::refresh(const Element *el)
+void SpriteElement::refresh(const Element *el, Model *model)
 {
+    (void) model;
     setSize(el->getSize().first, el->getSize().second);
     setPosition(el->getPosition().first, el->getPosition().second);
     animate();

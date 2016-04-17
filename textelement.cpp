@@ -60,8 +60,9 @@ void TextElement::draw(sf::RenderWindow *window) const
     window->draw(*this);
 }
 
-void TextElement::refresh(const Element *el)
+void TextElement::refresh(const Element *el, Model *model)
 {
+    (void) model;
     setSize(el->getSize().first, el->getSize().second);
     setPosition(el->getPosition().first, el->getPosition().second);
 }

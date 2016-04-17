@@ -35,13 +35,13 @@ bool GameView::treatEvent()
             switch (m_window->getEvent()->key.code)
             {
             case sf::Keyboard::Right :
-                m_gameModel->getCharacter()->rightMove(1);
+                m_gameModel->getCharacters()[0]->rightMove(1);
                 break;
             case sf::Keyboard::Left :
-                m_gameModel->getCharacter()->leftMove(1);
+                m_gameModel->getCharacters()[0]->leftMove(1);
                 break;
             case sf::Keyboard::Up :
-                m_gameModel->getCharacter()->jump();
+                m_gameModel->getCharacters()[0]->jump();
             break;
             default:
                 break;
@@ -50,10 +50,10 @@ bool GameView::treatEvent()
         case sf::Event::KeyReleased :
             switch (m_window->getEvent()->key.code) {
             case sf::Keyboard::Left:
-                m_gameModel->getCharacter()->leftMove(0);
+                m_gameModel->getCharacters()[0]->leftMove(0);
                 break;
             case sf::Keyboard::Right:
-                m_gameModel->getCharacter()->rightMove(0);
+                m_gameModel->getCharacters()[0]->rightMove(0);
                 break;
             default:
                 break;
@@ -101,7 +101,7 @@ void GameView::synchronise()
             if (className == "GameCharacter")
             {
                 std::list<GraphicElement*> list;
-                list.push_back(new SpriteElement{10, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["character.png"], 100, 2, 8});
+                list.push_back(new GameCharacterGraphic{10, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["character.png"], 100, 2, 8});
                 list.push_back(new LifeBar{100, 200, 30, 1000, 600});
                 m_elementToGraphicElement.insert(std::make_pair(*iterator, list));
 
@@ -163,22 +163,10 @@ void GameView::synchronise()
     std::map <const Element*, std::list<GraphicElement*> >::const_iterator iterator = m_elementToGraphicElement.begin();
     while(iterator != m_elementToGraphicElement.end())
     {
-        if (iterator->first->getClassName() == "GameCharacter")
-        {
-            /*float vitesseBalle = iterator->first->getPixelSpeed().first - m_gameModel->getPixelSpeed();
-            if (vitesseBalle >= 0)
-            {
-                iterator->second->setRectPos(1, iterator->second->getActiveColonne());
-            } else {
-                iterator->second->setRectPos(2, iterator->second->getActiveColonne());
-            }
-            float perimetreBalle = PI * iterator->first->getSize().first;
-            iterator->second->setAnimatePeriod(std::abs((1/(vitesseBalle/perimetreBalle))/iterator->second->getNbLignes())*1000);*/
-        }
         std::list<GraphicElement*>::const_iterator iterator2 = iterator->second.begin();
         while (iterator2 != iterator->second.end())
         {
-            (**iterator2).refresh(iterator->first);
+            (**iterator2).refresh(iterator->first, m_gameModel);
             ++iterator2;
         }
         ++iterator;

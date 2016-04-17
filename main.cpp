@@ -15,7 +15,7 @@ int main()
     Window superfenetre{"Runner", sf::Style::Default, GAME_SIZE_W, GAME_SIZE_H};
     GraphicElement::loadTextures();
     TextElement::loadFonts();
-    Game gameModel{STARTSPEEDPERIODGAME};
+    Game gameModel{GAME_SIZE_W, GAME_SIZE_H, STARTSPEEDPERIODGAME};
     GameView gameView{};
     Menu menuModel;
     MenuView menuView;

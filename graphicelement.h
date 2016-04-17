@@ -4,7 +4,7 @@
 #include <list>
 #include <SFML/Graphics.hpp>
 #include "const.h"
-#include "element.h"
+#include "model.h"
 
 class GraphicElement
 {
@@ -21,7 +21,7 @@ public:
     unsigned int getZIndex() const;
     virtual std::string getClassName() const = 0;
     bool operator<(const GraphicElement &ge) const;
-    virtual void refresh(const Element *el)=0;
+    virtual void refresh(const Element *el, Model *model)=0;
     virtual void draw(sf::RenderWindow *window) const=0;
 
     static std::map<std::string, sf::Texture*> m_listTextures;

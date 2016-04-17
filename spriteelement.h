@@ -6,7 +6,7 @@
 
 class SpriteElement: public GraphicElement, public sf::Sprite
 {
-private:
+protected:
     std::pair<float, float> m_size;
     int m_nbLignes;
     int m_nbColonnes;
@@ -27,11 +27,11 @@ public:
     virtual void setSize(float width, float height);
     virtual void setPosition(float x, float y) override;
     void setRectPos(int ligne, int colonne=1);
-    void animate();
+    virtual void animate();
     void setAnimatePeriod(float a);
     void refreshTextRect();
     virtual void draw(sf::RenderWindow *window) const;
-    virtual void refresh(const Element *el);
+    virtual void refresh(const Element *el, Model *model);
 };
 
 #endif // SPRITEELEMENT_H

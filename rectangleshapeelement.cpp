@@ -45,8 +45,9 @@ void RectangleShapeElement::setPosition(float x, float y)
     sf::RectangleShape::setPosition(x, y);
 }
 
-void RectangleShapeElement::refresh(const Element *el)
+void RectangleShapeElement::refresh(const Element *el, Model *model)
 {
+    (void) model;
     setPosition(el->getPosition().first, el->getPosition().second);
     setSize(el->getSize().first, el->getSize().second);
 }

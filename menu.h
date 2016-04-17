@@ -2,9 +2,9 @@
 #define MENU_H
 
 #include "page.h"
-#include "const.h"
+#include "model.h"
 
-class Menu
+class Menu: public Model
 {
 private:
     std::pair<float, float> m_size;
@@ -12,6 +12,7 @@ private:
     int m_activePage;
 public:
     Menu();
+    virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const;
 };
 
 #endif // MENU_H

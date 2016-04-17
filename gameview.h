@@ -11,6 +11,7 @@
 #include "rectangleshapeelement.h"
 #include "lifebar.h"
 #include "textelement.h"
+#include "gamecharactergraphic.h"
 
 
 class GameView

@@ -47,8 +47,9 @@ void CircleShapeElement::setPosition(float x, float y)
     sf::CircleShape::setPosition(x, y);
 }
 
-void CircleShapeElement::refresh(const Element *el)
+void CircleShapeElement::refresh(const Element *el, Model *model)
 {
+    (void) model;
     setSize(el->getSize().first, el->getSize().second);
     setPosition(el->getPosition().first, el->getPosition().second);
 }

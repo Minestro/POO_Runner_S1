@@ -19,7 +19,7 @@ public:
     virtual std::string getClassName() const;
     virtual std::pair<float, float> getPosition() const override;
     virtual void draw(sf::RenderWindow *window) const;
-    virtual void refresh(const Element *el);
+    virtual void refresh(const Element *el, Model *model);
 
     static std::map<std::string, sf::Font*> m_listFonts;
     static void loadFonts(std::string themeName="Default");

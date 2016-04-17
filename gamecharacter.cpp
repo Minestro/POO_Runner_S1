@@ -1,7 +1,7 @@
 #include "gamecharacter.h"
 #include <iostream>
 
-GameCharacter::GameCharacter(float x, float y, float w, float h, float mx, float my, unsigned int life): MovableElement{x, y, w, h, mx, my, CHARACTERSPEEDPERIOD}, m_score{0}, m_movingLeft{0}, m_movingRight{0}, m_doubleJumpUsed{0}, m_life{life}, m_doubleJumpActive{1}, m_invincibilityActive{0}, m_slowTimeActive{0}
+GameCharacter::GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life): MovableElement{x, y, w, h, mx, my, CHARACTERSPEEDPERIOD}, m_score{0}, m_movingLeft{0}, m_movingRight{0}, m_doubleJumpUsed{0}, m_life{life}, m_doubleJumpActive{1}, m_invincibilityActive{0}, m_slowTimeActive{0}, m_player{player}
 {
 
 }
@@ -130,3 +130,4 @@ void GameCharacter::move()
         m_lastMoveCall = std::chrono::system_clock::now();
     }
 }
+

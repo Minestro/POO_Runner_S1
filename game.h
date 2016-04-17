@@ -3,14 +3,10 @@
 
 #include <vector>
 #include <ctime>
-#include "gamecharacter.h"
+#include "model.h"
 #include "player.h"
-#include "obstacle.h"
-#include "bonus.h"
-#include "background.h"
-#include "const.h"
 
-class Game
+class Game: public Model
 {
 private:
     std::chrono::time_point<std::chrono::system_clock> m_beginGameTime;
@@ -18,24 +14,15 @@ private:
     std::chrono::time_point<std::chrono::system_clock> m_lastMoveCall;
     int m_movePeriod;
     long int m_pauseTime;
-    std::pair<int, int> m_size;
-    GameCharacter *m_character;
     Player *m_player;
-    std::vector<Background*> m_backgrounds;
-    std::vector<Obstacle*> m_obstacles;
-    std::vector<Bonus*> m_bonus;
-    std::vector<const Element*> m_newElements;
-    std::vector<const Element*> m_deletedElements;
 
 public:
-    Game(int movePeriodMs);
+    Game() = default;
+    Game(float width, float height, int movePeriodMs);
     ~Game();
+    virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const;
     void nextStep();
     float getPixelSpeed() const;
-    std::pair<int, int> getSize() const;
-    std::vector<const Element*> &getDeletedElements();
-    std::vector<const Element*> &getNewElements();
-    GameCharacter *getCharacter();
 };
 
 #endif // GAME_H
