@@ -5,10 +5,10 @@
 #include "movableelement.h"
 #include "player.h"
 
-
 class GameCharacter: public MovableElement
 {
 private:
+    static unsigned int nbCharacters;
     unsigned int m_score;
     bool m_movingLeft;
     bool m_movingRight;
@@ -18,18 +18,23 @@ private:
     bool m_invincibilityActive;
     bool m_slowTimeActive;
     Player *m_player;
+    unsigned int m_id;
 public:
-    GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life = MAX_LIFE);
-    virtual ~GameCharacter() = default;
+    GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life = MAX_LIFE, unsigned int id = GameCharacter::nbCharacters);
+    virtual ~GameCharacter();
     void addLife (unsigned int life);
     void removeLife (unsigned int life);
     unsigned int getLife() const;
+    unsigned int getId() const;
+    unsigned int getScore() const;
+    void addScore(unsigned int score);
     void jump();
     //void crouch(bool c); a voir plus tard
     void leftMove(bool ml);
     void rightMove(bool mr);
     void move() override;
     std::string getClassName() const;
+    static unsigned int getNbCharacters();
 };
 
 #endif // GAMECHARACTER_H

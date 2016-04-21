@@ -9,9 +9,10 @@ private:
     void rescale(float width, float height);
     std::pair<float, float> m_realPosition;
     std::pair<float, float> m_realSize;
+    bool m_autoRescale;
 public:
     TextElement() = default;
-    TextElement(unsigned int zIndex, float width, float height, float x, float y, std::string text, const sf::Font *font, unsigned int fonSize, sf::Color color = sf::Color::Black, int style = 0);
+    TextElement(unsigned int zIndex, float width, float height, float x, float y, std::string text, const sf::Font *font, unsigned int fontSize, bool autoRescale = 1, sf::Color color = sf::Color::Black, int style = 0);
     virtual ~TextElement() = default;
     void setSize(float width, float height);
     virtual void setPosition(float x, float y) override;

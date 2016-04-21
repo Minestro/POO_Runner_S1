@@ -3,7 +3,7 @@
 
 std::map<std::string, sf::Font*> TextElement::m_listFonts;
 
-TextElement::TextElement(unsigned int zIndex, float width, float height, float x, float y, std::string text, const sf::Font *font, unsigned int fontSize, sf::Color color, int style): GraphicElement::GraphicElement{zIndex}, sf::Text{text, *font, fontSize}, m_realPosition{x, y}, m_realSize{width, height}
+TextElement::TextElement(unsigned int zIndex, float width, float height, float x, float y, std::string text, const sf::Font *font, unsigned int fontSize, bool autoRescale, sf::Color color, int style): GraphicElement::GraphicElement{zIndex}, sf::Text{text, *font, fontSize}, m_realPosition{x, y}, m_realSize{width, height}, m_autoRescale{autoRescale}
 {
     setOrigin(0, 0);
     setStyle(style);
@@ -23,11 +23,9 @@ void TextElement::setSize(float width, float height)
 {
     m_realSize.first = width;
     m_realSize.second = height;
-    if (getLocalBounds().width > m_realSize.first || getLocalBounds().height > m_realSize.second)
+    if ((getLocalBounds().width > m_realSize.first || getLocalBounds().height > m_realSize.second) && m_autoRescale)
     {
         rescale(m_realSize.first, m_realSize.second);
-    } else {
-        setScale(1 ,1);
     }
     setPosition(m_realPosition.first, m_realPosition.second);
 }
@@ -36,12 +34,22 @@ void TextElement::setPosition(float x, float y)
 {
     m_realPosition.first = x;
     m_realPosition.second = y;
-    sf::Text::setPosition(((m_realSize.first-(getLocalBounds().width*getScale().x))/2)+m_realPosition.first, ((m_realSize.second-(getLocalBounds().height*getScale().y))/2)+ m_realPosition.second);
+    if (m_autoRescale)
+    {
+        sf::Text::setPosition(((m_realSize.first-(getLocalBounds().width*getScale().x))/2)+m_realPosition.first, ((m_realSize.second-(getLocalBounds().height*getScale().y))/2)+ m_realPosition.second);
+    } else {
+        sf::Text::setPosition(x, y);
+    }
 }
 
 std::pair<float, float> TextElement::getSize() const
 {
-    return m_realSize;
+    if (m_autoRescale)
+    {
+        return m_realSize;
+    } else {
+        return {Text::getLocalBounds().width, Text::getLocalBounds().height};
+    }
 }
 
 std::pair<float, float> TextElement::getPosition() const

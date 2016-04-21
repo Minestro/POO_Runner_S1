@@ -6,13 +6,22 @@
 #include "const.h"
 #include "model.h"
 
+struct HSLColor
+{
+    float h;
+    float s;
+    float l;
+};
+
 class GraphicElement
 {
 protected:
     unsigned int m_zIndex;
+    std::chrono::time_point<std::chrono::system_clock> m_lastRefeshCall;
+    int m_refreshPeriod;
 public:
     GraphicElement() = default;
-    GraphicElement(unsigned int zIndex);
+    GraphicElement(unsigned int zIndex, int refreshPeriod = 0);
     virtual ~GraphicElement() = default;
     virtual void setSize(float width, float height) = 0;
     virtual void setPosition(float x, float y) = 0;
@@ -27,6 +36,8 @@ public:
     static std::map<std::string, sf::Texture*> m_listTextures;
     static void loadTextures(std::string themeName="Default");
     static void clearTextures();
+    static sf::Color hsl2color(float h, float s, float l);
+    static HSLColor color2hsl(int r, int g, int b);
 };
 
 

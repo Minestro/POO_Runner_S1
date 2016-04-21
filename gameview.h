@@ -12,6 +12,7 @@
 #include "lifebar.h"
 #include "textelement.h"
 #include "gamecharactergraphic.h"
+#include "scoregraphic.h"
 
 
 class GameView

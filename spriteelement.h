@@ -14,10 +14,12 @@ protected:
     int m_activeColonne;
     std::chrono::time_point<std::chrono::system_clock> m_lastAnimateCall;
     int m_animatePeriod;
+    bool m_autoLoop;
+    bool m_animationDirectionRight;
     void rescale(float width, float height);
 public:
     SpriteElement() = default;
-    SpriteElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, int animatePeriod = 0, int nbLignes = 1, int nbColonnes = 1, int activeLigne = 1, int activeColonne = 1);
+    SpriteElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, int animatePeriod = 0, int nbLignes = 1, int nbColonnes = 1, int activeLigne = 1, int activeColonne = 1, bool autoLoop = 1, bool animationDirectionright = 1);
     virtual ~SpriteElement() = default;
     virtual std::pair<float, float> getSize() const;
     virtual std::pair<float, float> getPosition() const override;
@@ -30,6 +32,7 @@ public:
     virtual void animate();
     void setAnimatePeriod(float a);
     void refreshTextRect();
+    void changeDirectionSprite(bool directionRight);
     virtual void draw(sf::RenderWindow *window) const;
     virtual void refresh(const Element *el, Model *model);
 };

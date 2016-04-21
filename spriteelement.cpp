@@ -1,6 +1,6 @@
 #include "spriteelement.h"
 
-SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, int animatePeriod, int nbLignes, int nbColonnes, int activeLigne, int activeColonne) : GraphicElement{zIndex}, sf::Sprite{}, m_size{width, height}, m_nbLignes{nbLignes}, m_nbColonnes{nbColonnes}, m_activeLigne{activeLigne}, m_activeColonne{activeColonne}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}
+SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, int animatePeriod, int nbLignes, int nbColonnes, int activeLigne, int activeColonne,  bool autoLoop, bool animationDirectionright) : GraphicElement{zIndex}, sf::Sprite{}, m_size{width, height}, m_nbLignes{nbLignes}, m_nbColonnes{nbColonnes}, m_activeLigne{activeLigne}, m_activeColonne{activeColonne}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{autoLoop}, m_animationDirectionRight{animationDirectionright}
 {
     setTexture(*texture);
     setPosition(x, y);
@@ -65,17 +65,34 @@ void SpriteElement::setRectPos(int ligne, int colonne)
     }
 }
 
+void SpriteElement::changeDirectionSprite(bool directionRight)
+{
+    m_animationDirectionRight = directionRight;
+}
+
 void SpriteElement::animate()
 {
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastAnimateCall).count() > m_animatePeriod)
     {
-        if( (m_activeColonne%m_nbColonnes) > 0 )
+        if (m_animationDirectionRight)
         {
-            setRectPos(m_activeLigne, m_activeColonne+1);
-        }
-        else
-        {
-            setRectPos(m_activeLigne, 1);
+            if ((m_activeColonne%m_nbColonnes) > 0 )
+            {
+                setRectPos(m_activeLigne, m_activeColonne+1);
+            }
+            else
+            {
+                setRectPos(m_activeLigne, 1);
+            }
+        } else {
+            if (m_activeColonne > 1)
+            {
+                setRectPos(m_activeLigne, m_activeColonne-1);
+            }
+            else
+            {
+                setRectPos(m_activeLigne, m_nbColonnes);
+            }
         }
         m_lastAnimateCall = std::chrono::system_clock::now();
     }

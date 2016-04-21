@@ -11,14 +11,16 @@ class LifeBar: public GraphicElement
 private:
     SpriteElement *m_sprite;
     RectangleShapeElement *m_bar;
+    unsigned int m_actualBarWidth;
+    float m_ratioLife;
 public:
     LifeBar() = default;
-    LifeBar(unsigned int zIndex, float width, float height, float x, float y);
+    LifeBar(unsigned int zIndex, float width, float height, float x, float y, int refreshPeriod = 0);
     virtual ~LifeBar();
     virtual void setSize(float width, float height);
     virtual void setPosition(float x, float y);
     virtual std::pair<float, float> getSize() const;
-    virtual std::pair<float, float> getPosition() const override;
+    virtual std::pair<float, float> getPosition() const;
     virtual std::string getClassName() const;
     virtual void draw(sf::RenderWindow *window) const;
     virtual void refresh(const Element *el, Model *model);

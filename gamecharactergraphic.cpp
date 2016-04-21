@@ -20,12 +20,12 @@ void GameCharacterGraphic::refresh(const Element *el, Model *model)
         float vitesseBalle = model->getCharacterSpeed(*it).first;
         if (vitesseBalle >= 0)
         {
-            setRectPos(1, getActiveColonne());
+            changeDirectionSprite(1);
         } else {
-            setRectPos(2, getActiveColonne());
+            changeDirectionSprite(0);
         }
         float perimetreBalle = PI * (**it).getSize().first;
-        setAnimatePeriod(std::abs((1/(vitesseBalle/perimetreBalle))/getNbLignes())*1000);
+        setAnimatePeriod(std::abs((1/(vitesseBalle/perimetreBalle))/getNbLignes())*500);
     }
     animate();
 }

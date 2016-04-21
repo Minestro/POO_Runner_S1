@@ -17,6 +17,7 @@ protected:
     std::vector<Bonus*> m_bonus;
     std::vector<const Element*> m_newElements;
     std::vector<const Element*> m_deletedElements;
+    std::pair<int, int> m_cursorPosition;
 public:
     Model() = default;
     Model(float width, float height);
@@ -28,6 +29,7 @@ public:
     std::vector<Bonus*> &getBonus();
     std::pair<float, float> getSize() const;
     virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const = 0;
+    void setCursorPosition(int x, int y);
 };
 
 #endif // MODEL_H

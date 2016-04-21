@@ -43,6 +43,9 @@ bool GameView::treatEvent()
             case sf::Keyboard::Up :
                 m_gameModel->getCharacters()[0]->jump();
             break;
+            case sf::Keyboard::A :
+                m_gameModel->getCharacters()[0]->addScore(100);
+                break;
             default:
                 break;
             }
@@ -54,6 +57,9 @@ bool GameView::treatEvent()
                 break;
             case sf::Keyboard::Right:
                 m_gameModel->getCharacters()[0]->rightMove(0);
+                break;
+            case sf::Event::MouseMoved:
+                m_gameModel->setCursorPosition(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
                 break;
             default:
                 break;
@@ -101,8 +107,9 @@ void GameView::synchronise()
             if (className == "GameCharacter")
             {
                 std::list<GraphicElement*> list;
-                list.push_back(new GameCharacterGraphic{10, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["character.png"], 100, 2, 8});
-                list.push_back(new LifeBar{100, 200, 30, 1000, 600});
+                list.push_back(new GameCharacterGraphic{10, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["character.png"], 100, 1, 8});
+                list.push_back(new LifeBar{100, 200, 30, 1000, 600, 20});
+                list.push_back(new ScoreGraphic{100, 50, 600, TextElement::m_listFonts["score.ttf"], 20, 5, sf::Color::White});
                 m_elementToGraphicElement.insert(std::make_pair(*iterator, list));
 
             } else if (className == "Obstacle")

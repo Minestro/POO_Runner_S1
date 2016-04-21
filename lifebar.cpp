@@ -1,9 +1,9 @@
 #include "lifebar.h"
 
-LifeBar::LifeBar(unsigned int zIndex, float width, float height, float x, float y): GraphicElement::GraphicElement{zIndex}
+LifeBar::LifeBar(unsigned int zIndex, float width, float height, float x, float y, int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_actualBarWidth{(unsigned int)width}, m_ratioLife{1.0f}
 {
     m_sprite = new SpriteElement{zIndex, width, height, x, y, GraphicElement::m_listTextures["life.png"]};
-    m_bar = new RectangleShapeElement{zIndex, width-6, height-6, x+3, y+3};
+    m_bar = new RectangleShapeElement{zIndex, width, height, x, y, sf::Color::Green};
 }
 
 LifeBar::~LifeBar()
@@ -16,13 +16,13 @@ LifeBar::~LifeBar()
 void LifeBar::setSize(float width, float height)
 {
     m_sprite->setSize(width, height);
-    m_bar->setSize(width-6, height-6);
+    m_bar->setSize(width * m_ratioLife, height);
 }
 
 void LifeBar::setPosition(float x, float y)
 {
     m_sprite->setPosition(x, y);
-    m_bar->setPosition(x+3, y+3);
+    m_bar->setPosition(x, y);
 }
 
 std::pair<float, float> LifeBar::getSize() const
@@ -55,6 +55,41 @@ void LifeBar::refresh(const Element *el, Model *model)
     }
     if (it != model->getCharacters().end())
     {
-        m_bar->setSize(m_sprite->getSize().first * ((float)(**it).getLife() / (float)MAX_LIFE)-6, m_sprite->getSize().second-6);
+        if ((**it).getId() > 0)
+        {
+            setPosition(el->getPosition().first, el->getPosition().second - 15);
+            setSize(el->getSize().first, 10.0);
+        }
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastRefeshCall).count() > m_refreshPeriod)
+        {
+            m_ratioLife = (float)(**it).getLife() / (float)MAX_LIFE;
+            if (std::abs(m_actualBarWidth - (m_sprite->getSize().first * m_ratioLife)) > 100)
+            {
+                m_actualBarWidth = m_sprite->getSize().first * m_ratioLife;
+            }
+            if (m_actualBarWidth > m_sprite->getSize().first * m_ratioLife + 1)
+            {
+                m_actualBarWidth--;
+            } else if (m_actualBarWidth < m_sprite->getSize().first * m_ratioLife - 1)
+            {
+                m_actualBarWidth++;
+            }
+            m_bar->setSize(m_actualBarWidth, m_sprite->getSize().second);
+            HSLColor beginColor = color2hsl(0, 255, 0);
+            HSLColor endColor = color2hsl(255, 0, 0);
+            sf::Color finalColor;
+            float deltaColorDeg = beginColor.h - endColor.h;
+            float h =  beginColor.h - deltaColorDeg * (1.0-m_ratioLife);
+            if (h >= 360)
+            {
+                h -= 360;
+            } else if (h < 0)
+            {
+                h += 360;
+            }
+            finalColor = hsl2color(h, beginColor.s, beginColor.l);
+            m_bar->setFillColor(finalColor);
+            m_lastRefeshCall = std::chrono::system_clock::now();
+        }
     }
 }
