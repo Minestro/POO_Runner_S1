@@ -2,8 +2,6 @@
 #define GAMEVIEW_H
 
 #include <SFML/Graphics.hpp>
-#include <set>
-#include <typeinfo>
 #include "game.h"
 #include "window.h"
 #include "spriteelement.h"
@@ -22,12 +20,13 @@ private:
     std::map <const Element*, std::list<GraphicElement*> > m_elementToGraphicElement;
     std::vector <const GraphicElement*> m_drawableElementsList;
     Window *m_window;
+
     void insertGraphicElementIntoList(GraphicElement *ge);
+    void fillGraphicElementsList();
 public:
     GameView();
     void draw();
     bool treatEvent();
-    void fillGraphicElementsList();
     void synchronise();
     void setModel(Game *model);
     void setWindow(Window *window);

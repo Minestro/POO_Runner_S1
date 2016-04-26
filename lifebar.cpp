@@ -48,21 +48,21 @@ void LifeBar::draw(sf::RenderWindow *window) const
 
 void LifeBar::refresh(const Element *el, Model *model)
 {
-    std::vector<GameCharacter*>::const_iterator it = model->getCharacters().begin();
-    while (it != model->getCharacters().end() && *it != el)
+    std::vector<std::pair<bool, GameCharacter*> >::const_iterator it = model->getCharacters().begin();
+    while (it != model->getCharacters().end() && it->second != el)
     {
         ++it;
     }
     if (it != model->getCharacters().end())
     {
-        if ((**it).getId() > 0)
+        if (it->second->getId() > 0)
         {
             setPosition(el->getPosition().first, el->getPosition().second - 15);
             setSize(el->getSize().first, 10.0);
         }
         if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastRefeshCall).count() > m_refreshPeriod)
         {
-            m_ratioLife = (float)(**it).getLife() / (float)MAX_LIFE;
+            m_ratioLife = (float)it->second->getLife() / (float)MAX_LIFE;
             if (std::abs(m_actualBarWidth - (m_sprite->getSize().first * m_ratioLife)) > 100)
             {
                 m_actualBarWidth = m_sprite->getSize().first * m_ratioLife;
@@ -79,7 +79,7 @@ void LifeBar::refresh(const Element *el, Model *model)
             HSLColor endColor = color2hsl(255, 0, 0);
             sf::Color finalColor;
             float deltaColorDeg = beginColor.h - endColor.h;
-            float h =  beginColor.h - deltaColorDeg * (1.0-m_ratioLife);
+            float h =  beginColor.h - deltaColorDeg * (1.0 - (m_actualBarWidth / m_sprite->getSize().first));
             if (h >= 360)
             {
                 h -= 360;

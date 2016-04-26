@@ -1,18 +1,22 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "page.h"
 #include "model.h"
+
+enum menuPage {ESCAPE_MENU, PRE_MENU, HOME, GAME_MODE_SELECTION, SHOP, SETTINGS, HIGHSCORE, PAUSE};
 
 class Menu: public Model
 {
 private:
-    std::pair<float, float> m_size;
-    std::vector <Page*> m_pageList;
     int m_activePage;
 public:
-    Menu();
+    Menu() = default;
+    Menu(float width, float height, int activePage);
+    virtual ~Menu() = default;
     virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const;
+    void changePage(int page);
+    void refresh();
+    int getActivePage() const;
 };
 
 #endif // MENU_H

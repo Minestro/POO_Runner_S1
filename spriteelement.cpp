@@ -27,7 +27,6 @@ std::pair<float, float> SpriteElement::getSize() const
     return m_size;
 }
 
-
 std::pair<float, float> SpriteElement::getPosition() const
 {
     return {sf::Sprite::getPosition().x, sf::Sprite::getPosition().y};
@@ -65,6 +64,21 @@ void SpriteElement::setRectPos(int ligne, int colonne)
     }
 }
 
+void SpriteElement::setAutoLoop(bool autoLoop)
+{
+    m_autoLoop = autoLoop;
+}
+
+void SpriteElement::setNbColonnes(int nb)
+{
+    m_nbColonnes = nb;
+}
+
+void SpriteElement::setNbLignes(int nb)
+{
+    m_nbLignes = nb;
+}
+
 void SpriteElement::changeDirectionSprite(bool directionRight)
 {
     m_animationDirectionRight = directionRight;
@@ -78,18 +92,18 @@ void SpriteElement::animate()
         {
             if ((m_activeColonne%m_nbColonnes) > 0 )
             {
-                setRectPos(m_activeLigne, m_activeColonne+1);
+                setRectPos(m_activeLigne, ++m_activeColonne);
             }
-            else
+            else if (m_autoLoop)
             {
                 setRectPos(m_activeLigne, 1);
             }
         } else {
             if (m_activeColonne > 1)
             {
-                setRectPos(m_activeLigne, m_activeColonne-1);
+                setRectPos(m_activeLigne, --m_activeColonne);
             }
-            else
+            else if (m_autoLoop)
             {
                 setRectPos(m_activeLigne, m_nbColonnes);
             }

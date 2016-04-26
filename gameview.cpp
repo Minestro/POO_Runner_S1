@@ -1,7 +1,7 @@
 #include "gameview.h"
 #include <iostream>
 
-GameView::GameView()
+GameView::GameView(): m_gameModel{nullptr}
 {
 
 }
@@ -20,6 +20,11 @@ void GameView::insertGraphicElementIntoList(GraphicElement *ge)
 bool GameView::treatEvent()
 {
     bool quitter = false;
+    std::vector<std::pair<bool, GameCharacter*> >::iterator player1 = m_gameModel->getCharacters().begin();
+    while (player1 != m_gameModel->getCharacters().end() && player1->second->getId() != 0)
+    {
+        ++player1;
+    }
     while (m_window->pollEvent(*m_window->getEvent()))
     {
         switch (m_window->getEvent()->type)
@@ -35,16 +40,25 @@ bool GameView::treatEvent()
             switch (m_window->getEvent()->key.code)
             {
             case sf::Keyboard::Right :
-                m_gameModel->getCharacters()[0]->rightMove(1);
+                if (player1 != m_gameModel->getCharacters().end())
+                {
+                    player1->second->rightMove(1);
+                }
                 break;
             case sf::Keyboard::Left :
-                m_gameModel->getCharacters()[0]->leftMove(1);
+                if (player1 != m_gameModel->getCharacters().end())
+                {
+                    player1->second->leftMove(1);
+                }
                 break;
             case sf::Keyboard::Up :
-                m_gameModel->getCharacters()[0]->jump();
+                if (player1 != m_gameModel->getCharacters().end())
+                {
+                    player1->second->jump();
+                }
             break;
             case sf::Keyboard::A :
-                m_gameModel->getCharacters()[0]->addScore(100);
+                m_gameModel->getCharacters()[0].second->addScore(100);
                 break;
             default:
                 break;
@@ -53,13 +67,19 @@ bool GameView::treatEvent()
         case sf::Event::KeyReleased :
             switch (m_window->getEvent()->key.code) {
             case sf::Keyboard::Left:
-                m_gameModel->getCharacters()[0]->leftMove(0);
+                if (player1 != m_gameModel->getCharacters().end())
+                {
+                    player1->second->leftMove(0);
+                }
                 break;
             case sf::Keyboard::Right:
-                m_gameModel->getCharacters()[0]->rightMove(0);
+                if (player1 != m_gameModel->getCharacters().end())
+                {
+                    player1->second->rightMove(0);
+                }
                 break;
             case sf::Event::MouseMoved:
-                m_gameModel->setCursorPosition(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
+                m_gameModel->setCursorPosition(m_window->mapPixelToCoords(sf::Vector2i{sf::Mouse::getPosition(*m_window).x, sf::Mouse::getPosition(*m_window).y}).x, m_window->mapPixelToCoords(sf::Vector2i{sf::Mouse::getPosition(*m_window).x, sf::Mouse::getPosition(*m_window).y}).y);
                 break;
             default:
                 break;
@@ -97,48 +117,68 @@ void GameView::draw()
 
 void GameView::synchronise()
 {
-    //Si le gameModel contient des nouveaux élements on les ajoutes à la liste elementToGraphicElement en lui associant un GraphicElement
-    if (m_gameModel->getNewElements().size() > 0)
+    //Si le gameModel contient des nouveaux élements on les ajoutes à la liste elementToGraphicElement en lui associant un ou plusieurs GraphicElement
+    for (unsigned int i=0; i<m_gameModel->getCharacters().size(); i++)
     {
-        std::vector<const Element*>::const_iterator iterator = m_gameModel->getNewElements().begin();
-        while (iterator != m_gameModel->getNewElements().end())
+        if (m_gameModel->getCharacters()[i].first)
         {
-            std::string className = (**iterator).getClassName();
-            if (className == "GameCharacter")
+            std::map <const Element*, std::list<GraphicElement*> >::const_iterator it = m_elementToGraphicElement.find(m_gameModel->getCharacters()[i].second);
+            if (it == m_elementToGraphicElement.end())
             {
                 std::list<GraphicElement*> list;
-                list.push_back(new GameCharacterGraphic{10, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["character.png"], 100, 1, 8});
+                list.push_back(new GameCharacterGraphic{10, m_gameModel->getCharacters()[i].second->getSize().first, m_gameModel->getCharacters()[i].second->getSize().second, m_gameModel->getCharacters()[i].second->getPosition().first, m_gameModel->getCharacters()[i].second->getPosition().second, GraphicElement::m_listTextures["character.png"], 100, 1, 8});
                 list.push_back(new LifeBar{100, 200, 30, 1000, 600, 20});
                 list.push_back(new ScoreGraphic{100, 50, 600, TextElement::m_listFonts["score.ttf"], 20, 5, sf::Color::White});
-                m_elementToGraphicElement.insert(std::make_pair(*iterator, list));
+                m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getCharacters()[i].second, list));
+            } else {
 
-            } else if (className == "Obstacle")
+            }
+            m_gameModel->getCharacters()[i].first = 0;
+        }
+    }
+
+    for (unsigned int i=0; i<m_gameModel->getObstacles().size(); i++)
+    {
+        if (m_gameModel->getObstacles()[i].first)
+        {
+            std::map <const Element*, std::list<GraphicElement*> >::const_iterator it = m_elementToGraphicElement.find(m_gameModel->getObstacles()[i].second);
+            if (it == m_elementToGraphicElement.end())
             {
                 std::list<GraphicElement*> list;
-                list.push_back(new SpriteElement{10, (**iterator).getSize().first, (**iterator).getSize().second, (**iterator).getPosition().first, (**iterator).getPosition().second, GraphicElement::m_listTextures["obstacles_block.png"], 100, 1, 2});
-                m_elementToGraphicElement.insert(std::make_pair(*iterator, list));
-            } else if (className == "Background")
+                list.push_back(new SpriteElement{10, m_gameModel->getObstacles()[i].second->getSize().first, m_gameModel->getObstacles()[i].second->getSize().second, m_gameModel->getObstacles()[i].second->getPosition().first, m_gameModel->getObstacles()[i].second->getPosition().second, GraphicElement::m_listTextures["obstacles_block.png"], 100, 1, 2});
+                m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getObstacles()[i].second, list));
+            } else {
+
+            }
+            m_gameModel->getObstacles()[i].first = 0;
+        }
+    }
+
+    for (unsigned int i=0; i<m_gameModel->getBackgrounds().size(); i++)
+    {
+        if (m_gameModel->getBackgrounds()[i].first)
+        {
+            std::map <const Element*, std::list<GraphicElement*> >::const_iterator it = m_elementToGraphicElement.find(m_gameModel->getBackgrounds()[i].second);
+            if (it == m_elementToGraphicElement.end())
             {
-                const Background *bckg = dynamic_cast<const Background*>(*iterator);
                 std::list<GraphicElement*> list;
-                if (bckg->isSliding())
+                if (m_gameModel->getBackgrounds()[i].second->isSliding())
                 {
-                    sf::Texture *texture = GraphicElement::m_listTextures[bckg->getBackgroundFileName()];
+                    sf::Texture *texture = GraphicElement::m_listTextures[m_gameModel->getBackgrounds()[i].second->getBackgroundFileName()];
                     texture->setRepeated(1);
-                    SpriteElement *ge = new SpriteElement{(unsigned int)bckg->getZIndex(), bckg->getSize().first, bckg->getSize().second, bckg->getPosition().first, bckg->getPosition().second, texture};
+                    SpriteElement *ge = new SpriteElement{(unsigned int)m_gameModel->getBackgrounds()[i].second->getZIndex(), m_gameModel->getBackgrounds()[i].second->getSize().first, m_gameModel->getBackgrounds()[i].second->getSize().second, m_gameModel->getBackgrounds()[i].second->getPosition().first, m_gameModel->getBackgrounds()[i].second->getPosition().second, texture};
                     ge->setTextureRect(sf::IntRect{ge->getTextureRect().left, ge->getTextureRect().top, ge->getTextureRect().width*2, ge->getTextureRect().height});
                     list.push_back(ge);
-                    m_elementToGraphicElement.insert(std::make_pair(*iterator, list));
+                    m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getBackgrounds()[i].second, list));
                 } else {
-                    list.push_back(new SpriteElement{(unsigned int)bckg->getZIndex(), bckg->getSize().first, bckg->getSize().second, bckg->getPosition().first, bckg->getPosition().second, GraphicElement::m_listTextures[bckg->getBackgroundFileName()]});
-                    m_elementToGraphicElement.insert(std::make_pair(*iterator, list));
+                    list.push_back(new SpriteElement{(unsigned int)m_gameModel->getBackgrounds()[i].second->getZIndex(), m_gameModel->getBackgrounds()[i].second->getSize().first, m_gameModel->getBackgrounds()[i].second->getSize().second, m_gameModel->getBackgrounds()[i].second->getPosition().first, m_gameModel->getBackgrounds()[i].second->getPosition().second, GraphicElement::m_listTextures[m_gameModel->getBackgrounds()[i].second->getBackgroundFileName()]});
+                    m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getBackgrounds()[i].second, list));
                 }
             } else {
 
             }
-            ++iterator;
+            m_gameModel->getBackgrounds()[i].first = 0;
         }
-        m_gameModel->getNewElements().clear();
     }
 
     //Pareil mais si des élements ont été supprimés
@@ -183,7 +223,7 @@ void GameView::synchronise()
 
 void GameView::fillGraphicElementsList()
 {
-    //Cette fonction ajoute dans un set tous les graphicElements du tableau de correspondance elementToGraphicElement et qui seront triés suivant leur z-index
+    //Cette fonction ajoute dans une liste de tous les graphicElements du tableau de correspondance elementToGraphicElement et qui seront triés suivant leur z-index
     m_drawableElementsList.clear();
     std::map <const Element*, std::list <GraphicElement*> >::const_iterator iterator = m_elementToGraphicElement.begin();
     while(iterator != m_elementToGraphicElement.end())

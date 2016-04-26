@@ -17,8 +17,8 @@ int main()
     TextElement::loadFonts();
     Game gameModel{GAME_SIZE_W, GAME_SIZE_H, STARTSPEEDPERIODGAME};
     GameView gameView{};
-    Menu menuModel;
-    MenuView menuView;
+    Menu menuModel{GAME_SIZE_W, GAME_SIZE_H, menuPage::HOME};
+    MenuView menuView{};
     gameView.setModel(&gameModel);
     gameView.setWindow(&superfenetre);
     menuView.setModel(&menuModel);
@@ -26,14 +26,26 @@ int main()
     while (!quitter)
     {
         sf::sleep(sf::milliseconds(1));
-        gameModel.nextStep();
-        if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-loopTime).count() > drawPeriod)
+        if (menuModel.getActivePage() == menuPage::ESCAPE_MENU)
         {
-            gameView.synchronise();
-            gameView.draw();
-            loopTime = std::chrono::system_clock::now();
+            gameModel.nextStep();
+            if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-loopTime).count() > drawPeriod)
+            {
+                gameView.synchronise();
+                gameView.draw();
+                loopTime = std::chrono::system_clock::now();
+            }
+            quitter = gameView.treatEvent();
+        } else {
+            menuModel.refresh();
+            if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-loopTime).count() > drawPeriod)
+            {
+                menuView.synchronise();
+                menuView.draw();
+                loopTime = std::chrono::system_clock::now();
+            }
+            quitter = menuView.treatEvent();
         }
-        quitter = gameView.treatEvent();
     }
     GraphicElement::clearTextures();
     TextElement::clearFonts();

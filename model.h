@@ -6,28 +6,31 @@
 #include "background.h"
 #include "gamecharacter.h"
 #include "const.h"
+#include "button.h"
 
 class Model
 {
 protected:
     std::pair<float, float> m_size;
-    std::vector<GameCharacter*> m_characters;
-    std::vector<Background*> m_backgrounds;
-    std::vector<Obstacle*> m_obstacles;
-    std::vector<Bonus*> m_bonus;
-    std::vector<const Element*> m_newElements;
+    std::vector<std::pair<bool, GameCharacter*> > m_characters;
+    std::vector<std::pair<bool, Background*> > m_backgrounds;
+    std::vector<std::pair<bool, Obstacle*> >m_obstacles;
+    std::vector<std::pair<bool, Bonus*> > m_bonus;
+    std::vector<std::pair<bool, Button*> > m_buttons;
     std::vector<const Element*> m_deletedElements;
     std::pair<int, int> m_cursorPosition;
 public:
     Model() = default;
     Model(float width, float height);
+    virtual ~Model() = default;
     std::vector<const Element*> &getDeletedElements();
-    std::vector<const Element*> &getNewElements();
-    std::vector<GameCharacter*> &getCharacters();
-    std::vector<Background*> &getBackgrounds();
-    std::vector<Obstacle*> &getObstacles();
-    std::vector<Bonus*> &getBonus();
+    std::vector<std::pair<bool, GameCharacter*> > &getCharacters();
+    std::vector<std::pair<bool, Background*> > &getBackgrounds();
+    std::vector<std::pair<bool, Obstacle*> > &getObstacles();
+    std::vector<std::pair<bool, Bonus*> > &getBonus();
+    std::vector<std::pair<bool, Button*> > &getButtons();
     std::pair<float, float> getSize() const;
+    std::pair<int, int> getCursorPosition() const;
     virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const = 0;
     void setCursorPosition(int x, int y);
 };

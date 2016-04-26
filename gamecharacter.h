@@ -5,6 +5,8 @@
 #include "movableelement.h"
 #include "player.h"
 
+enum character_state{STATIC, DYING, RUNNING, FLYING};
+
 class GameCharacter: public MovableElement
 {
 private:
@@ -19,6 +21,7 @@ private:
     bool m_slowTimeActive;
     Player *m_player;
     unsigned int m_id;
+    character_state m_state;
 public:
     GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life = MAX_LIFE, unsigned int id = GameCharacter::nbCharacters);
     virtual ~GameCharacter();
@@ -27,6 +30,8 @@ public:
     unsigned int getLife() const;
     unsigned int getId() const;
     unsigned int getScore() const;
+    character_state getState() const;
+    void setSate(character_state state);
     void addScore(unsigned int score);
     void jump();
     //void crouch(bool c); a voir plus tard

@@ -3,7 +3,7 @@
 
 unsigned int GameCharacter::nbCharacters = 0;
 
-GameCharacter::GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life, unsigned int id): MovableElement{x, y, w, h, mx, my, CHARACTERSPEEDPERIOD}, m_score{0}, m_movingLeft{0}, m_movingRight{0}, m_doubleJumpUsed{0}, m_life{life}, m_doubleJumpActive{1}, m_invincibilityActive{0}, m_slowTimeActive{0}, m_player{player}, m_id{id}
+GameCharacter::GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life, unsigned int id): MovableElement{x, y, w, h, mx, my, CHARACTERSPEEDPERIOD}, m_score{0}, m_movingLeft{0}, m_movingRight{0}, m_doubleJumpUsed{0}, m_life{life}, m_doubleJumpActive{1}, m_invincibilityActive{0}, m_slowTimeActive{0}, m_player{player}, m_id{id}, m_state{character_state::STATIC}
 {
     GameCharacter::nbCharacters ++;
 }
@@ -20,22 +20,31 @@ std::string GameCharacter::getClassName() const
 
 void GameCharacter::rightMove(bool mr)
 {
-    m_movingRight = mr;
+    if (m_state != character_state::DYING)
+    {
+        m_movingRight = mr;
+    }
 }
 
 void GameCharacter::leftMove(bool ml)
 {
-    m_movingLeft = ml;
+    if (m_state != character_state::DYING)
+    {
+        m_movingLeft = ml;
+    }
 }
 
 void GameCharacter::jump()
 {
-    if (m_position.second + m_size.second == HAUTEUR_SOL || (m_doubleJumpActive && !m_doubleJumpUsed))
+    if (m_state != character_state::DYING)
     {
-        m_movement.second = -5;
-        if (m_position.second + m_size.second != HAUTEUR_SOL)
+        if (m_position.second + m_size.second == HAUTEUR_SOL || (m_doubleJumpActive && !m_doubleJumpUsed))
         {
-            m_doubleJumpUsed = 1;
+            m_movement.second = -5;
+            if (m_position.second + m_size.second != HAUTEUR_SOL)
+            {
+                m_doubleJumpUsed = 1;
+            }
         }
     }
 }
@@ -83,6 +92,16 @@ unsigned int GameCharacter::getScore() const
 void GameCharacter::addScore(unsigned int score)
 {
     m_score += score;
+}
+
+character_state GameCharacter::getState() const
+{
+    return m_state;
+}
+
+void GameCharacter::setSate(character_state state)
+{
+    m_state = state;
 }
 
 void GameCharacter::move()

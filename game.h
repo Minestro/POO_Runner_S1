@@ -19,7 +19,7 @@ private:
 public:
     Game() = default;
     Game(float width, float height, int movePeriodMs);
-    ~Game();
+    virtual ~Game();
     virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const;
     void nextStep();
     float getPixelSpeed() const;

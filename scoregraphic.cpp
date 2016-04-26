@@ -47,8 +47,8 @@ void ScoreGraphic::draw(sf::RenderWindow *window) const
 
 void ScoreGraphic::refresh(const Element *el, Model *model)
 {
-    std::vector<GameCharacter*>::const_iterator it = model->getCharacters().begin();
-    while (it != model->getCharacters().end() && *it != el)
+    std::vector<std::pair<bool, GameCharacter*> >::const_iterator it = model->getCharacters().begin();
+    while (it != model->getCharacters().end() && it->second != el)
     {
         ++it;
     }
@@ -56,15 +56,15 @@ void ScoreGraphic::refresh(const Element *el, Model *model)
     {
         if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastRefeshCall).count() > m_refreshPeriod)
         {
-            int deltaScore = (std::max((**it).getScore(), m_showedScore) - std::min((**it).getScore(), m_showedScore))/10;
+            int deltaScore = (std::max(it->second->getScore(), m_showedScore) - std::min(it->second->getScore(), m_showedScore))/10;
             if (deltaScore < 1)
             {
                 deltaScore = 1;
             }
-            if (m_showedScore < (**it).getScore())
+            if (m_showedScore < it->second->getScore())
             {
                 m_showedScore += deltaScore;
-            } else if (m_showedScore > (**it).getScore())
+            } else if (m_showedScore > it->second->getScore())
             {
                 m_showedScore -= deltaScore;
             }

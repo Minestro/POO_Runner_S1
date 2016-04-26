@@ -1,6 +1,6 @@
 #include "model.h"
 
-Model::Model(float width, float height): m_size{width, height}, m_characters{}, m_backgrounds{}, m_obstacles{}, m_bonus{}, m_newElements{}, m_deletedElements{}, m_cursorPosition{}
+Model::Model(float width, float height): m_size{width, height}, m_characters{}, m_backgrounds{}, m_obstacles{}, m_bonus{}, m_deletedElements{}, m_cursorPosition{}
 {
 
 }
@@ -10,34 +10,39 @@ std::vector<const Element*> &Model::getDeletedElements()
     return m_deletedElements;
 }
 
-std::vector<const Element*> &Model::getNewElements()
-{
-    return m_newElements;
-}
-
-std::vector<GameCharacter*> &Model::getCharacters()
+std::vector<std::pair<bool, GameCharacter *> > &Model::getCharacters()
 {
     return m_characters;
 }
 
-std::vector<Background*> &Model::getBackgrounds()
+std::vector<std::pair<bool, Background *> > &Model::getBackgrounds()
 {
     return m_backgrounds;
 }
 
-std::vector<Obstacle*> &Model::getObstacles()
+std::vector<std::pair<bool, Obstacle *> > &Model::getObstacles()
 {
     return m_obstacles;
 }
 
-std::vector<Bonus*> &Model::getBonus()
+std::vector<std::pair<bool, Bonus *> > &Model::getBonus()
 {
     return m_bonus;
+}
+
+std::vector<std::pair<bool, Button*> > &Model::getButtons()
+{
+    return m_buttons;
 }
 
 std::pair<float, float> Model::getSize() const
 {
     return m_size;
+}
+
+std::pair<int, int> Model::getCursorPosition() const
+{
+    return m_cursorPosition;
 }
 
 void Model::setCursorPosition(int x, int y)

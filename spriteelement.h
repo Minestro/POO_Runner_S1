@@ -29,6 +29,9 @@ public:
     virtual void setSize(float width, float height);
     virtual void setPosition(float x, float y) override;
     void setRectPos(int ligne, int colonne=1);
+    void setAutoLoop(bool autoLoop);
+    void setNbLignes(int nb);
+    void setNbColonnes(int nb);
     virtual void animate();
     void setAnimatePeriod(float a);
     void refreshTextRect();
