@@ -108,69 +108,75 @@ void GameCharacter::move()
 {
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() > m_movePeriod)
     {
-        // Si la touche gauche ou droite est appuyé et que la balle est au sol, on la déplace
-        if ((m_movingLeft || m_movingRight) && m_position.second + m_size.second == HAUTEUR_SOL)
+        if (m_state != character_state::DYING)
         {
-            if (m_movingRight && m_movement.first < CHARACTER_MAX_SPEED)
+            // Si la touche gauche ou droite est appuyé et que la balle est au sol, on la déplace
+            if ((m_movingLeft || m_movingRight) && m_position.second + m_size.second == HAUTEUR_SOL)
             {
-                m_movement.first += ACCELERATION_CHARACTER;
-            } else if (m_movingLeft && m_movement.first > -CHARACTER_MAX_SPEED)
-            {
-                m_movement.first -= ACCELERATION_CHARACTER;
-            }
-        } else {
-            // Sinon : Si le vecteur mouvement est très faible (< Acceleration du perso), on considère que la balle ne doit plus bouger
-            if (abs(m_movement.first) < ACCELERATION_CHARACTER)
-            {
-                m_movement.first = 0;
+                if (m_movingRight && m_movement.first < CHARACTER_MAX_SPEED)
+                {
+                    m_movement.first += ACCELERATION_CHARACTER;
+                } else if (m_movingLeft && m_movement.first > -CHARACTER_MAX_SPEED)
+                {
+                    m_movement.first -= ACCELERATION_CHARACTER;
+                }
+            } else {
+                // Sinon : Si le vecteur mouvement est très faible (< Acceleration du perso), on considère que la balle ne doit plus bouger
+                if (abs(m_movement.first) < ACCELERATION_CHARACTER)
+                {
+                    m_movement.first = 0;
+                }
+
+                //Si le vecteur mouvement x est supérieur à 0, on décelère la balle
+                if (m_movement.first > 0)
+                {
+                    if (m_position.second + m_size.second == HAUTEUR_SOL)
+                    {
+                        m_movement.first -= (ACCELERATION_CHARACTER/2);
+                    } else {
+                        //Moins vite si la balle est en l'air
+                        m_movement.first -= (ACCELERATION_CHARACTER/8);
+                    }
+                } else if (m_movement.first < 0)
+                {
+                    if (m_position.second + m_size.second == HAUTEUR_SOL)
+                    {
+                        m_movement.first += (ACCELERATION_CHARACTER/2);
+                    } else {
+                        m_movement.first += (ACCELERATION_CHARACTER/8);
+                    }
+                }
             }
 
-            //Si le vecteur mouvement x est supérieur à 0, on décelère la balle
-            if (m_movement.first > 0)
+            // Si la balle est en lair, on applique la gravité
+            if (m_position.second + m_size.second < HAUTEUR_SOL)
             {
-                if (m_position.second + m_size.second == HAUTEUR_SOL)
-                {
-                    m_movement.first -= (ACCELERATION_CHARACTER/2);
-                } else {
-                    //Moins vite si la balle est en l'air
-                    m_movement.first -= (ACCELERATION_CHARACTER/8);
-                }
-            } else if (m_movement.first < 0)
-            {
-                if (m_position.second + m_size.second == HAUTEUR_SOL)
-                {
-                    m_movement.first += (ACCELERATION_CHARACTER/2);
-                } else {
-                    m_movement.first += (ACCELERATION_CHARACTER/8);
-                }
+                m_movement.second += GRAVITY;
             }
-        }
-
-        // Si la balle est en lair, on applique la gravité
-        if (m_position.second + m_size.second < HAUTEUR_SOL)
-        {
-            m_movement.second += GRAVITY;
         }
 
         //On deplace la position de la balle
         m_position.first += m_movement.first;
         m_position.second += m_movement.second;
 
-        //Test des collisions avec les bords de l'écran et le sol
-        if (m_position.first + m_size.first > GAME_SIZE_W)
+        if (m_state != character_state::DYING)
         {
-            m_position.first = GAME_SIZE_W - m_size.first;
-            m_movement.first = 0;
-        } else if (m_position.first < 0)
-        {
-            m_position.first = 0;
-            m_movement.first = 0;
-        }
-        if (m_position.second + m_size.second > HAUTEUR_SOL)
-        {
-            m_position.second = HAUTEUR_SOL - m_size.second;
-            m_movement.second = 0;
-            m_doubleJumpUsed = false;
+            //Test des collisions avec les bords de l'écran et le sol
+            if (m_position.first + m_size.first > GAME_SIZE_W)
+            {
+                m_position.first = GAME_SIZE_W - m_size.first;
+                m_movement.first = 0;
+            } else if (m_position.first < 0)
+            {
+                m_position.first = 0;
+                m_movement.first = 0;
+            }
+            if (m_position.second + m_size.second > HAUTEUR_SOL)
+            {
+                m_position.second = HAUTEUR_SOL - m_size.second;
+                m_movement.second = 0;
+                m_doubleJumpUsed = false;
+            }
         }
 
         m_lastMoveCall = std::chrono::system_clock::now();

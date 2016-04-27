@@ -9,6 +9,7 @@ class Menu: public Model
 {
 private:
     int m_activePage;
+    int m_backgroundMovePeriod;
 public:
     Menu() = default;
     Menu(float width, float height, int activePage);

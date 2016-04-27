@@ -1,6 +1,6 @@
 #include "menu.h"
 
-Menu::Menu(float width, float height, int activePage): Model::Model{width, height}, m_activePage{activePage}
+Menu::Menu(float width, float height, int activePage): Model::Model{width, height}, m_activePage{activePage}, m_backgroundMovePeriod{STARTSPEEDPERIODGAME}
 {
     changePage(activePage);
 }
@@ -52,7 +52,11 @@ void Menu::changePage(int page)
 
 void Menu::refresh()
 {
-
+    for (unsigned int i=0; i<m_backgrounds.size(); i++)
+    {
+        m_backgrounds[i].second->setMovePeriod(m_backgrounds[i].second->getCoefSpeed() * m_backgroundMovePeriod);
+        m_backgrounds[i].second->move();
+    }
 }
 
 int Menu::getActivePage() const

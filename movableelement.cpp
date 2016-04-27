@@ -30,3 +30,9 @@ void MovableElement::setMovePeriod(float movePeriod)
 {
     m_movePeriod = movePeriod;
 }
+
+void MovableElement::setMovement(float dx, float dy)
+{
+    m_movement.first = dx;
+    m_movement.second = dy;
+}

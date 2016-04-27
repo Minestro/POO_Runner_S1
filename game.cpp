@@ -2,7 +2,7 @@
 #include <iostream>
 #include <time.h>
 
-Game::Game(float width, float height, int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastObstacleCreate{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}
+Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastMove{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}, m_distance{0}
 {
     m_player =  new Player;
     GameCharacter *gc = new GameCharacter{0, HAUTEUR_SOL, 40, 40, 0, 0, m_player};
@@ -11,6 +11,7 @@ Game::Game(float width, float height, int movePeriodMs): Model::Model{width, hei
     Background *b2 = new Background{"city_1.png", 2, 1.0, 1, 0};
     m_backgrounds.push_back(std::make_pair(1, b1));
     m_backgrounds.push_back(std::make_pair(1, b2));
+    setSpeedPeriod(m_movePeriod);
 }
 
 Game::~Game()
@@ -47,11 +48,37 @@ void Game::nextStep()
         ++player1;
     }
 
-    //On actualise la vitesse de defilement du background
+    std::cout << m_obstacles.size() << std::endl;
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMove).count() > m_movePeriod)
+    {
+        //On ajoute la distance
+        m_distance += PIXELPERBACKGROUNDMOVE;
+
+        //On augmente la vitesse
+        if ((m_distance/PIXELPERBACKGROUNDMOVE) % 500 == 0)
+        {
+            setSpeedPeriod(--m_movePeriod);
+        }
+
+        //On créé des nouveaux obstacles
+        if ((m_distance/PIXELPERBACKGROUNDMOVE) % 100 == 0)
+        {
+            int aleatoire= rand()% 2 ;
+            if (aleatoire == 1)
+            {
+                Obstacle* ob = new Obstacle(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -PIXELPERBACKGROUNDMOVE, 0, m_movePeriod, 5, 1);
+                m_obstacles.push_back(std::make_pair(1, ob));
+
+            }
+        }
+
+        m_lastMove = std::chrono::system_clock::now();
+    }
+
+    //On move les backgrounds
     std::vector<std::pair<bool, Background *> >::iterator iterator = m_backgrounds.begin();
     while (iterator != m_backgrounds.end())
     {
-        iterator->second->setMovePeriod(iterator->second->getCoefSpeed() * m_movePeriod);
         iterator->second->move();
         ++iterator;
     }
@@ -59,21 +86,25 @@ void Game::nextStep()
     //On bouge les personnages
     for (unsigned int i = 0; i<m_characters.size(); i++)
     {
+        if(m_characters[i].second->getState() == character_state::DYING)
+        {
+            m_characters[i].second->setMovement(-PIXELPERBACKGROUNDMOVE, 0);
+            m_characters[i].second->setMovePeriod(m_movePeriod);
+        }
         m_characters[i].second->move();
 
     }
 
     //On créé des nouveaux obstacles
-    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastObstacleCreate).count() > 2000)
+    if ((m_distance/PIXELPERBACKGROUNDMOVE)%100 == 0)
     {
         int aleatoire= rand()% 2 ;
         if (aleatoire == 1)
         {
-            Obstacle* ob = new Obstacle(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -PIXELPERBACKGROUNDMOVE, 0, m_movePeriod, 50, 1);
+            Obstacle* ob = new Obstacle(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -PIXELPERBACKGROUNDMOVE, 0, m_movePeriod, 5, 1);
             m_obstacles.push_back(std::make_pair(1, ob));
 
         }
-        m_lastObstacleCreate =  std::chrono::system_clock::now();
     }
 
     //Test des collisions avec les obstacles et les bonus
@@ -117,4 +148,33 @@ void Game::nextStep()
 std::pair<float, float> Game::getCharacterSpeed(const GameCharacter *gc) const
 {
     return {gc->getPixelSpeed().first - getPixelSpeed(), gc->getPixelSpeed().second};
+}
+
+unsigned int Game::getSpeedPeriod() const
+{
+    return m_movePeriod;
+}
+
+void Game::setSpeedPeriod(int period)
+{
+    unsigned int mp;
+    if (period < 0)
+    {
+        mp = 0;
+    } else {
+        mp = period;
+    }
+    m_movePeriod = mp;
+    for (unsigned int i=0; i<m_obstacles.size(); i++)
+    {
+        m_obstacles[i].second->setMovePeriod(mp);
+    }
+    for (unsigned int i=0; i<m_bonus.size(); i++)
+    {
+        m_bonus[i].second->setMovePeriod(mp);
+    }
+    for (unsigned int i=0; i<m_backgrounds.size(); i++)
+    {
+        m_backgrounds[i].second->setMovePeriod(m_backgrounds[i].second->getCoefSpeed() * mp);
+    }
 }
