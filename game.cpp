@@ -2,7 +2,7 @@
 #include <iostream>
 #include <time.h>
 
-Game::Game(float width, float height, int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastObstacleCreate{}, m_lastMoveCall{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}
+Game::Game(float width, float height, int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastObstacleCreate{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}
 {
     m_player =  new Player;
     GameCharacter *gc = new GameCharacter{0, HAUTEUR_SOL, 40, 40, 0, 0, m_player};
@@ -39,6 +39,15 @@ float Game::getPixelSpeed() const
 void Game::nextStep()
 {
     srand(time(NULL));
+
+    //On cherche le joueur 1 (le notre)
+    std::vector<std::pair<bool, GameCharacter*> >::iterator player1 = getCharacters().begin();
+    while (player1 != getCharacters().end() && player1->second->getId() != 0)
+    {
+        ++player1;
+    }
+
+    //On actualise la vitesse de defilement du background
     std::vector<std::pair<bool, Background *> >::iterator iterator = m_backgrounds.begin();
     while (iterator != m_backgrounds.end())
     {
@@ -46,12 +55,15 @@ void Game::nextStep()
         iterator->second->move();
         ++iterator;
     }
-    m_lastMoveCall = std::chrono::system_clock::now();
+
+    //On bouge les personnages
     for (unsigned int i = 0; i<m_characters.size(); i++)
     {
         m_characters[i].second->move();
 
     }
+
+    //On créé des nouveaux obstacles
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastObstacleCreate).count() > 2000)
     {
         int aleatoire= rand()% 2 ;
@@ -63,24 +75,36 @@ void Game::nextStep()
         }
         m_lastObstacleCreate =  std::chrono::system_clock::now();
     }
+
+    //Test des collisions avec les obstacles et les bonus
     std::vector<std::pair<bool, Obstacle *> >::iterator iterator1 = m_obstacles.begin();
     while (iterator1 != m_obstacles.end())
     {
+        bool increment = true;
         iterator1->second->move();
-        if (iterator1->second->collision(m_characters[0].second))
+        if (player1 != m_characters.end())
         {
-            m_characters[0].second->removeLife(iterator1->second->getDammage());
+            if (iterator1->second->collision(player1->second))
+            {
+                player1->second->removeLife(iterator1->second->getDammage());
+                m_deletedElements.push_back(iterator1->second);
+                m_obstacles.erase(iterator1);
+                increment = false;
+            }
+        }
+        if (iterator1->second->getPosition().first < -iterator1->second->getSize().first)
+        {
             m_deletedElements.push_back(iterator1->second);
             m_obstacles.erase(iterator1);
-        } else if (iterator1->second->getPosition().first < -iterator1->second->getSize().first)
-        {
-            m_deletedElements.push_back(iterator1->second);
-            m_obstacles.erase(iterator1);
-        } else
+            increment = false;
+        }
+        if (increment)
         {
             ++iterator1;
         }
     }
+
+    //On test si un personnage n'a plus de vie
     for (unsigned int i=0; i<m_characters.size(); i++)
     {
         if (m_characters[i].second->getLife() == 0)

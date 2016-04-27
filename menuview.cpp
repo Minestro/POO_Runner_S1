@@ -100,7 +100,6 @@ void MenuView::synchronise()
 {
     //Si le menuModel contient des nouveaux élements on les ajoutes à la liste elementToGraphicElement en lui associant un ou plusieurs GraphicElement
 
-
     for (unsigned int i=0; i< m_menuModel->getButtons().size(); i++)
     {
         if (m_menuModel->getButtons()[i].first)
