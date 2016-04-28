@@ -1,6 +1,6 @@
 #include "model.h"
 
-Model::Model(float width, float height): m_size{width, height}, m_characters{}, m_backgrounds{}, m_obstacles{}, m_bonus{}, m_deletedElements{}, m_cursorPosition{}
+Model::Model(float width, float height): m_size{width, height}, m_characters{}, m_backgrounds{}, m_obstacles{}, m_bonus{}, m_texts{}, m_deletedElements{}, m_cursorPosition{}
 {
 
 }
@@ -33,6 +33,11 @@ std::vector<std::pair<bool, Bonus *> > &Model::getBonus()
 std::vector<std::pair<bool, Button*> > &Model::getButtons()
 {
     return m_buttons;
+}
+
+std::vector<std::pair<bool, Text*> > &Model::getTexts()
+{
+    return m_texts;
 }
 
 std::pair<float, float> Model::getSize() const

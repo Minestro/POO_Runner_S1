@@ -74,7 +74,12 @@ bool MenuView::treatEvent()
             default:
                 break;
             }
-
+            break;
+        case sf::Event::KeyPressed:
+            if (m_menuModel->getActivePage() == menuPage::PRE_MENU)
+            {
+                m_menuModel->changePage(menuPage::HOME);
+            }
             break;
         default:
             break;
@@ -116,6 +121,22 @@ void MenuView::synchronise()
             }
             m_menuModel->getButtons()[i].first = 0;
         }
+    }
+
+    for (unsigned int i=0; i< m_menuModel->getTexts().size(); i++)
+    {
+         if (m_menuModel->getTexts()[i].first)
+         {
+             std::map <const Element*, std::list<GraphicElement*> >::const_iterator it = m_elementToGraphicElement.find(m_menuModel->getTexts()[i].second);
+             if (it == m_elementToGraphicElement.end())
+             {
+                 std::list<GraphicElement*> list;
+                 list.push_back(new TextElement{10, m_menuModel->getTexts()[i].second->getSize().first, m_menuModel->getTexts()[i].second->getSize().second, m_menuModel->getTexts()[i].second->getPosition().first, m_menuModel->getTexts()[i].second->getPosition().second, m_menuModel->getTexts()[i].second->getText(), TextElement::m_listFonts["score.ttf"], 20, 0, 1, sf::Color::White, 0, text_effect::BREATH, 20});
+                 m_elementToGraphicElement.insert(std::make_pair(m_menuModel->getTexts()[i].second, list));
+             } else {
+
+             }
+         }
     }
 
     for (unsigned int i=0; i<m_menuModel->getBackgrounds().size(); i++)

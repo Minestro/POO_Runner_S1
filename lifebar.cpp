@@ -1,6 +1,6 @@
 #include "lifebar.h"
 
-LifeBar::LifeBar(unsigned int zIndex, float width, float height, float x, float y, int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_actualBarWidth{(unsigned int)width}, m_ratioLife{1.0f}
+LifeBar::LifeBar(unsigned int zIndex, float width, float height, float x, float y, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_actualBarWidth{(unsigned int)width}, m_ratioLife{1.0f}
 {
     m_sprite = new SpriteElement{zIndex, width, height, x, y, GraphicElement::m_listTextures["life.png"]};
     m_bar = new RectangleShapeElement{zIndex, width, height, x, y, sf::Color::Green};

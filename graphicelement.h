@@ -18,10 +18,10 @@ class GraphicElement
 protected:
     unsigned int m_zIndex;
     std::chrono::time_point<std::chrono::system_clock> m_lastRefeshCall;
-    int m_refreshPeriod;
+    unsigned int m_refreshPeriod;
 public:
     GraphicElement() = default;
-    GraphicElement(unsigned int zIndex, int refreshPeriod = 0);
+    GraphicElement(unsigned int zIndex, unsigned int refreshPeriod = 0);
     virtual ~GraphicElement() = default;
     virtual void setSize(float width, float height) = 0;
     virtual void setPosition(float x, float y) = 0;

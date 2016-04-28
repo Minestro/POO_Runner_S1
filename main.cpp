@@ -17,7 +17,7 @@ int main()
     TextElement::loadFonts();
     Game gameModel{GAME_SIZE_W, GAME_SIZE_H, STARTSPEEDPERIODGAME};
     GameView gameView{};
-    Menu menuModel{GAME_SIZE_W, GAME_SIZE_H, menuPage::HOME};
+    Menu menuModel{GAME_SIZE_W, GAME_SIZE_H, menuPage::PRE_MENU};
     MenuView menuView{};
     gameView.setModel(&gameModel);
     gameView.setWindow(&superfenetre);

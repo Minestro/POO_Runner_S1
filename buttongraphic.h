@@ -13,7 +13,7 @@ private:
     SpriteElement *m_sprite;
 public:
     ButtonGraphic() = default;
-    ButtonGraphic(unsigned int zIndex, float width, float height, float x, float y, std::string text, const sf::Font *font, unsigned int fontSize, sf::Color color, int style = 0, int refreshPeriod = 0);
+    ButtonGraphic(unsigned int zIndex, float width, float height, float x, float y, std::string text, const sf::Font *font, unsigned int fontSize, sf::Color color, int style = 0, unsigned int refreshPeriod = 0);
     virtual ~ButtonGraphic();
     virtual void setSize(float width, float height);
     virtual void setPosition(float x, float y);

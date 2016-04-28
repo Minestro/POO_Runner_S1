@@ -3,7 +3,7 @@
 
 std::map<std::string, sf::Texture*> GraphicElement::m_listTextures;
 
-GraphicElement::GraphicElement(unsigned int zIndex, int refreshPeriod):m_zIndex{zIndex}, m_lastRefeshCall{}, m_refreshPeriod{refreshPeriod}
+GraphicElement::GraphicElement(unsigned int zIndex, unsigned int refreshPeriod):m_zIndex{zIndex}, m_lastRefeshCall{}, m_refreshPeriod{refreshPeriod}
 {
 
 }

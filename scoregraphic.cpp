@@ -1,9 +1,9 @@
 #include "scoregraphic.h"
 
-ScoreGraphic::ScoreGraphic(unsigned int zIndex, float x, float y, const sf::Font *font, unsigned int fontSize, int refreshPeriod, sf::Color color, int style): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_showedScore{0}
+ScoreGraphic::ScoreGraphic(unsigned int zIndex, float x, float y, const sf::Font *font, unsigned int fontSize, unsigned int refreshPeriod, sf::Color color, int style): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_showedScore{0}
 {
-    m_prefixe = new TextElement{zIndex, 0, 0, x, y, "Score : ", font, fontSize, 0, color, style};
-    m_score = new TextElement{zIndex, 0, 0, x + m_prefixe->getSize().first, y, std::to_string(0), font, fontSize, 0, color, style};
+    m_prefixe = new TextElement{zIndex, 0, 0, x, y, "Score : ", font, fontSize, 0, 0, color, style};
+    m_score = new TextElement{zIndex, 0, 0, x + m_prefixe->getSize().first, y, std::to_string(0), font, fontSize, 0, 0, color, style};
 }
 
 ScoreGraphic::~ScoreGraphic()
