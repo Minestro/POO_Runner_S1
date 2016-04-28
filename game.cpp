@@ -5,7 +5,7 @@
 Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastMove{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}, m_distance{0}
 {
     m_player =  new Player;
-    GameCharacter *gc = new GameCharacter{0, HAUTEUR_SOL, 40, 40, 0, 0, m_player};
+    GameCharacter *gc = new GameCharacter{0, HAUTEUR_SOL, 40, 40, 0, 0, m_player, 100, 0};
     m_characters.push_back(std::make_pair(1, gc));
     Background *b1 = new Background{"city_2.png", 1, 1.5, 1, 0};
     Background *b2 = new Background{"city_1.png", 2, 1.0, 1, 0};
@@ -95,17 +95,6 @@ void Game::nextStep()
 
     }
 
-    //On créé des nouveaux obstacles
-    if ((m_distance/PIXELPERBACKGROUNDMOVE)%100 == 0)
-    {
-        int aleatoire= rand()% 2 ;
-        if (aleatoire == 1)
-        {
-            Obstacle* ob = new Obstacle(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -PIXELPERBACKGROUNDMOVE, 0, m_movePeriod, 5, 1);
-            m_obstacles.push_back(std::make_pair(1, ob));
-
-        }
-    }
 
     //Test des collisions avec les obstacles et les bonus
     std::vector<std::pair<bool, Obstacle *> >::iterator iterator1 = m_obstacles.begin();
@@ -115,9 +104,12 @@ void Game::nextStep()
         iterator1->second->move();
         if (player1 != m_characters.end())
         {
+            std::cout << "passé"<<std::endl;
             if (iterator1->second->collision(player1->second))
             {
+                std::cout << "passé"<<std::endl;
                 player1->second->removeLife(iterator1->second->getDammage());
+                std::cout <<"vie moins"<< std::endl;
                 m_deletedElements.push_back(iterator1->second);
                 m_obstacles.erase(iterator1);
                 increment = false;

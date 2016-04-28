@@ -17,6 +17,7 @@ public:
     virtual std::string getClassName() const=0;
     std::pair<float, float> getSize() const;
     void setSize(float w, float h);
+    void setPosition(float x, float y);
     std::pair<float, float> getPosition() const;
     bool collision(const Element *el) const;
     virtual std::pair<float, float> getPixelSpeed() const;

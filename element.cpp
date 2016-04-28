@@ -19,6 +19,11 @@ void Element::setSize(float w, float h)
     m_size.first = w;
     m_size.second = h;
 }
+void Element::setPosition(float x, float y)
+{
+    m_position.first=x;
+    m_position.second=y;
+}
 
 bool Element::collision(const Element *el) const
 {
