@@ -26,13 +26,13 @@ public:
     GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life = MAX_LIFE, unsigned int id = GameCharacter::nbCharacters);
     virtual ~GameCharacter();
     void addLife (unsigned int life);
+    void addScore(unsigned int score);
     void removeLife (unsigned int life);
     unsigned int getLife() const;
     unsigned int getId() const;
     unsigned int getScore() const;
     character_state getState() const;
     void setSate(character_state state);
-    void addScore(unsigned int score);
     void jump();
     //void crouch(bool c); a voir plus tard
     void leftMove(bool ml);

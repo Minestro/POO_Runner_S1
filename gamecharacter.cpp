@@ -106,7 +106,7 @@ void GameCharacter::setSate(character_state state)
 
 void GameCharacter::move()
 {
-    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() > m_movePeriod)
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() >= m_movePeriod)
     {
         if (m_state != character_state::DYING)
         {

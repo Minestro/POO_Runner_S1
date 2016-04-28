@@ -54,7 +54,7 @@ void ScoreGraphic::refresh(const Element *el, Model *model)
     }
     if (it != model->getCharacters().end())
     {
-        if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastRefeshCall).count() > m_refreshPeriod)
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastRefeshCall).count() >= m_refreshPeriod)
         {
             int deltaScore = (std::max(it->second->getScore(), m_showedScore) - std::min(it->second->getScore(), m_showedScore))/10;
             if (deltaScore < 1)

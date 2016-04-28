@@ -70,13 +70,13 @@ float HueToRGB(float v1, float v2, float vH) {
 }
 
 sf::Color GraphicElement::hsl2color(float h, float s, float l) {
-    unsigned char r = 0;
-    unsigned char g = 0;
-    unsigned char b = 0;
+    unsigned int r = 0;
+    unsigned int g = 0;
+    unsigned int b = 0;
 
     if (s == 0)
     {
-        r = g = b = (unsigned char)(l * 255);
+        r = g = b = (unsigned int)(l * 255);
     }
     else
     {
@@ -91,9 +91,9 @@ sf::Color GraphicElement::hsl2color(float h, float s, float l) {
         }
         v1 = 2 * l - v2;
 
-        r = (unsigned char)(255 * HueToRGB(v1, v2, hue + (1.0f / 3)));
-        g = (unsigned char)(255 * HueToRGB(v1, v2, hue));
-        b = (unsigned char)(255 * HueToRGB(v1, v2, hue - (1.0f / 3)));
+        r = (unsigned int)(255 * HueToRGB(v1, v2, hue + (1.0f / 3)));
+        g = (unsigned int)(255 * HueToRGB(v1, v2, hue));
+        b = (unsigned int)(255 * HueToRGB(v1, v2, hue - (1.0f / 3)));
     }
 
     return {(sf::Uint8)r, (sf::Uint8)g, (sf::Uint8)b};

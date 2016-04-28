@@ -60,7 +60,7 @@ void LifeBar::refresh(const Element *el, Model *model)
             setPosition(el->getPosition().first, el->getPosition().second - 15);
             setSize(el->getSize().first, 10.0);
         }
-        if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastRefeshCall).count() > m_refreshPeriod)
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastRefeshCall).count() >= m_refreshPeriod)
         {
             m_ratioLife = (float)it->second->getLife() / (float)MAX_LIFE;
             if (std::abs(m_actualBarWidth - (m_sprite->getSize().first * m_ratioLife)) > 100)

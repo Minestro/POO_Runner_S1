@@ -29,7 +29,7 @@ int main()
         if (menuModel.getActivePage() == menuPage::ESCAPE_MENU)
         {
             gameModel.nextStep();
-            if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-loopTime).count() > drawPeriod)
+            if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-loopTime).count() >= drawPeriod)
             {
                 gameView.synchronise();
                 gameView.draw();
@@ -38,7 +38,7 @@ int main()
             quitter = gameView.treatEvent();
         } else {
             menuModel.refresh();
-            if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-loopTime).count() > drawPeriod)
+            if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-loopTime).count() >= drawPeriod)
             {
                 menuView.synchronise();
                 menuView.draw();

@@ -12,7 +12,7 @@ std::string MovableElement::getClassName() const
 
 void MovableElement::move()
 {
-    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() > m_movePeriod)
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() >= m_movePeriod)
     {
         m_position.first += m_movement.first;
         m_position.second += m_movement.second;

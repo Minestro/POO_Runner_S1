@@ -86,7 +86,7 @@ void SpriteElement::changeDirectionSprite(bool directionRight)
 
 void SpriteElement::animate()
 {
-    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastAnimateCall).count() > m_animatePeriod)
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastAnimateCall).count() >= m_animatePeriod)
     {
         if (m_animationDirectionRight)
         {

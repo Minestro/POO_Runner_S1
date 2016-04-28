@@ -5,7 +5,7 @@
 Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastMove{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}, m_distance{0}
 {
     m_player =  new Player;
-    GameCharacter *gc = new GameCharacter{0, HAUTEUR_SOL, 40, 40, 0, 0, m_player};
+    GameCharacter *gc = new GameCharacter{0, HAUTEUR_SOL-40, 40, 40, 0, 0, m_player};
     m_characters.push_back(std::make_pair(1, gc));
     Background *b1 = new Background{"city_2.png", 1, 1.5, 1, 0};
     Background *b2 = new Background{"city_1.png", 2, 1.0, 1, 0};
@@ -48,10 +48,17 @@ void Game::nextStep()
         ++player1;
     }
 
-    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMove).count() > m_movePeriod)
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMove).count() >= m_movePeriod)
     {
         //On ajoute la distance
         m_distance += PIXELPERBACKGROUNDMOVE;
+        for (unsigned int i = 0; i<m_characters.size(); i++)
+        {
+            if (m_characters[i].second->getState() != DYING)
+            {
+                m_characters[i].second->addScore(1);
+            }
+        }
 
         //On augmente la vitesse
         if ((m_distance/PIXELPERBACKGROUNDMOVE) % 500 == 0)
