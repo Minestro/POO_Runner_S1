@@ -20,6 +20,7 @@ const int CHARACTERSPEEDPERIOD = 10;
 const int FPS = 60;
 const int STARTSPEEDPERIODGAME = 15;
 const int PIXELPERBACKGROUNDMOVE = 3;
+const int ACCELERATION_PERIOD = 30;     //en secondes
 const float PI = 3.14159265359;
 
 

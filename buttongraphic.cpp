@@ -3,7 +3,7 @@
 ButtonGraphic::ButtonGraphic(unsigned int zIndex, float width, float height, float x, float y, std::string text, const sf::Font *font, unsigned int fontSize, sf::Color color, int style, int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_size{width, height}, m_position{x, y}
 {
     m_text = new TextElement{zIndex, width, height, x, y, text, font, fontSize, 1, color, style};
-    m_sprite = new SpriteElement{zIndex, width, height, x, y, GraphicElement::m_listTextures["buttons.png"], 0, 1, 2, 1, 1};
+    m_sprite = new SpriteElement{zIndex, width, height, x, y, GraphicElement::m_listTextures["buttons.png"], 1, 2, 1, 1, 0};
 }
 
 ButtonGraphic::~ButtonGraphic()

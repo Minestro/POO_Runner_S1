@@ -2,12 +2,12 @@
 #include <iostream>
 #include <time.h>
 
-Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastMove{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}, m_distance{0}
+Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}, m_distance{0}
 {
     m_player =  new Player;
     GameCharacter *gc = new GameCharacter{0, HAUTEUR_SOL-40, 40, 40, 0, 0, m_player};
     m_characters.push_back(std::make_pair(1, gc));
-    Background *b1 = new Background{"city_2.png", 1, 1.5, 1, 0};
+    Background *b1 = new Background{"city_2.png", 1, 0.5, 1, 0};
     Background *b2 = new Background{"city_1.png", 2, 1.0, 1, 0};
     m_backgrounds.push_back(std::make_pair(1, b1));
     m_backgrounds.push_back(std::make_pair(1, b2));
@@ -60,33 +60,42 @@ void Game::nextStep()
             }
         }
 
-        //On augmente la vitesse
-        if ((m_distance/PIXELPERBACKGROUNDMOVE) % 500 == 0)
-        {
-            setSpeedPeriod(--m_movePeriod);
-        }
-
         //On créé des nouveaux obstacles
         if ((m_distance/PIXELPERBACKGROUNDMOVE) % 100 == 0)
         {
             int aleatoire= rand()% 2 ;
             if (aleatoire == 1)
             {
-                Obstacle* ob = new Obstacle(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -PIXELPERBACKGROUNDMOVE, 0, m_movePeriod, 5, 1);
+                Obstacle* ob = new Obstacle(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -PIXELPERBACKGROUNDMOVE, 0, 0, 5, 1);
                 m_obstacles.push_back(std::make_pair(1, ob));
 
             }
         }
 
-        m_lastMove = std::chrono::system_clock::now();
-    }
+        //On bouge les backgrounds
+        for (unsigned int i = 0; i<m_backgrounds.size(); i++)
+        {
+            m_backgrounds[i].second->move();
+        }
 
-    //On move les backgrounds
-    std::vector<std::pair<bool, Background *> >::iterator iterator = m_backgrounds.begin();
-    while (iterator != m_backgrounds.end())
-    {
-        iterator->second->move();
-        ++iterator;
+        //On bouge les personnages
+        for (unsigned int i = 0; i<m_characters.size(); i++)
+        {
+            if(m_characters[i].second->getState() == character_state::DYING)
+            {
+                m_characters[i].second->setMovement(-PIXELPERBACKGROUNDMOVE, 0);
+                m_characters[i].second->setMovePeriod(m_movePeriod);
+            }
+            m_characters[i].second->move();
+        }
+
+        //On bouge les obstacles
+        for (unsigned int i = 0; i<m_obstacles.size(); i++)
+        {
+            m_obstacles[i].second->move();
+        }
+
+        m_lastMove = std::chrono::system_clock::now();
     }
 
     //Test des collisions avec les obstacles et les bonus
@@ -94,7 +103,6 @@ void Game::nextStep()
     while (iterator1 != m_obstacles.end())
     {
         bool increment = true;
-        iterator1->second->move();
         if (player1 != m_characters.end())
         {
             if (iterator1->second->collision(player1->second))
@@ -117,17 +125,6 @@ void Game::nextStep()
         }
     }
 
-    //On bouge les personnages
-    for (unsigned int i = 0; i<m_characters.size(); i++)
-    {
-        if(m_characters[i].second->getState() == character_state::DYING)
-        {
-            m_characters[i].second->setMovement(-PIXELPERBACKGROUNDMOVE, 0);
-            m_characters[i].second->setMovePeriod(m_movePeriod);
-        }
-        m_characters[i].second->move();
-
-    }
 
     //On test si un personnage n'a plus de vie
     for (unsigned int i=0; i<m_characters.size(); i++)
@@ -136,6 +133,13 @@ void Game::nextStep()
         {
             m_characters[i].second->setSate(character_state::DYING);
         }
+    }
+
+    //On augmente la vitesse
+    if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now()-m_lastAcceleration).count() >= ACCELERATION_PERIOD)
+    {
+        setSpeedPeriod(--m_movePeriod);
+        m_lastAcceleration = std::chrono::system_clock::now();
     }
 }
 
@@ -152,23 +156,11 @@ unsigned int Game::getSpeedPeriod() const
 void Game::setSpeedPeriod(int period)
 {
     unsigned int mp;
-    if (period < 0)
+    if (period < 1)
     {
-        mp = 0;
+        mp = 1;
     } else {
         mp = period;
     }
     m_movePeriod = mp;
-    for (unsigned int i=0; i<m_obstacles.size(); i++)
-    {
-        m_obstacles[i].second->setMovePeriod(mp);
-    }
-    for (unsigned int i=0; i<m_bonus.size(); i++)
-    {
-        m_bonus[i].second->setMovePeriod(mp);
-    }
-    for (unsigned int i=0; i<m_backgrounds.size(); i++)
-    {
-        m_backgrounds[i].second->setMovePeriod(m_backgrounds[i].second->getCoefSpeed() * mp);
-    }
 }

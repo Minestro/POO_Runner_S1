@@ -1,7 +1,12 @@
 #include "gamecharactergraphic.h"
 #include <iostream>
 
-GameCharacterGraphic::GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, int animatePeriod, int nbLignes, int nbColonnes, int activeLigne, int activeColonne): SpriteElement::SpriteElement{zIndex, width, height, x, y, texture, animatePeriod, nbLignes, nbColonnes, activeLigne, activeColonne}
+GameCharacterGraphic::GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, int animatePeriod): SpriteElement::SpriteElement{zIndex, width, height, x, y, texture, animatePeriod}
+{
+    m_shadow = new CircleShapeElement{zIndex, width, width/2, x, HAUTEUR_SOL - 10, sf::Color::Black};
+}
+
+GameCharacterGraphic::GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, int nbLignes, int nbColonnes, int activeLigne, int activeColonne, int animatePeriod): SpriteElement::SpriteElement{zIndex, width, height, x, y, texture, nbLignes, nbColonnes, activeLigne, activeColonne, 1, animatePeriod}
 {
     m_shadow = new CircleShapeElement{zIndex, width, width/2, x, HAUTEUR_SOL - 10, sf::Color::Black};
 }
@@ -28,15 +33,19 @@ void GameCharacterGraphic::refresh(const Element *el, Model *model)
     }
     if (it != model->getCharacters().end())
     {
-        float vitesseBalle = model->getCharacterSpeed(it->second).first;
-        if (vitesseBalle >= 0)
+        if (it->second->getId() != character_state::DYING)
         {
-            changeDirectionSprite(1);
-        } else {
-            changeDirectionSprite(0);
+            float vitesseBalle = model->getCharacterSpeed(it->second).first;
+            if (vitesseBalle >= 0)
+            {
+                changeDirectionSprite(1);
+            } else {
+                changeDirectionSprite(0);
+            }
+            float perimetreBalle = PI * it->second->getSize().first;
+            setAnimatePeriod(std::abs((1/(vitesseBalle/perimetreBalle))/getNbLignes())*500);
         }
-        float perimetreBalle = PI * it->second->getSize().first;
-        setAnimatePeriod(std::abs((1/(vitesseBalle/perimetreBalle))/getNbLignes())*500);
+
         int sizeShadow = getSize().first - ((HAUTEUR_SOL + 10)-(el->getPosition().second + el->getSize().second));
         if (sizeShadow < 0)
         {
@@ -51,7 +60,7 @@ void GameCharacterGraphic::refresh(const Element *el, Model *model)
             {
                 setTexture(* GraphicElement::m_listTextures["explosion.png"]);
                 setNbLignes(1);
-                setNbColonnes(5);
+                setNbColonnes(81);
                 setRectPos(1);
             }
             setAutoLoop(0);

@@ -126,7 +126,7 @@ void GameView::synchronise()
             if (it == m_elementToGraphicElement.end())
             {
                 std::list<GraphicElement*> list;
-                list.push_back(new GameCharacterGraphic{10, m_gameModel->getCharacters()[i].second->getSize().first, m_gameModel->getCharacters()[i].second->getSize().second, m_gameModel->getCharacters()[i].second->getPosition().first, m_gameModel->getCharacters()[i].second->getPosition().second, GraphicElement::m_listTextures["character.png"], 100, 1, 8});
+                list.push_back(new GameCharacterGraphic{10, m_gameModel->getCharacters()[i].second->getSize().first, m_gameModel->getCharacters()[i].second->getSize().second, m_gameModel->getCharacters()[i].second->getPosition().first, m_gameModel->getCharacters()[i].second->getPosition().second, GraphicElement::m_listTextures["character.png"], 1, 8, 1, 1, 100});
                 list.push_back(new LifeBar{100, 200, 30, 1000, 600, 20});
                 list.push_back(new ScoreGraphic{100, 50, 600, TextElement::m_listFonts["score.ttf"], 20, 5, sf::Color::White});
                 m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getCharacters()[i].second, list));
@@ -145,7 +145,7 @@ void GameView::synchronise()
             if (it == m_elementToGraphicElement.end())
             {
                 std::list<GraphicElement*> list;
-                list.push_back(new SpriteElement{10, m_gameModel->getObstacles()[i].second->getSize().first, m_gameModel->getObstacles()[i].second->getSize().second, m_gameModel->getObstacles()[i].second->getPosition().first, m_gameModel->getObstacles()[i].second->getPosition().second, GraphicElement::m_listTextures["obstacles_block.png"], 100, 1, 2});
+                list.push_back(new SpriteElement{10, m_gameModel->getObstacles()[i].second->getSize().first, m_gameModel->getObstacles()[i].second->getSize().second, m_gameModel->getObstacles()[i].second->getPosition().first, m_gameModel->getObstacles()[i].second->getPosition().second, GraphicElement::m_listTextures["obstacles_block.png"], 1, 2, 1, 1, 1, 100});
                 m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getObstacles()[i].second, list));
             } else {
 

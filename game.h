@@ -11,6 +11,7 @@ class Game: public Model
 private:
     std::chrono::time_point<std::chrono::system_clock> m_beginGameTime;
     std::chrono::time_point<std::chrono::system_clock> m_lastMove;
+    std::chrono::time_point<std::chrono::system_clock> m_lastAcceleration;
     unsigned int m_movePeriod;
     long int m_pauseTime;
     Player *m_player;

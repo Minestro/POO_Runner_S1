@@ -21,7 +21,7 @@ void Background::move()
     {
         if (m_position.first - 10 > -m_size.first)
         {
-            m_position.first += m_movement.first;
+            m_position.first += m_movement.first * m_coefSpeed;
         } else {
             m_position.first = 0;
         }
