@@ -122,8 +122,6 @@ void Game::nextStep()
 
     }
 
-    std::cout << "x: " << player1->second->getPosition().first << " y:" << player1->second->getPosition().second << "dx: " << player1->second->getMovement().first << " y:" << player1->second->getMovement().second << std::endl;
-
     //On test si un personnage n'a plus de vie
     for (unsigned int i=0; i<m_characters.size(); i++)
     {

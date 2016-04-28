@@ -45,40 +45,6 @@ void GraphicElement::clearTextures()
     m_listTextures.clear();
 }
 
-/*sf::Color GraphicElement::hsl2color(float h, float s, float l)
-{
-    if (h < 0 || h >= 360 || s < 0 || s > 1 || l < 0 || l > 1)
-    {
-        return {0, 0, 0};
-    } else {
-        float c = (1 - std::abs(2*l - 1)) * s;
-        float temp = (h / 60.0) / 2.0;
-        float h2 = temp - (int)(temp/2.0);
-        float x = c * (1 - std::abs((h2) - 1));
-        float m = l - c/2;
-        int r, g, b;
-        if (0 <= h && h < 60)
-        {
-            r = c; g = x; b = 0;
-        } else if (60 <= h && h < 120)
-        {
-            r = x; g = c; b= 0;
-        } else if (120 <= h && h < 180)
-        {
-            r = 0; g = c; b = x;
-        } else if (180 <= h && h < 240)
-        {
-            r = 0; g = x; b = c;
-        } else if (240 <= h && h < 300)
-        {
-            r = x; g = 0; b = c;
-        } else {
-            r = c; g = 0; b = x;
-        }
-        return {(sf::Uint8)((r+m)*255), (sf::Uint8)((g+m)*255), (sf::Uint8)((b+m)*255)};
-    }
-}*/
-
 float HueToRGB(float v1, float v2, float vH) {
     if (vH < 0)
     {
@@ -142,9 +108,9 @@ HSLColor GraphicElement::color2hsl(int r, int g, int b)
     {
         h = 0; s = 0; l = 0;
     } else {
-        float r2 = r/255;
-        float g2 = g/255;
-        float b2 = b/255;
+        float r2 = (float)r/255.0f;
+        float g2 = (float)g/255.0f;
+        float b2 = (float)b/255.0f;
         float cMax = std::max(std::max(r2, g2), b2);
         float cMin = std::min(std::max(r2, g2), b2);
         float delta = cMax - cMin;
