@@ -5,7 +5,7 @@
 Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastMove{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}, m_distance{0}
 {
     m_player =  new Player;
-    GameCharacter *gc = new GameCharacter{0, HAUTEUR_SOL, 40, 40, 0, 0, m_player};
+    GameCharacter *gc = new GameCharacter{0, HAUTEUR_SOL-40, 40, 40, 0, 0, m_player};
     m_characters.push_back(std::make_pair(1, gc));
     Background *b1 = new Background{"city_2.png", 1, 1.5, 1, 0};
     Background *b2 = new Background{"city_1.png", 2, 1.0, 1, 0};

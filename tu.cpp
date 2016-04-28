@@ -1,12 +1,10 @@
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE RunnerTest
 
-#include <boost/test/unit_test.hpp>
+/*#include <boost/test/unit_test.hpp>
 #include "game.h"
 #include "bonus.h"
 #include"gamecharacter.h"
-
-
 
 
 
@@ -65,3 +63,30 @@ BOOST_AUTO_TEST_CASE(test_gamelife)
 
     delete gameModel;
 }
+BOOST_AUTO_TEST_CASE(test_GameCharacterJump)
+{
+    Game *gameModel= new Game{GAME_SIZE_W, GAME_SIZE_H, STARTSPEEDPERIODGAME};
+    gameModel->getCharacters()[0].second->jump();
+    gameModel->nextStep();
+
+    BOOST_CHECK(gameModel->getCharacters()[0].second->getPosition().second < HAUTEUR_SOL-40);
+    for (int i=0;i<68;i++)
+        gameModel.nextStep();
+    delete gameModel;
+}
+
+BOOST_AUTO_TEST_CASE(test_Gravite)
+{
+    Game *gameModel= new Game{GAME_SIZE_W, GAME_SIZE_H, STARTSPEEDPERIODGAME};
+    gameModel->getCharacters()[0].second->setPostion(200,200);
+    for (int i=0; i<40;i++)
+    {
+        gameModel.nextStep();
+    }
+
+    BOOST_CHECK(gameModel->getCharacters()[0].second->getPosition().second > 200);
+
+    delete gameModel;
+}
+
+*/
