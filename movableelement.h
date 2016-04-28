@@ -19,6 +19,7 @@ public:
     virtual void move();
     void setMovePeriod(float movePeriod);
     void setMovement(float dx, float dy);
+    std::pair<float, float> getMovement() const;
     std::pair<float, float> getPixelSpeed() const override;
 };
 

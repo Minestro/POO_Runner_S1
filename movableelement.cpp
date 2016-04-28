@@ -26,6 +26,11 @@ std::pair<float, float> MovableElement::getPixelSpeed() const
     return std::make_pair<float, float>((m_movement.first / m_movePeriod) * 1000, (m_movement.second / m_movePeriod) * 1000);
 }
 
+std::pair<float, float> MovableElement::getMovement() const
+{
+    return m_movement;
+}
+
 void MovableElement::setMovePeriod(float movePeriod)
 {
     m_movePeriod = movePeriod;

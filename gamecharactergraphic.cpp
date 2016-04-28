@@ -21,7 +21,7 @@ void GameCharacterGraphic::refresh(const Element *el, Model *model)
 {
     setPosition(el->getPosition().first, el->getPosition().second);
     setSize(el->getSize().first, el->getSize().second);
-    std::vector<std::pair<bool, GameCharacter*> >::const_iterator it = model->getCharacters().begin();
+    std::vector<std::pair<bool, GameCharacter*> >::iterator it = model->getCharacters().begin();
     while (it != model->getCharacters().end() && it->second != el)
     {
         ++it;

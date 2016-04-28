@@ -53,19 +53,15 @@ BOOST_AUTO_TEST_CASE(test_gamelife)
 {
     Game *gameModel= new Game{GAME_SIZE_W, GAME_SIZE_H, STARTSPEEDPERIODGAME};
     Player p1{};
-    Obstacle *ob = new Obstacle{0, HAUTEUR_SOL, 40,40, 0, 0, 10, 50, 1};
+    Obstacle *ob = new Obstacle{0, HAUTEUR_SOL-40, 40,40, 0, 0, 10, 50, 1};
 
     gameModel->getObstacles().push_back(std::make_pair(1,ob));
-
-    gameModel->getCharacters()[0].second->setPosition(0,HAUTEUR_SOL);
+    gameModel->getCharacters()[0].second->setPosition(0,HAUTEUR_SOL-gameModel->getCharacters()[0].second->getSize().second);
 
     BOOST_CHECK(gameModel->getCharacters()[0].second->collision(ob)==true);
+    gameModel->nextStep();
 
     BOOST_CHECK(gameModel->getCharacters()[0].second->getLife()==50);
 
-
-
-
-
-
+    delete gameModel;
 }

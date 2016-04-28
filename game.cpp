@@ -5,7 +5,7 @@
 Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastMove{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}, m_distance{0}
 {
     m_player =  new Player;
-    GameCharacter *gc = new GameCharacter{0, HAUTEUR_SOL, 40, 40, 0, 0, m_player, 100, 0};
+    GameCharacter *gc = new GameCharacter{0, HAUTEUR_SOL, 40, 40, 0, 0, m_player};
     m_characters.push_back(std::make_pair(1, gc));
     Background *b1 = new Background{"city_2.png", 1, 1.5, 1, 0};
     Background *b2 = new Background{"city_1.png", 2, 1.0, 1, 0};
@@ -39,7 +39,7 @@ float Game::getPixelSpeed() const
 
 void Game::nextStep()
 {
-    srand(time(NULL));
+    srand(time(nullptr));
 
     //On cherche le joueur 1 (le notre)
     std::vector<std::pair<bool, GameCharacter*> >::iterator player1 = getCharacters().begin();
@@ -48,7 +48,6 @@ void Game::nextStep()
         ++player1;
     }
 
-    std::cout << m_obstacles.size() << std::endl;
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMove).count() > m_movePeriod)
     {
         //On ajoute la distance
@@ -83,19 +82,6 @@ void Game::nextStep()
         ++iterator;
     }
 
-    //On bouge les personnages
-    for (unsigned int i = 0; i<m_characters.size(); i++)
-    {
-        if(m_characters[i].second->getState() == character_state::DYING)
-        {
-            m_characters[i].second->setMovement(-PIXELPERBACKGROUNDMOVE, 0);
-            m_characters[i].second->setMovePeriod(m_movePeriod);
-        }
-        m_characters[i].second->move();
-
-    }
-
-
     //Test des collisions avec les obstacles et les bonus
     std::vector<std::pair<bool, Obstacle *> >::iterator iterator1 = m_obstacles.begin();
     while (iterator1 != m_obstacles.end())
@@ -104,12 +90,9 @@ void Game::nextStep()
         iterator1->second->move();
         if (player1 != m_characters.end())
         {
-            std::cout << "passé"<<std::endl;
             if (iterator1->second->collision(player1->second))
             {
-                std::cout << "passé"<<std::endl;
                 player1->second->removeLife(iterator1->second->getDammage());
-                std::cout <<"vie moins"<< std::endl;
                 m_deletedElements.push_back(iterator1->second);
                 m_obstacles.erase(iterator1);
                 increment = false;
@@ -126,6 +109,20 @@ void Game::nextStep()
             ++iterator1;
         }
     }
+
+    //On bouge les personnages
+    for (unsigned int i = 0; i<m_characters.size(); i++)
+    {
+        if(m_characters[i].second->getState() == character_state::DYING)
+        {
+            m_characters[i].second->setMovement(-PIXELPERBACKGROUNDMOVE, 0);
+            m_characters[i].second->setMovePeriod(m_movePeriod);
+        }
+        m_characters[i].second->move();
+
+    }
+
+    std::cout << "x: " << player1->second->getPosition().first << " y:" << player1->second->getPosition().second << "dx: " << player1->second->getMovement().first << " y:" << player1->second->getMovement().second << std::endl;
 
     //On test si un personnage n'a plus de vie
     for (unsigned int i=0; i<m_characters.size(); i++)
