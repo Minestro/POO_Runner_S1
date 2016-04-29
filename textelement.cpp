@@ -3,13 +3,12 @@
 
 std::map<std::string, sf::Font*> TextElement::m_listFonts;
 
-TextElement::TextElement(unsigned int zIndex, float width, float height, float x, float y, std::string text, const sf::Font *font, unsigned int fontSize, bool autoRescale, bool wordBreak, sf::Color color, int style, text_effect effect, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, sf::Text{text, *font, fontSize}, m_realPosition{x, y}, m_realSize{width, height}, m_autoRescale{autoRescale}, m_wordBreak{wordBreak}, m_textLines{}, m_effect{effect}, m_breath{1}, m_textForm{}
+TextElement::TextElement(unsigned int zIndex, float width, float height, float x, float y, std::string text, const sf::Font *font, unsigned int fontSize, bool autoRescale, bool wordBreak, sf::Color color, int style, text_effect effect, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, sf::Text{text, *font, fontSize}, m_realPosition{x, y}, m_realSize{width, height}, m_autoRescale{autoRescale}, m_wordBreak{wordBreak}, m_textLines{}, m_effect{effect}, m_breath{1}, m_textForm{}, m_alphaChannel{0}
 {
     if (m_wordBreak)
     {
         m_autoRescale = 0;
     }
-    setOrigin(0, 0);
     setStyle(style);
     setSize(width, height);
     setColor(color);
@@ -27,22 +26,25 @@ void TextElement::setText(std::string text)
         std::string word;
         m_textLines.push_back("");
         sf::Text lineGraphic{m_textLines[l], *getFont(), getCharacterSize()};
-        while (lineGraphic.getLocalBounds().width < m_realSize.first && i < (int)text.size())
+        while (i < (int)text.size())
         {
-            word = "";
-            while (text[i] != ' ' && i < (int)text.size())
+            if (lineGraphic.getLocalBounds().width <= m_realSize.first)
             {
-                word.push_back(text[i]);
+                word = "";
+                while (text[i] != ' ' && i < (int)text.size())
+                {
+                    word.push_back(text[i]);
+                    i++;
+                }
                 i++;
             }
-            i++;
             wordCount++;
-            lineGraphic.setString(lineGraphic.getString() + word);
+            lineGraphic.setString(m_textLines[l] + word);
             if (lineGraphic.getLocalBounds().width > m_realSize.first)
             {
                 if (wordCount == 1)
                 {
-                    m_textLines[l] += word;
+                    m_textLines[l] += word + " ";
                 }
                 m_textLines.push_back("");
                 l++;
@@ -54,7 +56,6 @@ void TextElement::setText(std::string text)
                 }
                 m_textLines[l] += word;
             }
-            lineGraphic.setString(m_textLines[l]);
         }
         generateTextForm();
     } else {
@@ -76,7 +77,7 @@ void TextElement::setSize(float width, float height)
     m_realSize.second = height;
     if (m_wordBreak)
     {
-        std::string text;
+        std::string text = "";
         for (unsigned int i = 0; i<m_textLines.size(); i++)
         {
             text += m_textLines[i] + " ";
@@ -108,7 +109,7 @@ std::pair<float, float> TextElement::getSize() const
     {
         return m_realSize;
     } else {
-        if (m_wordBreak)
+        if (!m_wordBreak)
         {
             return {Text::getLocalBounds().width, Text::getLocalBounds().height};
         } else {
@@ -130,23 +131,29 @@ std::string TextElement::getClassName() const
 
 void TextElement::generateTextForm()
 {
+    sf::Text line {"", *getFont(), getCharacterSize()};
+    line.setColor(sf::Color::White);
+    line.setStyle(getStyle());
+    m_textForm.create(GAME_SIZE_W, GAME_SIZE_H);
+    m_textForm.setSmooth(1);
     m_textForm.clear(sf::Color::Transparent);
-    m_textForm.create(m_realSize.first, (getLocalBounds().height * m_textLines.size()) + 1);
     for (unsigned int i = 0; i<m_textLines.size(); i++)
     {
-        setString(m_textLines[i]);
-        sf::Text::setPosition(m_realPosition.first, m_realPosition.second + i * getLocalBounds().height);
-        m_textForm.draw(*this);
+        line.setString(m_textLines[i]);
+        line.setPosition(0, i * getLocalBounds().height);
+        m_textForm.draw(line);
     }
+    m_textForm.display();
 }
 
 void TextElement::draw(sf::RenderWindow *window) const
 {
     if (m_wordBreak)
     {
-        sf::Sprite texteG{m_textForm.getTexture()};
-        texteG.setPosition(m_realPosition.first, m_realPosition.second);
-        window->draw(texteG);
+        sf::Sprite textS{m_textForm.getTexture()};
+        textS.setPosition(m_realPosition.first, m_realPosition.second);
+        textS.setColor(sf::Color{getColor().r, getColor().g, getColor().b, (sf::Uint8)m_alphaChannel});
+        window->draw(textS);
     } else {
         window->draw(*this);
     }
@@ -155,8 +162,14 @@ void TextElement::draw(sf::RenderWindow *window) const
 void TextElement::refresh(const Element *el, Model *model)
 {
     (void) model;
-    setSize(el->getSize().first, el->getSize().second);
-    setPosition(el->getPosition().first, el->getPosition().second);
+    if (m_realPosition != el->getPosition())
+    {
+        setPosition(el->getPosition().first, el->getPosition().second);
+    }
+    if (m_realSize != el->getSize())
+    {
+        setSize(el->getSize().first, el->getSize().second);
+    }
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastRefeshCall).count() >= m_refreshPeriod)
     {
         switch (m_effect)
@@ -164,23 +177,26 @@ void TextElement::refresh(const Element *el, Model *model)
         case text_effect::BREATH:
             if (m_breath)
             {
-                if (getColor().a + 10 <= 255)
+                if (m_alphaChannel + 10 <= 255)
                 {
-                    setColor(sf::Color{getColor().r, getColor().g, getColor().b, (sf::Uint8)(getColor().a + 10)});
+                    m_alphaChannel += 10;
+                    setColor(sf::Color{getColor().r, getColor().g, getColor().b, (sf::Uint8)m_alphaChannel});
                 } else {
                     m_breath = !m_breath;
                 }
             } else {
-                if (getColor().a -10 >= 0)
+                if (m_alphaChannel -10 >= 0)
                 {
-                    setColor(sf::Color{getColor().r, getColor().g, getColor().b, (sf::Uint8)(getColor().a - 10)});
+                    m_alphaChannel -= 10;
+                    setColor(sf::Color{getColor().r, getColor().g, getColor().b, (sf::Uint8)m_alphaChannel});
                 } else {
                     m_breath = !m_breath;
                 }
             }
             break;
         case text_effect::FLASH:
-            setColor(sf::Color{getColor().r, getColor().g, getColor().b, (sf::Uint8) std::abs(255 - getColor().a)});
+            m_alphaChannel = std::abs(255 - m_alphaChannel);
+            setColor(sf::Color{getColor().r, getColor().g, getColor().b, (sf::Uint8)m_alphaChannel});
             break;
         default:
             break;

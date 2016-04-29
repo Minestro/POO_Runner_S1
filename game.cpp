@@ -37,6 +37,12 @@ float Game::getPixelSpeed() const
     return (((float) -PIXELPERBACKGROUNDMOVE / m_movePeriod) * 1000);
 }
 
+//------------------------------------------------------------------------------
+// Input:   Rien
+// Output:  Rien
+// Return:  Rien
+// Purpose: Actualise tous les élements du modèle de jeu (déplacement des élements, test de collision, ajouts/ suppressions d'obstacles / bonus avant la prochaine actualisation de l'image
+//------------------------------------------------------------------------------
 void Game::nextStep()
 {
     srand(time(nullptr));

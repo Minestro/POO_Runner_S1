@@ -21,7 +21,7 @@ void ScoreGraphic::setSize(float width, float height)
 void ScoreGraphic::setPosition(float x, float y)
 {
     m_prefixe->setPosition(x, y);
-    m_score->setPosition(x+200, y);
+    m_score->setPosition(x + m_prefixe->getSize().first + 20, y);
 }
 
 std::pair<float, float> ScoreGraphic::getSize() const

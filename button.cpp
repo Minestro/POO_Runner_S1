@@ -26,6 +26,14 @@ bool Button::isClickable() const
     return isClickable();
 }
 
+
+//------------------------------------------------------------------------------
+// Input:   x : coordonnées de la souris en x
+//          y : coordonnées de la souris en y
+// Output:  Rien
+// Return:  Booléen
+// Purpose: Fonction qui renvoie si le bouton est survolé par la souris
+//------------------------------------------------------------------------------
 bool Button::isHover(int x, int y) const
 {
     return (x < m_position.first + m_size.first && x > m_position.first && y < m_position.second + m_size.second && y > m_position.second);

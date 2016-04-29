@@ -25,6 +25,12 @@ void Element::setPosition(float x, float y)
     m_position.second=y;
 }
 
+//------------------------------------------------------------------------------
+// Input:   el : second élement avec lequel on veut tester la collision
+// Output:  Rien
+// Return:  Booléen
+// Purpose: Fonction qui renvoie si deux élements sont en collision
+//------------------------------------------------------------------------------
 bool Element::collision(const Element *el) const
 {
     return ((el->getPosition().first < m_position.first + m_size.first && el->getPosition().first + el->getSize().first > m_position.first) && (el->getPosition().second < m_position.second + m_size.second && el->getPosition().second + el->getSize().second > m_position.second));

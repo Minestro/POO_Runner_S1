@@ -2,8 +2,7 @@
 #define TEXTELEMENT_H
 
 #include "graphicelement.h"
-
-enum text_effect{NOTHING, BREATH, FLASH};
+#include "const.h"
 
 class TextElement: public GraphicElement, public sf::Text
 {
@@ -17,6 +16,7 @@ private:
     text_effect m_effect;
     bool m_breath;
     sf::RenderTexture m_textForm;
+    int m_alphaChannel;
 
     void generateTextForm();
 public:

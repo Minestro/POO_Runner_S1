@@ -54,7 +54,7 @@ void Menu::changePage(unsigned int page)
     case menuPage::PRE_MENU:
         m_backgrounds.push_back(std::make_pair(1, new Background{"city_2.png", 1, 0.5, 1, m_backgroundMovePeriod}));
         m_backgrounds.push_back(std::make_pair(1, new Background{"city_1.png", 2, 1.0, 1, m_backgroundMovePeriod}));
-        m_texts.push_back(std::make_pair(1, new Text{50, 50, 300, 50, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."}));
+        m_texts.push_back(std::make_pair(1, new Text{50, 50, 300, 50, "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et f quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum  Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quimollit dolorum  Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis estbusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."}));
         break;
     default:
         break;

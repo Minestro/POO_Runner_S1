@@ -7,6 +7,8 @@ const std::string FILES_LIST[] = {"city.png", "city_1.png", "city_2.png", "backg
 
 const std::string FONTS_LIST[] = {"score.ttf"};
 
+enum text_effect{NOTHING, BREATH, FLASH};
+
 const int GAME_SIZE_W = 1280;
 const int GAME_SIZE_H = 720;
 const int MENU_SIZE_W = 800;

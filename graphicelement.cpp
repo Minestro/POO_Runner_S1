@@ -69,6 +69,14 @@ float HueToRGB(float v1, float v2, float vH) {
     return v1;
 }
 
+//------------------------------------------------------------------------------
+// Input:   h : hue : c'est l'angle de la couleur dans le spectre chromatique
+//          s : s : saturation de la couleur
+//          l : l : clarté de la couleur
+// Output:  Rien
+// Return:  sf::Color (format rgba)
+// Purpose: Fonction transforme une couleur au format hsl (pour les biens de fondus de couleurs) en couleur rgba
+//------------------------------------------------------------------------------
 sf::Color GraphicElement::hsl2color(float h, float s, float l) {
     unsigned int r = 0;
     unsigned int g = 0;
@@ -99,6 +107,12 @@ sf::Color GraphicElement::hsl2color(float h, float s, float l) {
     return {(sf::Uint8)r, (sf::Uint8)g, (sf::Uint8)b};
 }
 
+//------------------------------------------------------------------------------
+// Input:   r,g,b : couleur d'entrée au format rgb
+// Output:  Rien
+// Return:  HSLColor : Couleur au format HSL
+// Purpose: Fonction qui transforme une couleur du format rgb vers hsl
+//------------------------------------------------------------------------------
 HSLColor GraphicElement::color2hsl(int r, int g, int b)
 {
     float h;
