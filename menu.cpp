@@ -38,6 +38,11 @@ void Menu::changePage(unsigned int page)
         m_deletedElements.push_back(m_obstacles[i].second);
     }
     m_obstacles.clear();
+    for (unsigned int i = 0; i<m_texts.size(); i++)
+    {
+        m_deletedElements.push_back(m_texts[i].second);
+    }
+    m_texts.clear();
 
     switch (m_activePage)
     {

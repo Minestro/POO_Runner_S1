@@ -9,7 +9,6 @@
 #include "menu.h"
 #include "graphicelement.h"
 
-
 // les tests groupes par "cas"
 
 //On regarde que les obstacles et les bons se deplacent bien

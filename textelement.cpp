@@ -5,7 +5,7 @@ std::map<std::string, sf::Font*> TextElement::m_listFonts;
 
 TextElement::TextElement(unsigned int zIndex, float width, float height, float x, float y, std::string text, const sf::Font *font, unsigned int fontSize, bool autoRescale, bool wordBreak, sf::Color color, int style, text_effect effect, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, sf::Text{text, *font, fontSize}, m_realPosition{x, y}, m_realSize{width, height}, m_autoRescale{autoRescale}, m_wordBreak{wordBreak}, m_textLines{}, m_effect{effect}, m_breath{1}, m_textForm{}
 {
-    if (wordBreak)
+    if (m_wordBreak)
     {
         m_autoRescale = 0;
     }
@@ -13,47 +13,7 @@ TextElement::TextElement(unsigned int zIndex, float width, float height, float x
     setStyle(style);
     setSize(width, height);
     setColor(color);
-
-    if (m_wordBreak)
-    {
-        int i = 0;
-        int l = 0;
-        int wordCount = 0;
-        std::string word;
-        sf::Text lineGraphic{"", *getFont(), getCharacterSize()};
-        m_textLines.push_back("");
-        while (lineGraphic.getLocalBounds().width < m_realSize.first && i < (int)text.size())
-        {
-            word = "";
-            while (text[i] != ' ' && i < (int)text.size())
-            {
-                word.push_back(text[i]);
-                i++;
-            }
-            wordCount++;
-            lineGraphic.setString(lineGraphic.getString() + word);
-            if (lineGraphic.getLocalBounds().width > m_realSize.first)
-            {
-                if (wordCount == 1)
-                {
-                    m_textLines[l] += word;
-                }
-                m_textLines.push_back("");
-                l++;
-                wordCount = 0;
-            } else {
-                if (wordCount > 1)
-                {
-                    m_textLines[l] += " ";
-                }
-                m_textLines[l] += word;
-            }
-            lineGraphic.setString(m_textLines[l]);
-        }
-        generateTextForm();
-    } else {
-        m_textLines.push_back(text);
-    }
+    setText(text);
 }
 
 void TextElement::setText(std::string text)
@@ -65,8 +25,8 @@ void TextElement::setText(std::string text)
         int l = 0;
         int wordCount = 0;
         std::string word;
-        sf::Text lineGraphic{"", *getFont(), getCharacterSize()};
         m_textLines.push_back("");
+        sf::Text lineGraphic{m_textLines[l], *getFont(), getCharacterSize()};
         while (lineGraphic.getLocalBounds().width < m_realSize.first && i < (int)text.size())
         {
             word = "";
@@ -75,6 +35,7 @@ void TextElement::setText(std::string text)
                 word.push_back(text[i]);
                 i++;
             }
+            i++;
             wordCount++;
             lineGraphic.setString(lineGraphic.getString() + word);
             if (lineGraphic.getLocalBounds().width > m_realSize.first)
@@ -183,7 +144,9 @@ void TextElement::draw(sf::RenderWindow *window) const
 {
     if (m_wordBreak)
     {
-        window->draw(sf::Sprite{m_textForm.getTexture()});
+        sf::Sprite texteG{m_textForm.getTexture()};
+        texteG.setPosition(m_realPosition.first, m_realPosition.second);
+        window->draw(texteG);
     } else {
         window->draw(*this);
     }
