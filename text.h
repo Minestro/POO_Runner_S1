@@ -12,7 +12,7 @@ private:
 public:
     Text() = default;
     Text(float x, float y, float width, float height, std::string text, bool autoRescale = 1, bool wordBreak = 1);
-    virtual ~Text();
+    virtual ~Text() = default;
     void setText(std::string text);
     std::string getText() const;
     virtual std::string getClassName() const;

@@ -1,6 +1,6 @@
 #include "text.h"
 
-Text::Text(float x, float y, float width, float height, std::string text, bool autoRescale, bool wordBreak): Element::Element{x, y, width, height}, m_wordBreak{wordBreak}, m_autoRescale{autoRescale}, m_textLines{}, m_text{text}
+Text::Text(float x, float y, float width, float height, std::string text, bool autoRescale, bool wordBreak): Element::Element{x, y, width, height}, m_wordBreak{wordBreak}, m_autoRescale{autoRescale}, m_text{text}
 {
 }
 
