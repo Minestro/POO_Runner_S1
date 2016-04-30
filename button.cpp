@@ -1,7 +1,7 @@
 #include "button.h"
 #include "menu.h"
 
-Button::Button(float x, float y, float width, float height, std::string text, int destinationPage, Menu *m, button_type type, bool isClickable): Element::Element{x, y, width, height}, m_text{text}, m_type{type}, m_isClickable{isClickable}, m_destinationPage{destinationPage}, m_menu{m}
+Button::Button(float x, float y, float width, float height, std::string text, int destinationPage, Menu *m, button_type type, bool isClickable): Element::Element{x, y, width, height}, m_text{text}, m_type{type}, m_isClickable{isClickable}, m_destinationPage{destinationPage}, m_menu{m}, m_actions{}
 {
 
 }
@@ -26,6 +26,10 @@ bool Button::isClickable() const
     return isClickable();
 }
 
+void Button::addAction(button_action action)
+{
+    m_actions.push_back(action);
+}
 
 //------------------------------------------------------------------------------
 // Input:   x : coordonnées de la souris en x
@@ -41,5 +45,25 @@ bool Button::isHover(int x, int y) const
 
 void Button::onClick()
 {
-    m_menu->changePage(m_destinationPage);
+    for (unsigned int i=0; i<m_actions.size(); i++)
+    {
+        switch (m_actions[i])
+        {
+        case button_action::CHANGE_PAGE:
+            Button::changePage(this, m_menu);
+            break;
+        default:
+            break;
+        }
+    }
+}
+
+int Button::getDestinationPage() const
+{
+    return m_destinationPage;
+}
+
+void Button::changePage(Button *sender, Menu *menu)
+{
+    menu->setPage(sender->getDestinationPage());
 }

@@ -15,8 +15,9 @@ public:
     Menu(float width, float height, int activePage);
     virtual ~Menu() = default;
     virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const;
-    void changePage(unsigned int page);
+    void setPage(unsigned int page);
     void refresh();
+    void refreshContent();
     int getActivePage() const;
 };
 

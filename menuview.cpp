@@ -78,7 +78,7 @@ bool MenuView::treatEvent()
         case sf::Event::KeyPressed:
             if (m_menuModel->getActivePage() == menuPage::PRE_MENU)
             {
-                m_menuModel->changePage(menuPage::HOME);
+                m_menuModel->setPage(menuPage::HOME);
             }
             break;
         default:
@@ -131,7 +131,7 @@ void MenuView::synchronise()
              if (it == m_elementToGraphicElement.end())
              {
                  std::list<GraphicElement*> list;
-                 list.push_back(new TextElement{10, m_menuModel->getTexts()[i].second->getSize().first, m_menuModel->getTexts()[i].second->getSize().second, m_menuModel->getTexts()[i].second->getPosition().first, m_menuModel->getTexts()[i].second->getPosition().second, m_menuModel->getTexts()[i].second->getText(), TextElement::m_listFonts["score.ttf"], 20, 0, 1, sf::Color::Blue, 0, text_effect::BREATH, 20});
+                 list.push_back(new TextElement{10, m_menuModel->getTexts()[i].second->getSize().first, m_menuModel->getTexts()[i].second->getSize().second, m_menuModel->getTexts()[i].second->getPosition().first, m_menuModel->getTexts()[i].second->getPosition().second, m_menuModel->getTexts()[i].second->getText(), TextElement::m_listFonts[m_menuModel->getTexts()[i].second->getFont()], m_menuModel->getTexts()[i].second->getFontSize(), m_menuModel->getTexts()[i].second->getAutoRescale(), m_menuModel->getTexts()[i].second->getWordBreak(), sf::Color{(sf::Uint8)m_menuModel->getTexts()[i].second->getR(), (sf::Uint8)m_menuModel->getTexts()[i].second->getG(), (sf::Uint8)m_menuModel->getTexts()[i].second->getB()}, 0, m_menuModel->getTexts()[i].second->getEffect(), m_menuModel->getTexts()[i].second->getEffectPeriod()});
                  m_elementToGraphicElement.insert(std::make_pair(m_menuModel->getTexts()[i].second, list));
              } else {
 

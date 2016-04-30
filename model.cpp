@@ -55,3 +55,37 @@ void Model::setCursorPosition(int x, int y)
     m_cursorPosition.first = x;
     m_cursorPosition.second = y;
 }
+
+void Model::clearAll()
+{
+    for (unsigned int i = 0; i<m_backgrounds.size(); i++)
+    {
+        m_deletedElements.push_back(m_backgrounds[i].second);
+    }
+    m_backgrounds.clear();
+    for (unsigned int i = 0; i<m_bonus.size(); i++)
+    {
+        m_deletedElements.push_back(m_bonus[i].second);
+    }
+    m_bonus.clear();
+    for (unsigned int i = 0; i<m_buttons.size(); i++)
+    {
+        m_deletedElements.push_back(m_buttons[i].second);
+    }
+    m_buttons.clear();
+    for (unsigned int i = 0; i<m_characters.size(); i++)
+    {
+        m_deletedElements.push_back(m_characters[i].second);
+    }
+    m_characters.clear();
+    for (unsigned int i = 0; i<m_obstacles.size(); i++)
+    {
+        m_deletedElements.push_back(m_obstacles[i].second);
+    }
+    m_obstacles.clear();
+    for (unsigned int i = 0; i<m_texts.size(); i++)
+    {
+        m_deletedElements.push_back(m_texts[i].second);
+    }
+    m_texts.clear();
+}

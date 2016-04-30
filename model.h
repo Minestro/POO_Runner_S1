@@ -36,6 +36,7 @@ public:
     std::pair<int, int> getCursorPosition() const;
     virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const = 0;
     void setCursorPosition(int x, int y);
+    void clearAll();
 };
 
 #endif // MODEL_H

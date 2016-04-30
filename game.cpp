@@ -84,7 +84,7 @@ void Game::nextStep()
             int aleatoire= rand()% 2 ;
             if (aleatoire == 1)
             {
-                Bonus* bonus = new Bonus(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -PIXELPERBACKGROUNDMOVE, 0, 0,PIECE);
+                Bonus* bonus = new Bonus(GAME_SIZE_W, HAUTEUR_SOL- 100, 30,30, -PIXELPERBACKGROUNDMOVE, 0, 0, bonus_type::PIECE);
                 m_bonus.push_back(std::make_pair(1, bonus));
 
             }
@@ -113,36 +113,76 @@ void Game::nextStep()
             m_obstacles[i].second->move();
         }
 
+        //On bouge les bonus
+        for (unsigned int i= 0; i<m_bonus.size(); i++)
+        {
+            m_bonus[i].second->move();
+        }
+
         m_lastMove = std::chrono::system_clock::now();
     }
 
-    //Test des collisions avec les obstacles et les bonus
-    std::vector<std::pair<bool, Obstacle *> >::iterator iterator1 = m_obstacles.begin();
-    while (iterator1 != m_obstacles.end())
+    //Test des collisions avec les obstacles
+    std::vector<std::pair<bool, Obstacle *> >::iterator obstacle = m_obstacles.begin();
+    while (obstacle != m_obstacles.end())
     {
         bool increment = true;
         if (player1 != m_characters.end())
         {
-            if (iterator1->second->collision(player1->second))
+            if (obstacle->second->collision(player1->second))
             {
-                player1->second->removeLife(iterator1->second->getDammage());
-                m_deletedElements.push_back(iterator1->second);
-                m_obstacles.erase(iterator1);
+                player1->second->removeLife(obstacle->second->getDammage());
+                m_deletedElements.push_back(obstacle->second);
+                m_obstacles.erase(obstacle);
                 increment = false;
             }
         }
-        if (iterator1->second->getPosition().first < -iterator1->second->getSize().first)
+        if (obstacle->second->getPosition().first < -obstacle->second->getSize().first)
         {
-            m_deletedElements.push_back(iterator1->second);
-            m_obstacles.erase(iterator1);
+            m_deletedElements.push_back(obstacle->second);
+            m_obstacles.erase(obstacle);
             increment = false;
         }
         if (increment)
         {
-            ++iterator1;
+            ++obstacle;
         }
     }
 
+    //Test des collisions avec les bonus
+    std::vector<std::pair<bool, Bonus *> >::iterator bonus = m_bonus.begin();   //Declaration d'un iterator pour parcourir les bonus
+    while (bonus != m_bonus.end())          //Tant que on arrive pas à la fin de la liste de bonus
+    {
+        bool increment = true;              //Ce booléen indique si l'on a supprimé un bonus. Lorsqu'on supprime un bonus, tous les bonus suivants se retrouvent décalés du coup on incrémente pas l'iterator pour passer au bonus suivant
+        if (bonus->second->getPosition().first < -bonus->second->getSize().first)   // Si le bonus sort de l'écran à gauche, on le supprime
+        {
+            m_deletedElements.push_back(bonus->second);
+            m_bonus.erase(bonus);
+            increment = false;
+        }
+        if (player1 != m_characters.end())      //Si le joueur 1 n'est pas mort (on test les collisions que pour lui)
+        {
+            if (bonus->second->collision(player1->second))      //Si il y a collision avec le personnage 1
+            {
+                switch (bonus->second->getType())               //Action différente suivant le type de bonus
+                {
+                case bonus_type::PIECE:
+                    break;
+                case bonus_type::INVINSIBLE:
+                    break;
+                default:
+                    break;
+                }
+                m_deletedElements.push_back(bonus->second);     //on supprime le bonus
+                m_bonus.erase(bonus);
+                increment = false;
+            }
+        }
+        if (increment)                  //Si on a supprimé aucun bonus, on passe au suivant sinon pas besoin car les autres se sont trouvés décalés sur la position actuelle
+        {
+            ++bonus;
+        }
+    }
 
     //On test si un personnage n'a plus de vie
     for (unsigned int i=0; i<m_characters.size(); i++)
