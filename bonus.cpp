@@ -10,3 +10,8 @@ std::string Bonus::getClassName() const
 {
     return "Bonus";
 }
+
+bonus_state Bonus::getState() const
+{
+    return m_type ;
+}

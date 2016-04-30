@@ -153,6 +153,23 @@ void GameView::synchronise()
             m_gameModel->getObstacles()[i].first = 0;
         }
     }
+    for (unsigned int i=0; i<m_gameModel->getBonus().size(); i++)
+    {
+        if (m_gameModel->getBonus()[i].first)
+        {
+            std::map <const Element*, std::list<GraphicElement*> >::const_iterator it = m_elementToGraphicElement.find(m_gameModel->getBonus()[i].second);
+            if (it == m_elementToGraphicElement.end())
+            {
+                std::list<GraphicElement*> list;
+                list.push_back(new SpriteElement{10, m_gameModel->getBonus()[i].second->getSize().first, m_gameModel->getBonus()[i].second->getSize().second, m_gameModel->getBonus()[i].second->getPosition().first, m_gameModel->getBonus()[i].second->getPosition().second, GraphicElement::m_listTextures["bonus.png"], 4, 5, 1, 1, 1, 100});
+                std::cout<< "passer"<<std::endl;
+                m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getBonus()[i].second, list));
+            } else {
+
+            }
+            m_gameModel->getBonus()[i].first = 0;
+        }
+    }
 
     for (unsigned int i=0; i<m_gameModel->getBackgrounds().size(); i++)
     {

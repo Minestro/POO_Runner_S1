@@ -78,6 +78,18 @@ void Game::nextStep()
             }
         }
 
+        //On crée des nouveaux bonus
+        if ((m_distance/PIXELPERBACKGROUNDMOVE) % 100 == 0)
+        {
+            int aleatoire= rand()% 2 ;
+            if (aleatoire == 1)
+            {
+                Bonus* bonus = new Bonus(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -PIXELPERBACKGROUNDMOVE, 0, 0,PIECE);
+                m_bonus.push_back(std::make_pair(1, bonus));
+
+            }
+        }
+
         //On bouge les backgrounds
         for (unsigned int i = 0; i<m_backgrounds.size(); i++)
         {

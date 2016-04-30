@@ -1,7 +1,7 @@
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE RunnerTest
 
-#include <boost/test/unit_test.hpp>
+/*#include <boost/test/unit_test.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <iostream>
 #include "game.h"
@@ -137,4 +137,4 @@ BOOST_AUTO_TEST_CASE(test_Gravite)
     BOOST_CHECK(gameModel->getCharacters()[0].second->getPosition().second > 200);
 
     delete gameModel;
-}
+}*/

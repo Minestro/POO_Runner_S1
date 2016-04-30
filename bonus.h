@@ -11,8 +11,9 @@ private:
 public:
     Bonus(float x, float y, float w, float h, float mx, float my, int movePeriod, bonus_state type);
     virtual ~Bonus() = default;
-    unsigned int getType() const;
     std::string getClassName() const;
+    bonus_state getState() const;
 };
 
 #endif // BONUS_H
+
