@@ -167,6 +167,7 @@ void Game::nextStep()
                 switch (bonus->second->getType())               //Action différente suivant le type de bonus
                 {
                 case bonus_type::PIECE:
+                    player1->second->addScore(1000);
                     break;
                 case bonus_type::INVINSIBLE:
                     break;
