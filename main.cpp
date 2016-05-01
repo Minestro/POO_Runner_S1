@@ -49,5 +49,5 @@ int main()
     }
     GraphicElement::clearTextures();
     TextElement::clearFonts();
-    return 0;
+    return EXIT_SUCCESS;
 }

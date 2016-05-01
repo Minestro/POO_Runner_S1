@@ -2,7 +2,7 @@
 #include <iostream>
 #include <time.h>
 
-Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}, m_distance{0}
+Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}, m_player{nullptr}, m_distance{0}, m_powerActives{}
 {
     m_player =  new Player;
     GameCharacter *gc = new GameCharacter{0, HAUTEUR_SOL-40, 40, 40, 0, 0, m_player};
@@ -12,6 +12,7 @@ Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{w
     m_backgrounds.push_back(std::make_pair(1, b1));
     m_backgrounds.push_back(std::make_pair(1, b2));
     setSpeedPeriod(m_movePeriod);
+    m_powerActives.resize(power_list::NB_POWER - 1);
 }
 
 Game::~Game()
@@ -81,7 +82,7 @@ void Game::nextStep()
         //On crée des nouveaux bonus
         if ((m_distance/PIXELPERBACKGROUNDMOVE) % 100 == 0)
         {
-            int aleatoire= rand()% 2 ;
+            int aleatoire= rand()% 5 ;
             if (aleatoire == 1)
             {
                 Bonus* bonus = new Bonus(GAME_SIZE_W, HAUTEUR_SOL- 100, 30,30, -PIXELPERBACKGROUNDMOVE, 0, 0, bonus_type::PIECE);
@@ -167,6 +168,7 @@ void Game::nextStep()
                 switch (bonus->second->getType())               //Action différente suivant le type de bonus
                 {
                 case bonus_type::PIECE:
+                    player1->second->addScore(1000);
                     break;
                 case bonus_type::INVINSIBLE:
                     break;

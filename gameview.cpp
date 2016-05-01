@@ -6,6 +6,20 @@ GameView::GameView(): m_gameModel{nullptr}
 
 }
 
+GameView::~GameView()
+{
+    std::map<const Element*, std::list<GraphicElement *> >::iterator map = m_elementToGraphicElement.begin();
+    while (map != m_elementToGraphicElement.end())
+    {
+        std::list<GraphicElement *>::iterator list = map->second.begin();
+        while (list != map->second.end())
+        {
+            delete *list;
+            ++list;
+        }
+        ++map;
+    }
+}
 
 void GameView::insertGraphicElementIntoList(GraphicElement *ge)
 {

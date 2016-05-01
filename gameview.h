@@ -25,6 +25,7 @@ private:
     void fillGraphicElementsList();
 public:
     GameView();
+    ~GameView();
     void draw();
     bool treatEvent();
     void synchronise();

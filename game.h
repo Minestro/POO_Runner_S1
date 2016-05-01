@@ -16,6 +16,7 @@ private:
     long int m_pauseTime;
     Player *m_player;
     unsigned long int m_distance;
+    std::vector<std::pair <bool, std::chrono::time_point<std::chrono::system_clock> > > m_powerActives; //Pour chaque pouvoir on associ un bool pour savoir si il est activé et un time point qui définit jusqu'à quand le pouvoir est actif.
 
 public:
     Game() = default;
