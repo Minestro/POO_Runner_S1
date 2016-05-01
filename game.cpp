@@ -11,8 +11,31 @@ Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{w
     Background *b2 = new Background{"city_1.png", 2, 1.0, 1, 0};
     m_backgrounds.push_back(std::make_pair(1, b1));
     m_backgrounds.push_back(std::make_pair(1, b2));
+
     setSpeedPeriod(m_movePeriod);
     m_powerActives.resize(power_list::NB_POWER - 1);
+
+    /*unsigned int nbPatterns = 0;
+    std::ifstream fichierPattern(PATTERNS_FILE.c_str(), std::ios::in);
+    if (fichierPattern)
+    {
+        std::string line;
+        do
+        {
+            std::getline(fichierPattern, line);
+        } while(line.find("#NbPatterns") == std::string::npos);
+        if (!fichierPattern.eof())
+        {
+            nbPatterns = std::stoi(line.substr(line.find("= ")+2));
+        }
+        fichierPattern.close();
+    } else {
+        std::cerr << "Erreur lors de l'ouverture du fichier des modèles d'obstacles" << std::endl;
+    }
+    for (unsigned int i= 0; i<nbPatterns; i++)
+    {
+        m_patternsList.push_back(ObstaclesBonusPattern{i, this});
+    }*/
 }
 
 Game::~Game()
@@ -73,7 +96,7 @@ void Game::nextStep()
             int aleatoire= rand()% 2 ;
             if (aleatoire == 1)
             {
-                Obstacle* ob = new Obstacle(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -PIXELPERBACKGROUNDMOVE, 0, 0, 5, 1);
+                Obstacle* ob = new Obstacle(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -PIXELPERBACKGROUNDMOVE, 0, 0, 5, obstacle_type::MINE);
                 m_obstacles.push_back(std::make_pair(1, ob));
 
             }

@@ -9,6 +9,8 @@ const std::string FONTS_LIST[] = {"score.ttf"};
 
 enum text_effect{NOTHING, BREATH, FLASH};
 
+
+const std::string PATTERNS_FILE = "Ressources/patternsList.xml";
 const int GAME_SIZE_W = 1280;
 const int GAME_SIZE_H = 720;
 const int MENU_SIZE_W = 800;
