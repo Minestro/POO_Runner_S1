@@ -17,8 +17,8 @@ private:
 
 public:
     Text() = default;
-    Text(float x, float y, float width, float height, std::string text, unsigned int fontSize, std::string font, bool autoRescale = 1, bool wordBreak = 1);
-    Text(float x, float y, float width, float height, std::string text, unsigned int fontSize, std::string font, unsigned int r = 255, unsigned int g = 255, unsigned int b = 255, text_effect effect = text_effect::NOTHING, unsigned int effectPeriod = 0, bool autoRescale = 1, bool wordBreak = 1);
+    Text(float x, float y, float width, float height, float rotation, std::string text, unsigned int fontSize, std::string font, bool autoRescale = 1, bool wordBreak = 1);
+    Text(float x, float y, float width, float height, float rotation, std::string text, unsigned int fontSize, std::string font, unsigned int r = 255, unsigned int g = 255, unsigned int b = 255, text_effect effect = text_effect::NOTHING, unsigned int effectPeriod = 0, bool autoRescale = 1, bool wordBreak = 1);
     virtual ~Text() = default;
     void setText(std::string text);
     std::string getText() const;

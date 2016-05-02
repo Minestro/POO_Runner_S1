@@ -11,10 +11,11 @@ private:
     unsigned int m_showedScore;
 public:
     ScoreGraphic() = default;
-    ScoreGraphic(unsigned int zIndex, float x, float y, const sf::Font *font, unsigned int fontSize, unsigned int refreshPeriod, sf::Color color = sf::Color::Black, int style = 0);
+    ScoreGraphic(unsigned int zIndex, float x, float y, float rotateAngle, const sf::Font *font, unsigned int fontSize, unsigned int refreshPeriod, sf::Color color = sf::Color::Black, int style = 0);
     virtual ~ScoreGraphic();
     virtual void setSize(float width, float height);
     virtual void setPosition(float x, float y);
+    virtual void setRotateAngle(float angle);
     virtual std::pair<float, float> getSize() const;
     virtual std::pair<float, float> getPosition() const;
     virtual std::string getClassName() const;

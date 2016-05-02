@@ -1,9 +1,9 @@
 #include "scoregraphic.h"
 
-ScoreGraphic::ScoreGraphic(unsigned int zIndex, float x, float y, const sf::Font *font, unsigned int fontSize, unsigned int refreshPeriod, sf::Color color, int style): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_showedScore{0}
+ScoreGraphic::ScoreGraphic(unsigned int zIndex, float x, float y, float rotateAngle, const sf::Font *font, unsigned int fontSize, unsigned int refreshPeriod, sf::Color color, int style): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_showedScore{0}
 {
-    m_prefixe = new TextElement{zIndex, 0, 0, x, y, "Score : ", font, fontSize, 0, 0, color, style};
-    m_score = new TextElement{zIndex, 0, 0, x + m_prefixe->getSize().first, y, std::to_string(0), font, fontSize, 0, 0, color, style};
+    m_prefixe = new TextElement{zIndex, 0, 0, x, y, rotateAngle, "Score : ", font, fontSize, 0, 0, color, style};
+    m_score = new TextElement{zIndex, 0, 0, x + m_prefixe->getSize().first, y, rotateAngle, std::to_string(0), font, fontSize, 0, 0, color, style};
 }
 
 ScoreGraphic::~ScoreGraphic()
@@ -22,6 +22,12 @@ void ScoreGraphic::setPosition(float x, float y)
 {
     m_prefixe->setPosition(x, y);
     m_score->setPosition(x + m_prefixe->getSize().first + 20, y);
+}
+
+void ScoreGraphic::setRotateAngle(float angle)
+{
+    m_prefixe->setRotation(angle);
+    m_score->setRotation(angle);
 }
 
 std::pair<float, float> ScoreGraphic::getSize() const
@@ -47,6 +53,7 @@ void ScoreGraphic::draw(sf::RenderWindow *window) const
 
 void ScoreGraphic::refresh(const Element *el, Model *model)
 {
+    setRotateAngle(el->getRotateAngle());
     std::vector<std::pair<bool, GameCharacter*> >::const_iterator it = model->getCharacters().begin();
     while (it != model->getCharacters().end() && it->second != el)
     {

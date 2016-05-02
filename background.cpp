@@ -1,6 +1,6 @@
 #include "background.h"
 
-Background::Background(std::string backgroundFileName, int zIndex, float coefSpeed, bool isSliding, int movePeriodMicroSec):MovableElement{0, 0, GAME_SIZE_W, GAME_SIZE_H, -PIXELPERBACKGROUNDMOVE, 0, movePeriodMicroSec}, m_isSliding{isSliding}, m_backgroundFileName{backgroundFileName}, m_zIndex{zIndex}, m_coefSpeed{coefSpeed}
+Background::Background(std::string backgroundFileName, int zIndex, float coefSpeed, bool isSliding, int movePeriodMicroSec):MovableElement{0, 0, GAME_SIZE_W, GAME_SIZE_H, 0, -PIXELPERBACKGROUNDMOVE, 0, 0, movePeriodMicroSec}, m_isSliding{isSliding}, m_backgroundFileName{backgroundFileName}, m_zIndex{zIndex}, m_coefSpeed{coefSpeed}
 {
 
 }

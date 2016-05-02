@@ -140,9 +140,9 @@ void GameView::synchronise()
             if (it == m_elementToGraphicElement.end())
             {
                 std::list<GraphicElement*> list;
-                list.push_back(new GameCharacterGraphic{10, m_gameModel->getCharacters()[i].second->getSize().first, m_gameModel->getCharacters()[i].second->getSize().second, m_gameModel->getCharacters()[i].second->getPosition().first, m_gameModel->getCharacters()[i].second->getPosition().second, GraphicElement::m_listTextures["character.png"], 1, 8, 1, 1, 100});
-                list.push_back(new LifeBar{100, 200, 30, 1000, 600, 20});
-                list.push_back(new ScoreGraphic{100, 50, 600, TextElement::m_listFonts["score.ttf"], 20, 5, sf::Color::White});
+                list.push_back(new GameCharacterGraphic{10, m_gameModel->getCharacters()[i].second->getSize().first, m_gameModel->getCharacters()[i].second->getSize().second, m_gameModel->getCharacters()[i].second->getPosition().first, m_gameModel->getCharacters()[i].second->getPosition().second, m_gameModel->getCharacters()[i].second->getRotateAngle(), GraphicElement::m_listTextures["character.png"], 1, 8, 1, 1, 100});
+                list.push_back(new LifeBar{100, 200, 30, 0, 1000, 600, 20});
+                list.push_back(new ScoreGraphic{100, 50, 600, 0, TextElement::m_listFonts["score.ttf"], 20, 5, sf::Color::White});
                 m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getCharacters()[i].second, list));
             } else {
 
@@ -159,7 +159,7 @@ void GameView::synchronise()
             if (it == m_elementToGraphicElement.end())
             {
                 std::list<GraphicElement*> list;
-                list.push_back(new SpriteElement{10, m_gameModel->getObstacles()[i].second->getSize().first, m_gameModel->getObstacles()[i].second->getSize().second, m_gameModel->getObstacles()[i].second->getPosition().first, m_gameModel->getObstacles()[i].second->getPosition().second, GraphicElement::m_listTextures["obstacles_block.png"], 1, 2, 1, 1, 1, 100});
+                list.push_back(new SpriteElement{10, m_gameModel->getObstacles()[i].second->getSize().first, m_gameModel->getObstacles()[i].second->getSize().second, m_gameModel->getObstacles()[i].second->getPosition().first, m_gameModel->getObstacles()[i].second->getPosition().second, m_gameModel->getObstacles()[i].second->getRotateAngle(), GraphicElement::m_listTextures["obstacles_block.png"], 1, 2, 1, 1, 1, 100});
                 m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getObstacles()[i].second, list));
             } else {
 
@@ -178,7 +178,7 @@ void GameView::synchronise()
                 switch (m_gameModel->getBonus()[i].second->getType())           //Suivant le type de bonus, l'élement graphique n'aura pas la même texture, la même vitesse d'animation...
                 {
                 case bonus_type::PIECE:
-                    list.push_back(new SpriteElement{10, m_gameModel->getBonus()[i].second->getSize().first, m_gameModel->getBonus()[i].second->getSize().second, m_gameModel->getBonus()[i].second->getPosition().first, m_gameModel->getBonus()[i].second->getPosition().second, GraphicElement::m_listTextures["coin.png"], 1, 10, 1, 1, 1, 100});
+                    list.push_back(new SpriteElement{10, m_gameModel->getBonus()[i].second->getSize().first, m_gameModel->getBonus()[i].second->getSize().second, m_gameModel->getBonus()[i].second->getPosition().first, m_gameModel->getBonus()[i].second->getPosition().second, m_gameModel->getBonus()[i].second->getRotateAngle(), GraphicElement::m_listTextures["coin.png"], 1, 10, 1, 1, 1, 100});
                     break;
                 case bonus_type::INVINSIBLE:
                     // TO DO
@@ -206,12 +206,12 @@ void GameView::synchronise()
                 {
                     sf::Texture *texture = GraphicElement::m_listTextures[m_gameModel->getBackgrounds()[i].second->getBackgroundFileName()];
                     texture->setRepeated(1);
-                    SpriteElement *ge = new SpriteElement{(unsigned int)m_gameModel->getBackgrounds()[i].second->getZIndex(), m_gameModel->getBackgrounds()[i].second->getSize().first, m_gameModel->getBackgrounds()[i].second->getSize().second, m_gameModel->getBackgrounds()[i].second->getPosition().first, m_gameModel->getBackgrounds()[i].second->getPosition().second, texture};
+                    SpriteElement *ge = new SpriteElement{(unsigned int)m_gameModel->getBackgrounds()[i].second->getZIndex(), m_gameModel->getBackgrounds()[i].second->getSize().first, m_gameModel->getBackgrounds()[i].second->getSize().second, m_gameModel->getBackgrounds()[i].second->getPosition().first, m_gameModel->getBackgrounds()[i].second->getPosition().second, m_gameModel->getBackgrounds()[i].second->getRotateAngle(), texture};
                     ge->setTextureRect(sf::IntRect{ge->getTextureRect().left, ge->getTextureRect().top, ge->getTextureRect().width*2, ge->getTextureRect().height});
                     list.push_back(ge);
                     m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getBackgrounds()[i].second, list));
                 } else {
-                    list.push_back(new SpriteElement{(unsigned int)m_gameModel->getBackgrounds()[i].second->getZIndex(), m_gameModel->getBackgrounds()[i].second->getSize().first, m_gameModel->getBackgrounds()[i].second->getSize().second, m_gameModel->getBackgrounds()[i].second->getPosition().first, m_gameModel->getBackgrounds()[i].second->getPosition().second, GraphicElement::m_listTextures[m_gameModel->getBackgrounds()[i].second->getBackgroundFileName()]});
+                    list.push_back(new SpriteElement{(unsigned int)m_gameModel->getBackgrounds()[i].second->getZIndex(), m_gameModel->getBackgrounds()[i].second->getSize().first, m_gameModel->getBackgrounds()[i].second->getSize().second, m_gameModel->getBackgrounds()[i].second->getPosition().first, m_gameModel->getBackgrounds()[i].second->getPosition().second, m_gameModel->getBackgrounds()[i].second->getRotateAngle(), GraphicElement::m_listTextures[m_gameModel->getBackgrounds()[i].second->getBackgroundFileName()]});
                     m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getBackgrounds()[i].second, list));
                 }
             } else {

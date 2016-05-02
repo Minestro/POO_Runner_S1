@@ -1,7 +1,7 @@
 #include "bonus.h"
 
-Bonus::Bonus(float x, float y, float w, float h, float mx, float my, int movePeriod, int type)
-    : MovableElement{x,y,w,h,mx,my,movePeriod}, m_type{type}
+Bonus::Bonus(float x, float y, float w, float h, float rotation, float mx, float my, float rotationMovement, int movePeriod, int type)
+    : MovableElement{x, y, w, h, rotation, mx, my, rotationMovement, movePeriod}, m_type{type}
 {
 
 }

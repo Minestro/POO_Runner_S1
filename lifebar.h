@@ -15,10 +15,11 @@ private:
     float m_ratioLife;
 public:
     LifeBar() = default;
-    LifeBar(unsigned int zIndex, float width, float height, float x, float y, unsigned int refreshPeriod = 0);
+    LifeBar(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, unsigned int refreshPeriod = 0);
     virtual ~LifeBar();
     virtual void setSize(float width, float height);
     virtual void setPosition(float x, float y);
+    virtual void setRotateAngle(float angle);
     virtual std::pair<float, float> getSize() const;
     virtual std::pair<float, float> getPosition() const;
     virtual std::string getClassName() const;

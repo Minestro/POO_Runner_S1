@@ -25,6 +25,7 @@ public:
     virtual ~GraphicElement() = default;
     virtual void setSize(float width, float height) = 0;
     virtual void setPosition(float x, float y) = 0;
+    virtual void setRotateAngle(float angle) = 0;
     virtual std::pair<float, float> getSize() const = 0;
     virtual std::pair<float, float> getPosition() const = 0;
     unsigned int getZIndex() const;

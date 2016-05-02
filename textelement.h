@@ -21,10 +21,11 @@ private:
     void generateTextForm();
 public:
     TextElement() = default;
-    TextElement(unsigned int zIndex, float width, float height, float x, float y, std::string text, const sf::Font *font, unsigned int fontSize, bool autoRescale = 1, bool wordBreak = 1, sf::Color color = sf::Color::Black, int style = 0, text_effect effect = text_effect::NOTHING, unsigned int refreshPeriod = 0);
+    TextElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, std::string text, const sf::Font *font, unsigned int fontSize, bool autoRescale = 1, bool wordBreak = 1, sf::Color color = sf::Color::Black, int style = 0, text_effect effect = text_effect::NOTHING, unsigned int refreshPeriod = 0);
     virtual ~TextElement() = default;
     void setSize(float width, float height);
     virtual void setPosition(float x, float y) override;
+    virtual void setRotateAngle(float angle);
     void setText(std::string text);
     virtual std::pair<float, float> getSize() const;
     virtual std::string getClassName() const;

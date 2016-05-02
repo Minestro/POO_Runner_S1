@@ -1,19 +1,21 @@
 #include "spriteelement.h"
 
-SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, int animatePeriod): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_size{width, height}, m_nbLignes{1}, m_nbColonnes{1}, m_activeLigne{1}, m_activeColonne{1}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{1}, m_animationDirectionRight{1}
+SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int animatePeriod): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_size{width, height}, m_nbLignes{1}, m_nbColonnes{1}, m_activeLigne{1}, m_activeColonne{1}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{1}, m_animationDirectionRight{1}
 {
     setTexture(*texture);
     setPosition(x, y);
     refreshTextRect();
     rescale(width, height);
+    setRotateAngle(rotateAngle);
 }
 
-SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, int nbLignes, int nbColonnes, int activeLigne, int activeColonne, bool autoLoop, int animatePeriod, bool animationDirectionright): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_size{width, height}, m_nbLignes{nbLignes}, m_nbColonnes{nbColonnes}, m_activeLigne{activeLigne}, m_activeColonne{activeColonne}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{autoLoop}, m_animationDirectionRight{animationDirectionright}
+SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int nbLignes, int nbColonnes, int activeLigne, int activeColonne, bool autoLoop, int animatePeriod, bool animationDirectionright): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_size{width, height}, m_nbLignes{nbLignes}, m_nbColonnes{nbColonnes}, m_activeLigne{activeLigne}, m_activeColonne{activeColonne}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{autoLoop}, m_animationDirectionRight{animationDirectionright}
 {
     setTexture(*texture);
     setPosition(x, y);
     refreshTextRect();
     rescale(width, height);
+    setRotateAngle(rotateAngle);
 }
 
 void SpriteElement::rescale(float width, float height)
@@ -140,9 +142,18 @@ void SpriteElement::setPosition(float x, float y)
     sf::Sprite::setPosition(x, y);
 }
 
+void SpriteElement::setRotateAngle(float angle)
+{
+    sf::Vector2f origin = getOrigin();
+    setOrigin(getSize().first/2, getSize().second/2);
+    setRotation(angle);
+    setOrigin(origin);
+}
+
 void SpriteElement::refresh(const Element *el, Model *model)
 {
     (void) model;
+    setRotateAngle(el->getRotateAngle());
     setSize(el->getSize().first, el->getSize().second);
     setPosition(el->getPosition().first, el->getPosition().second);
     animate();

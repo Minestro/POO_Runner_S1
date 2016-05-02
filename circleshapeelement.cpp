@@ -1,11 +1,12 @@
 #include "circleshapeelement.h"
 
-CircleShapeElement::CircleShapeElement(unsigned int zIndex, float width, float height, float x, float y, sf::Color color): GraphicElement::GraphicElement{zIndex}, sf::CircleShape::CircleShape{(width+height)/4}
+CircleShapeElement::CircleShapeElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, sf::Color color): GraphicElement::GraphicElement{zIndex}, sf::CircleShape::CircleShape{(width+height)/4}
 {
-    setOrigin(0, 0);
     setPosition(x, y);
     setSize(width, height);
+    setOrigin(0, 0);
     setFillColor(color);
+    setRotateAngle(rotateAngle);
 }
 
 void CircleShapeElement::rescale(float width, float height)
@@ -20,6 +21,11 @@ void CircleShapeElement::setSize(float width, float height)
 {
     setRadius((width+height)/4);
     rescale(width, height);
+}
+
+void CircleShapeElement::setRotateAngle(float angle)
+{
+    setRotation(angle);
 }
 
 std::pair<float, float> CircleShapeElement::getSize() const
@@ -52,4 +58,5 @@ void CircleShapeElement::refresh(const Element *el, Model *model)
     (void) model;
     setSize(el->getSize().first, el->getSize().second);
     setPosition(el->getPosition().first, el->getPosition().second);
+    setRotateAngle(el->getRotateAngle());
 }

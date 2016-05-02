@@ -3,7 +3,7 @@
 
 std::map<std::string, sf::Font*> TextElement::m_listFonts;
 
-TextElement::TextElement(unsigned int zIndex, float width, float height, float x, float y, std::string text, const sf::Font *font, unsigned int fontSize, bool autoRescale, bool wordBreak, sf::Color color, int style, text_effect effect, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, sf::Text{text, *font, fontSize}, m_realPosition{x, y}, m_realSize{width, height}, m_autoRescale{autoRescale}, m_wordBreak{wordBreak}, m_textLines{}, m_effect{effect}, m_breath{1}, m_textForm{}, m_alphaChannel{0}
+TextElement::TextElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, std::string text, const sf::Font *font, unsigned int fontSize, bool autoRescale, bool wordBreak, sf::Color color, int style, text_effect effect, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, sf::Text{text, *font, fontSize}, m_realPosition{x, y}, m_realSize{width, height}, m_autoRescale{autoRescale}, m_wordBreak{wordBreak}, m_textLines{}, m_effect{effect}, m_breath{1}, m_textForm{}, m_alphaChannel{0}
 {
     if (m_wordBreak)
     {
@@ -13,6 +13,7 @@ TextElement::TextElement(unsigned int zIndex, float width, float height, float x
     setSize(width, height);
     setColor(color);
     setText(text);
+    setRotateAngle(rotateAngle);
 }
 
 void TextElement::setText(std::string text)
@@ -103,6 +104,11 @@ void TextElement::setPosition(float x, float y)
     }
 }
 
+void TextElement::setRotateAngle(float angle)
+{
+    setRotation(angle);
+}
+
 std::pair<float, float> TextElement::getSize() const
 {
     if (m_autoRescale)
@@ -153,6 +159,7 @@ void TextElement::draw(sf::RenderWindow *window) const
         sf::Sprite textS{m_textForm.getTexture()};
         textS.setPosition(m_realPosition.first, m_realPosition.second);
         textS.setColor(sf::Color{getColor().r, getColor().g, getColor().b, (sf::Uint8)m_alphaChannel});
+        textS.setRotation(getRotation());
         window->draw(textS);
     } else {
         window->draw(*this);
@@ -170,6 +177,7 @@ void TextElement::refresh(const Element *el, Model *model)
     {
         setSize(el->getSize().first, el->getSize().second);
     }
+    setRotateAngle(el->getRotateAngle());
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastRefeshCall).count() >= m_refreshPeriod)
     {
         switch (m_effect)

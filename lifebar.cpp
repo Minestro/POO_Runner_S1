@@ -1,9 +1,9 @@
 #include "lifebar.h"
 
-LifeBar::LifeBar(unsigned int zIndex, float width, float height, float x, float y, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_actualBarWidth{(unsigned int)width}, m_ratioLife{1.0f}
+LifeBar::LifeBar(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_actualBarWidth{(unsigned int)width}, m_ratioLife{1.0f}
 {
-    m_sprite = new SpriteElement{zIndex, width, height, x, y, GraphicElement::m_listTextures["life.png"]};
-    m_bar = new RectangleShapeElement{zIndex, width, height, x, y, sf::Color::Green};
+    m_sprite = new SpriteElement{zIndex, width, height, x, y, rotateAngle, GraphicElement::m_listTextures["life.png"]};
+    m_bar = new RectangleShapeElement{zIndex, width, height, x, y, rotateAngle, sf::Color::Green};
 }
 
 LifeBar::~LifeBar()
@@ -23,6 +23,12 @@ void LifeBar::setPosition(float x, float y)
 {
     m_sprite->setPosition(x, y);
     m_bar->setPosition(x, y);
+}
+
+void LifeBar::setRotateAngle(float angle)
+{
+    m_sprite->setRotation(angle);
+    m_bar->setRotation(angle);
 }
 
 std::pair<float, float> LifeBar::getSize() const
@@ -59,6 +65,7 @@ void LifeBar::refresh(const Element *el, Model *model)
         {
             setPosition(el->getPosition().first, el->getPosition().second - 15);
             setSize(el->getSize().first, 10.0);
+            setRotateAngle(el->getRotateAngle());
         }
         if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastRefeshCall).count() >= m_refreshPeriod)
         {

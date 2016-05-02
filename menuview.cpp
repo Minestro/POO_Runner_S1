@@ -113,7 +113,7 @@ void MenuView::synchronise()
             if (it == m_elementToGraphicElement.end())
             {
                 std::list<GraphicElement*> list;
-                list.push_back(new ButtonGraphic{10, m_menuModel->getButtons()[i].second->getSize().first, m_menuModel->getButtons()[i].second->getSize().second, m_menuModel->getButtons()[i].second->getPosition().first, m_menuModel->getButtons()[i].second->getPosition().second, m_menuModel->getButtons()[i].second->getText(), TextElement::m_listFonts["score.ttf"], 20, sf::Color::White});
+                list.push_back(new ButtonGraphic{10, m_menuModel->getButtons()[i].second->getSize().first, m_menuModel->getButtons()[i].second->getSize().second, m_menuModel->getButtons()[i].second->getPosition().first, m_menuModel->getButtons()[i].second->getPosition().second, m_menuModel->getButtons()[i].second->getRotateAngle(), m_menuModel->getButtons()[i].second->getText(), TextElement::m_listFonts["score.ttf"], 20, sf::Color::White});
                 m_elementToGraphicElement.insert(std::make_pair(m_menuModel->getButtons()[i].second, list));
 
             } else {
@@ -131,7 +131,7 @@ void MenuView::synchronise()
              if (it == m_elementToGraphicElement.end())
              {
                  std::list<GraphicElement*> list;
-                 list.push_back(new TextElement{10, m_menuModel->getTexts()[i].second->getSize().first, m_menuModel->getTexts()[i].second->getSize().second, m_menuModel->getTexts()[i].second->getPosition().first, m_menuModel->getTexts()[i].second->getPosition().second, m_menuModel->getTexts()[i].second->getText(), TextElement::m_listFonts[m_menuModel->getTexts()[i].second->getFont()], m_menuModel->getTexts()[i].second->getFontSize(), m_menuModel->getTexts()[i].second->getAutoRescale(), m_menuModel->getTexts()[i].second->getWordBreak(), sf::Color{(sf::Uint8)m_menuModel->getTexts()[i].second->getR(), (sf::Uint8)m_menuModel->getTexts()[i].second->getG(), (sf::Uint8)m_menuModel->getTexts()[i].second->getB()}, 0, m_menuModel->getTexts()[i].second->getEffect(), m_menuModel->getTexts()[i].second->getEffectPeriod()});
+                 list.push_back(new TextElement{10, m_menuModel->getTexts()[i].second->getSize().first, m_menuModel->getTexts()[i].second->getSize().second, m_menuModel->getTexts()[i].second->getPosition().first, m_menuModel->getTexts()[i].second->getPosition().second, m_menuModel->getTexts()[i].second->getRotateAngle(),  m_menuModel->getTexts()[i].second->getText(), TextElement::m_listFonts[m_menuModel->getTexts()[i].second->getFont()], m_menuModel->getTexts()[i].second->getFontSize(), m_menuModel->getTexts()[i].second->getAutoRescale(), m_menuModel->getTexts()[i].second->getWordBreak(), sf::Color{(sf::Uint8)m_menuModel->getTexts()[i].second->getR(), (sf::Uint8)m_menuModel->getTexts()[i].second->getG(), (sf::Uint8)m_menuModel->getTexts()[i].second->getB()}, 0, m_menuModel->getTexts()[i].second->getEffect(), m_menuModel->getTexts()[i].second->getEffectPeriod()});
                  m_elementToGraphicElement.insert(std::make_pair(m_menuModel->getTexts()[i].second, list));
              } else {
 
@@ -151,12 +151,12 @@ void MenuView::synchronise()
                 {
                     sf::Texture *texture = GraphicElement::m_listTextures[m_menuModel->getBackgrounds()[i].second->getBackgroundFileName()];
                     texture->setRepeated(1);
-                    SpriteElement *ge = new SpriteElement{(unsigned int)m_menuModel->getBackgrounds()[i].second->getZIndex(), m_menuModel->getBackgrounds()[i].second->getSize().first, m_menuModel->getBackgrounds()[i].second->getSize().second, m_menuModel->getBackgrounds()[i].second->getPosition().first, m_menuModel->getBackgrounds()[i].second->getPosition().second, texture};
+                    SpriteElement *ge = new SpriteElement{(unsigned int)m_menuModel->getBackgrounds()[i].second->getZIndex(), m_menuModel->getBackgrounds()[i].second->getSize().first, m_menuModel->getBackgrounds()[i].second->getSize().second, m_menuModel->getBackgrounds()[i].second->getPosition().first, m_menuModel->getBackgrounds()[i].second->getPosition().second, m_menuModel->getBackgrounds()[i].second->getRotateAngle(), texture};
                     ge->setTextureRect(sf::IntRect{ge->getTextureRect().left, ge->getTextureRect().top, ge->getTextureRect().width*2, ge->getTextureRect().height});
                     list.push_back(ge);
                     m_elementToGraphicElement.insert(std::make_pair(m_menuModel->getBackgrounds()[i].second, list));
                 } else {
-                    list.push_back(new SpriteElement{(unsigned int)m_menuModel->getBackgrounds()[i].second->getZIndex(), m_menuModel->getBackgrounds()[i].second->getSize().first, m_menuModel->getBackgrounds()[i].second->getSize().second, m_menuModel->getBackgrounds()[i].second->getPosition().first, m_menuModel->getBackgrounds()[i].second->getPosition().second, GraphicElement::m_listTextures[m_menuModel->getBackgrounds()[i].second->getBackgroundFileName()]});
+                    list.push_back(new SpriteElement{(unsigned int)m_menuModel->getBackgrounds()[i].second->getZIndex(), m_menuModel->getBackgrounds()[i].second->getSize().first, m_menuModel->getBackgrounds()[i].second->getSize().second, m_menuModel->getBackgrounds()[i].second->getPosition().first, m_menuModel->getBackgrounds()[i].second->getPosition().second, m_menuModel->getBackgrounds()[i].second->getRotateAngle(),  GraphicElement::m_listTextures[m_menuModel->getBackgrounds()[i].second->getBackgroundFileName()]});
                     m_elementToGraphicElement.insert(std::make_pair(m_menuModel->getBackgrounds()[i].second, list));
                 }
             } else {

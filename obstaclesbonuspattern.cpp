@@ -115,6 +115,7 @@ int ObstaclesBonusPattern::loadBonus(const XMLElement &bonus)
     float y;
     int type;
     float mR;
+    float r;
     int returnCode;
 
     std::vector<std::pair<int*, std::string> > intAttributeToTagName;
@@ -126,6 +127,7 @@ int ObstaclesBonusPattern::loadBonus(const XMLElement &bonus)
     floatAttributeToTagName.push_back(std::make_pair(&x, "PositionX"));
     floatAttributeToTagName.push_back(std::make_pair(&y, "PositionY"));
     floatAttributeToTagName.push_back(std::make_pair(&mR, "RotateMovement"));
+    floatAttributeToTagName.push_back(std::make_pair(&r, "RotateAngle"));
 
     for (unsigned int i=0; i<floatAttributeToTagName.size(); i++)
     {
@@ -153,7 +155,7 @@ int ObstaclesBonusPattern::loadBonus(const XMLElement &bonus)
         }
     }
 
-    m_bonusList.push_back(Bonus{x + GAME_SIZE_W, y, width, height, -PIXELPERBACKGROUNDMOVE, 0.0f, 0, type});
+    m_bonusList.push_back(Bonus{x + GAME_SIZE_W, y, width, height, r, -PIXELPERBACKGROUNDMOVE, 0.0f, mR, 0, type});
     return XML_SUCCESS;
 }
 
@@ -167,6 +169,7 @@ int ObstaclesBonusPattern::loadObstacles(const XMLElement &obstacle)
     int type;
     int dammage;
     float mR;
+    float r;
 
     std::vector<std::pair<int*, std::string> > intAttributeToTagName;
     std::vector<std::pair<float*, std::string> > floatAttributeToTagName;
@@ -178,6 +181,7 @@ int ObstaclesBonusPattern::loadObstacles(const XMLElement &obstacle)
     floatAttributeToTagName.push_back(std::make_pair(&x, "PositionX"));
     floatAttributeToTagName.push_back(std::make_pair(&y, "PositionY"));
     floatAttributeToTagName.push_back(std::make_pair(&mR, "RotateMovement"));
+    floatAttributeToTagName.push_back(std::make_pair(&r, "RotateAngle"));
 
     for (unsigned int i=0; i<floatAttributeToTagName.size(); i++)
     {
@@ -205,6 +209,6 @@ int ObstaclesBonusPattern::loadObstacles(const XMLElement &obstacle)
         }
     }
 
-    m_obstaclesList.push_back(Obstacle{x + GAME_SIZE_W, y, width, height, -PIXELPERBACKGROUNDMOVE, 0.0f, 0, (unsigned int)dammage, type});
+    m_obstaclesList.push_back(Obstacle{x + GAME_SIZE_W, y, width, height, r, -PIXELPERBACKGROUNDMOVE, 0.0f, mR, 0, (unsigned int)dammage, type});
     return XML_SUCCESS;
 }

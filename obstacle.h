@@ -13,7 +13,7 @@ private:
     int m_state;
     int m_type;
 public:
-    Obstacle(float x, float y, float w, float h, float mx, float my, int movePeriod,unsigned int dammage, int type);
+    Obstacle(float x, float y, float w, float h, float rotation, float mx, float my, float rotationMovement, int movePeriod,unsigned int dammage, int type);
     virtual ~Obstacle() = default;
     void setState(int state);
     unsigned int getDammage() const;

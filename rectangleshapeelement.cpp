@@ -1,10 +1,11 @@
 #include "rectangleshapeelement.h"
 
-RectangleShapeElement::RectangleShapeElement(unsigned int zIndex, float width, float height, float x, float y, sf::Color color): GraphicElement::GraphicElement{zIndex}, RectangleShape::RectangleShape{sf::Vector2f{width, height}}
+RectangleShapeElement::RectangleShapeElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, sf::Color color): GraphicElement::GraphicElement{zIndex}, RectangleShape::RectangleShape{sf::Vector2f{width, height}}
 {
     setOrigin(0, 0);
     setPosition(x, y);
     setFillColor(color);
+    setRotateAngle(rotateAngle);
 }
 
 void RectangleShapeElement::rescale(float width, float height)
@@ -18,6 +19,16 @@ void RectangleShapeElement::rescale(float width, float height)
 void RectangleShapeElement::setSize(float width, float height)
 {
     RectangleShape::setSize(sf::Vector2f{width, height});
+}
+
+void RectangleShapeElement::setPosition(float x, float y)
+{
+    sf::RectangleShape::setPosition(x, y);
+}
+
+void RectangleShapeElement::setRotateAngle(float angle)
+{
+    setRotation(angle);
 }
 
 std::pair<float, float> RectangleShapeElement::getSize() const
@@ -40,14 +51,10 @@ void RectangleShapeElement::draw(sf::RenderWindow *window) const
     window->draw(*this);
 }
 
-void RectangleShapeElement::setPosition(float x, float y)
-{
-    sf::RectangleShape::setPosition(x, y);
-}
-
 void RectangleShapeElement::refresh(const Element *el, Model *model)
 {
     (void) model;
     setPosition(el->getPosition().first, el->getPosition().second);
     setSize(el->getSize().first, el->getSize().second);
+    setRotateAngle(el->getRotateAngle());
 }

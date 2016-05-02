@@ -1,14 +1,14 @@
 #include "gamecharactergraphic.h"
 #include <iostream>
 
-GameCharacterGraphic::GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, int animatePeriod): SpriteElement::SpriteElement{zIndex, width, height, x, y, texture, animatePeriod}
+GameCharacterGraphic::GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int animatePeriod): SpriteElement::SpriteElement{zIndex, width, height, x, y, rotateAngle, texture, animatePeriod}
 {
-    m_shadow = new CircleShapeElement{zIndex, width, width/2, x, HAUTEUR_SOL - 10, sf::Color::Black};
+    m_shadow = new CircleShapeElement{zIndex, width, width/2, x, HAUTEUR_SOL - 10, 0, sf::Color::Black};
 }
 
-GameCharacterGraphic::GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, const sf::Texture *texture, int nbLignes, int nbColonnes, int activeLigne, int activeColonne, int animatePeriod): SpriteElement::SpriteElement{zIndex, width, height, x, y, texture, nbLignes, nbColonnes, activeLigne, activeColonne, 1, animatePeriod}
+GameCharacterGraphic::GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int nbLignes, int nbColonnes, int activeLigne, int activeColonne, int animatePeriod): SpriteElement::SpriteElement{zIndex, width, height, x, y, rotateAngle, texture, nbLignes, nbColonnes, activeLigne, activeColonne, 1, animatePeriod}
 {
-    m_shadow = new CircleShapeElement{zIndex, width, width/2, x, HAUTEUR_SOL - 10, sf::Color::Black};
+    m_shadow = new CircleShapeElement{zIndex, width, width/2, x, HAUTEUR_SOL - 10, 0, sf::Color::Black};
 }
 
 GameCharacterGraphic::~GameCharacterGraphic()
@@ -26,6 +26,7 @@ void GameCharacterGraphic::refresh(const Element *el, Model *model)
 {
     setPosition(el->getPosition().first, el->getPosition().second);
     setSize(el->getSize().first, el->getSize().second);
+    setRotateAngle(el->getRotateAngle());
     std::vector<std::pair<bool, GameCharacter*> >::iterator it = model->getCharacters().begin();
     while (it != model->getCharacters().end() && it->second != el)
     {

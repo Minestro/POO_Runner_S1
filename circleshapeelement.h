@@ -9,10 +9,11 @@ private:
     void rescale(float width, float height);
 public:
     CircleShapeElement() = default;
-    CircleShapeElement(unsigned int zIndex, float width, float height, float x, float y, sf::Color color = sf::Color::Black);
+    CircleShapeElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, sf::Color color = sf::Color::Black);
     virtual ~CircleShapeElement() = default;
-    void setSize(float width, float height);
+    virtual void setSize(float width, float height);
     virtual void setPosition(float x, float y) override;
+    virtual void setRotateAngle(float angle);
     virtual std::pair<float, float> getSize() const;
     virtual std::pair<float, float> getPosition() const override;
     virtual std::string getClassName() const;

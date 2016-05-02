@@ -1,6 +1,6 @@
 #include "movableelement.h"
 
-MovableElement::MovableElement(float x, float y, float w, float h, float mx, float my, int movePeriod): Element{x, y, w, h}, m_movement{mx, my}, m_lastMoveCall{}, m_movePeriod{movePeriod}
+MovableElement::MovableElement(float x, float y, float w, float h, float rotation, float mx, float my, float rotationMovement, int movePeriod): Element{x, y, w, h, rotation}, m_movement{mx, my}, m_rotationMovement{rotationMovement}, m_lastMoveCall{}, m_movePeriod{movePeriod}
 {
 
 }
@@ -16,6 +16,7 @@ void MovableElement::move()
     {
         m_position.first += m_movement.first;
         m_position.second += m_movement.second;
+        m_rotation += m_rotationMovement;
         m_lastMoveCall = std::chrono::system_clock::now();
     }
 }

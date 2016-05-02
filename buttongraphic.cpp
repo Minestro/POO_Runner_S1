@@ -1,9 +1,9 @@
 #include "buttongraphic.h"
 
-ButtonGraphic::ButtonGraphic(unsigned int zIndex, float width, float height, float x, float y, std::string text, const sf::Font *font, unsigned int fontSize, sf::Color color, int style, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_size{width, height}, m_position{x, y}
+ButtonGraphic::ButtonGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, std::string text, const sf::Font *font, unsigned int fontSize, sf::Color color, int style, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_size{width, height}, m_position{x, y}
 {
-    m_text = new TextElement{zIndex, width, height, x, y, text, font, fontSize, 1, 0, color, style};
-    m_sprite = new SpriteElement{zIndex, width, height, x, y, GraphicElement::m_listTextures["buttons.png"], 1, 2, 1, 1, 0};
+    m_text = new TextElement{zIndex, width, height, x, y, rotateAngle, text, font, fontSize, 1, 0, color, style};
+    m_sprite = new SpriteElement{zIndex, width, height, x, y, rotateAngle, GraphicElement::m_listTextures["buttons.png"], 1, 2, 1, 1, 0};
 }
 
 ButtonGraphic::~ButtonGraphic()
@@ -26,6 +26,12 @@ void ButtonGraphic::setPosition(float x, float y)
     m_position.second = y;
     m_text->setPosition(x, y);
     m_sprite->setPosition(x, y);
+}
+
+void ButtonGraphic::setRotateAngle(float angle)
+{
+    m_text->setRotation(angle);
+    m_sprite->setRotation(angle);
 }
 
 std::pair<float, float> ButtonGraphic::getSize() const
@@ -64,6 +70,7 @@ void ButtonGraphic::refresh(const Element *el, Model *model)
         m_sprite->setSize(m_size.first, m_size.second);
         m_position = el->getPosition();
         m_sprite->setPosition(m_position.first, m_position.second);
+        setRotateAngle(el->getRotateAngle());
         if (button->second->isHover(model->getCursorPosition().first, model->getCursorPosition().second))
         {
             m_sprite->setRectPos(1, 2);

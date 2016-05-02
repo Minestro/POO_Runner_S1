@@ -1,7 +1,7 @@
 #include "obstacle.h"
 
-Obstacle::Obstacle(float x, float y, float w, float h, float mx, float my, int movePeriod, unsigned int dammage, int type)
-    : MovableElement{x,y,w,h,mx,my,movePeriod}, m_dammage{dammage}, m_state{obstacle_state::ACTIVE}, m_type{type}
+Obstacle::Obstacle(float x, float y, float w, float h, float rotation, float mx, float my, float rotationMovement, int movePeriod, unsigned int dammage, int type)
+    : MovableElement{x, y, w, h, rotation, mx, my, rotationMovement, movePeriod}, m_dammage{dammage}, m_state{obstacle_state::ACTIVE}, m_type{type}
 {
 
 }

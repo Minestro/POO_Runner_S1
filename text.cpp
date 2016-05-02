@@ -1,11 +1,11 @@
 #include "text.h"
 
-Text::Text(float x, float y, float width, float height, std::string text, unsigned int fontSize, std::string font, bool autoRescale, bool wordBreak): Element{x, y, width, height}, m_wordBreak{wordBreak}, m_autoRescale{autoRescale}, m_text{text}, m_fontSize{fontSize}, m_r{255}, m_g{255}, m_b{255}, m_font{font}, m_effect{text_effect::NOTHING}, m_effectPeriod{0}
+Text::Text(float x, float y, float width, float height, float rotation, std::string text, unsigned int fontSize, std::string font, bool autoRescale, bool wordBreak): Element{x, y, width, height, rotation}, m_wordBreak{wordBreak}, m_autoRescale{autoRescale}, m_text{text}, m_fontSize{fontSize}, m_r{255}, m_g{255}, m_b{255}, m_font{font}, m_effect{text_effect::NOTHING}, m_effectPeriod{0}
 {
 
 }
 
-Text::Text(float x, float y, float width, float height, std::string text, unsigned int fontSize, std::string font, unsigned int r, unsigned int g, unsigned int b, text_effect effect, unsigned int effectPeriod, bool autoRescale, bool wordBreak): Element{x, y, width, height}, m_wordBreak{wordBreak}, m_autoRescale{autoRescale}, m_text{text}, m_fontSize{fontSize}, m_r{r}, m_g{g}, m_b{b}, m_font{font}, m_effect{effect}, m_effectPeriod{effectPeriod}
+Text::Text(float x, float y, float width, float height, float rotation, std::string text, unsigned int fontSize, std::string font, unsigned int r, unsigned int g, unsigned int b, text_effect effect, unsigned int effectPeriod, bool autoRescale, bool wordBreak): Element{x, y, width, height, rotation}, m_wordBreak{wordBreak}, m_autoRescale{autoRescale}, m_text{text}, m_fontSize{fontSize}, m_r{r}, m_g{g}, m_b{b}, m_font{font}, m_effect{effect}, m_effectPeriod{effectPeriod}
 {
 
 }

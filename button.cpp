@@ -1,7 +1,7 @@
 #include "button.h"
 #include "menu.h"
 
-Button::Button(float x, float y, float width, float height, std::string text, int destinationPage, Menu *m, button_type type, bool isClickable): Element::Element{x, y, width, height}, m_text{text}, m_type{type}, m_isClickable{isClickable}, m_destinationPage{destinationPage}, m_menu{m}, m_actions{}
+Button::Button(float x, float y, float width, float height, float rotation, std::string text, int destinationPage, Menu *m, button_type type, bool isClickable): Element::Element{x, y, width, height, rotation}, m_text{text}, m_type{type}, m_isClickable{isClickable}, m_destinationPage{destinationPage}, m_menu{m}, m_actions{}
 {
 
 }

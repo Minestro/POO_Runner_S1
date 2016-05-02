@@ -1,6 +1,6 @@
 #include "element.h"
 
-Element::Element(float x, float y, float w, float h): m_position{x, y}, m_size{w, h}
+Element::Element(float x, float y, float w, float h, float rotation): m_position{x, y}, m_size{w, h}, m_rotation{rotation}
 {
 
 }
@@ -39,4 +39,9 @@ bool Element::collision(const Element *el) const
 std::pair<float, float> Element::getPixelSpeed() const
 {
     return (std::make_pair<float, float>(0.0, 0.0));
+}
+
+float Element::getRotateAngle() const
+{
+    return m_rotation;
 }
