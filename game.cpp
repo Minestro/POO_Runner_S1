@@ -1,8 +1,8 @@
 #include "game.h"
-#include <iostream>
-#include <time.h>
 
-Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}, m_player{nullptr}, m_distance{0}, m_powerActives{}
+using namespace tinyxml2;
+
+Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}, m_player{nullptr}, m_distance{0}, m_powerActives{}, m_nextPatternAt{0}
 {
     m_player =  new Player;
     GameCharacter *gc = new GameCharacter{0, HAUTEUR_SOL-40, 40, 40, 0, 0, m_player};
@@ -15,27 +15,11 @@ Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{w
     setSpeedPeriod(m_movePeriod);
     m_powerActives.resize(power_list::NB_POWER - 1);
 
-    /*unsigned int nbPatterns = 0;
-    std::ifstream fichierPattern(PATTERNS_FILE.c_str(), std::ios::in);
-    if (fichierPattern)
+    int returnCode = loadPatterns();
+    if (returnCode != XML_SUCCESS)
     {
-        std::string line;
-        do
-        {
-            std::getline(fichierPattern, line);
-        } while(line.find("#NbPatterns") == std::string::npos);
-        if (!fichierPattern.eof())
-        {
-            nbPatterns = std::stoi(line.substr(line.find("= ")+2));
-        }
-        fichierPattern.close();
-    } else {
-        std::cerr << "Erreur lors de l'ouverture du fichier des modèles d'obstacles" << std::endl;
+        std::cerr << "Erreur lors de la lecture du fichier des definitions des obstacles. Code Erreur : " << returnCode << std::endl;
     }
-    for (unsigned int i= 0; i<nbPatterns; i++)
-    {
-        m_patternsList.push_back(ObstaclesBonusPattern{i, this});
-    }*/
 }
 
 Game::~Game()
@@ -55,6 +39,43 @@ Game::~Game()
     delete m_player;
 }
 
+int Game::loadPatterns()
+{
+    int nbPatterns = 0;
+    int returnCode;
+    XMLDocument patternsFile;
+    returnCode = patternsFile.LoadFile(PATTERNS_FILE.c_str());
+    if (returnCode != XML_SUCCESS)
+    {
+        return returnCode;
+    }
+    const XMLNode *pRoot = patternsFile.FirstChild();
+    if (pRoot == nullptr)
+    {
+        return XML_ERROR_FILE_READ_ERROR;
+    }
+    const XMLElement *nbPatternsNode = pRoot->FirstChildElement("NbPatterns");
+    if (nbPatternsNode == nullptr)
+    {
+        return XML_ERROR_PARSING_ELEMENT;
+    }
+    returnCode = nbPatternsNode->QueryIntText(&nbPatterns);
+    if (returnCode != XML_SUCCESS)
+    {
+        return returnCode;
+    }
+    for (unsigned int i=0; (int)i<nbPatterns; i++)
+    {
+        ObstaclesBonusPattern op{i, this};
+        returnCode = op.loadFromFile(patternsFile);
+        if (returnCode != XML_SUCCESS)
+        {
+            return returnCode;
+        }
+        m_patternsList.push_back(op);
+    }
+    return XML_SUCCESS;
+}
 
 float Game::getPixelSpeed() const
 {
@@ -90,7 +111,15 @@ void Game::nextStep()
             }
         }
 
-        //On créé des nouveaux obstacles
+        //On créé des nouveaux obstacles et bonus en appelant un pattern aléatoire
+        if (m_distance > m_nextPatternAt)
+        {
+            int ran = rand()% m_patternsList.size();
+            m_patternsList[ran].addElementsToModel();
+            m_nextPatternAt = m_distance + m_patternsList[ran].getWidth();
+        }
+
+        /*//On créé des nouveaux obstacles
         if ((m_distance/PIXELPERBACKGROUNDMOVE) % 100 == 0)
         {
             int aleatoire= rand()% 2 ;
@@ -112,7 +141,7 @@ void Game::nextStep()
                 m_bonus.push_back(std::make_pair(1, bonus));
 
             }
-        }
+        }*/
 
         //On bouge les backgrounds
         for (unsigned int i = 0; i<m_backgrounds.size(); i++)

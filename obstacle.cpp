@@ -1,6 +1,6 @@
 #include "obstacle.h"
 
-Obstacle::Obstacle(float x, float y, float w, float h, float mx, float my, int movePeriod, unsigned int dammage, obstacle_type type)
+Obstacle::Obstacle(float x, float y, float w, float h, float mx, float my, int movePeriod, unsigned int dammage, int type)
     : MovableElement{x,y,w,h,mx,my,movePeriod}, m_dammage{dammage}, m_state{obstacle_state::ACTIVE}, m_type{type}
 {
 
@@ -15,17 +15,17 @@ std::string Obstacle::getClassName() const
     return "Obstacle";
 }
 
-void Obstacle::setState(obstacle_state state)
+void Obstacle::setState(int state)
 {
     m_state = state;
 }
 
-obstacle_state Obstacle::getState() const
+int Obstacle::getState() const
 {
     return m_state;
 }
 
-obstacle_type Obstacle::getType() const
+int Obstacle::getType() const
 {
     return m_type;
 }

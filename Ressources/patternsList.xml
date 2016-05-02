@@ -3,31 +3,39 @@
 	<Pattern id="0">
 		<Width>1280</Width>
 		<Bonus>
-			<Size>40,40</Size>
-			<Position>200,200</Position>
-			<Type>1</Type>
-			<RotateMovement>0</RotateMovement>
+			<SizeWidth>40.0</SizeWidth>
+			<SizeHeight>40.0</SizeHeight>
+			<PositionX>200.0</PositionX>
+			<PositionY>100.0</PositionY>
+			<Type>0</Type>
+			<RotateMovement>0.0</RotateMovement>
 		</Bonus>
 		<Obstacle>
-			<Size>40,40</Size>
-			<Position>400,400</Position>
-			<Type>1</Type>
+			<SizeWidth>40.0</SizeWidth>
+			<SizeHeight>40.0</SizeHeight>
+			<PositionX>400.0</PositionX>
+			<PositionY>200.0</PositionY>
+			<Type>0</Type>
 			<Dammage>10</Dammage>
-			<RotateMovement>0</RotateMovement>
+			<RotateMovement>0.0</RotateMovement>
 		</Obstacle>
 	</Pattern>
 	<Pattern id="1">
-		<Width>1280</Width>
+		<Width>777</Width>
 		<Bonus>
-			<Size>20,20</Size>
-			<Position>400,400</Position>
-			<Type>1</Type>
+			<SizeWidth>20.0</SizeWidth>
+			<SizeHeight>20.0</SizeHeight>
+			<PositionX>400.0</PositionX>
+			<PositionY>50.0</PositionY>
+			<Type>0</Type>
 			<RotateMovement>0</RotateMovement>
 		</Bonus>
 		<Obstacle>
-			<Size>20,20</Size>
-			<Position>100,600</Position>
-			<Type>1</Type>
+			<SizeWidth>20.0</SizeWidth>
+			<SizeHeight>20.0</SizeHeight>
+			<PositionX>100.0</PositionX>
+			<PositionY>300.0</PositionY>
+			<Type>0</Type>
 			<Dammage>10</Dammage>
 			<RotateMovement>0</RotateMovement>
 		</Obstacle>
