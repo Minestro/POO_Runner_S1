@@ -6,6 +6,7 @@
 #include "model.h"
 #include <TinyXml2/tinyxml2.h>
 
+
 class ObstaclesBonusPattern
 {
 private:

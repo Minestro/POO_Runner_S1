@@ -7,8 +7,8 @@ Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{w
     m_player =  new Player;
     GameCharacter *gc = new GameCharacter{0, HAUTEUR_SOL-40, 40, 40, 0, 0, m_player};
     m_characters.push_back(std::make_pair(1, gc));
-    Background *b1 = new Background{"city_2.png", 1, 0.5, 1, 0};
-    Background *b2 = new Background{"city_1.png", 2, 1.0, 1, 0};
+    Background *b1 = new Background{"FOND2.png", 1, 0.5, 1, 0};
+    Background *b2 = new Background{"FOND1.png", 2, 1.0, 1, 0};
     m_backgrounds.push_back(std::make_pair(1, b1));
     m_backgrounds.push_back(std::make_pair(1, b2));
 
