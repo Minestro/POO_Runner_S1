@@ -4,11 +4,13 @@
 GameCharacterGraphic::GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int animatePeriod): SpriteElement::SpriteElement{zIndex, width, height, x, y, rotateAngle, texture, animatePeriod}
 {
     m_shadow = new CircleShapeElement{zIndex, width, width/2, x, HAUTEUR_SOL - 10, 0, sf::Color::Black};
+    setOrigin(width/2, height/2);
 }
 
 GameCharacterGraphic::GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int nbLignes, int nbColonnes, int activeLigne, int activeColonne, int animatePeriod): SpriteElement::SpriteElement{zIndex, width, height, x, y, rotateAngle, texture, nbLignes, nbColonnes, activeLigne, activeColonne, 1, animatePeriod}
 {
     m_shadow = new CircleShapeElement{zIndex, width, width/2, x, HAUTEUR_SOL - 10, 0, sf::Color::Black};
+    setOrigin(width/2, height/2);
 }
 
 GameCharacterGraphic::~GameCharacterGraphic()
@@ -34,19 +36,6 @@ void GameCharacterGraphic::refresh(const Element *el, Model *model)
     }
     if (it != model->getCharacters().end())
     {
-        if (it->second->getId() != character_state::DYING)
-        {
-            float vitesseBalle = model->getCharacterSpeed(it->second).first;
-            if (vitesseBalle >= 0)
-            {
-                changeDirectionSprite(1);
-            } else {
-                changeDirectionSprite(0);
-            }
-            float perimetreBalle = PI * it->second->getSize().first;
-            setAnimatePeriod(std::abs((1/(vitesseBalle/perimetreBalle))/getNbLignes())*500);
-        }
-
         int sizeShadow = getSize().first - ((HAUTEUR_SOL + 10)-(el->getPosition().second + el->getSize().second));
         if (sizeShadow < 0)
         {
@@ -72,14 +61,14 @@ void GameCharacterGraphic::refresh(const Element *el, Model *model)
             }
             break;
         default:
-            if (getTexture() != GraphicElement::m_listTextures["character.png"])
+            /*if (getTexture() != GraphicElement::m_listTextures["character.png"])
             {
                 setTexture(* GraphicElement::m_listTextures["character.png"]);
                 setNbLignes(1);
                 setNbColonnes(8);
                 setRectPos(1);
             }
-            setAutoLoop(1);
+            setAutoLoop(1);*/
             break;
         }
     }

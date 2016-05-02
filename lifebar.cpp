@@ -65,7 +65,6 @@ void LifeBar::refresh(const Element *el, Model *model)
         {
             setPosition(el->getPosition().first, el->getPosition().second - 15);
             setSize(el->getSize().first, 10.0);
-            setRotateAngle(el->getRotateAngle());
         }
         if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastRefeshCall).count() >= m_refreshPeriod)
         {

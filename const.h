@@ -3,7 +3,7 @@
 
 #include <string>
 
-const std::string FILES_LIST[] = {"city.png", "FOND1.png", "FOND2.png", "background.png", "character.png", "bonus.png", "buttons.png", "obstacles.png", "obstacles_block.png", "dead.png", "life.png", "logo.jpeg", "explosion.png", "coin.png"};
+const std::string FILES_LIST[] = {"city.png", "FOND1.png", "FOND2.png", "background.png", "character.png", "bonus.png", "buttons.png", "obstacles.png", "obstacles_block.png", "dead.png", "life.png", "logo.jpeg", "explosion.png", "coin.png", "plane.png"};
 
 const std::string FONTS_LIST[] = {"score.ttf"};
 

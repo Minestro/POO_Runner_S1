@@ -53,7 +53,6 @@ void ScoreGraphic::draw(sf::RenderWindow *window) const
 
 void ScoreGraphic::refresh(const Element *el, Model *model)
 {
-    setRotateAngle(el->getRotateAngle());
     std::vector<std::pair<bool, GameCharacter*> >::const_iterator it = model->getCharacters().begin();
     while (it != model->getCharacters().end() && it->second != el)
     {

@@ -15,11 +15,8 @@ private:
     unsigned int m_score;
     bool m_movingLeft;
     bool m_movingRight;
-    bool m_doubleJumpUsed;
+    bool m_ascending;
     unsigned int m_life;
-    bool m_doubleJumpActive;
-    bool m_invincibilityActive;
-    bool m_slowTimeActive;
     Player *m_player;
     unsigned int m_id;
     character_state m_state;
@@ -34,8 +31,7 @@ public:
     unsigned int getScore() const;
     character_state getState() const;
     void setSate(character_state state);
-    void jump();
-    //void crouch(bool c); a voir plus tard
+    void ascend(bool a);
     void leftMove(bool ml);
     void rightMove(bool mr);
     void move() override;

@@ -68,7 +68,7 @@ bool GameView::treatEvent()
             case sf::Keyboard::Up :
                 if (player1 != m_gameModel->getCharacters().end())
                 {
-                    player1->second->jump();
+                    player1->second->ascend(1);
                 }
             break;
             case sf::Keyboard::A :
@@ -92,12 +92,17 @@ bool GameView::treatEvent()
                     player1->second->rightMove(0);
                 }
                 break;
-            case sf::Event::MouseMoved:
-                m_gameModel->setCursorPosition(m_window->mapPixelToCoords(sf::Vector2i{sf::Mouse::getPosition(*m_window).x, sf::Mouse::getPosition(*m_window).y}).x, m_window->mapPixelToCoords(sf::Vector2i{sf::Mouse::getPosition(*m_window).x, sf::Mouse::getPosition(*m_window).y}).y);
-                break;
+            case sf::Keyboard::Up:
+                if (player1 != m_gameModel->getCharacters().end())
+                {
+                    player1->second->ascend(0);
+                }
             default:
                 break;
             }
+            break;
+        case sf::Event::MouseMoved:
+            m_gameModel->setCursorPosition(m_window->mapPixelToCoords(sf::Vector2i{sf::Mouse::getPosition(*m_window).x, sf::Mouse::getPosition(*m_window).y}).x, m_window->mapPixelToCoords(sf::Vector2i{sf::Mouse::getPosition(*m_window).x, sf::Mouse::getPosition(*m_window).y}).y);
             break;
         default:
             break;
@@ -140,7 +145,7 @@ void GameView::synchronise()
             if (it == m_elementToGraphicElement.end())
             {
                 std::list<GraphicElement*> list;
-                list.push_back(new GameCharacterGraphic{10, m_gameModel->getCharacters()[i].second->getSize().first, m_gameModel->getCharacters()[i].second->getSize().second, m_gameModel->getCharacters()[i].second->getPosition().first, m_gameModel->getCharacters()[i].second->getPosition().second, m_gameModel->getCharacters()[i].second->getRotateAngle(), GraphicElement::m_listTextures["character.png"], 1, 8, 1, 1, 100});
+                list.push_back(new GameCharacterGraphic{10, m_gameModel->getCharacters()[i].second->getSize().first, m_gameModel->getCharacters()[i].second->getSize().second, m_gameModel->getCharacters()[i].second->getPosition().first, m_gameModel->getCharacters()[i].second->getPosition().second, m_gameModel->getCharacters()[i].second->getRotateAngle(), GraphicElement::m_listTextures["plane.png"], 1, 2, 1, 1, 50});
                 list.push_back(new LifeBar{100, 200, 30, 1000, 600, 0, 20});
                 list.push_back(new ScoreGraphic{100, 50, 600, 0, TextElement::m_listFonts["score.ttf"], 20, 5, sf::Color::White});
                 m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getCharacters()[i].second, list));
