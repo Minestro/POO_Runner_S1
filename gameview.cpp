@@ -141,7 +141,7 @@ void GameView::synchronise()
             {
                 std::list<GraphicElement*> list;
                 list.push_back(new GameCharacterGraphic{10, m_gameModel->getCharacters()[i].second->getSize().first, m_gameModel->getCharacters()[i].second->getSize().second, m_gameModel->getCharacters()[i].second->getPosition().first, m_gameModel->getCharacters()[i].second->getPosition().second, m_gameModel->getCharacters()[i].second->getRotateAngle(), GraphicElement::m_listTextures["character.png"], 1, 8, 1, 1, 100});
-                list.push_back(new LifeBar{100, 200, 30, 0, 1000, 600, 20});
+                list.push_back(new LifeBar{100, 200, 30, 1000, 600, 0, 20});
                 list.push_back(new ScoreGraphic{100, 50, 600, 0, TextElement::m_listFonts["score.ttf"], 20, 5, sf::Color::White});
                 m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getCharacters()[i].second, list));
             } else {
