@@ -5,7 +5,7 @@ using namespace tinyxml2;
 Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}, m_player{nullptr}, m_distance{0}, m_powerActives{}, m_nextPatternAt{0}
 {
     m_player =  new Player;
-    GameCharacter *gc = new GameCharacter{GAME_SIZE_H/2, HAUTEUR_SOL-40, 128, 48, 0, 0, m_player};
+    GameCharacter *gc = new GameCharacter{GAME_SIZE_H/2, HAUTEUR_SOL-40, 100, 50, 0, 0, m_player};
     m_characters.push_back(std::make_pair(1, gc));
     Background *b1 = new Background{"FOND2.png", 1, 0.5, 1, 0};
     Background *b2 = new Background{"FOND1.png", 2, 1.0, 1, 0};
@@ -125,17 +125,6 @@ void Game::nextStep()
             m_backgrounds[i].second->move();
         }
 
-        //On bouge les personnages
-        for (unsigned int i = 0; i<m_characters.size(); i++)
-        {
-            if(m_characters[i].second->getState() == character_state::DYING)
-            {
-                m_characters[i].second->setMovement(-PIXELPERBACKGROUNDMOVE, 0);
-                m_characters[i].second->setMovePeriod(m_movePeriod);
-            }
-            m_characters[i].second->move();
-        }
-
         //On bouge les obstacles
         for (unsigned int i = 0; i<m_obstacles.size(); i++)
         {
@@ -149,6 +138,17 @@ void Game::nextStep()
         }
 
         m_lastMove = std::chrono::system_clock::now();
+    }
+
+    //On bouge les personnages
+    for (unsigned int i = 0; i<m_characters.size(); i++)
+    {
+        if(m_characters[i].second->getState() == character_state::DYING)
+        {
+            m_characters[i].second->setMovement(-PIXELPERBACKGROUNDMOVE, 0);
+            m_characters[i].second->setMovePeriod(m_movePeriod);
+        }
+        m_characters[i].second->move();
     }
 
     //Test des collisions avec les obstacles

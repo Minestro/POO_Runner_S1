@@ -1,21 +1,23 @@
 #include "spriteelement.h"
 
-SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int animatePeriod): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_size{width, height}, m_nbLignes{1}, m_nbColonnes{1}, m_activeLigne{1}, m_activeColonne{1}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{1}, m_animationDirectionRight{1}, m_rotation{0}
+SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int animatePeriod): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_size{width, height}, m_nbLignes{1}, m_nbColonnes{1}, m_activeLigne{1}, m_activeColonne{1}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{1}, m_animationDirectionRight{1}
 {
     setTexture(*texture);
     setPosition(x, y);
     refreshTextRect();
+    setOrigin(getLocalBounds().width/2, getLocalBounds().height/2);
     rescale(width, height);
-    m_rotation = rotateAngle;
+    setRotateAngle(rotateAngle);
 }
 
-SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int nbLignes, int nbColonnes, int activeLigne, int activeColonne, bool autoLoop, int animatePeriod, bool animationDirectionright): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_size{width, height}, m_nbLignes{nbLignes}, m_nbColonnes{nbColonnes}, m_activeLigne{activeLigne}, m_activeColonne{activeColonne}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{autoLoop}, m_animationDirectionRight{animationDirectionright}, m_rotation{0}
+SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int nbLignes, int nbColonnes, int activeLigne, int activeColonne, bool autoLoop, int animatePeriod, bool animationDirectionright): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_size{width, height}, m_nbLignes{nbLignes}, m_nbColonnes{nbColonnes}, m_activeLigne{activeLigne}, m_activeColonne{activeColonne}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{autoLoop}, m_animationDirectionRight{animationDirectionright}
 {
     setTexture(*texture);
     setPosition(x, y);
     refreshTextRect();
+    setOrigin(getLocalBounds().width/2, getLocalBounds().height/2);
     rescale(width, height);
-    m_rotation = rotateAngle;
+    setRotateAngle(rotateAngle);
 }
 
 void SpriteElement::rescale(float width, float height)
@@ -62,11 +64,12 @@ void SpriteElement::setSize(float width, float height)
     m_size.first = width;
     m_size.second = height;
     rescale(m_size.first, m_size.second);
+    setOrigin(getLocalBounds().width/2, getLocalBounds().height/2);
 }
 
 void SpriteElement::setPosition(float x, float y)
 {
-    sf::Sprite::setPosition(x, y);
+    sf::Sprite::setPosition(x + getOrigin().x * getScale().x, y + getOrigin().y * getScale().y);
 }
 
 void SpriteElement::setRotateAngle(float angle)
@@ -144,19 +147,15 @@ void SpriteElement::refreshTextRect()
 
 void SpriteElement::draw(sf::RenderWindow *window) const
 {
-    sf::Sprite renderWhithRotate{*this};            //Parceque SFML utilise la même origine pour rotate que pour positionner...
-    renderWhithRotate.setOrigin(renderWhithRotate.getLocalBounds().width / 2, renderWhithRotate.getLocalBounds().height / 2);
-    renderWhithRotate.setPosition(renderWhithRotate.getPosition().x + renderWhithRotate.getGlobalBounds().width / 2, renderWhithRotate.getPosition().y + renderWhithRotate.getGlobalBounds().height / 2);
-    renderWhithRotate.rotate(m_rotation);
-    window->draw(renderWhithRotate);
+    window->draw(*this);
 }
 
 void SpriteElement::refresh(const Element *el, Model *model)
 {
     (void) model;
-    m_rotation = el->getRotateAngle();
     setSize(el->getSize().first, el->getSize().second);
     setPosition(el->getPosition().first, el->getPosition().second);
+    setRotateAngle(el->getRotateAngle());
     animate();
 }
 

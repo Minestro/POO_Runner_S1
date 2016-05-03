@@ -5,8 +5,8 @@ CircleShapeElement::CircleShapeElement(unsigned int zIndex, float width, float h
     setSize(width, height);
     setOrigin(width/2, height/2);
     setFillColor(color);
+    setPosition(x, y);
     setRotateAngle(rotateAngle);
-    CircleShapeElement::setPosition(x, y);
 }
 
 void CircleShapeElement::rescale(float width, float height)
