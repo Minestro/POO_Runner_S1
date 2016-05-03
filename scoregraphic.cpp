@@ -24,7 +24,7 @@ void ScoreGraphic::setPosition(float x, float y)
     m_score->setPosition(x + m_prefixe->getSize().first + 20, y);
 }
 
-void ScoreGraphic::setRotateAngle(float angle)
+void ScoreGraphic::setRotation(float angle)
 {
     m_prefixe->setRotation(angle);
     m_score->setRotation(angle);

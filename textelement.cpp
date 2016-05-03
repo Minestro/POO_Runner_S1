@@ -13,7 +13,7 @@ TextElement::TextElement(unsigned int zIndex, float width, float height, float x
     setSize(width, height);
     setColor(color);
     setText(text);
-    setRotateAngle(rotateAngle);
+    setRotation(rotateAngle);
 }
 
 void TextElement::setText(std::string text)
@@ -104,11 +104,6 @@ void TextElement::setPosition(float x, float y)
     }
 }
 
-void TextElement::setRotateAngle(float angle)
-{
-    setRotation(angle);
-}
-
 std::pair<float, float> TextElement::getSize() const
 {
     if (m_autoRescale)
@@ -137,6 +132,8 @@ std::string TextElement::getClassName() const
 
 void TextElement::generateTextForm()
 {
+    float r = getRotation();
+    setRotation(0);
     sf::Text line {"", *getFont(), getCharacterSize()};
     line.setColor(sf::Color::White);
     line.setStyle(getStyle());
@@ -149,6 +146,7 @@ void TextElement::generateTextForm()
         line.setPosition(0, i * getLocalBounds().height);
         m_textForm.draw(line);
     }
+    setRotation(r);
     m_textForm.display();
 }
 
@@ -157,7 +155,8 @@ void TextElement::draw(sf::RenderWindow *window) const
     if (m_wordBreak)
     {
         sf::Sprite textS{m_textForm.getTexture()};
-        textS.setPosition(m_realPosition.first, m_realPosition.second);
+        textS.setOrigin(textS.getLocalBounds().width / 2, textS.getLocalBounds().height / 2);
+        textS.setPosition(m_realPosition.first + textS.getOrigin().x, m_realPosition.second + textS.getOrigin().y);
         textS.setColor(sf::Color{getColor().r, getColor().g, getColor().b, (sf::Uint8)m_alphaChannel});
         textS.setRotation(getRotation());
         window->draw(textS);
@@ -177,7 +176,7 @@ void TextElement::refresh(const Element *el, Model *model)
     {
         setSize(el->getSize().first, el->getSize().second);
     }
-    setRotateAngle(el->getRotateAngle());
+    setRotation(el->getRotateAngle());
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastRefeshCall).count() >= m_refreshPeriod)
     {
         switch (m_effect)

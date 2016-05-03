@@ -28,7 +28,7 @@ void ButtonGraphic::setPosition(float x, float y)
     m_sprite->setPosition(x, y);
 }
 
-void ButtonGraphic::setRotateAngle(float angle)
+void ButtonGraphic::setRotation(float angle)
 {
     m_text->setRotation(angle);
     m_sprite->setRotation(angle);
@@ -70,7 +70,7 @@ void ButtonGraphic::refresh(const Element *el, Model *model)
         m_sprite->setSize(m_size.first, m_size.second);
         m_position = el->getPosition();
         m_sprite->setPosition(m_position.first, m_position.second);
-        setRotateAngle(el->getRotateAngle());
+        setRotation(el->getRotateAngle());
         if (button->second->isHover(model->getCursorPosition().first, model->getCursorPosition().second))
         {
             m_sprite->setRectPos(1, 2);

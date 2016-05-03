@@ -25,7 +25,6 @@ public:
     virtual ~TextElement() = default;
     void setSize(float width, float height);
     virtual void setPosition(float x, float y) override;
-    virtual void setRotateAngle(float angle);
     void setText(std::string text);
     virtual std::pair<float, float> getSize() const;
     virtual std::string getClassName() const;

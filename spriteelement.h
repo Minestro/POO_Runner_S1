@@ -7,7 +7,6 @@
 class SpriteElement: public GraphicElement, public sf::Sprite
 {
 protected:
-    std::pair<float, float> m_size;
     int m_nbLignes;
     int m_nbColonnes;
     int m_activeLigne;
@@ -29,7 +28,6 @@ public:
     virtual std::string getClassName() const;
     virtual void setSize(float width, float height);
     virtual void setPosition(float x, float y) override;
-    virtual void setRotateAngle(float angle);
     void setRectPos(int ligne, int colonne=1);
     void setAutoLoop(bool autoLoop);
     void setNbLignes(int nb);

@@ -18,6 +18,7 @@ void LifeBar::setSize(float width, float height)
 {
     m_sprite->setSize(width, height);
     m_bar->setSize(width * m_ratioLife, height);
+    setPosition(m_sprite->getPosition().first, m_sprite->getPosition().second);
 }
 
 void LifeBar::setPosition(float x, float y)
@@ -26,7 +27,7 @@ void LifeBar::setPosition(float x, float y)
     m_bar->setPosition(x, y);
 }
 
-void LifeBar::setRotateAngle(float angle)
+void LifeBar::setRotation(float angle)
 {
     m_sprite->setRotation(angle);
     m_bar->setRotation(angle);
@@ -52,7 +53,6 @@ void LifeBar::draw(sf::RenderWindow *window) const
     m_bar->draw(window);
     m_sprite->draw(window);
 }
-
 
 #include <iostream>
 void LifeBar::refresh(const Element *el, Model *model)
@@ -82,6 +82,7 @@ void LifeBar::refresh(const Element *el, Model *model)
                 m_actualBarWidth = m_sprite->getSize().first * m_ratioLife;
             }
             m_bar->setSize(m_actualBarWidth, m_sprite->getSize().second);
+            m_bar->setPosition(m_sprite->getPosition().first, m_sprite->getPosition().second);
             float deltaColorDeg = beginColor.h - endColor.h;
             float h =  beginColor.h - deltaColorDeg * (1.0 - (m_actualBarWidth / m_sprite->getSize().first));
             if (h >= 360)

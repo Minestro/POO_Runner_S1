@@ -4,22 +4,19 @@ RectangleShapeElement::RectangleShapeElement(unsigned int zIndex, float width, f
 {
     setPosition(x, y);
     setFillColor(color);
-    setRotateAngle(rotateAngle);
+    setRotation(rotateAngle);
+    setOrigin(getLocalBounds().width/2, getLocalBounds().height/2);
 }
 
 void RectangleShapeElement::setSize(float width, float height)
 {
     RectangleShape::setSize(sf::Vector2f{width, height});
+    setOrigin(getLocalBounds().width/2, getLocalBounds().height/2);
 }
 
 void RectangleShapeElement::setPosition(float x, float y)
 {
-    sf::RectangleShape::setPosition(x, y);
-}
-
-void RectangleShapeElement::setRotateAngle(float angle)
-{
-    setRotation(angle);
+    sf::RectangleShape::setPosition(x + getOrigin().x * getScale().x, y + getOrigin().y * getScale().y);
 }
 
 std::pair<float, float> RectangleShapeElement::getSize() const
@@ -29,7 +26,7 @@ std::pair<float, float> RectangleShapeElement::getSize() const
 
 std::pair<float, float> RectangleShapeElement::getPosition() const
 {
-    return {sf::RectangleShape::getPosition().x, sf::RectangleShape::getPosition().y};
+    return {sf::RectangleShape::getPosition().x - getOrigin().x * getScale().x, sf::RectangleShape::getPosition().y - getOrigin().y * getScale().y};
 }
 
 std::string RectangleShapeElement::getClassName() const
@@ -47,5 +44,5 @@ void RectangleShapeElement::refresh(const Element *el, Model *model)
     (void) model;
     setPosition(el->getPosition().first, el->getPosition().second);
     setSize(el->getSize().first, el->getSize().second);
-    setRotateAngle(el->getRotateAngle());
+    setRotation(el->getRotateAngle());
 }

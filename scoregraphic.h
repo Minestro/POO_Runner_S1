@@ -15,7 +15,7 @@ public:
     virtual ~ScoreGraphic();
     virtual void setSize(float width, float height);
     virtual void setPosition(float x, float y);
-    virtual void setRotateAngle(float angle);
+    void setRotation(float angle);
     virtual std::pair<float, float> getSize() const;
     virtual std::pair<float, float> getPosition() const;
     virtual std::string getClassName() const;
