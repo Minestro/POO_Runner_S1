@@ -2,11 +2,11 @@
 
 CircleShapeElement::CircleShapeElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, sf::Color color): GraphicElement::GraphicElement{zIndex}, sf::CircleShape::CircleShape{(width+height)/4}
 {
-    setPosition(x, y);
     setSize(width, height);
-    setOrigin(0, 0);
+    setOrigin(width/2, height/2);
     setFillColor(color);
     setRotateAngle(rotateAngle);
+    CircleShapeElement::setPosition(x, y);
 }
 
 void CircleShapeElement::rescale(float width, float height)
@@ -50,7 +50,7 @@ void CircleShapeElement::draw(sf::RenderWindow *window) const
 
 void CircleShapeElement::setPosition(float x, float y)
 {
-    sf::CircleShape::setPosition(x, y);
+    sf::CircleShape::setPosition(x + getOrigin().x, y + getOrigin().y);
 }
 
 void CircleShapeElement::refresh(const Element *el, Model *model)

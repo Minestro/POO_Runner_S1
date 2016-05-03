@@ -3,6 +3,7 @@
 SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int animatePeriod): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_size{width, height}, m_nbLignes{1}, m_nbColonnes{1}, m_activeLigne{1}, m_activeColonne{1}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{1}, m_animationDirectionRight{1}
 {
     setTexture(*texture);
+    setOrigin(width/2, height/2);
     setPosition(x, y);
     refreshTextRect();
     rescale(width, height);
@@ -12,6 +13,7 @@ SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, flo
 SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int nbLignes, int nbColonnes, int activeLigne, int activeColonne, bool autoLoop, int animatePeriod, bool animationDirectionright): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_size{width, height}, m_nbLignes{nbLignes}, m_nbColonnes{nbColonnes}, m_activeLigne{activeLigne}, m_activeColonne{activeColonne}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{autoLoop}, m_animationDirectionRight{animationDirectionright}
 {
     setTexture(*texture);
+    setOrigin(width/2, height/2);
     setPosition(x, y);
     refreshTextRect();
     rescale(width, height);
@@ -39,7 +41,7 @@ std::pair<float, float> SpriteElement::getSize() const
 
 std::pair<float, float> SpriteElement::getPosition() const
 {
-    return {sf::Sprite::getPosition().x, sf::Sprite::getPosition().y};
+    return {sf::Sprite::getPosition().x - getOrigin().x, sf::Sprite::getPosition().y - getOrigin().y};
 }
 
 int SpriteElement::getNbLignes() const
@@ -62,6 +64,17 @@ void SpriteElement::setSize(float width, float height)
     m_size.first = width;
     m_size.second = height;
     rescale(m_size.first, m_size.second);
+    setOrigin(getSize().first/2, getSize().second/2);
+}
+
+void SpriteElement::setPosition(float x, float y)
+{
+    sf::Sprite::setPosition(x + getOrigin().x * getScale().x, y + getOrigin().y * getScale().y);
+}
+
+void SpriteElement::setRotateAngle(float angle)
+{
+    setRotation(angle);
 }
 
 void SpriteElement::setRectPos(int ligne, int colonne)
@@ -135,19 +148,6 @@ void SpriteElement::refreshTextRect()
 void SpriteElement::draw(sf::RenderWindow *window) const
 {
     window->draw(*this);
-}
-
-void SpriteElement::setPosition(float x, float y)
-{
-    sf::Sprite::setPosition(x, y);
-}
-
-void SpriteElement::setRotateAngle(float angle)
-{
-    sf::Vector2f origin = getOrigin();
-    setOrigin(getSize().first/2, getSize().second/2);
-    setRotation(angle);
-    setOrigin(origin);
 }
 
 void SpriteElement::refresh(const Element *el, Model *model)
