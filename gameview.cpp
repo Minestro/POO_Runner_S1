@@ -164,7 +164,7 @@ void GameView::synchronise()
             if (it == m_elementToGraphicElement.end())
             {
                 std::list<GraphicElement*> list;
-                list.push_back(new SpriteElement{10, m_gameModel->getObstacles()[i].second->getSize().first, m_gameModel->getObstacles()[i].second->getSize().second, m_gameModel->getObstacles()[i].second->getPosition().first, m_gameModel->getObstacles()[i].second->getPosition().second, m_gameModel->getObstacles()[i].second->getRotateAngle(), GraphicElement::m_listTextures["obstacles_block.png"], 1, 2, 1, 1, 1, 100});
+                list.push_back(new SpriteElement{10, m_gameModel->getObstacles()[i].second->getSize().first, m_gameModel->getObstacles()[i].second->getSize().second, m_gameModel->getObstacles()[i].second->getPosition().first, m_gameModel->getObstacles()[i].second->getPosition().second, m_gameModel->getObstacles()[i].second->getRotateAngle(), GraphicElement::m_listTextures["mine.png"], 1, 1, 1, 1, 1, 100});
                 m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getObstacles()[i].second, list));
             } else {
 

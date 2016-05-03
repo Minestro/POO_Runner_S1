@@ -160,10 +160,18 @@ void Game::nextStep()
         {
             if (obstacle->second->collision(player1->second))
             {
-                player1->second->removeLife(obstacle->second->getDammage());
-                m_deletedElements.push_back(obstacle->second);
-                m_obstacles.erase(obstacle);
-                increment = false;
+                if (obstacle->second->getState() != obstacle_state::EXPLODE)
+                {
+                    player1->second->removeLife(obstacle->second->getDammage());
+                }
+                if (obstacle->second->getType() == obstacle_type::MINE)
+                {
+                    obstacle->second->setState(obstacle_state::EXPLODE);
+                } else {
+                    m_deletedElements.push_back(obstacle->second);
+                    m_obstacles.erase(obstacle);
+                    increment = false;
+                }
             }
         }
         if (obstacle->second->getPosition().first < -obstacle->second->getSize().first)

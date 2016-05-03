@@ -149,6 +149,35 @@ void SpriteElement::refresh(const Element *el, Model *model)
     setSize(el->getSize().first, el->getSize().second);
     setPosition(el->getPosition().first, el->getPosition().second);
     setRotation(el->getRotateAngle());
+
+    std::vector<std::pair<bool, Obstacle*> >::iterator obstacle = model->getObstacles().begin();
+    while (obstacle != model->getObstacles().end() && obstacle->second != el)
+    {
+        ++obstacle;
+    }
+    if (obstacle != model->getObstacles().end())
+    {
+        switch (obstacle->second->getState())
+        {
+        case obstacle_state::EXPLODE:
+            if (getTexture() != GraphicElement::m_listTextures["explosion.png"])
+            {
+                setTexture(* GraphicElement::m_listTextures["explosion.png"]);
+                setNbLignes(1);
+                setNbColonnes(81);
+                setRectPos(1);
+            }
+            setAutoLoop(0);
+            if (m_activeColonne == m_nbColonnes)
+            {
+                model->getDeletedElements().push_back(el);
+                model->getObstacles().erase(obstacle);
+            }
+            break;
+        default:
+            break;
+        }
+    }
     animate();
 }
 

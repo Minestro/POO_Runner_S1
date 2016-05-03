@@ -27,8 +27,7 @@ void Menu::refreshContent()
         Button *b1 = new Button{GAME_SIZE_W/2 - 100, 50, 200, 50, 0, "Jouer", menuPage::ESCAPE_MENU, this, button_type::TEXT_BUTTON};
         b1->addAction(button_action::CHANGE_PAGE);
          m_buttons.push_back(std::make_pair(1, b1));
-         m_backgrounds.push_back(std::make_pair(1, new Background{"FOND2.png", 1, 0.5, 1, m_backgroundMovePeriod}));
-         m_backgrounds.push_back(std::make_pair(1, new Background{"FOND1.png", 2, 1.0, 1, m_backgroundMovePeriod}));
+         m_backgrounds.push_back(std::make_pair(1, new Background{"menuBackground.png", 1, 0, 0}));
         break;
     }
     case menuPage::PRE_MENU:
