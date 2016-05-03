@@ -17,6 +17,7 @@ protected:
     bool m_autoLoop;
     bool m_animationDirectionRight;
     void rescale(float width, float height);
+    float m_rotation;
 public:
     SpriteElement() = default;
     SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int animatePeriod = 0);

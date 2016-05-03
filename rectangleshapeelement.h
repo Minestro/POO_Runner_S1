@@ -5,8 +5,6 @@
 
 class RectangleShapeElement: public GraphicElement, public sf::RectangleShape
 {
-private:
-    void rescale(float width, float height);
 public:
     RectangleShapeElement() = default;
     RectangleShapeElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, sf::Color color = sf::Color::Black);

@@ -106,8 +106,8 @@
 	<Pattern id="1">
 		<Width>777</Width>
 		<Bonus>
-			<SizeWidth>2.0</SizeWidth>
-			<SizeHeight>2.0</SizeHeight>
+			<SizeWidth>20.0</SizeWidth>
+			<SizeHeight>20.0</SizeHeight>
 			<PositionX>0.0</PositionX>
 			<PositionY>0.0</PositionY>
 			<Type>0</Type>
@@ -115,14 +115,14 @@
 			<RotateMovement>0</RotateMovement>
 		</Bonus>
 		<Obstacle>
-			<SizeWidth>20.0</SizeWidth>
-			<SizeHeight>20.0</SizeHeight>
+			<SizeWidth>280.0</SizeWidth>
+			<SizeHeight>80.0</SizeHeight>
 			<PositionX>100.0</PositionX>
 			<PositionY>300.0</PositionY>
 			<Type>0</Type>
 			<Dammage>10</Dammage>
 			<RotateAngle>0.0</RotateAngle>
-			<RotateMovement>0</RotateMovement>
+			<RotateMovement>1</RotateMovement>
 		</Obstacle>
 	</Pattern>
 </PatternList>
