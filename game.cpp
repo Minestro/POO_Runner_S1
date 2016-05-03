@@ -119,30 +119,6 @@ void Game::nextStep()
             m_nextPatternAt = m_distance + m_patternsList[ran].getWidth();
         }
 
-        /*//On créé des nouveaux obstacles
-        if ((m_distance/PIXELPERBACKGROUNDMOVE) % 100 == 0)
-        {
-            int aleatoire= rand()% 2 ;
-            if (aleatoire == 1)
-            {
-                Obstacle* ob = new Obstacle(GAME_SIZE_W, HAUTEUR_SOL- 30, 30,30, -PIXELPERBACKGROUNDMOVE, 0, 0, 5, obstacle_type::MINE);
-                m_obstacles.push_back(std::make_pair(1, ob));
-
-            }
-        }
-
-        //On crée des nouveaux bonus
-        if ((m_distance/PIXELPERBACKGROUNDMOVE) % 100 == 0)
-        {
-            int aleatoire= rand()% 5 ;
-            if (aleatoire == 1)
-            {
-                Bonus* bonus = new Bonus(GAME_SIZE_W, HAUTEUR_SOL- 100, 30,30, -PIXELPERBACKGROUNDMOVE, 0, 0, bonus_type::PIECE);
-                m_bonus.push_back(std::make_pair(1, bonus));
-
-            }
-        }*/
-
         //On bouge les backgrounds
         for (unsigned int i = 0; i<m_backgrounds.size(); i++)
         {

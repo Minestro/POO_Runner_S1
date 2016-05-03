@@ -64,10 +64,6 @@ int ObstaclesBonusPattern::loadFromFile(const XMLDocument &file)
         m_width = widthRead;
 
         const XMLElement *bonusEl = patternsList->FirstChildElement("Bonus");
-        if (bonusEl == nullptr)
-        {
-            return XML_ERROR_PARSING_ELEMENT;
-        }
         do
         {
             if (bonusEl != nullptr)
@@ -77,16 +73,12 @@ int ObstaclesBonusPattern::loadFromFile(const XMLDocument &file)
                 {
                     return returnCode;
                 }
+                bonusEl = bonusEl->NextSiblingElement("Bonus");
             }
-            bonusEl = bonusEl->NextSiblingElement("Bonus");
         }
         while (bonusEl != nullptr);
 
         const XMLElement *obstacleEl = patternsList->FirstChildElement("Obstacle");
-        if (obstacleEl == nullptr)
-        {
-            return XML_ERROR_PARSING_ELEMENT;
-        }
         do
         {
             if (obstacleEl != nullptr)
@@ -96,8 +88,8 @@ int ObstaclesBonusPattern::loadFromFile(const XMLDocument &file)
                 {
                     return returnCode;
                 }
+                obstacleEl = obstacleEl->NextSiblingElement("Obstacle");
             }
-            obstacleEl = obstacleEl->NextSiblingElement("Obstacle");
         }
         while (obstacleEl != nullptr);
 
