@@ -1,23 +1,21 @@
 #include "spriteelement.h"
 
-SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int animatePeriod): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_size{width, height}, m_nbLignes{1}, m_nbColonnes{1}, m_activeLigne{1}, m_activeColonne{1}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{1}, m_animationDirectionRight{1}
+SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int animatePeriod): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_size{width, height}, m_nbLignes{1}, m_nbColonnes{1}, m_activeLigne{1}, m_activeColonne{1}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{1}, m_animationDirectionRight{1}, m_rotation{0}
 {
     setTexture(*texture);
-    setOrigin(width/2, height/2);
     setPosition(x, y);
     refreshTextRect();
     rescale(width, height);
-    setRotateAngle(rotateAngle);
+    m_rotation = rotateAngle;
 }
 
-SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int nbLignes, int nbColonnes, int activeLigne, int activeColonne, bool autoLoop, int animatePeriod, bool animationDirectionright): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_size{width, height}, m_nbLignes{nbLignes}, m_nbColonnes{nbColonnes}, m_activeLigne{activeLigne}, m_activeColonne{activeColonne}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{autoLoop}, m_animationDirectionRight{animationDirectionright}
+SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int nbLignes, int nbColonnes, int activeLigne, int activeColonne, bool autoLoop, int animatePeriod, bool animationDirectionright): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_size{width, height}, m_nbLignes{nbLignes}, m_nbColonnes{nbColonnes}, m_activeLigne{activeLigne}, m_activeColonne{activeColonne}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{autoLoop}, m_animationDirectionRight{animationDirectionright}, m_rotation{0}
 {
     setTexture(*texture);
-    setOrigin(width/2, height/2);
     setPosition(x, y);
     refreshTextRect();
     rescale(width, height);
-    setRotateAngle(rotateAngle);
+    m_rotation = rotateAngle;
 }
 
 void SpriteElement::rescale(float width, float height)
@@ -32,16 +30,6 @@ void SpriteElement::rescale(float width, float height)
         width_factor = width / bb.width;
     }
     setScale(width_factor, height_factor);
-}
-
-std::pair<float, float> SpriteElement::getSize() const
-{
-    return m_size;
-}
-
-std::pair<float, float> SpriteElement::getPosition() const
-{
-    return {sf::Sprite::getPosition().x - getOrigin().x, sf::Sprite::getPosition().y - getOrigin().y};
 }
 
 int SpriteElement::getNbLignes() const
@@ -59,17 +47,26 @@ std::string SpriteElement::getClassName() const
     return "SpriteElement";
 }
 
+std::pair<float, float> SpriteElement::getPosition() const
+{
+    return {sf::Sprite::getPosition().x, sf::Sprite::getPosition().y};
+}
+
+std::pair<float, float> SpriteElement::getSize() const
+{
+    return m_size;
+}
+
 void SpriteElement::setSize(float width, float height)
 {
     m_size.first = width;
     m_size.second = height;
     rescale(m_size.first, m_size.second);
-    setOrigin(getSize().first/2, getSize().second/2);
 }
 
 void SpriteElement::setPosition(float x, float y)
 {
-    sf::Sprite::setPosition(x + getOrigin().x * getScale().x, y + getOrigin().y * getScale().y);
+    sf::Sprite::setPosition(x, y);
 }
 
 void SpriteElement::setRotateAngle(float angle)
@@ -147,13 +144,17 @@ void SpriteElement::refreshTextRect()
 
 void SpriteElement::draw(sf::RenderWindow *window) const
 {
-    window->draw(*this);
+    sf::Sprite renderWhithRotate{*this};            //Parceque SFML utilise la même origine pour rotate que pour positionner...
+    renderWhithRotate.setOrigin(renderWhithRotate.getLocalBounds().width / 2, renderWhithRotate.getLocalBounds().height / 2);
+    renderWhithRotate.setPosition(renderWhithRotate.getPosition().x + renderWhithRotate.getGlobalBounds().width / 2, renderWhithRotate.getPosition().y + renderWhithRotate.getGlobalBounds().height / 2);
+    renderWhithRotate.rotate(m_rotation);
+    window->draw(renderWhithRotate);
 }
 
 void SpriteElement::refresh(const Element *el, Model *model)
 {
     (void) model;
-    setRotateAngle(el->getRotateAngle());
+    m_rotation = el->getRotateAngle();
     setSize(el->getSize().first, el->getSize().second);
     setPosition(el->getPosition().first, el->getPosition().second);
     animate();

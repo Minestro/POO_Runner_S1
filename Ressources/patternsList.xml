@@ -452,23 +452,30 @@
 	<Pattern id="1">
 		<Width>777</Width>
 		<Bonus>
+<<<<<<< HEAD
 			<SizeWidth>2.0</SizeWidth>
 			<SizeHeight>2.0</SizeHeight>
 			<PositionX>100.0</PositionX>
 			<PositionY>100.0</PositionY>
+=======
+			<SizeWidth>20.0</SizeWidth>
+			<SizeHeight>20.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>0.0</PositionY>
+>>>>>>> 223b75fa001f5eeced7e3dde14f57e72b5521bfa
 			<Type>0</Type>
 			<RotateAngle>0.0</RotateAngle>
 			<RotateMovement>0</RotateMovement>
 		</Bonus>
 		<Obstacle>
-			<SizeWidth>20.0</SizeWidth>
-			<SizeHeight>20.0</SizeHeight>
+			<SizeWidth>280.0</SizeWidth>
+			<SizeHeight>80.0</SizeHeight>
 			<PositionX>100.0</PositionX>
 			<PositionY>300.0</PositionY>
 			<Type>0</Type>
 			<Dammage>10</Dammage>
 			<RotateAngle>0.0</RotateAngle>
-			<RotateMovement>0</RotateMovement>
+			<RotateMovement>1</RotateMovement>
 		</Obstacle>
 	</Pattern>
 </PatternList>

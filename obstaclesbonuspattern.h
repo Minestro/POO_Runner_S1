@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "model.h"
-#include <TinyXml2/tinyxml2.h>
+#include "TinyXml2\tinyxml2.h"
 
 
 class ObstaclesBonusPattern
