@@ -15,7 +15,7 @@ class Button: public Element
 private:
     std::string m_text;
     button_type m_type;
-    bool m_isClickable; //On peut immaginer que le bouton soit non cliquable par exemple qu'il soir grisé.
+    bool m_isClickable; //On peut immaginer que le bouton soit non cliquable par exemple qu'il soit grisé.
     int m_destinationPage;
     Menu *m_menu;
     std::vector<button_action> m_actions;
