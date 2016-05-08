@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <math.h>
 #include "const.h"
 
 class Element
