@@ -24,9 +24,9 @@ void Menu::refreshContent()
     {
     case menuPage::HOME :
     {
-        Button *b1 = new Button{GAME_SIZE_W/2 - 100, 50, 200, 50, 0, "Jouer", menuPage::ESCAPE_MENU, this, button_type::TEXT_BUTTON};
+        Button *b1 = new Button{GAME_SIZE_W/2 - 100, 150, 200, 50, 0, "Jouer", menuPage::ESCAPE_MENU, this, button_type::TEXT_BUTTON};
         b1->addAction(button_action::CHANGE_PAGE);
-        Button *b2 = new Button{GAME_SIZE_W/2 - 100, 150, 200, 50, 0, "Explication", menuPage::EXPLICATION, this, button_type::TEXT_BUTTON};
+        Button *b2 = new Button{GAME_SIZE_W/2 - 100, 250, 200, 50, 0, "Regles", menuPage::RULES, this, button_type::TEXT_BUTTON};
         b2->addAction(button_action::CHANGE_PAGE);
 
          m_buttons.push_back(std::make_pair(1, b1));
@@ -42,14 +42,24 @@ void Menu::refreshContent()
         m_texts.push_back(std::make_pair(1, new Text{0, 600, GAME_SIZE_W, 50, 0, "Appuyez sur une touche pour continuer", 20, "score.ttf", 255, 255, 255, text_effect::BREATH, 20, 1, 0}));
         break;
     }
-    case menuPage::EXPLICATION :
+    case menuPage::RULES :
     {
-        m_backgrounds.push_back(std::make_pair(1, new Background{"FOND.png", 1, 0, 0}));
-        Button *b1 = new Button{GAME_SIZE_W/2 - 200, 50, 200, 50, 0, "Retour", menuPage::HOME, this, button_type::TEXT_BUTTON};
+        m_backgrounds.push_back(std::make_pair(1, new Background{"Rules.png", 1, 0, 0}));
+        Button *b1 = new Button{GAME_SIZE_W/2 - 150 , 470, 200, 50, 0, "Retour", menuPage::HOME, this, button_type::TEXT_BUTTON};
         b1->addAction(button_action::CHANGE_PAGE);
+        Button *b2 = new Button{GAME_SIZE_W/2 + 250 , 470, 200, 50, 0, "Suivant", menuPage::BONUSLIST, this, button_type::TEXT_BUTTON};
+        b2->addAction(button_action::CHANGE_PAGE);
         m_buttons.push_back(std::make_pair(1, b1));
+        m_buttons.push_back(std::make_pair(1, b2));
         break;
      }
+     case menuPage::BONUSLIST :
+    {
+        m_backgrounds.push_back(std::make_pair(1, new Background{"BonusList.png", 1, 0, 0}));
+        Button *b1 = new Button{GAME_SIZE_W/2 - 150 , 470, 200, 50, 0, "Retour", menuPage::HOME, this, button_type::TEXT_BUTTON};
+        b1->addAction(button_action::CHANGE_PAGE);
+        m_buttons.push_back(std::make_pair(1, b1));
+    }
 
     default:
         break;
