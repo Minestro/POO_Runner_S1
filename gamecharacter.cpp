@@ -1,5 +1,6 @@
 #include "gamecharacter.h"
 #include <iostream>
+#include "obstacle.h"
 
 unsigned int GameCharacter::nbCharacters = 0;
 
@@ -130,25 +131,58 @@ void GameCharacter::move()
         m_position.first += m_movement.first;
         m_position.second += m_movement.second;
 
+
         if (m_state != character_state::DYING)
         {
             //Test des collisions avec les bords de l'écran et le sol
-            if (m_position.first + m_size.first > GAME_SIZE_W)
+            Obstacle rightWall{GAME_SIZE_W, 0, 1, GAME_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
+            Obstacle leftWall {-1, 0, 1, GAME_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
+            if (collision(&rightWall))
             {
-                m_position.first = GAME_SIZE_W - m_size.first;
+                while (collision(&rightWall))
+                {
+                    m_position.first--;
+                }
                 m_movement.first = 0;
-            } else if (m_position.first < 0)
+            } else if (collision(&leftWall))
             {
-                m_position.first = 0;
+                while(collision(&leftWall))
+                {
+                    m_position.first++;
+                }
                 m_movement.first = 0;
             }
-            if (m_position.second + m_size.second > GAME_SIZE_H)
+
+            Obstacle roof{0, -1, GAME_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
+            Obstacle ground{0, HAUTEUR_SOL, GAME_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
+            if (collision(&ground))
             {
-                m_position.second = GAME_SIZE_H - m_size.second;
+                m_life = 0;
+                while (collision(&ground))
+                {
+                    m_position.second--;
+                }
                 m_movement.second = 0;
-            } else if (m_position.second < 0)
+            } else if (collision(&roof))
             {
-                m_position.second = 0;
+                if (m_rotation != 0)
+                {
+                    if (m_rotation > 0)
+                    {
+                        m_rotation--;
+                    } else if (m_rotation < 0)
+                    {
+                        m_rotation++;
+                    }
+                    if (abs(m_rotation) < 1)
+                    {
+                        m_rotation = 0;
+                    }
+                }
+                while (collision(&roof))
+                {
+                    m_position.second++;
+                }
                 m_movement.second = 0;
             }
         }
