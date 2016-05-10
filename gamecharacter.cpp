@@ -131,7 +131,6 @@ void GameCharacter::move()
         m_position.first += m_movement.first;
         m_position.second += m_movement.second;
 
-
         if (m_state != character_state::DYING)
         {
             //Test des collisions avec les bords de l'écran et le sol
@@ -165,7 +164,7 @@ void GameCharacter::move()
                 m_movement.second = 0;
             } else if (collision(&roof))
             {
-                if (m_rotation != 0)
+                /*if (m_rotation != 0)
                 {
                     if (m_rotation > 0)
                     {
@@ -178,12 +177,20 @@ void GameCharacter::move()
                     {
                         m_rotation = 0;
                     }
+                }*/
+                if (m_movement.second < 0)
+                {
+                    m_movement.second++;
+                }
+                if (abs(m_movement.second) < 1)
+                {
+                    m_movement.second = 0;
                 }
                 while (collision(&roof))
                 {
                     m_position.second++;
                 }
-                m_movement.second = 0;
+
             }
         }
 

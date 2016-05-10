@@ -1,5 +1,13 @@
 #include "element.h"
 
+ColorRGBA::ColorRGBA(unsigned int cr, unsigned int cg, unsigned int cb, unsigned int alpha): r{cr}, g{cg}, b{cb}, a{alpha}
+{
+
+}
+
+const ColorRGBA ColorRGBA::White = ColorRGBA{255, 255, 255};
+const ColorRGBA ColorRGBA::Black = ColorRGBA{0, 0, 0};
+
 Element::Element(float x, float y, float w, float h, float rotation): m_position{x, y}, m_size{w, h}, m_rotation{rotation}
 {
 

@@ -39,13 +39,14 @@ void Menu::refreshContent()
     {
         m_backgrounds.push_back(std::make_pair(1, new Background{"FOND2.png", 1, 0.5, 1, m_backgroundMovePeriod}));
         m_backgrounds.push_back(std::make_pair(1, new Background{"FOND1.png", 2, 1.0, 1, m_backgroundMovePeriod}));
-        m_texts.push_back(std::make_pair(1, new Text{0, 600, GAME_SIZE_W, 50, 0, "Appuyez sur une touche pour continuer", 20, "score.ttf", 255, 255, 255, text_effect::BREATH, 20, 1, 0}));
+        m_texts.push_back(std::make_pair(1, new Text{0, 600, GAME_SIZE_W, 50, 0, "Appuyez sur une touche pour continuer", 20, "score.ttf", ColorRGBA::White,text_effect::BREATH, 20, 1, 0}));
         break;
     }
     case menuPage::EXPLICATION :
     {
         m_backgrounds.push_back(std::make_pair(1, new Background{"FOND.png", 1, 0, 0}));
-        Button *b1 = new Button{GAME_SIZE_W/2 - 200, 50, 200, 50, 0, "Retour", menuPage::HOME, this, button_type::TEXT_BUTTON};
+        m_texts.push_back(std::make_pair(1, new Text{200, 200, 200, 200, 0, "explications du jeu", 20, "score.ttf" , ColorRGBA::White, text_effect::NOTHING, 0, 0, 1}));
+        Button *b1 = new Button{GAME_SIZE_W/2 - 100, 600, 200, 50, 0, "Retour", menuPage::HOME, this, button_type::TEXT_BUTTON};
         b1->addAction(button_action::CHANGE_PAGE);
         m_buttons.push_back(std::make_pair(1, b1));
         break;

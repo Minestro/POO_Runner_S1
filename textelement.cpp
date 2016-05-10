@@ -3,9 +3,9 @@
 
 std::map<std::string, sf::Font*> TextElement::m_listFonts;
 
-TextElement::TextElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, std::string text, const sf::Font *font, unsigned int fontSize, bool autoRescale, bool wordBreak, sf::Color color, int style, text_effect effect, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, sf::Text{text, *font, fontSize}, m_realPosition{x, y}, m_realSize{width, height}, m_autoRescale{autoRescale}, m_wordBreak{wordBreak}, m_textLines{}, m_effect{effect}, m_breath{1}, m_textForm{}, m_alphaChannel{0}
+TextElement::TextElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, std::string text, const sf::Font *font, unsigned int fontSize, bool autoRescale, bool lineBreak, sf::Color color, int style, text_effect effect, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, sf::Text{text, *font, fontSize}, m_realPosition{x, y}, m_realSize{width, height}, m_autoRescale{autoRescale}, m_lineBreak{lineBreak}, m_textLines{}, m_effect{effect}, m_breath{1}, m_textForm{}, m_alphaChannel{255}
 {
-    if (m_wordBreak)
+    if (m_lineBreak)
     {
         m_autoRescale = 0;
     }
@@ -18,7 +18,7 @@ TextElement::TextElement(unsigned int zIndex, float width, float height, float x
 
 void TextElement::setText(std::string text)
 {
-    if (m_wordBreak)
+    if (m_lineBreak)
     {
         m_textLines.clear();
         int i = 0;
@@ -76,7 +76,7 @@ void TextElement::setSize(float width, float height)
 {
     m_realSize.first = width;
     m_realSize.second = height;
-    if (m_wordBreak)
+    if (m_lineBreak)
     {
         std::string text = "";
         for (unsigned int i = 0; i<m_textLines.size(); i++)
@@ -110,7 +110,7 @@ std::pair<float, float> TextElement::getSize() const
     {
         return m_realSize;
     } else {
-        if (!m_wordBreak)
+        if (!m_lineBreak)
         {
             return {Text::getLocalBounds().width, Text::getLocalBounds().height};
         } else {
@@ -148,11 +148,12 @@ void TextElement::generateTextForm()
     }
     setRotation(r);
     m_textForm.display();
+    m_textForm.getTexture().copyToImage().saveToFile("test.jpg");
 }
 
 void TextElement::draw(sf::RenderWindow *window) const
 {
-    if (m_wordBreak)
+    if (m_lineBreak)
     {
         sf::Sprite textS{m_textForm.getTexture()};
         textS.setOrigin(textS.getLocalBounds().width / 2, textS.getLocalBounds().height / 2);

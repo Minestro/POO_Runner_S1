@@ -1,11 +1,11 @@
 #include "text.h"
 
-Text::Text(float x, float y, float width, float height, float rotation, std::string text, unsigned int fontSize, std::string font, bool autoRescale, bool wordBreak): Element{x, y, width, height, rotation}, m_wordBreak{wordBreak}, m_autoRescale{autoRescale}, m_text{text}, m_fontSize{fontSize}, m_r{255}, m_g{255}, m_b{255}, m_font{font}, m_effect{text_effect::NOTHING}, m_effectPeriod{0}
+Text::Text(float x, float y, float width, float height, float rotation, std::string text, unsigned int fontSize, std::string font, bool autoRescale, bool lineBreak): Element{x, y, width, height, rotation}, m_lineBreak{lineBreak}, m_autoRescale{autoRescale}, m_text{text}, m_fontSize{fontSize}, m_color{ColorRGBA::White}, m_font{font}, m_effect{text_effect::NOTHING}, m_effectPeriod{0}
 {
 
 }
 
-Text::Text(float x, float y, float width, float height, float rotation, std::string text, unsigned int fontSize, std::string font, unsigned int r, unsigned int g, unsigned int b, text_effect effect, unsigned int effectPeriod, bool autoRescale, bool wordBreak): Element{x, y, width, height, rotation}, m_wordBreak{wordBreak}, m_autoRescale{autoRescale}, m_text{text}, m_fontSize{fontSize}, m_r{r}, m_g{g}, m_b{b}, m_font{font}, m_effect{effect}, m_effectPeriod{effectPeriod}
+Text::Text(float x, float y, float width, float height, float rotation, std::string text, unsigned int fontSize, std::string font, ColorRGBA color, text_effect effect, unsigned int effectPeriod, bool autoRescale, bool lineBreak): Element{x, y, width, height, rotation}, m_lineBreak{lineBreak}, m_autoRescale{autoRescale}, m_text{text}, m_fontSize{fontSize}, m_color{color}, m_font{font}, m_effect{effect}, m_effectPeriod{effectPeriod}
 {
 
 }
@@ -30,19 +30,9 @@ unsigned int Text::getFontSize() const
     return m_fontSize;
 }
 
-unsigned int Text::getR() const
+ColorRGBA Text::getColor() const
 {
-    return m_r;
-}
-
-unsigned int Text::getG() const
-{
-    return m_g;
-}
-
-unsigned int Text::getB() const
-{
-    return m_b;
+    return m_color;
 }
 
 std::string Text::getFont() const
@@ -60,9 +50,9 @@ bool Text::getAutoRescale() const
     return m_autoRescale;
 }
 
-bool Text::getWordBreak() const
+bool Text::getlineBreak() const
 {
-    return m_wordBreak;
+    return m_lineBreak;
 }
 
 unsigned int Text::getEffectPeriod() const
