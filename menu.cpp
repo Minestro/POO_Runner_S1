@@ -32,23 +32,31 @@ void Menu::refreshContent()
          m_buttons.push_back(std::make_pair(1, b1));
          m_buttons.push_back(std::make_pair(1, b2));
 
-         m_backgrounds.push_back(std::make_pair(1, new Background{"menuBackground.png", 1, 0, 0}));
+         m_images.push_back(std::make_pair(1, new Image{0, 0, GAME_SIZE_W, GAME_SIZE_H, "menuBackground.png", 1, 0, 0}));
         break;
     }
     case menuPage::PRE_MENU :
     {
-        m_backgrounds.push_back(std::make_pair(1, new Background{"FOND2.png", 1, 0.5, 1, m_backgroundMovePeriod}));
-        m_backgrounds.push_back(std::make_pair(1, new Background{"FOND1.png", 2, 1.0, 1, m_backgroundMovePeriod}));
+        m_images.push_back(std::make_pair(1, new Image{0, 0, GAME_SIZE_W, GAME_SIZE_H, "FOND2.png", 1, 0.5, 1, m_backgroundMovePeriod}));
+        m_images.push_back(std::make_pair(1, new Image{0, 0, GAME_SIZE_W, GAME_SIZE_H, "FOND1.png", 2, 1.0, 1, m_backgroundMovePeriod}));
         m_texts.push_back(std::make_pair(1, new Text{0, 600, GAME_SIZE_W, 50, 0, "Appuyez sur une touche pour continuer", 20, "score.ttf", ColorRGBA::White,text_effect::BREATH, 20, 1, 0}));
         break;
     }
     case menuPage::RULES :
     {
-        m_backgrounds.push_back(std::make_pair(1, new Background{"menuBackground.png", 0, 0, 0}));
-        m_texts.push_back(std::make_pair(1, new Text{200, 200, 200, 200, 0, "explications du jeu", 20, "score.ttf" , ColorRGBA::White, text_effect::NOTHING, 0, 0, 1}));
-        Button *b1 = new Button{GAME_SIZE_W/2 - 100, 600, 200, 50, 0, "Retour", menuPage::HOME, this, button_type::TEXT_BUTTON};
+        m_images.push_back(std::make_pair(1, new Image{0, 0, GAME_SIZE_W, GAME_SIZE_H, "FOND.png", 1, 0, 0}));
+        m_images.push_back(std::make_pair(1, new Image{GAME_SIZE_W/2 - 250, 100, 500, 400, "textBox.png", 2, 0, 0}));
+        m_texts.push_back(std::make_pair(1, new Text{GAME_SIZE_W/2 - 250, 100, 500, 70, 0, "Regles", 30, "score.ttf" , ColorRGBA::Black, text_effect::NOTHING, 0, 1, 0}));
+        m_texts.push_back(std::make_pair(1, new Text{GAME_SIZE_W/2 - 230, 170, 460, 150, 0, "Pilotez l'avion le plus loin possible en evitant les obstacles et en ramassant un maximum de pieces possible !", 20, "score.ttf" , ColorRGBA::Black, text_effect::NOTHING, 0, 1, 1}));
+        m_images.push_back(std::make_pair(1, new Image{GAME_SIZE_W/2 - 230, 250, 40, 40, "leftKey.png", 3, 0, 0}));
+        m_images.push_back(std::make_pair(1, new Image{GAME_SIZE_W/2 - 230, 310, 40, 40, "rightKey.png", 3, 0, 0}));
+        m_images.push_back(std::make_pair(1, new Image{GAME_SIZE_W/2 - 230, 370, 40, 40, "upKey.png", 3, 0, 0}));
+        m_texts.push_back(std::make_pair(1, new Text{GAME_SIZE_W/2 - 170, 250, 0, 0, 0, "Reculer", 20, "score.ttf" , ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0}));
+        m_texts.push_back(std::make_pair(1, new Text{GAME_SIZE_W/2 - 170, 310, 0, 0, 0, "Avancer", 20, "score.ttf" , ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0}));
+        m_texts.push_back(std::make_pair(1, new Text{GAME_SIZE_W/2 - 170, 370, 0, 0, 0, "Monter", 20, "score.ttf" , ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0}));
+        Button *b1 = new Button{GAME_SIZE_W/2 - 250, 550, 200, 50, 0, "Retour", menuPage::HOME, this, button_type::TEXT_BUTTON};
         b1->addAction(button_action::CHANGE_PAGE);
-        Button *b2 = new Button{GAME_SIZE_W/2 + 250 , 470, 200, 50, 0, "Suivant", menuPage::BONUSLIST, this, button_type::TEXT_BUTTON};
+        Button *b2 = new Button{GAME_SIZE_W/2 + 50 , 550, 200, 50, 0, "Liste des objets", menuPage::BONUSLIST, this, button_type::TEXT_BUTTON};
         b2->addAction(button_action::CHANGE_PAGE);
         m_buttons.push_back(std::make_pair(1, b1));
         m_buttons.push_back(std::make_pair(1, b2));
@@ -56,10 +64,15 @@ void Menu::refreshContent()
      }
     case menuPage::BONUSLIST :
     {
-        m_backgrounds.push_back(std::make_pair(1, new Background{"BonusList.png", 1, 0, 0}));
-        Button *b1 = new Button{GAME_SIZE_W/2 - 150 , 470, 200, 50, 0, "Retour", menuPage::HOME, this, button_type::TEXT_BUTTON};
+        m_images.push_back(std::make_pair(1, new Image{0, 0, GAME_SIZE_W, GAME_SIZE_H, "FOND.png", 1, 0, 0}));
+        m_images.push_back(std::make_pair(1, new Image{GAME_SIZE_W/2 - 250, 100, 500, 400, "textBox.png", 2, 0, 0}));
+        Button *b1 = new Button{GAME_SIZE_W/2 - 100 , 550, 200, 50, 0, "Retour", menuPage::HOME, this, button_type::TEXT_BUTTON};
         b1->addAction(button_action::CHANGE_PAGE);
+        m_texts.push_back(std::make_pair(1, new Text{GAME_SIZE_W/2 - 250, 100, 500, 70, 0, "Bonus", 30, "score.ttf" , ColorRGBA::Black, text_effect::NOTHING, 0, 1, 0}));
+        m_bonus.push_back(std::make_pair(1, new Bonus{GAME_SIZE_W/2 - 230, 170, 40, 40, 0, 0, 0, 0, 0, 0}));
         m_buttons.push_back(std::make_pair(1, b1));
+        m_texts.push_back(std::make_pair(1, new Text{GAME_SIZE_W/2 - 170, 180, 0, 0, 0, "Piece : Augmente votre score de 1000", 20, "score.ttf" , ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0}));
+
     }
 
     default:
@@ -69,10 +82,10 @@ void Menu::refreshContent()
 
 void Menu::refresh()
 {
-    for (unsigned int i=0; i<m_backgrounds.size(); i++)
+    for (unsigned int i=0; i<m_images.size(); i++)
     {
-        m_backgrounds[i].second->setMovePeriod(m_backgroundMovePeriod);
-        m_backgrounds[i].second->move();
+        m_images[i].second->setMovePeriod(m_backgroundMovePeriod);
+        m_images[i].second->move();
     }
 }
 

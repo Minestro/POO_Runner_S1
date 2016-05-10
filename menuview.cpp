@@ -139,30 +139,57 @@ void MenuView::synchronise()
          }
     }
 
-    for (unsigned int i=0; i<m_menuModel->getBackgrounds().size(); i++)
+    for (unsigned int i=0; i<m_menuModel->getImages().size(); i++)
     {
-        if (m_menuModel->getBackgrounds()[i].first)
+        if (m_menuModel->getImages()[i].first)
         {
-            std::map <const Element*, std::list<GraphicElement*> >::const_iterator it = m_elementToGraphicElement.find(m_menuModel->getBackgrounds()[i].second);
+            std::map <const Element*, std::list<GraphicElement*> >::const_iterator it = m_elementToGraphicElement.find(m_menuModel->getImages()[i].second);
             if (it == m_elementToGraphicElement.end())
             {
                 std::list<GraphicElement*> list;
-                if (m_menuModel->getBackgrounds()[i].second->isSliding())
+                if (m_menuModel->getImages()[i].second->isSliding())
                 {
-                    sf::Texture *texture = GraphicElement::m_listTextures[m_menuModel->getBackgrounds()[i].second->getBackgroundFileName()];
+                    sf::Texture *texture = GraphicElement::m_listTextures[m_menuModel->getImages()[i].second->getBackgroundFileName()];
                     texture->setRepeated(1);
-                    SpriteElement *ge = new SpriteElement{(unsigned int)m_menuModel->getBackgrounds()[i].second->getZIndex(), m_menuModel->getBackgrounds()[i].second->getSize().first, m_menuModel->getBackgrounds()[i].second->getSize().second, m_menuModel->getBackgrounds()[i].second->getPosition().first, m_menuModel->getBackgrounds()[i].second->getPosition().second, m_menuModel->getBackgrounds()[i].second->getRotateAngle(), texture};
+                    SpriteElement *ge = new SpriteElement{(unsigned int)m_menuModel->getImages()[i].second->getZIndex(), m_menuModel->getImages()[i].second->getSize().first, m_menuModel->getImages()[i].second->getSize().second, m_menuModel->getImages()[i].second->getPosition().first, m_menuModel->getImages()[i].second->getPosition().second, m_menuModel->getImages()[i].second->getRotateAngle(), texture};
                     ge->setTextureRect(sf::IntRect{ge->getTextureRect().left, ge->getTextureRect().top, ge->getTextureRect().width*2, ge->getTextureRect().height});
                     list.push_back(ge);
-                    m_elementToGraphicElement.insert(std::make_pair(m_menuModel->getBackgrounds()[i].second, list));
+                    m_elementToGraphicElement.insert(std::make_pair(m_menuModel->getImages()[i].second, list));
                 } else {
-                    list.push_back(new SpriteElement{(unsigned int)m_menuModel->getBackgrounds()[i].second->getZIndex(), m_menuModel->getBackgrounds()[i].second->getSize().first, m_menuModel->getBackgrounds()[i].second->getSize().second, m_menuModel->getBackgrounds()[i].second->getPosition().first, m_menuModel->getBackgrounds()[i].second->getPosition().second, m_menuModel->getBackgrounds()[i].second->getRotateAngle(),  GraphicElement::m_listTextures[m_menuModel->getBackgrounds()[i].second->getBackgroundFileName()]});
-                    m_elementToGraphicElement.insert(std::make_pair(m_menuModel->getBackgrounds()[i].second, list));
+                    list.push_back(new SpriteElement{(unsigned int)m_menuModel->getImages()[i].second->getZIndex() , m_menuModel->getImages()[i].second->getSize().first, m_menuModel->getImages()[i].second->getSize().second, m_menuModel->getImages()[i].second->getPosition().first, m_menuModel->getImages()[i].second->getPosition().second, m_menuModel->getImages()[i].second->getRotateAngle(),  GraphicElement::m_listTextures[m_menuModel->getImages()[i].second->getBackgroundFileName()]});
+                    m_elementToGraphicElement.insert(std::make_pair(m_menuModel->getImages()[i].second, list));
                 }
             } else {
 
             }
-            m_menuModel->getBackgrounds()[i].first = 0;
+            m_menuModel->getImages()[i].first = 0;
+        }
+    }
+
+    for (unsigned int i=0; i<m_menuModel->getBonus().size(); i++)
+    {
+        if (m_menuModel->getBonus()[i].first)
+        {
+            std::map <const Element*, std::list<GraphicElement*> >::const_iterator it = m_elementToGraphicElement.find(m_menuModel->getBonus()[i].second);
+            if (it == m_elementToGraphicElement.end())
+            {
+                std::list<GraphicElement*> list;
+                switch (m_menuModel->getBonus()[i].second->getType())           //Suivant le type de bonus, l'élement graphique n'aura pas la même texture, la même vitesse d'animation...
+                {
+                case bonus_type::PIECE:
+                    list.push_back(new SpriteElement{10, m_menuModel->getBonus()[i].second->getSize().first, m_menuModel->getBonus()[i].second->getSize().second, m_menuModel->getBonus()[i].second->getPosition().first, m_menuModel->getBonus()[i].second->getPosition().second, m_menuModel->getBonus()[i].second->getRotateAngle(), GraphicElement::m_listTextures["coin.png"], 1, 10, 1, 1, 1, 100});
+                    break;
+                case bonus_type::INVINSIBLE:
+                    // TO DO
+                    break;
+                default:
+                    break;
+                }
+                m_elementToGraphicElement.insert(std::make_pair(m_menuModel->getBonus()[i].second, list));
+            } else {
+
+            }
+            m_menuModel->getBonus()[i].first = 0;
         }
     }
 

@@ -203,30 +203,30 @@ void GameView::synchronise()
         }
     }
 
-    for (unsigned int i=0; i<m_gameModel->getBackgrounds().size(); i++)
+    for (unsigned int i=0; i<m_gameModel->getImages().size(); i++)
     {
-        if (m_gameModel->getBackgrounds()[i].first)
+        if (m_gameModel->getImages()[i].first)
         {
-            std::map <const Element*, std::list<GraphicElement*> >::const_iterator it = m_elementToGraphicElement.find(m_gameModel->getBackgrounds()[i].second);
+            std::map <const Element*, std::list<GraphicElement*> >::const_iterator it = m_elementToGraphicElement.find(m_gameModel->getImages()[i].second);
             if (it == m_elementToGraphicElement.end())
             {
                 std::list<GraphicElement*> list;
-                if (m_gameModel->getBackgrounds()[i].second->isSliding())
+                if (m_gameModel->getImages()[i].second->isSliding())
                 {
-                    sf::Texture *texture = GraphicElement::m_listTextures[m_gameModel->getBackgrounds()[i].second->getBackgroundFileName()];
+                    sf::Texture *texture = GraphicElement::m_listTextures[m_gameModel->getImages()[i].second->getBackgroundFileName()];
                     texture->setRepeated(1);
-                    SpriteElement *ge = new SpriteElement{(unsigned int)m_gameModel->getBackgrounds()[i].second->getZIndex(), m_gameModel->getBackgrounds()[i].second->getSize().first, m_gameModel->getBackgrounds()[i].second->getSize().second, m_gameModel->getBackgrounds()[i].second->getPosition().first, m_gameModel->getBackgrounds()[i].second->getPosition().second, m_gameModel->getBackgrounds()[i].second->getRotateAngle(), texture};
+                    SpriteElement *ge = new SpriteElement{(unsigned int)m_gameModel->getImages()[i].second->getZIndex(), m_gameModel->getImages()[i].second->getSize().first, m_gameModel->getImages()[i].second->getSize().second, m_gameModel->getImages()[i].second->getPosition().first, m_gameModel->getImages()[i].second->getPosition().second, m_gameModel->getImages()[i].second->getRotateAngle(), texture};
                     ge->setTextureRect(sf::IntRect{ge->getTextureRect().left, ge->getTextureRect().top, ge->getTextureRect().width*2, ge->getTextureRect().height});
                     list.push_back(ge);
-                    m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getBackgrounds()[i].second, list));
+                    m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getImages()[i].second, list));
                 } else {
-                    list.push_back(new SpriteElement{(unsigned int)m_gameModel->getBackgrounds()[i].second->getZIndex(), m_gameModel->getBackgrounds()[i].second->getSize().first, m_gameModel->getBackgrounds()[i].second->getSize().second, m_gameModel->getBackgrounds()[i].second->getPosition().first, m_gameModel->getBackgrounds()[i].second->getPosition().second, m_gameModel->getBackgrounds()[i].second->getRotateAngle(), GraphicElement::m_listTextures[m_gameModel->getBackgrounds()[i].second->getBackgroundFileName()]});
-                    m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getBackgrounds()[i].second, list));
+                    list.push_back(new SpriteElement{(unsigned int)m_gameModel->getImages()[i].second->getZIndex(), m_gameModel->getImages()[i].second->getSize().first, m_gameModel->getImages()[i].second->getSize().second, m_gameModel->getImages()[i].second->getPosition().first, m_gameModel->getImages()[i].second->getPosition().second, m_gameModel->getImages()[i].second->getRotateAngle(), GraphicElement::m_listTextures[m_gameModel->getImages()[i].second->getBackgroundFileName()]});
+                    m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getImages()[i].second, list));
                 }
             } else {
 
             }
-            m_gameModel->getBackgrounds()[i].first = 0;
+            m_gameModel->getImages()[i].first = 0;
         }
     }
 

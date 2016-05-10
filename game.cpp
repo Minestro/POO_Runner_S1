@@ -7,10 +7,10 @@ Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{w
     m_player =  new Player;
     GameCharacter *gc = new GameCharacter{100, 0, 100, 50, 0, 0, m_player};
     m_characters.push_back(std::make_pair(1, gc));
-    Background *b1 = new Background{"FOND2.png", 1, 0.5, 1, 0};
-    Background *b2 = new Background{"FOND1.png", 2, 1.0, 1, 0};
-    m_backgrounds.push_back(std::make_pair(1, b1));
-    m_backgrounds.push_back(std::make_pair(1, b2));
+    Image *b1 = new Image{0, 0, GAME_SIZE_W, GAME_SIZE_H, "FOND2.png", 1, 0.5, 1, 0};
+    Image *b2 = new Image{0, 0, GAME_SIZE_W, GAME_SIZE_H, "FOND1.png", 2, 1.0, 1, 0};
+    m_images.push_back(std::make_pair(1, b1));
+    m_images.push_back(std::make_pair(1, b2));
 
     setSpeedPeriod(m_movePeriod);
     m_powerActives.resize(power_list::NB_POWER - 1);
@@ -24,8 +24,8 @@ Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{w
 
 Game::~Game()
 {
-    std::vector<std::pair<bool, Background *> >::iterator iterator = m_backgrounds.begin();
-    while (iterator != m_backgrounds.end())
+    std::vector<std::pair<bool, Image *> >::iterator iterator = m_images.begin();
+    while (iterator != m_images.end())
     {
         delete iterator->second;
         ++iterator;
@@ -101,31 +101,31 @@ void Game::nextStep()
 
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMove).count() >= m_movePeriod)
     {
-        //On ajoute la distance
-        m_distance += PIXELPERBACKGROUNDMOVE;
-        for (unsigned int i = 0; i<m_characters.size(); i++)
-        {
-            if (m_characters[i].second->getState() != DYING)
-            {
-                m_characters[i].second->addScore(1);
-            }
-        }
-
-        //On créé des nouveaux obstacles et bonus en appelant un pattern aléatoire
         if (m_gameState == game_state::RUNNING)
         {
+            //On créé des nouveaux obstacles et bonus en appelant un pattern aléatoire
             if (m_distance > m_nextPatternAt)
             {
                 int ran = rand()% m_patternsList.size();
                 m_patternsList[ran].addElementsToModel();
                 m_nextPatternAt = m_distance + m_patternsList[ran].getWidth();
             }
+
+            //On ajoute la distance
+            m_distance += PIXELPERBACKGROUNDMOVE;
+            for (unsigned int i = 0; i<m_characters.size(); i++)
+            {
+                if (m_characters[i].second->getState() != DYING)
+                {
+                    m_characters[i].second->addScore(1);
+                }
+            }
         }
 
         //On bouge les backgrounds
-        for (unsigned int i = 0; i<m_backgrounds.size(); i++)
+        for (unsigned int i = 0; i<m_images.size(); i++)
         {
-            m_backgrounds[i].second->move();
+            m_images[i].second->move();
         }
 
         //On bouge les obstacles

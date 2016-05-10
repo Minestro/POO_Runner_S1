@@ -1,6 +1,6 @@
 #include "model.h"
 
-Model::Model(float width, float height): m_size{width, height}, m_characters{}, m_backgrounds{}, m_obstacles{}, m_bonus{}, m_texts{}, m_deletedElements{}, m_cursorPosition{}
+Model::Model(float width, float height): m_size{width, height}, m_characters{}, m_images{}, m_obstacles{}, m_bonus{}, m_texts{}, m_deletedElements{}, m_cursorPosition{}
 {
     clearAll();
     for (unsigned int i=0; i<m_deletedElements.size(); i++)
@@ -19,9 +19,9 @@ std::vector<std::pair<bool, GameCharacter *> > &Model::getCharacters()
     return m_characters;
 }
 
-std::vector<std::pair<bool, Background *> > &Model::getBackgrounds()
+std::vector<std::pair<bool, Image *> > &Model::getImages()
 {
-    return m_backgrounds;
+    return m_images;
 }
 
 std::vector<std::pair<bool, Obstacle *> > &Model::getObstacles()
@@ -62,11 +62,11 @@ void Model::setCursorPosition(int x, int y)
 
 void Model::clearAll()
 {
-    for (unsigned int i = 0; i<m_backgrounds.size(); i++)
+    for (unsigned int i = 0; i<m_images.size(); i++)
     {
-        m_deletedElements.push_back(m_backgrounds[i].second);
+        m_deletedElements.push_back(m_images[i].second);
     }
-    m_backgrounds.clear();
+    m_images.clear();
     for (unsigned int i = 0; i<m_bonus.size(); i++)
     {
         m_deletedElements.push_back(m_bonus[i].second);

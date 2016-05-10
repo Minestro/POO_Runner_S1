@@ -3,7 +3,7 @@
 
 #include "obstacle.h"
 #include "bonus.h"
-#include "background.h"
+#include "image.h"
 #include "gamecharacter.h"
 #include "const.h"
 #include "button.h"
@@ -14,7 +14,7 @@ class Model
 protected:
     std::pair<float, float> m_size;
     std::vector<std::pair<bool, GameCharacter*> > m_characters;
-    std::vector<std::pair<bool, Background*> > m_backgrounds;
+    std::vector<std::pair<bool, Image*> > m_images;
     std::vector<std::pair<bool, Obstacle*> >m_obstacles;
     std::vector<std::pair<bool, Bonus*> > m_bonus;
     std::vector<std::pair<bool, Button*> > m_buttons;
@@ -27,7 +27,7 @@ public:
     virtual ~Model() = default;
     std::vector<const Element*> &getDeletedElements();
     std::vector<std::pair<bool, GameCharacter*> > &getCharacters();
-    std::vector<std::pair<bool, Background*> > &getBackgrounds();
+    std::vector<std::pair<bool, Image*> > &getImages();
     std::vector<std::pair<bool, Obstacle*> > &getObstacles();
     std::vector<std::pair<bool, Bonus*> > &getBonus();
     std::vector<std::pair<bool, Button*> > &getButtons();

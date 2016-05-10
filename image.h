@@ -3,7 +3,7 @@
 
 #include "movableelement.h"
 
-class Background: public MovableElement
+class Image: public MovableElement
 {
 private:
     bool m_isSliding;
@@ -11,8 +11,8 @@ private:
     int m_zIndex;
     float m_coefSpeed;
 public:
-    Background(std::string backgroundFileName, int zIndex, float coefSpeed, bool isSliding = 0, int movePeriodMicroSec = 0);
-    virtual ~Background() = default;
+    Image(float x, float y, float width, float height, std::string backgroundFileName, int zIndex, float coefSpeed, bool isSliding = 0, int movePeriodMicroSec = 0);
+    virtual ~Image() = default;
     std::string getBackgroundFileName() const;
     int getZIndex() const;
     float getCoefSpeed() const;
