@@ -166,6 +166,7 @@ void SpriteElement::refresh(const Element *el, Model *model)
                 setNbLignes(1);
                 setNbColonnes(81);
                 setRectPos(1);
+                setAnimatePeriod(10);
             }
             setAutoLoop(0);
             if (m_activeColonne == m_nbColonnes)

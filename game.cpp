@@ -2,7 +2,7 @@
 
 using namespace tinyxml2;
 
-Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_beginGameTime{}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_pauseTime{0}, m_player{nullptr}, m_distance{0}, m_powerActives{}, m_nextPatternAt{0}
+Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_gameState{game_state::INTRO}, m_gameMode{game_mode::SOLO}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_player{nullptr}, m_distance{0}, m_powerActives{}, m_nextPatternAt{0}
 {
     m_player =  new Player;
     GameCharacter *gc = new GameCharacter{100, 0, 100, 50, 0, 0, m_player};
@@ -112,11 +112,14 @@ void Game::nextStep()
         }
 
         //On créé des nouveaux obstacles et bonus en appelant un pattern aléatoire
-        if (m_distance > m_nextPatternAt)
+        if (m_gameState == game_state::RUNNING)
         {
-            int ran = rand()% m_patternsList.size();
-            m_patternsList[ran].addElementsToModel();
-            m_nextPatternAt = m_distance + m_patternsList[ran].getWidth();
+            if (m_distance > m_nextPatternAt)
+            {
+                int ran = rand()% m_patternsList.size();
+                m_patternsList[ran].addElementsToModel();
+                m_nextPatternAt = m_distance + m_patternsList[ran].getWidth();
+            }
         }
 
         //On bouge les backgrounds
@@ -140,102 +143,111 @@ void Game::nextStep()
         m_lastMove = std::chrono::system_clock::now();
     }
 
-    //On bouge les personnages
-    for (unsigned int i = 0; i<m_characters.size(); i++)
+    if (m_gameState == game_state::RUNNING)
     {
-        if(m_characters[i].second->getState() == character_state::DYING)
+        //On bouge les personnages
+        for (unsigned int i = 0; i<m_characters.size(); i++)
         {
-            m_characters[i].second->setMovement(-PIXELPERBACKGROUNDMOVE, 0);
-            m_characters[i].second->setMovePeriod(m_movePeriod);
-        }
-        m_characters[i].second->move();
-    }
-
-    //Test des collisions avec les obstacles
-    std::vector<std::pair<bool, Obstacle *> >::iterator obstacle = m_obstacles.begin();
-    while (obstacle != m_obstacles.end())
-    {
-        bool increment = true;
-        if (player1 != m_characters.end())
-        {
-            if (obstacle->second->collision(player1->second))
+            if(m_characters[i].second->getState() == character_state::DYING)
             {
-                if (obstacle->second->getState() != obstacle_state::EXPLODE)
+                m_characters[i].second->setMovement(-PIXELPERBACKGROUNDMOVE, 0);
+                m_characters[i].second->setMovePeriod(m_movePeriod);
+            }
+            m_characters[i].second->move();
+        }
+
+        //Test des collisions avec les obstacles
+        std::vector<std::pair<bool, Obstacle *> >::iterator obstacle = m_obstacles.begin();
+        while (obstacle != m_obstacles.end())
+        {
+            bool increment = true;
+            if (player1 != m_characters.end())
+            {
+                if (obstacle->second->collision(player1->second))
                 {
-                    player1->second->removeLife(obstacle->second->getDammage());
-                }
-                if (obstacle->second->getType() == obstacle_type::MINE)
-                {
-                    obstacle->second->setState(obstacle_state::EXPLODE);
-                } else {
-                    m_deletedElements.push_back(obstacle->second);
-                    m_obstacles.erase(obstacle);
-                    increment = false;
+                    if (obstacle->second->getState() != obstacle_state::EXPLODE)
+                    {
+                        player1->second->removeLife(obstacle->second->getDammage());
+                    }
+                    if (obstacle->second->getType() == obstacle_type::MINE)
+                    {
+                        obstacle->second->setState(obstacle_state::EXPLODE);
+                    } else {
+                        m_deletedElements.push_back(obstacle->second);
+                        m_obstacles.erase(obstacle);
+                        increment = false;
+                    }
                 }
             }
-        }
-        if (obstacle->second->getPosition().first < -obstacle->second->getSize().first)
-        {
-            m_deletedElements.push_back(obstacle->second);
-            m_obstacles.erase(obstacle);
-            increment = false;
-        }
-        if (increment)
-        {
-            ++obstacle;
-        }
-    }
-
-    //Test des collisions avec les bonus
-    std::vector<std::pair<bool, Bonus *> >::iterator bonus = m_bonus.begin();   //Declaration d'un iterator pour parcourir les bonus
-    while (bonus != m_bonus.end())          //Tant que on arrive pas à la fin de la liste de bonus
-    {
-        bool increment = true;              //Ce booléen indique si l'on a supprimé un bonus. Lorsqu'on supprime un bonus, tous les bonus suivants se retrouvent décalés du coup on incrémente pas l'iterator pour passer au bonus suivant
-        if (bonus->second->getPosition().first < -bonus->second->getSize().first)   // Si le bonus sort de l'écran à gauche, on le supprime
-        {
-            m_deletedElements.push_back(bonus->second);
-            m_bonus.erase(bonus);
-            increment = false;
-        }
-        if (player1 != m_characters.end())      //Si le joueur 1 n'est pas mort (on test les collisions que pour lui)
-        {
-            if (bonus->second->collision(player1->second))      //Si il y a collision avec le personnage 1
+            if (obstacle->second->getPosition().first < -obstacle->second->getSize().first)
             {
-                switch (bonus->second->getType())               //Action différente suivant le type de bonus
-                {
-                case bonus_type::PIECE:
-                    player1->second->addScore(1000);
-                    break;
-                case bonus_type::INVINSIBLE:
-                    break;
-                default:
-                    break;
-                }
-                m_deletedElements.push_back(bonus->second);     //on supprime le bonus
+                m_deletedElements.push_back(obstacle->second);
+                m_obstacles.erase(obstacle);
+                increment = false;
+            }
+            if (increment)
+            {
+                ++obstacle;
+            }
+        }
+
+        //Test des collisions avec les bonus
+        std::vector<std::pair<bool, Bonus *> >::iterator bonus = m_bonus.begin();   //Declaration d'un iterator pour parcourir les bonus
+        while (bonus != m_bonus.end())          //Tant que on arrive pas à la fin de la liste de bonus
+        {
+            bool increment = true;              //Ce booléen indique si l'on a supprimé un bonus. Lorsqu'on supprime un bonus, tous les bonus suivants se retrouvent décalés du coup on incrémente pas l'iterator pour passer au bonus suivant
+            if (bonus->second->getPosition().first < -bonus->second->getSize().first)   // Si le bonus sort de l'écran à gauche, on le supprime
+            {
+                m_deletedElements.push_back(bonus->second);
                 m_bonus.erase(bonus);
                 increment = false;
             }
+            if (player1 != m_characters.end())      //Si le joueur 1 n'est pas mort (on test les collisions que pour lui)
+            {
+                if (bonus->second->collision(player1->second))      //Si il y a collision avec le personnage 1
+                {
+                    switch (bonus->second->getType())               //Action différente suivant le type de bonus
+                    {
+                    case bonus_type::PIECE:
+                        player1->second->addScore(1000);
+                        break;
+                    case bonus_type::INVINSIBLE:
+                        break;
+                    default:
+                        break;
+                    }
+                    m_deletedElements.push_back(bonus->second);     //on supprime le bonus
+                    m_bonus.erase(bonus);
+                    increment = false;
+                }
+            }
+            if (increment)                  //Si on a supprimé aucun bonus, on passe au suivant sinon pas besoin car les autres se sont trouvés décalés sur la position actuelle
+            {
+                ++bonus;
+            }
         }
-        if (increment)                  //Si on a supprimé aucun bonus, on passe au suivant sinon pas besoin car les autres se sont trouvés décalés sur la position actuelle
-        {
-            ++bonus;
-        }
-    }
 
-    //On test si un personnage n'a plus de vie
-    for (unsigned int i=0; i<m_characters.size(); i++)
-    {
-        if (m_characters[i].second->getLife() == 0)
+        //On test si un personnage n'a plus de vie
+        for (unsigned int i=0; i<m_characters.size(); i++)
         {
-            m_characters[i].second->setSate(character_state::DYING);
+            if (m_characters[i].second->getLife() == 0)
+            {
+                m_characters[i].second->setSate(character_state::DYING);
+            }
         }
-    }
 
-    //On augmente la vitesse
-    if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now()-m_lastAcceleration).count() >= ACCELERATION_PERIOD)
+        //On augmente la vitesse
+        if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now()-m_lastAcceleration).count() >= ACCELERATION_PERIOD)
+        {
+            setSpeedPeriod(--m_movePeriod);
+            m_lastAcceleration = std::chrono::system_clock::now();
+        }
+    } else if (m_gameState == game_state::INTRO)
     {
-        setSpeedPeriod(--m_movePeriod);
-        m_lastAcceleration = std::chrono::system_clock::now();
+        for (unsigned int i=0; i<m_characters.size(); i++)
+        {
+            m_characters[i].second->setPosition(100, 100 + (i*70));
+        }
     }
 }
 
@@ -259,4 +271,24 @@ void Game::setSpeedPeriod(int period)
         mp = period;
     }
     m_movePeriod = mp;
+}
+
+int Game::getGameState() const
+{
+    return m_gameState;
+}
+
+int Game::getGameMode() const
+{
+    return m_gameMode;
+}
+
+void Game::setGameState(int state)
+{
+    m_gameState = state;
+}
+
+void Game::setGameMode(int mode)
+{
+    m_gameMode = mode;
 }

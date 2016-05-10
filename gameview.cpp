@@ -51,6 +51,10 @@ bool GameView::treatEvent()
             synchronise();
             break;
         case sf::Event::KeyPressed :
+            if (m_gameModel->getGameState() == game_state::INTRO)
+            {
+                m_gameModel->setGameState(game_state::RUNNING);
+            }
             switch (m_window->getEvent()->key.code)
             {
             case sf::Keyboard::Right :

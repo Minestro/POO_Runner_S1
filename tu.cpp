@@ -1,5 +1,5 @@
-#define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE RunnerTest
+//#define BOOST_TEST_DYN_LINK
+//#define BOOST_TEST_MODULE RunnerTest
 
 /*#include <boost/test/unit_test.hpp>
 #include <SFML/Graphics/Color.hpp>
