@@ -24,18 +24,7 @@ Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{w
 
 Game::~Game()
 {
-    std::vector<std::pair<bool, Image *> >::iterator iterator = m_images.begin();
-    while (iterator != m_images.end())
-    {
-        delete iterator->second;
-        ++iterator;
-    }
-    std::vector<std::pair<bool, GameCharacter*> >::iterator iterator2 = m_characters.begin();
-    while (iterator2 != m_characters.end())
-    {
-        delete iterator2->second;
-        ++iterator2;
-    }
+    clearAll();
     delete m_player;
 }
 
@@ -138,7 +127,7 @@ void Game::nextStep()
 
     if (m_gameState == game_state::RUNNING)
     {
-        //deleteElement(GAMEINTROTEXTID);
+        deleteElement(GAMEINTROTEXTID);
         //On bouge les personnages
         for (unsigned int i = 0; i<m_characters.size(); i++)
         {
@@ -187,25 +176,29 @@ void Game::nextStep()
         while (bonus != m_bonus.end())          //Tant que on arrive pas à la fin de la liste de bonus
         {
             bool increment = true;              //Ce booléen indique si l'on a supprimé un bonus. Lorsqu'on supprime un bonus, tous les bonus suivants se retrouvent décalés du coup on incrémente pas l'iterator pour passer au bonus suivant
+            if (bonus->second->collision(m_characters[0].second))      //Si il y a collision avec le personnage 1
+            {
+                switch (bonus->second->getType())               //Action différente suivant le type de bonus
+                {
+                case bonus_type::PIECE:
+                    m_characters[0].second->addScore(1000);
+                    break;
+                case bonus_type::SOINS:
+                    m_characters[0].second->addLife(10);
+                    break;
+                default:
+                    break;
+                }
+                m_deletedElements.push_back(bonus->second);     //on supprime le bonus
+                m_bonus.erase(bonus);
+                increment = false;
+            }
             if (bonus->second->getPosition().first < -bonus->second->getSize().first)   // Si le bonus sort de l'écran à gauche, on le supprime
             {
                 m_deletedElements.push_back(bonus->second);
                 m_bonus.erase(bonus);
                 increment = false;
             }
-            switch (bonus->second->getType())               //Action différente suivant le type de bonus
-            {
-            case bonus_type::PIECE:
-                m_characters[0].second->addScore(1000);
-                break;
-            case bonus_type::INVINSIBLE:
-                break;
-            default:
-                break;
-            }
-            m_deletedElements.push_back(bonus->second);     //on supprime le bonus
-            m_bonus.erase(bonus);
-            increment = false;
             if (increment)                  //Si on a supprimé aucun bonus, on passe au suivant sinon pas besoin car les autres se sont trouvés décalés sur la position actuelle
             {
                 ++bonus;
@@ -229,10 +222,12 @@ void Game::nextStep()
         }
     } else if (m_gameState == game_state::INTRO)
     {
-        /*if (searchElementById(GAMEINTROTEXTID) == nullptr)
+        if (searchElementById(GAMEINTROTEXTID) == nullptr)
         {
-            m_texts.push_back(std::make_pair(1, new Text{200, 200, 0, 0, 0, "Appuyez sur une touche pour lancer l'avion", 20, "score.ttf", ColorRGBA::White, text_effect::BREATH, 100, 0, 0}));
-        }*/
+            Text *text = new Text{0, 600, GAME_SIZE_W, 50, 0, "Appuyez sur une touche pour lancer l'avion", 20, "score.ttf", ColorRGBA::White,text_effect::BREATH, 20, 1, 0};
+            m_texts.push_back(std::make_pair(1, text));
+            text->setId(GAMEINTROTEXTID);
+        }
         for (unsigned int i=0; i<m_characters.size(); i++)
         {
             m_characters[i].second->setPosition(100, 100 + (i*70));

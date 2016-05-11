@@ -104,6 +104,7 @@ Element *Model::searchElementById(unsigned int id)
         {
             el = m_images[i].second;
         }
+        i++;
     }
     i = 0;
     while (el == nullptr && i<m_bonus.size())
@@ -112,6 +113,7 @@ Element *Model::searchElementById(unsigned int id)
         {
             el = m_bonus[i].second;
         }
+        i++;
     }
     i = 0;
     while (el == nullptr && i<m_buttons.size())
@@ -120,6 +122,7 @@ Element *Model::searchElementById(unsigned int id)
         {
             el = m_buttons[i].second;
         }
+        i++;
     }
     i = 0;
     while (el == nullptr && i<m_characters.size())
@@ -128,6 +131,7 @@ Element *Model::searchElementById(unsigned int id)
         {
             el = m_characters[i].second;
         }
+        i++;
     }
     i = 0;
     while (el == nullptr && i<m_obstacles.size())
@@ -136,6 +140,7 @@ Element *Model::searchElementById(unsigned int id)
         {
             el = m_obstacles[i].second;
         }
+        i++;
     }
     i = 0;
     while (el == nullptr && i<m_texts.size())
@@ -144,6 +149,7 @@ Element *Model::searchElementById(unsigned int id)
         {
             el = m_texts[i].second;
         }
+        i++;
     }
     return el;
 }
@@ -157,8 +163,9 @@ void Model::deleteElement(unsigned int id)
         if (m_images[i].second->getId() == id)
         {
             el = m_images[i].second;
-            //m_images.erase(m_images[i]);
+            m_images.erase(m_images.begin()+i);
         }
+        i++;
     }
     i = 0;
     while (el == nullptr && i<m_bonus.size())
@@ -166,8 +173,9 @@ void Model::deleteElement(unsigned int id)
         if (m_bonus[i].second->getId() == id)
         {
             el = m_bonus[i].second;
-            //m_bonus.erase(m_bonus[i]);
+            m_bonus.erase(m_bonus.begin()+i);
         }
+        i++;
     }
     i = 0;
     while (el == nullptr && i<m_buttons.size())
@@ -175,8 +183,9 @@ void Model::deleteElement(unsigned int id)
         if (m_buttons[i].second->getId() == id)
         {
             el = m_buttons[i].second;
-            //m_buttons.erase(m_buttons[i]);
+            m_buttons.erase(m_buttons.begin()+i);
         }
+        i++;
     }
     i = 0;
     while (el == nullptr && i<m_characters.size())
@@ -184,8 +193,9 @@ void Model::deleteElement(unsigned int id)
         if (m_characters[i].second->getId() == id)
         {
             el = m_characters[i].second;
-            //m_characters.erase(m_characters[i]);
+            m_characters.erase(m_characters.begin()+i);
         }
+        i++;
     }
     i = 0;
     while (el == nullptr && i<m_obstacles.size())
@@ -193,8 +203,9 @@ void Model::deleteElement(unsigned int id)
         if (m_obstacles[i].second->getId() == id)
         {
             el = m_obstacles[i].second;
-            //m_obstacles.erase(m_obstacles[i]);
+            m_obstacles.erase(m_obstacles.begin()+i);
         }
+        i++;
     }
     i = 0;
     while (el == nullptr && i<m_texts.size())
@@ -202,8 +213,9 @@ void Model::deleteElement(unsigned int id)
         if (m_texts[i].second->getId() == id)
         {
             el = m_texts[i].second;
-            //m_texts.erase(m_texts[i]);
+            m_texts.erase(m_texts.begin()+i);
         }
+        i++;
     }
     if (el != nullptr)
     {

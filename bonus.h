@@ -3,7 +3,7 @@
 
 #include "movableelement.h"
 
-enum bonus_type{PIECE, INVINSIBLE, DOUBLESAUT};
+enum bonus_type{PIECE, INVINSIBLE, DOUBLESAUT, SOINS};
 
 class Bonus: public MovableElement
 {

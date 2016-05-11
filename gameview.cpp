@@ -189,7 +189,9 @@ void GameView::synchronise()
                 case bonus_type::PIECE:
                     list.push_back(new SpriteElement{10, m_gameModel->getBonus()[i].second->getSize().first, m_gameModel->getBonus()[i].second->getSize().second, m_gameModel->getBonus()[i].second->getPosition().first, m_gameModel->getBonus()[i].second->getPosition().second, m_gameModel->getBonus()[i].second->getRotateAngle(), GraphicElement::m_listTextures["coin.png"], 1, 10, 1, 1, 1, 100});
                     break;
-                case bonus_type::INVINSIBLE:
+                case bonus_type::SOINS:
+                    list.push_back(new SpriteElement{2, m_gameModel->getBonus()[i].second->getSize().first, m_gameModel->getBonus()[i].second->getSize().second, m_gameModel->getBonus()[i].second->getPosition().first, m_gameModel->getBonus()[i].second->getPosition().second, m_gameModel->getBonus()[i].second->getRotateAngle(), GraphicElement::m_listTextures["Soins.png"], 1, 2, 1, 1, 1, 100});
+
                     // TO DO
                     break;
                 default:
@@ -228,6 +230,22 @@ void GameView::synchronise()
             }
             m_gameModel->getImages()[i].first = 0;
         }
+    }
+
+    for (unsigned int i=0; i< m_gameModel->getTexts().size(); i++)
+    {
+         if (m_gameModel->getTexts()[i].first)
+         {
+             std::map <const Element*, std::list<GraphicElement*> >::const_iterator it = m_elementToGraphicElement.find(m_gameModel->getTexts()[i].second);
+             if (it == m_elementToGraphicElement.end())
+             {
+                 std::list<GraphicElement*> list;
+                 list.push_back(new TextElement{10, m_gameModel->getTexts()[i].second->getSize().first, m_gameModel->getTexts()[i].second->getSize().second, m_gameModel->getTexts()[i].second->getPosition().first, m_gameModel->getTexts()[i].second->getPosition().second, m_gameModel->getTexts()[i].second->getRotateAngle(),  m_gameModel->getTexts()[i].second->getText(), TextElement::m_listFonts[m_gameModel->getTexts()[i].second->getFont()], m_gameModel->getTexts()[i].second->getFontSize(), m_gameModel->getTexts()[i].second->getAutoRescale(), m_gameModel->getTexts()[i].second->getlineBreak(), sf::Color{(sf::Uint8)m_gameModel->getTexts()[i].second->getColor().r, (sf::Uint8)m_gameModel->getTexts()[i].second->getColor().g, (sf::Uint8)m_gameModel->getTexts()[i].second->getColor().b, (sf::Uint8)m_gameModel->getTexts()[i].second->getColor().a}, 0, m_gameModel->getTexts()[i].second->getEffect(), m_gameModel->getTexts()[i].second->getEffectPeriod()});
+                 m_elementToGraphicElement.insert(std::make_pair(m_gameModel->getTexts()[i].second, list));
+             } else {
+
+             }
+         }
     }
 
     //Pareil mais si des élements ont été supprimés

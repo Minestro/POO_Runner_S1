@@ -185,7 +185,6 @@ void GameCharacter::move()
                 {
                     m_position.second++;
                 }
-
             }
         }
 
@@ -203,3 +202,11 @@ void GameCharacter::move()
     }
 }
 
+ void GameCharacter::addLife (unsigned int life)
+ {
+     m_life+=life;
+     if (m_life > 100)
+     {
+         m_life = 100;
+     }
+ }
