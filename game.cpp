@@ -211,7 +211,8 @@ void Game::nextStep()
                     case bonus_type::PIECE:
                         player1->second->addScore(1000);
                         break;
-                    case bonus_type::INVINSIBLE:
+                    case bonus_type::SOINS:
+                        player1->second->addLife(10);
                         break;
                     default:
                         break;

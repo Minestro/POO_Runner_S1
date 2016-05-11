@@ -189,7 +189,9 @@ void GameView::synchronise()
                 case bonus_type::PIECE:
                     list.push_back(new SpriteElement{10, m_gameModel->getBonus()[i].second->getSize().first, m_gameModel->getBonus()[i].second->getSize().second, m_gameModel->getBonus()[i].second->getPosition().first, m_gameModel->getBonus()[i].second->getPosition().second, m_gameModel->getBonus()[i].second->getRotateAngle(), GraphicElement::m_listTextures["coin.png"], 1, 10, 1, 1, 1, 100});
                     break;
-                case bonus_type::INVINSIBLE:
+                case bonus_type::SOINS:
+                    list.push_back(new SpriteElement{2, m_gameModel->getBonus()[i].second->getSize().first, m_gameModel->getBonus()[i].second->getSize().second, m_gameModel->getBonus()[i].second->getPosition().first, m_gameModel->getBonus()[i].second->getPosition().second, m_gameModel->getBonus()[i].second->getRotateAngle(), GraphicElement::m_listTextures["Soins.png"], 1, 2, 1, 1, 1, 100});
+
                     // TO DO
                     break;
                 default:

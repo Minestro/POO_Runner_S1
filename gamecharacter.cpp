@@ -208,3 +208,7 @@ void GameCharacter::move()
     }
 }
 
+ void GameCharacter::addLife (unsigned int life)
+ {
+     m_life+=life;
+ }
