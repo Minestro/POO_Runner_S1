@@ -18,16 +18,14 @@ private:
     bool m_ascending;
     unsigned int m_life;
     Player *m_player;
-    unsigned int m_id;
     character_state m_state;
 public:
-    GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life = MAX_LIFE, unsigned int id = GameCharacter::nbCharacters);
+    GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life = MAX_LIFE);
     virtual ~GameCharacter();
     void addLife (unsigned int life);
     void addScore(unsigned int score);
     void removeLife (unsigned int life);
     unsigned int getLife() const;
-    unsigned int getId() const;
     unsigned int getScore() const;
     character_state getState() const;
     void setSate(character_state state);

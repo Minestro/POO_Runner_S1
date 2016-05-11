@@ -32,10 +32,13 @@ public:
     std::vector<std::pair<bool, Bonus*> > &getBonus();
     std::vector<std::pair<bool, Button*> > &getButtons();
     std::vector<std::pair<bool, Text*> > &getTexts();
+
     std::pair<float, float> getSize() const;
     std::pair<int, int> getCursorPosition() const;
     virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const = 0;
     void setCursorPosition(int x, int y);
+    Element *searchElementById(unsigned int id);
+    void deleteElement(unsigned int id);
     void clearAll();
 };
 

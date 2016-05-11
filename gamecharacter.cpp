@@ -4,7 +4,7 @@
 
 unsigned int GameCharacter::nbCharacters = 0;
 
-GameCharacter::GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life, unsigned int id): MovableElement{x, y, w, h, 0.0f, mx, my, 0.0f, CHARACTERSPEEDPERIOD}, m_score{0}, m_movingLeft{0}, m_movingRight{0}, m_ascending{0}, m_life{life}, m_player{player}, m_id{id}, m_state{character_state::STATIC}
+GameCharacter::GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life): MovableElement{x, y, w, h, 0.0f, mx, my, 0.0f, CHARACTERSPEEDPERIOD}, m_score{0}, m_movingLeft{0}, m_movingRight{0}, m_ascending{0}, m_life{life}, m_player{player}, m_state{character_state::STATIC}
 {
     GameCharacter::nbCharacters ++;
 }
@@ -61,11 +61,6 @@ void GameCharacter::removeLife(unsigned int life)
 unsigned int GameCharacter::getNbCharacters()
 {
     return GameCharacter::nbCharacters;
-}
-
-unsigned int GameCharacter::getId() const
-{
-    return m_id;
 }
 
 unsigned int GameCharacter::getScore() const

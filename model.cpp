@@ -93,3 +93,120 @@ void Model::clearAll()
     }
     m_texts.clear();
 }
+
+Element *Model::searchElementById(unsigned int id)
+{
+    Element *el = nullptr;
+    unsigned int i = 0;
+    while (el == nullptr && i<m_images.size())
+    {
+        if (m_images[i].second->getId() == id)
+        {
+            el = m_images[i].second;
+        }
+    }
+    i = 0;
+    while (el == nullptr && i<m_bonus.size())
+    {
+        if (m_bonus[i].second->getId() == id)
+        {
+            el = m_bonus[i].second;
+        }
+    }
+    i = 0;
+    while (el == nullptr && i<m_buttons.size())
+    {
+        if (m_buttons[i].second->getId() == id)
+        {
+            el = m_buttons[i].second;
+        }
+    }
+    i = 0;
+    while (el == nullptr && i<m_characters.size())
+    {
+        if (m_characters[i].second->getId() == id)
+        {
+            el = m_characters[i].second;
+        }
+    }
+    i = 0;
+    while (el == nullptr && i<m_obstacles.size())
+    {
+        if (m_obstacles[i].second->getId() == id)
+        {
+            el = m_obstacles[i].second;
+        }
+    }
+    i = 0;
+    while (el == nullptr && i<m_texts.size())
+    {
+        if (m_texts[i].second->getId() == id)
+        {
+            el = m_texts[i].second;
+        }
+    }
+    return el;
+}
+
+void Model::deleteElement(unsigned int id)
+{
+    Element *el = nullptr;
+    unsigned int i = 0;
+    while (el == nullptr && i<m_images.size())
+    {
+        if (m_images[i].second->getId() == id)
+        {
+            el = m_images[i].second;
+            //m_images.erase(m_images[i]);
+        }
+    }
+    i = 0;
+    while (el == nullptr && i<m_bonus.size())
+    {
+        if (m_bonus[i].second->getId() == id)
+        {
+            el = m_bonus[i].second;
+            //m_bonus.erase(m_bonus[i]);
+        }
+    }
+    i = 0;
+    while (el == nullptr && i<m_buttons.size())
+    {
+        if (m_buttons[i].second->getId() == id)
+        {
+            el = m_buttons[i].second;
+            //m_buttons.erase(m_buttons[i]);
+        }
+    }
+    i = 0;
+    while (el == nullptr && i<m_characters.size())
+    {
+        if (m_characters[i].second->getId() == id)
+        {
+            el = m_characters[i].second;
+            //m_characters.erase(m_characters[i]);
+        }
+    }
+    i = 0;
+    while (el == nullptr && i<m_obstacles.size())
+    {
+        if (m_obstacles[i].second->getId() == id)
+        {
+            el = m_obstacles[i].second;
+            //m_obstacles.erase(m_obstacles[i]);
+        }
+    }
+    i = 0;
+    while (el == nullptr && i<m_texts.size())
+    {
+        if (m_texts[i].second->getId() == id)
+        {
+            el = m_texts[i].second;
+            //m_texts.erase(m_texts[i]);
+        }
+    }
+    if (el != nullptr)
+    {
+        m_deletedElements.push_back(el);
+    }
+}

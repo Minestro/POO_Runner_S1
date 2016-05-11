@@ -92,13 +92,6 @@ void Game::nextStep()
 {
     srand(time(nullptr));
 
-    //On cherche le joueur 1 (le notre)
-    std::vector<std::pair<bool, GameCharacter*> >::iterator player1 = getCharacters().begin();
-    while (player1 != getCharacters().end() && player1->second->getId() != 0)
-    {
-        ++player1;
-    }
-
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMove).count() >= m_movePeriod)
     {
         if (m_gameState == game_state::RUNNING)
@@ -145,6 +138,7 @@ void Game::nextStep()
 
     if (m_gameState == game_state::RUNNING)
     {
+        //deleteElement(GAMEINTROTEXTID);
         //On bouge les personnages
         for (unsigned int i = 0; i<m_characters.size(); i++)
         {
@@ -161,22 +155,19 @@ void Game::nextStep()
         while (obstacle != m_obstacles.end())
         {
             bool increment = true;
-            if (player1 != m_characters.end())
+            if (obstacle->second->collision(m_characters[0].second))
             {
-                if (obstacle->second->collision(player1->second))
+                if (obstacle->second->getState() != obstacle_state::EXPLODE)
                 {
-                    if (obstacle->second->getState() != obstacle_state::EXPLODE)
-                    {
-                        player1->second->removeLife(obstacle->second->getDammage());
-                    }
-                    if (obstacle->second->getType() == obstacle_type::MINE)
-                    {
-                        obstacle->second->setState(obstacle_state::EXPLODE);
-                    } else {
-                        m_deletedElements.push_back(obstacle->second);
-                        m_obstacles.erase(obstacle);
-                        increment = false;
-                    }
+                    m_characters[0].second->removeLife(obstacle->second->getDammage());
+                }
+                if (obstacle->second->getType() == obstacle_type::MINE)
+                {
+                    obstacle->second->setState(obstacle_state::EXPLODE);
+                } else {
+                    m_deletedElements.push_back(obstacle->second);
+                    m_obstacles.erase(obstacle);
+                    increment = false;
                 }
             }
             if (obstacle->second->getPosition().first < -obstacle->second->getSize().first)
@@ -202,25 +193,19 @@ void Game::nextStep()
                 m_bonus.erase(bonus);
                 increment = false;
             }
-            if (player1 != m_characters.end())      //Si le joueur 1 n'est pas mort (on test les collisions que pour lui)
+            switch (bonus->second->getType())               //Action différente suivant le type de bonus
             {
-                if (bonus->second->collision(player1->second))      //Si il y a collision avec le personnage 1
-                {
-                    switch (bonus->second->getType())               //Action différente suivant le type de bonus
-                    {
-                    case bonus_type::PIECE:
-                        player1->second->addScore(1000);
-                        break;
-                    case bonus_type::INVINSIBLE:
-                        break;
-                    default:
-                        break;
-                    }
-                    m_deletedElements.push_back(bonus->second);     //on supprime le bonus
-                    m_bonus.erase(bonus);
-                    increment = false;
-                }
+            case bonus_type::PIECE:
+                m_characters[0].second->addScore(1000);
+                break;
+            case bonus_type::INVINSIBLE:
+                break;
+            default:
+                break;
             }
+            m_deletedElements.push_back(bonus->second);     //on supprime le bonus
+            m_bonus.erase(bonus);
+            increment = false;
             if (increment)                  //Si on a supprimé aucun bonus, on passe au suivant sinon pas besoin car les autres se sont trouvés décalés sur la position actuelle
             {
                 ++bonus;
@@ -244,6 +229,10 @@ void Game::nextStep()
         }
     } else if (m_gameState == game_state::INTRO)
     {
+        /*if (searchElementById(GAMEINTROTEXTID) == nullptr)
+        {
+            m_texts.push_back(std::make_pair(1, new Text{200, 200, 0, 0, 0, "Appuyez sur une touche pour lancer l'avion", 20, "score.ttf", ColorRGBA::White, text_effect::BREATH, 100, 0, 0}));
+        }*/
         for (unsigned int i=0; i<m_characters.size(); i++)
         {
             m_characters[i].second->setPosition(100, 100 + (i*70));

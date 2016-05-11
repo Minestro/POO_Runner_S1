@@ -8,7 +8,9 @@ ColorRGBA::ColorRGBA(unsigned int cr, unsigned int cg, unsigned int cb, unsigned
 const ColorRGBA ColorRGBA::White = ColorRGBA{255, 255, 255};
 const ColorRGBA ColorRGBA::Black = ColorRGBA{0, 0, 0};
 
-Element::Element(float x, float y, float w, float h, float rotation): m_position{x, y}, m_size{w, h}, m_rotation{rotation}
+unsigned int Element::idcpt = 0;
+
+Element::Element(float x, float y, float w, float h, float rotation): m_id{idcpt++}, m_position{x, y}, m_size{w, h}, m_rotation{rotation}
 {
 
 }
@@ -142,4 +144,14 @@ std::pair<float, float> Element::getPixelSpeed() const
 float Element::getRotateAngle() const
 {
     return m_rotation;
+}
+
+unsigned int Element::getId() const
+{
+    return m_id;
+}
+
+void Element::setId(unsigned int id)
+{
+    m_id = id;
 }

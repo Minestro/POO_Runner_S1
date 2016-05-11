@@ -17,11 +17,13 @@ struct ColorRGBA
 class Element
 {
 protected:
+    static unsigned int idcpt;
+    unsigned int m_id;
     std::pair <float, float> m_position; //first : x, second : y
     std::pair <float, float> m_size;  //first : w, second : h
     float m_rotation;
 public:
-    Element()= default;
+    Element()= delete;
     Element(float x, float y, float w, float h, float rotation);
     virtual ~Element() = default;
     virtual std::string getClassName() const=0;
@@ -30,6 +32,8 @@ public:
     float getRotateAngle() const;
     void setSize(float w, float h);
     void setPosition(float x, float y);
+    void setId(unsigned int id);
+    unsigned int getId() const;
     bool collision(const Element *el) const;
     virtual std::pair<float, float> getPixelSpeed() const;
 };
