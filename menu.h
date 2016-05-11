@@ -11,7 +11,6 @@ private:
     int m_activePage;
     int m_backgroundMovePeriod;
 public:
-    Menu() = default;
     Menu(float width, float height, int activePage);
     virtual ~Menu() = default;
     virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const;

@@ -20,7 +20,6 @@ private:
     int loadBonus(const tinyxml2::XMLElement &bonus);
     int loadObstacles(const tinyxml2::XMLElement &obstacle);
 public:
-    ObstaclesBonusPattern() = default;
     ObstaclesBonusPattern(unsigned int id, Model *model);
     int loadFromFile(const tinyxml2::XMLDocument &file);
     void addElementsToModel() const;

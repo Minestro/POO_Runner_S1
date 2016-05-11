@@ -11,7 +11,6 @@ class Window: public sf::RenderWindow
 private:
     sf::Event m_event;
 public:
-    Window()=default;
     Window(std::string title, int style, float modelSizeW, float modelSizeH);
     ~Window();
     sf::Event *getEvent();

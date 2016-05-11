@@ -16,7 +16,6 @@ private:
     unsigned int m_effectPeriod;
 
 public:
-    Text() = default;
     Text(float x, float y, float width, float height, float rotation, std::string text, unsigned int fontSize, std::string font, bool autoRescale = 1, bool lineBreak = 1);
     Text(float x, float y, float width, float height, float rotation, std::string text, unsigned int fontSize, std::string font, ColorRGBA color = ColorRGBA::Black, text_effect effect = text_effect::NOTHING, unsigned int effectPeriod = 0, bool autoRescale = 1, bool lineBreak = 1);
     virtual ~Text() = default;

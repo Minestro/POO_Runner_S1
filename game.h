@@ -30,7 +30,6 @@ private:
     int loadPatterns();
 
 public:
-    Game() = default;
     Game(float width, float height, unsigned int movePeriodMs);
     virtual ~Game();
     virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const;

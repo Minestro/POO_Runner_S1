@@ -6,7 +6,6 @@
 class RectangleShapeElement: public GraphicElement, public sf::RectangleShape
 {
 public:
-    RectangleShapeElement() = default;
     RectangleShapeElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, sf::Color color = sf::Color::Black);
     virtual ~RectangleShapeElement() = default;
     virtual void setSize(float width, float height) override;

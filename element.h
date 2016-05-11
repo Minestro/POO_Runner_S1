@@ -23,7 +23,6 @@ protected:
     std::pair <float, float> m_size;  //first : w, second : h
     float m_rotation;
 public:
-    Element()= delete;
     Element(float x, float y, float w, float h, float rotation);
     virtual ~Element() = default;
     virtual std::string getClassName() const=0;

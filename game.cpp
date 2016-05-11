@@ -2,7 +2,7 @@
 
 using namespace tinyxml2;
 
-Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_gameState{game_state::INTRO}, m_gameMode{game_mode::SOLO}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_player{nullptr}, m_distance{0}, m_powerActives{}, m_nextPatternAt{0}
+Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_gameMode{game_mode::SOLO}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_player{nullptr}, m_distance{0}, m_powerActives{}, m_nextPatternAt{0}
 {
     m_player =  new Player;
     GameCharacter *gc = new GameCharacter{100, 0, 100, 50, 0, 0, m_player};
@@ -12,6 +12,7 @@ Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{w
     m_images.push_back(std::make_pair(1, b1));
     m_images.push_back(std::make_pair(1, b2));
 
+    setGameState(game_state::INTRO);
     setSpeedPeriod(m_movePeriod);
     m_powerActives.resize(power_list::NB_POWER - 1);
 
@@ -80,7 +81,6 @@ float Game::getPixelSpeed() const
 void Game::nextStep()
 {
     srand(time(nullptr));
-
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMove).count() >= m_movePeriod)
     {
         if (m_gameState == game_state::RUNNING)
@@ -127,7 +127,6 @@ void Game::nextStep()
 
     if (m_gameState == game_state::RUNNING)
     {
-        deleteElement(GAMEINTROTEXTID);
         //On bouge les personnages
         for (unsigned int i = 0; i<m_characters.size(); i++)
         {
@@ -222,12 +221,7 @@ void Game::nextStep()
         }
     } else if (m_gameState == game_state::INTRO)
     {
-        if (searchElementById(GAMEINTROTEXTID) == nullptr)
-        {
-            Text *text = new Text{0, 600, GAME_SIZE_W, 50, 0, "Appuyez sur une touche pour lancer l'avion", 20, "score.ttf", ColorRGBA::White,text_effect::BREATH, 20, 1, 0};
-            m_texts.push_back(std::make_pair(1, text));
-            text->setId(GAMEINTROTEXTID);
-        }
+
         for (unsigned int i=0; i<m_characters.size(); i++)
         {
             m_characters[i].second->setPosition(100, 100 + (i*70));
@@ -270,6 +264,23 @@ int Game::getGameMode() const
 void Game::setGameState(int state)
 {
     m_gameState = state;
+    switch (m_gameState)
+    {
+    case game_state::INTRO:
+        if (searchElementById(GAMEINTROTEXTID) == nullptr)
+        {
+            Text *text = new Text{0, 600, GAME_SIZE_W, 50, 0, "Appuyez sur une touche pour lancer l'avion", 20, "score.ttf", ColorRGBA::White,text_effect::BREATH, 20, 1, 0};
+            m_texts.push_back(std::make_pair(1, text));
+            text->setId(GAMEINTROTEXTID);
+        }
+        break;
+    case game_state::RUNNING:
+        deleteElement(GAMEINTROTEXTID);
+        break;
+    default:
+        break;
+    }
+
 }
 
 void Game::setGameMode(int mode)

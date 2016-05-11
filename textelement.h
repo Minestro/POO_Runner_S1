@@ -20,7 +20,6 @@ private:
 
     void generateTextForm();
 public:
-    TextElement() = default;
     TextElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, std::string text, const sf::Font *font, unsigned int fontSize, bool autoRescale = 1, bool lineBreak = 1, sf::Color color = sf::Color::Black, int style = 0, text_effect effect = text_effect::NOTHING, unsigned int refreshPeriod = 0);
     virtual ~TextElement() = default;
     void setSize(float width, float height);

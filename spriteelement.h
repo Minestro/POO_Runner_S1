@@ -17,7 +17,6 @@ protected:
     bool m_animationDirectionRight;
     void rescale(float width, float height);
 public:
-    SpriteElement() = default;
     SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int animatePeriod = 0);
     SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int nbLignes, int nbColonnes, int activeLigne = 1, int activeColonne = 1, bool autoLoop = 1, int animatePeriod = 0, bool animationDirectionright = 1);
     virtual ~SpriteElement() = default;

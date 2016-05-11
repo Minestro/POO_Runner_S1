@@ -20,7 +20,6 @@ protected:
     std::chrono::time_point<std::chrono::system_clock> m_lastRefeshCall;
     unsigned int m_refreshPeriod;
 public:
-    GraphicElement() = default;
     GraphicElement(unsigned int zIndex, unsigned int refreshPeriod = 0);
     virtual ~GraphicElement() = default;
     virtual void setSize(float width, float height) = 0;

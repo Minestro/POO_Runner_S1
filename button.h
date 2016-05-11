@@ -20,7 +20,6 @@ private:
     Menu *m_menu;
     std::vector<button_action> m_actions;
 public:
-    Button() = default;
     Button(float x, float y, float width, float height, float rotation, std::string text, int destinationPage, Menu *m, button_type type = button_type::TEXT_BUTTON, bool isClickable = 1);
     virtual ~Button() = default;
     bool isHover(int x, int y) const;

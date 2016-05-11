@@ -8,7 +8,6 @@ class CircleShapeElement: public GraphicElement, public sf::CircleShape
 private:
     void rescale(float width, float height);
 public:
-    CircleShapeElement() = default;
     CircleShapeElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, sf::Color color = sf::Color::Black);
     virtual ~CircleShapeElement() = default;
     virtual void setSize(float width, float height);

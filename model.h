@@ -22,7 +22,6 @@ protected:
     std::vector<const Element*> m_deletedElements;
     std::pair<int, int> m_cursorPosition;
 public:
-    Model() = default;
     Model(float width, float height);
     virtual ~Model() = default;
     std::vector<const Element*> &getDeletedElements();

@@ -10,7 +10,6 @@ private:
     TextElement *m_prefixe;
     unsigned int m_showedScore;
 public:
-    ScoreGraphic() = default;
     ScoreGraphic(unsigned int zIndex, float x, float y, float rotateAngle, const sf::Font *font, unsigned int fontSize, unsigned int refreshPeriod, sf::Color color = sf::Color::Black, int style = 0);
     virtual ~ScoreGraphic();
     virtual void setSize(float width, float height);

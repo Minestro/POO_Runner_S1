@@ -14,7 +14,6 @@ private:
     unsigned int m_actualBarWidth;
     float m_ratioLife;
 public:
-    LifeBar() = default;
     LifeBar(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, unsigned int refreshPeriod = 0);
     virtual ~LifeBar();
     virtual void setSize(float width, float height);
