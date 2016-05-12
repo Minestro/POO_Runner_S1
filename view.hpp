@@ -112,7 +112,7 @@ public:
                 {
                     std::list<GraphicElement*> list;
                     std::string texture;
-                    int nbLignes, nbColonnes, animationPeriod;
+                    unsigned int nbLignes, nbColonnes, animationPeriod;
                     switch (obstacle.second->getType())
                     {
                     case obstacle_type::MINE:
@@ -139,7 +139,7 @@ public:
                 {
                     std::list<GraphicElement*> list;
                     std::string texture;
-                    int nbLignes, nbColonnes, animationPeriod;
+                    unsigned int nbLignes, nbColonnes, animationPeriod;
                     switch (bonus.second->getType())
                     {
                     case bonus_type::PIECE:
@@ -206,7 +206,24 @@ public:
                 if (m_elementToGraphicElement.find(button.second) == m_elementToGraphicElement.end())
                 {
                     std::list<GraphicElement*> list;
-                    list.push_back(new ButtonGraphic{10, button.second->getSize().first, button.second->getSize().second, button.second->getPosition().first, button.second->getPosition().second, button.second->getRotateAngle(), button.second->getText(), TextElement::m_listFonts["score.ttf"], 20, sf::Color::White});
+                    std::string texture;
+                    unsigned int nbLignes, nbColonnes;
+                    switch (button.second->getType())
+                    {
+                    case button_type::TEXT_BUTTON:
+                        texture = "buttons.png";
+                        nbLignes = 1;
+                        nbColonnes = 2;
+                        break;
+                    case button_type::RADIO_BUTTON:
+                        texture = "radioButton.png";
+                        nbLignes = 1;
+                        nbColonnes = 2;
+                        break;
+                    default:
+                        break;
+                    }
+                    list.push_back(new ButtonGraphic{10, button.second->getSize().first, button.second->getSize().second, button.second->getPosition().first, button.second->getPosition().second, button.second->getRotateAngle(), GraphicElement::m_listTextures[texture], nbLignes, nbColonnes, button.second->getText(), TextElement::m_listFonts["score.ttf"], 20, sf::Color::White});
                     m_elementToGraphicElement.insert(std::make_pair(button.second, list));
                 }
                 button.first = 0;

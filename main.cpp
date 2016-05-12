@@ -5,6 +5,7 @@
 #include "textelement.h"
 #include "menu.h"
 #include "menuview.h"
+#include "appsettings.h"
 
 int main()
 {
@@ -12,7 +13,9 @@ int main()
     loopTime = std::chrono::system_clock::now();
     int drawPeriod = (1.0f / FPS)*1000;
     bool quitter = false;
+
     Window superfenetre{"Runner", sf::Style::Default, GAME_SIZE_W, GAME_SIZE_H};
+    AppSettings setting{};
     GraphicElement::loadTextures();
     TextElement::loadFonts();
     Game *gameModel = new Game{GAME_SIZE_W, GAME_SIZE_H, STARTSPEEDPERIODGAME};
@@ -23,6 +26,8 @@ int main()
     gameView->setWindow(&superfenetre);
     menuView->setModel(menuModel);
     menuView->setWindow(&superfenetre);
+    gameModel->setAppSettings(&setting);
+    menuModel->setAppSettings(&setting);
     while (!quitter)
     {
         sf::sleep(sf::milliseconds(1));
@@ -46,6 +51,7 @@ int main()
             }
             quitter = menuView->treatEvent();
         }
+        superfenetre.refreshSettings(setting);
     }
     GraphicElement::clearTextures();
     TextElement::clearFonts();
@@ -53,5 +59,6 @@ int main()
     delete menuModel;
     delete gameView;
     delete menuView;
+    superfenetre.close();
     return EXIT_SUCCESS;
 }

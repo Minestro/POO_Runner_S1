@@ -1,9 +1,8 @@
 #include "menuview.h"
 
-
 bool MenuView::treatEvent()
 {
-    bool quitter = false;
+    bool quitter = m_model->getExitApp();
     while (m_window->pollEvent(*m_window->getEvent()))
     {
         switch (m_window->getEvent()->type)

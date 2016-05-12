@@ -1,9 +1,9 @@
 #include "buttongraphic.h"
 
-ButtonGraphic::ButtonGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, std::string text, const sf::Font *font, unsigned int fontSize, sf::Color color, int style, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_size{width, height}, m_position{x, y}
+ButtonGraphic::ButtonGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int nbLignes, unsigned int nbColonnes, std::string text, const sf::Font *font, unsigned int fontSize, sf::Color color, int style, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_size{width, height}, m_position{x, y}
 {
     m_text = new TextElement{zIndex, width, height, x, y, rotateAngle, text, font, fontSize, 1, 0, color, style};
-    m_sprite = new SpriteElement{zIndex, width, height, x, y, rotateAngle, GraphicElement::m_listTextures["buttons.png"], 1, 2, 1, 1, 0};
+    m_sprite = new SpriteElement{zIndex, width, height, x, y, rotateAngle, texture, nbLignes, nbColonnes, 1, 1, 0};
 }
 
 ButtonGraphic::~ButtonGraphic()
@@ -64,18 +64,35 @@ void ButtonGraphic::refresh(const Element *el, Model *model)
     }
     if (button != model->getButtons().end())
     {
-        m_text->setString(button->second->getText());
-        m_text->refresh(el, model);
         m_size = el->getSize();
         m_sprite->setSize(m_size.first, m_size.second);
         m_position = el->getPosition();
         m_sprite->setPosition(m_position.first, m_position.second);
         setRotation(el->getRotateAngle());
-        if (button->second->isHover(model->getCursorPosition().first, model->getCursorPosition().second))
+        switch (button->second->getType())
         {
-            m_sprite->setRectPos(1, 2);
-        } else {
-            m_sprite->setRectPos(1, 1);
+        case button_type::TEXT_BUTTON:
+            m_text->setString(button->second->getText());
+            m_text->refresh(el, model);
+            if (button->second->isHover(model->getCursorPosition().first, model->getCursorPosition().second) && button->second->isClickable())
+            {
+                m_sprite->setRectPos(1, 2);
+            } else {
+                m_sprite->setRectPos(1, 1);
+            }
+            break;
+        case button_type::RADIO_BUTTON:
+            m_text->setString("");
+            m_text->refresh(el, model);
+            if (button->second-> isOn())
+            {
+                m_sprite->setRectPos(1, 1);
+            } else {
+                m_sprite->setRectPos(1, 2);
+            }
+            break;
+        default:
+            break;
         }
     }
 }

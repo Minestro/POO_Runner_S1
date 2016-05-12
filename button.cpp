@@ -1,7 +1,7 @@
 #include "button.h"
 #include "menu.h"
 
-Button::Button(float x, float y, float width, float height, float rotation, std::string text, int destinationPage, Menu *m, button_type type, bool isClickable): Element::Element{x, y, width, height, rotation}, m_text{text}, m_type{type}, m_isClickable{isClickable}, m_destinationPage{destinationPage}, m_menu{m}, m_actions{}
+Button::Button(float x, float y, float width, float height, float rotation, std::string text, int destinationPage, Menu *m, button_type type, bool isClickable): Element::Element{x, y, width, height, rotation}, m_text{text}, m_type{type}, m_isClickable{isClickable}, m_isOn{0}, m_destinationPage{destinationPage}, m_menu{m}, m_actions{}
 {
 
 }
@@ -23,7 +23,17 @@ button_type Button::getType() const
 
 bool Button::isClickable() const
 {
-    return isClickable();
+    return m_isClickable;
+}
+
+bool Button::isOn() const
+{
+    return m_isOn;
+}
+
+void Button::setIsOn(bool on)
+{
+    m_isOn = on;
 }
 
 void Button::addAction(button_action action)
@@ -51,6 +61,13 @@ void Button::onClick()
         {
         case button_action::CHANGE_PAGE:
             Button::changePage(this, m_menu);
+            break;
+        case button_action::EXIT_APP:
+            m_menu->exitApp();
+            break;
+        case button_action::SET_FULL_SCREEN:
+            m_menu->getAppSettings().m_isFullScreen = !m_menu->getAppSettings().m_isFullScreen;
+            m_isOn = m_menu->getAppSettings().m_isFullScreen;
             break;
         default:
             break;

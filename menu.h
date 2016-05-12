@@ -10,6 +10,7 @@ class Menu: public Model
 private:
     int m_activePage;
     int m_backgroundMovePeriod;
+    bool m_exitApp;
 public:
     Menu(float width, float height, int activePage);
     virtual ~Menu() = default;
@@ -18,6 +19,8 @@ public:
     void refresh();
     void refreshContent();
     int getActivePage() const;
+    bool getExitApp() const;
+    void exitApp();
 };
 
 #endif // MENU_H

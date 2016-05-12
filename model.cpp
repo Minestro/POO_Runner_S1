@@ -1,6 +1,6 @@
 #include "model.h"
 
-Model::Model(float width, float height): m_size{width, height}, m_characters{}, m_images{}, m_obstacles{}, m_bonus{}, m_texts{}, m_deletedElements{}, m_cursorPosition{}
+Model::Model(float width, float height): m_size{width, height}, m_characters{}, m_images{}, m_obstacles{}, m_bonus{}, m_texts{}, m_deletedElements{}, m_cursorPosition{0, 0}, m_settings{nullptr}
 {
 
 }
@@ -63,6 +63,16 @@ void Model::setCursorPosition(int x, int y)
 {
     m_cursorPosition.first = x;
     m_cursorPosition.second = y;
+}
+
+void Model::setAppSettings(AppSettings *setting)
+{
+    m_settings = setting;
+}
+
+AppSettings &Model::getAppSettings() const
+{
+    return *m_settings;
 }
 
 void Model::clearAll()

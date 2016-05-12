@@ -7,18 +7,18 @@
 class SpriteElement: public GraphicElement, public sf::Sprite
 {
 protected:
-    int m_nbLignes;
-    int m_nbColonnes;
-    int m_activeLigne;
-    int m_activeColonne;
+    unsigned int m_nbLignes;
+    unsigned int m_nbColonnes;
+    unsigned int m_activeLigne;
+    unsigned int m_activeColonne;
     std::chrono::time_point<std::chrono::system_clock> m_lastAnimateCall;
-    int m_animatePeriod;
+    unsigned int m_animatePeriod;
     bool m_autoLoop;
     bool m_animationDirectionRight;
     void rescale(float width, float height);
 public:
-    SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int animatePeriod = 0);
-    SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, int nbLignes, int nbColonnes, int activeLigne = 1, int activeColonne = 1, bool autoLoop = 1, int animatePeriod = 0, bool animationDirectionright = 1);
+    SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int animatePeriod = 0);
+    SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int nbLignes, unsigned int nbColonnes, unsigned int activeLigne = 1, unsigned int activeColonne = 1, bool autoLoop = 1, unsigned int animatePeriod = 0, bool animationDirectionright = 1);
     virtual ~SpriteElement() = default;
     virtual std::pair<float, float> getSize() const;
     virtual std::pair<float, float> getPosition() const override;

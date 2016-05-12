@@ -5,8 +5,8 @@
 #include <vector>
 #include <string>
 
-enum button_type {TEXT_BUTTON, ARROW_BUTTON};
-enum button_action {CHANGE_PAGE};
+enum button_type {TEXT_BUTTON, ARROW_BUTTON, RADIO_BUTTON};
+enum button_action {CHANGE_PAGE, EXIT_APP, SET_FULL_SCREEN};
 
 class Menu;
 
@@ -16,6 +16,7 @@ private:
     std::string m_text;
     button_type m_type;
     bool m_isClickable; //On peut immaginer que le bouton soit non cliquable par exemple qu'il soit grisé.
+    bool m_isOn;
     int m_destinationPage;
     Menu *m_menu;
     std::vector<button_action> m_actions;
@@ -28,11 +29,12 @@ public:
     button_type getType() const;
     int getDestinationPage() const;
     bool isClickable() const;
+    bool isOn() const;
+    void setIsOn(bool on);
     std::string getClassName() const;
     void addAction(button_action action);
 
     static void changePage(Button *sender, Menu *menu);
-    static void test(Button *sender, Menu *menu);
 };
 
 #endif // BUTTON_H
