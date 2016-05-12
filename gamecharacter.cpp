@@ -4,7 +4,7 @@
 
 unsigned int GameCharacter::nbCharacters = 0;
 
-GameCharacter::GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life): MovableElement{x, y, w, h, 0.0f, mx, my, 0.0f, CHARACTERSPEEDPERIOD}, m_score{0}, m_movingLeft{0}, m_movingRight{0}, m_ascending{0}, m_life{life}, m_player{player}, m_state{character_state::STATIC}
+GameCharacter::GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life): MovableElement{x, y, w, h, 0.0f, mx, my, 0.0f, CHARACTERSPEEDPERIOD}, m_score{0}, m_movingLeft{0}, m_movingRight{0}, m_ascending{0}, m_life{life}, m_player{player}, m_state{character_state::ALIVE}
 {
     GameCharacter::nbCharacters ++;
 }
@@ -87,6 +87,10 @@ void GameCharacter::move()
 {
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() >= m_movePeriod)
     {
+        Obstacle rightWall{GAME_SIZE_W, 0, 1, GAME_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
+        Obstacle leftWall {-1, 0, 1, GAME_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
+        Obstacle roof{0, -1, GAME_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
+        Obstacle ground{0, HAUTEUR_SOL, GAME_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
         if (m_state != character_state::DYING)
         {
             //On déplace latéralement le personnage
@@ -120,71 +124,74 @@ void GameCharacter::move()
             {
                 m_movement.first = 0;
             }
+
+            //Test des collisions avec les bords de l'écran et le sol
+            if (collision(&rightWall) && m_movement.first > 0)
+            {
+                m_movement.first = 0;
+                m_position.first --;
+            } else if (collision(&leftWall) && m_movement.first < 0)
+            {
+                m_movement.first = 0;
+                m_position.first ++;
+            }
+
+            if (collision(&ground) && m_movement.second > 0)
+            {
+                m_life = 0;
+                m_movement.second = 0;
+            } else if (collision(&roof) && m_movement.second < 0)
+            {
+                if (m_rotation < 0)
+                {
+                    m_rotation ++;
+                    while (!collision(&roof))
+                    {
+                        m_position.second --;
+                    }
+                } else if (m_rotation > 0)
+                {
+                    m_rotation --;
+                    while (!collision(&roof))
+                    {
+                        m_position.second --;
+                    }
+                }
+                if (abs(m_rotation) < 1)
+                {
+                    m_rotation = 0;
+                }
+                m_movement.second = 0;
+            }
+        }
+
+        //On rotate l'avion suivant sont vecteur de deplacement y
+        if ((!collision(&roof) && !collision(&ground)) || m_state != character_state::ALIVE)
+        {
+            float rotation = (m_movement.second/CHARACTER_MAX_SPEED)*45;
+            if (rotation > 45)
+            {
+                rotation = 45;
+            } else if (rotation < -45)
+            {
+                rotation = -45;
+            }
+            if (m_state == character_state::DYING)
+            {
+                m_rotation = rotation;
+            }
+            if (m_rotation < rotation)
+            {
+                m_rotation ++;
+            } else if (m_rotation > rotation)
+            {
+                m_rotation --;
+            }
         }
 
         //On deplace la position de la balle
         m_position.first += m_movement.first;
         m_position.second += m_movement.second;
-
-        std::vector<std::pair<float, float> > points = getPointsAfterRotation();
-        int xMin = std::min(std::min(points[UL].first, points[UR].first), std::min(points[DL].first, points[DR].first));
-        int yMin = std::min(std::min(points[UL].second, points[UR].second), std::min(points[DL].second, points[DR].second));
-        int xMax = std::max(std::max(points[UL].first, points[UR].first), std::max(points[DL].first, points[DR].first));
-        int yMax = std::max(std::max(points[UL].second, points[UR].second), std::max(points[DL].second, points[DR].second));
-        if (m_state != character_state::DYING)
-        {
-            //Test des collisions avec les bords de l'écran et le sol
-            Obstacle rightWall{GAME_SIZE_W, 0, 1, GAME_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
-            Obstacle leftWall {-1, 0, 1, GAME_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
-            if (collision(&rightWall))
-            {
-                m_position.first = GAME_SIZE_W + (xMax - (m_position.first + m_size.first));
-                m_movement.first = 0;
-            } else if (collision(&leftWall))
-            {
-                m_position.first = xMin - m_position.first;
-                m_movement.first = 0;
-            }
-
-            Obstacle roof{0, -1, GAME_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
-            Obstacle ground{0, HAUTEUR_SOL, GAME_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
-            if (collision(&ground))
-            {
-                m_life = 0;
-                while (collision(&ground))
-                {
-                    m_position.second--;
-                }
-                m_movement.second = 0;
-            } else if (collision(&roof))
-            {
-                if (m_rotation != 0)
-                {
-                    if (m_rotation > 0)
-                    {
-                        m_rotation--;
-                    } else if (m_rotation < 0)
-                    {
-                        m_rotation++;
-                    }
-                    if (abs(m_rotation) < 1)
-                    {
-                        m_rotation = 0;
-                    }
-                    m_position.second = yMin - m_position.second + 1;
-                }
-            }
-        }
-
-        //On rotate l'avion suivant sont vecteur de deplacement y
-        m_rotation = (m_movement.second/CHARACTER_MAX_SPEED)*45;
-        if (m_rotation > 45)
-        {
-            m_rotation = 45;
-        } else if (m_rotation < -45)
-        {
-            m_rotation = -45;
-        }
 
         m_lastMoveCall = std::chrono::system_clock::now();
     }

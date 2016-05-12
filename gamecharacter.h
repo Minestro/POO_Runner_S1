@@ -6,7 +6,7 @@
 #include "movableelement.h"
 #include "player.h"
 
-enum character_state{STATIC, DYING, RUN, FLYING};
+enum character_state{ALIVE, DYING};
 enum character_id{PLAYER1 = 7777, PLAYER2, PLAYER3, PLAYER4};
 
 class GameCharacter: public MovableElement
