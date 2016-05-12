@@ -9,7 +9,7 @@
 #include "player.h"
 #include "obstaclesbonuspattern.h"
 
-#define GAMEINTROTEXTID 6354354
+#define GAMEINTROTEXTID 101
 
 enum game_state{INTRO, RUNNING};
 enum game_mode{SOLO, MULTI_HOSTING, MULTI_CLIENT};

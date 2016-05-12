@@ -97,59 +97,62 @@ void Model::clearAll()
 Element *Model::searchElementById(unsigned int id)
 {
     Element *el = nullptr;
-    unsigned int i = 0;
-    while (el == nullptr && i<m_images.size())
+    if (id != IDNOTSET)
     {
-        if (m_images[i].second->getId() == id)
+        unsigned int i = 0;
+        while (el == nullptr && i<m_images.size())
         {
-            el = m_images[i].second;
+            if (m_images[i].second->getId() == id)
+            {
+                el = m_images[i].second;
+            }
+            i++;
         }
-        i++;
-    }
-    i = 0;
-    while (el == nullptr && i<m_bonus.size())
-    {
-        if (m_bonus[i].second->getId() == id)
+        i = 0;
+        while (el == nullptr && i<m_bonus.size())
         {
-            el = m_bonus[i].second;
+            if (m_bonus[i].second->getId() == id)
+            {
+                el = m_bonus[i].second;
+            }
+            i++;
         }
-        i++;
-    }
-    i = 0;
-    while (el == nullptr && i<m_buttons.size())
-    {
-        if (m_buttons[i].second->getId() == id)
+        i = 0;
+        while (el == nullptr && i<m_buttons.size())
         {
-            el = m_buttons[i].second;
+            if (m_buttons[i].second->getId() == id)
+            {
+                el = m_buttons[i].second;
+            }
+            i++;
         }
-        i++;
-    }
-    i = 0;
-    while (el == nullptr && i<m_characters.size())
-    {
-        if (m_characters[i].second->getId() == id)
+        i = 0;
+        while (el == nullptr && i<m_characters.size())
         {
-            el = m_characters[i].second;
+            if (m_characters[i].second->getId() == id)
+            {
+                el = m_characters[i].second;
+            }
+            i++;
         }
-        i++;
-    }
-    i = 0;
-    while (el == nullptr && i<m_obstacles.size())
-    {
-        if (m_obstacles[i].second->getId() == id)
+        i = 0;
+        while (el == nullptr && i<m_obstacles.size())
         {
-            el = m_obstacles[i].second;
+            if (m_obstacles[i].second->getId() == id)
+            {
+                el = m_obstacles[i].second;
+            }
+            i++;
         }
-        i++;
-    }
-    i = 0;
-    while (el == nullptr && i<m_texts.size())
-    {
-        if (m_texts[i].second->getId() == id)
+        i = 0;
+        while (el == nullptr && i<m_texts.size())
         {
-            el = m_texts[i].second;
+            if (m_texts[i].second->getId() == id)
+            {
+                el = m_texts[i].second;
+            }
+            i++;
         }
-        i++;
     }
     return el;
 }
@@ -157,65 +160,68 @@ Element *Model::searchElementById(unsigned int id)
 void Model::deleteElement(unsigned int id)
 {
     Element *el = nullptr;
-    unsigned int i = 0;
-    while (el == nullptr && i<m_images.size())
+    if (id != IDNOTSET)
     {
-        if (m_images[i].second->getId() == id)
+        unsigned int i = 0;
+        while (el == nullptr && i<m_images.size())
         {
-            el = m_images[i].second;
-            m_images.erase(m_images.begin()+i);
+            if (m_images[i].second->getId() == id)
+            {
+                el = m_images[i].second;
+                m_images.erase(m_images.begin()+i);
+            }
+            i++;
         }
-        i++;
-    }
-    i = 0;
-    while (el == nullptr && i<m_bonus.size())
-    {
-        if (m_bonus[i].second->getId() == id)
+        i = 0;
+        while (el == nullptr && i<m_bonus.size())
         {
-            el = m_bonus[i].second;
-            m_bonus.erase(m_bonus.begin()+i);
+            if (m_bonus[i].second->getId() == id)
+            {
+                el = m_bonus[i].second;
+                m_bonus.erase(m_bonus.begin()+i);
+            }
+            i++;
         }
-        i++;
-    }
-    i = 0;
-    while (el == nullptr && i<m_buttons.size())
-    {
-        if (m_buttons[i].second->getId() == id)
+        i = 0;
+        while (el == nullptr && i<m_buttons.size())
         {
-            el = m_buttons[i].second;
-            m_buttons.erase(m_buttons.begin()+i);
+            if (m_buttons[i].second->getId() == id)
+            {
+                el = m_buttons[i].second;
+                m_buttons.erase(m_buttons.begin()+i);
+            }
+            i++;
         }
-        i++;
-    }
-    i = 0;
-    while (el == nullptr && i<m_characters.size())
-    {
-        if (m_characters[i].second->getId() == id)
+        i = 0;
+        while (el == nullptr && i<m_characters.size())
         {
-            el = m_characters[i].second;
-            m_characters.erase(m_characters.begin()+i);
+            if (m_characters[i].second->getId() == id)
+            {
+                el = m_characters[i].second;
+                m_characters.erase(m_characters.begin()+i);
+            }
+            i++;
         }
-        i++;
-    }
-    i = 0;
-    while (el == nullptr && i<m_obstacles.size())
-    {
-        if (m_obstacles[i].second->getId() == id)
+        i = 0;
+        while (el == nullptr && i<m_obstacles.size())
         {
-            el = m_obstacles[i].second;
-            m_obstacles.erase(m_obstacles.begin()+i);
+            if (m_obstacles[i].second->getId() == id)
+            {
+                el = m_obstacles[i].second;
+                m_obstacles.erase(m_obstacles.begin()+i);
+            }
+            i++;
         }
-        i++;
-    }
-    i = 0;
-    while (el == nullptr && i<m_texts.size())
-    {
-        if (m_texts[i].second->getId() == id)
+        i = 0;
+        while (el == nullptr && i<m_texts.size())
         {
-            el = m_texts[i].second;
-            m_texts.erase(m_texts.begin()+i);
+            if (m_texts[i].second->getId() == id)
+            {
+                el = m_texts[i].second;
+                m_texts.erase(m_texts.begin()+i);
+            }
+            i++;
         }
-        i++;
     }
     if (el != nullptr)
     {

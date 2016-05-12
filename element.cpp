@@ -10,7 +10,7 @@ const ColorRGBA ColorRGBA::Black = ColorRGBA{0, 0, 0};
 
 unsigned int Element::idcpt = 0;
 
-Element::Element(float x, float y, float w, float h, float rotation): m_id{idcpt++}, m_position{x, y}, m_size{w, h}, m_rotation{rotation}
+Element::Element(float x, float y, float w, float h, float rotation, unsigned long int id): m_id{id}, m_position{x, y}, m_size{w, h}, m_rotation{rotation}
 {
 
 }
@@ -152,12 +152,12 @@ float Element::getRotateAngle() const
     return m_rotation;
 }
 
-unsigned int Element::getId() const
+unsigned long Element::getId() const
 {
     return m_id;
 }
 
-void Element::setId(unsigned int id)
+void Element::setId(unsigned long int id)
 {
     m_id = id;
 }
