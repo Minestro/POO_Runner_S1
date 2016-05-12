@@ -23,7 +23,7 @@ protected:
     std::pair<int, int> m_cursorPosition;
 public:
     Model(float width, float height);
-    virtual ~Model() = default;
+    virtual ~Model();
     std::vector<const Element*> &getDeletedElements();
     std::vector<std::pair<bool, GameCharacter*> > &getCharacters();
     std::vector<std::pair<bool, Image*> > &getImages();

@@ -2,6 +2,11 @@
 
 Model::Model(float width, float height): m_size{width, height}, m_characters{}, m_images{}, m_obstacles{}, m_bonus{}, m_texts{}, m_deletedElements{}, m_cursorPosition{}
 {
+
+}
+
+Model::~Model()
+{
     clearAll();
     for (unsigned int i = 0; i<m_deletedElements.size(); i++)
     {

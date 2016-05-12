@@ -1,4 +1,5 @@
 #include "menu.h"
+#include <iostream>
 
 Menu::Menu(float width, float height, int activePage): Model::Model{width, height}, m_activePage{activePage}, m_backgroundMovePeriod{STARTSPEEDPERIODGAME}
 {

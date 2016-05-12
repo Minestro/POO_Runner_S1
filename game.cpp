@@ -26,7 +26,6 @@ Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{w
 
 Game::~Game()
 {
-    clearAll();
     delete m_player;
 }
 
