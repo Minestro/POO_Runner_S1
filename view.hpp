@@ -68,10 +68,6 @@ public:
             }
             ++map;
         }
-        for (const Element *el : m_model->getDeletedElements())
-        {
-            delete el;
-        }
     }
 
     void draw()

@@ -96,7 +96,7 @@ void LifeBar::refresh(const Element *el, Model *model)
             m_bar->setFillColor(finalColor);
             m_lastRefeshCall = std::chrono::system_clock::now();
         }
-        if (it->second->getId() > 0)
+        if (it->second->getId() > character_id::PLAYER1)
         {
             setPosition(el->getPosition().first, el->getPosition().second - 15);
             setSize(el->getSize().first, 10.0);

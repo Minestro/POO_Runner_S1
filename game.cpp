@@ -6,6 +6,7 @@ Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{w
 {
     m_player =  new Player;
     GameCharacter *gc = new GameCharacter{100, 0, 100, 50, 0, 0, m_player};
+    gc->setId(character_id::PLAYER1);
     m_characters.push_back(std::make_pair(1, gc));
     Image *b1 = new Image{0, 0, GAME_SIZE_W, GAME_SIZE_H, "FOND2.png", 1, 0.5, 1, 0};
     Image *b2 = new Image{0, 0, GAME_SIZE_W, GAME_SIZE_H, "FOND1.png", 2, 1.0, 1, 0};
@@ -81,6 +82,13 @@ float Game::getPixelSpeed() const
 void Game::nextStep()
 {
     srand(time(nullptr));
+
+    std::vector<std::pair<bool, GameCharacter*> >::iterator player1 = m_characters.begin();
+    while (player1 != m_characters.end() && player1->second->getId() != character_id::PLAYER1)
+    {
+        ++player1;
+    }
+
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMove).count() >= m_movePeriod)
     {
         if (m_gameState == game_state::RUNNING)
@@ -143,19 +151,22 @@ void Game::nextStep()
         while (obstacle != m_obstacles.end())
         {
             bool increment = true;
-            if (obstacle->second->collision(m_characters[0].second))
+            if (player1 != m_characters.end())
             {
-                if (obstacle->second->getState() != obstacle_state::EXPLODE)
+                if (obstacle->second->collision(m_characters[0].second))
                 {
-                    m_characters[0].second->removeLife(obstacle->second->getDammage());
-                }
-                if (obstacle->second->getType() == obstacle_type::MINE)
-                {
-                    obstacle->second->setState(obstacle_state::EXPLODE);
-                } else {
-                    m_deletedElements.push_back(obstacle->second);
-                    m_obstacles.erase(obstacle);
-                    increment = false;
+                    if (obstacle->second->getState() != obstacle_state::EXPLODE)
+                    {
+                        m_characters[0].second->removeLife(obstacle->second->getDammage());
+                    }
+                    if (obstacle->second->getType() == obstacle_type::MINE)
+                    {
+                        obstacle->second->setState(obstacle_state::EXPLODE);
+                    } else {
+                        m_deletedElements.push_back(obstacle->second);
+                        m_obstacles.erase(obstacle);
+                        increment = false;
+                    }
                 }
             }
             if (obstacle->second->getPosition().first < -obstacle->second->getSize().first)
@@ -175,22 +186,25 @@ void Game::nextStep()
         while (bonus != m_bonus.end())          //Tant que on arrive pas à la fin de la liste de bonus
         {
             bool increment = true;              //Ce booléen indique si l'on a supprimé un bonus. Lorsqu'on supprime un bonus, tous les bonus suivants se retrouvent décalés du coup on incrémente pas l'iterator pour passer au bonus suivant
-            if (bonus->second->collision(m_characters[0].second))      //Si il y a collision avec le personnage 1
+            if (player1 != m_characters.end())
             {
-                switch (bonus->second->getType())               //Action différente suivant le type de bonus
+                if (bonus->second->collision(m_characters[0].second))      //Si il y a collision avec le personnage 1
                 {
-                case bonus_type::PIECE:
-                    m_characters[0].second->addScore(1000);
-                    break;
-                case bonus_type::SOINS:
-                    m_characters[0].second->addLife(10);
-                    break;
-                default:
-                    break;
+                    switch (bonus->second->getType())               //Action différente suivant le type de bonus
+                    {
+                    case bonus_type::PIECE:
+                        m_characters[0].second->addScore(1000);
+                        break;
+                    case bonus_type::SOINS:
+                        m_characters[0].second->addLife(10);
+                        break;
+                    default:
+                        break;
+                    }
+                    m_deletedElements.push_back(bonus->second);     //on supprime le bonus
+                    m_bonus.erase(bonus);
+                    increment = false;
                 }
-                m_deletedElements.push_back(bonus->second);     //on supprime le bonus
-                m_bonus.erase(bonus);
-                increment = false;
             }
             if (bonus->second->getPosition().first < -bonus->second->getSize().first)   // Si le bonus sort de l'écran à gauche, on le supprime
             {

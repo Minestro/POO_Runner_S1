@@ -6,6 +6,8 @@
 #include <math.h>
 #include "const.h"
 
+enum pointsName{UL, UR, DL, DR};
+
 struct ColorRGBA
 {
     ColorRGBA(unsigned int cr, unsigned int cg, unsigned int cb, unsigned int alpha = 255);
@@ -29,10 +31,11 @@ public:
     std::pair<float, float> getSize() const;
     std::pair<float, float> getPosition() const;
     float getRotateAngle() const;
+    unsigned int getId() const;
+    std::vector<std::pair<float, float> > getPointsAfterRotation() const;
     void setSize(float w, float h);
     void setPosition(float x, float y);
     void setId(unsigned int id);
-    unsigned int getId() const;
     bool collision(const Element *el) const;
     virtual std::pair<float, float> getPixelSpeed() const;
 };

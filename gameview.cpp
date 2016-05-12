@@ -5,7 +5,7 @@ bool GameView::treatEvent()
 {
     bool quitter = false;
     std::vector<std::pair<bool, GameCharacter*> >::iterator player1 = m_model->getCharacters().begin();
-    while (player1 != m_model->getCharacters().end() && player1->second->getId() != 0)
+    while (player1 != m_model->getCharacters().end() && player1->second->getId() != character_id::PLAYER1)
     {
         ++player1;
     }

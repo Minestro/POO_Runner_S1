@@ -48,7 +48,6 @@ bool Element::collision(const Element *el) const
     {
         return ((el->getPosition().first < m_position.first + m_size.first && el->getPosition().first + el->getSize().first > m_position.first) && (el->getPosition().second < m_position.second + m_size.second && el->getPosition().second + el->getSize().second > m_position.second));
     } else {
-        enum pointsName{UL, UR, DL, DR};
         std::vector<std::vector<std::pair<float, float> > > points;
         std::vector<const Element*> rectangles;
         std::vector<std::pair<float, float> > axis;
@@ -59,22 +58,7 @@ bool Element::collision(const Element *el) const
 
         for (unsigned int i=0; i<rectangles.size(); i++)
         {
-            std::pair<float, float> Origin = std::make_pair(rectangles[i]->getSize().first / 2, rectangles[i]->getSize().second / 2);
-            std::pair<float, float> Pos = std::make_pair(rectangles[i]->getPosition().first + Origin.first, rectangles[i]->getPosition().second + Origin.second);
-            std::pair<float, float> Ao{-Origin.first, -Origin.second};
-            std::pair<float, float> Bo{Origin.first, -Origin.second};
-            std::pair<float, float> Co{-Origin.first, Origin.second};
-            std::pair<float, float> Do{Origin.first, Origin.second};
-            float rotation = rectangles[i]->getRotateAngle()*(PI/180);
-            points[i].resize(4);
-
-            points[i][UL] = std::make_pair(Ao.first * cos(rotation) - Ao.second * sin(rotation) + Pos.first, Ao.second * cos(rotation) + Ao.first * sin(rotation) + Pos.second);
-
-            points[i][UR] = std::make_pair(Bo.first * cos(rotation) - Bo.second * sin(rotation) + Pos.first, Bo.second * cos(rotation) + Bo.first * sin(rotation) + Pos.second);
-
-            points[i][DL] = std::make_pair(Co.first * cos(rotation) - Co.second * sin(rotation) + Pos.first, Co.second * cos(rotation) + Co.first * sin(rotation) + Pos.second);
-
-            points[i][DR] = std::make_pair(Do.first * cos(rotation) - Do.second * sin(rotation) + Pos.first, Do.second * cos(rotation) + Do.first * sin(rotation) + Pos.second);
+            points[i] = rectangles[i]->getPointsAfterRotation();
         }
 
 
@@ -134,6 +118,28 @@ bool Element::collision(const Element *el) const
         }
         return collision;
     }
+}
+
+std::vector<std::pair<float, float> > Element::getPointsAfterRotation() const
+{
+    std::vector<std::pair<float, float> > points;
+    std::pair<float, float> Origin = std::make_pair(getSize().first / 2, getSize().second / 2);
+    std::pair<float, float> Pos = std::make_pair(getPosition().first + Origin.first, getPosition().second + Origin.second);
+    std::pair<float, float> Ao{-Origin.first, -Origin.second};
+    std::pair<float, float> Bo{Origin.first, -Origin.second};
+    std::pair<float, float> Co{-Origin.first, Origin.second};
+    std::pair<float, float> Do{Origin.first, Origin.second};
+    float rotation = getRotateAngle()*(PI/180);
+    points.resize(4);
+
+    points[UL] = std::make_pair(Ao.first * cos(rotation) - Ao.second * sin(rotation) + Pos.first, Ao.second * cos(rotation) + Ao.first * sin(rotation) + Pos.second);
+
+    points[UR] = std::make_pair(Bo.first * cos(rotation) - Bo.second * sin(rotation) + Pos.first, Bo.second * cos(rotation) + Bo.first * sin(rotation) + Pos.second);
+
+    points[DL] = std::make_pair(Co.first * cos(rotation) - Co.second * sin(rotation) + Pos.first, Co.second * cos(rotation) + Co.first * sin(rotation) + Pos.second);
+
+    points[DR] = std::make_pair(Do.first * cos(rotation) - Do.second * sin(rotation) + Pos.first, Do.second * cos(rotation) + Do.first * sin(rotation) + Pos.second);
+    return points;
 }
 
 std::pair<float, float> Element::getPixelSpeed() const

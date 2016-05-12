@@ -126,6 +126,11 @@ void GameCharacter::move()
         m_position.first += m_movement.first;
         m_position.second += m_movement.second;
 
+        std::vector<std::pair<float, float> > points = getPointsAfterRotation();
+        int xMin = std::min(std::min(points[UL].first, points[UR].first), std::min(points[DL].first, points[DR].first));
+        int yMin = std::min(std::min(points[UL].second, points[UR].second), std::min(points[DL].second, points[DR].second));
+        int xMax = std::max(std::max(points[UL].first, points[UR].first), std::max(points[DL].first, points[DR].first));
+        int yMax = std::max(std::max(points[UL].second, points[UR].second), std::max(points[DL].second, points[DR].second));
         if (m_state != character_state::DYING)
         {
             //Test des collisions avec les bords de l'écran et le sol
@@ -133,17 +138,11 @@ void GameCharacter::move()
             Obstacle leftWall {-1, 0, 1, GAME_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
             if (collision(&rightWall))
             {
-                while (collision(&rightWall))
-                {
-                    m_position.first--;
-                }
+                m_position.first = GAME_SIZE_W + (xMax - (m_position.first + m_size.first));
                 m_movement.first = 0;
             } else if (collision(&leftWall))
             {
-                while(collision(&leftWall))
-                {
-                    m_position.first++;
-                }
+                m_position.first = xMin - m_position.first;
                 m_movement.first = 0;
             }
 
@@ -159,7 +158,7 @@ void GameCharacter::move()
                 m_movement.second = 0;
             } else if (collision(&roof))
             {
-                /*if (m_rotation != 0)
+                if (m_rotation != 0)
                 {
                     if (m_rotation > 0)
                     {
@@ -172,18 +171,7 @@ void GameCharacter::move()
                     {
                         m_rotation = 0;
                     }
-                }*/
-                if (m_movement.second < 0)
-                {
-                    m_movement.second++;
-                }
-                if (abs(m_movement.second) < 1)
-                {
-                    m_movement.second = 0;
-                }
-                while (collision(&roof))
-                {
-                    m_position.second++;
+                    m_position.second = yMin - m_position.second + 1;
                 }
             }
         }
