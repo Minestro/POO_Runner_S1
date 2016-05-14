@@ -1,4 +1,5 @@
 #include "spriteelement.h"
+#include "model.h"
 
 SpriteElement::SpriteElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int animatePeriod): GraphicElement::GraphicElement{zIndex}, sf::Sprite::Sprite{}, m_nbLignes{1}, m_nbColonnes{1}, m_activeLigne{1}, m_activeColonne{1}, m_lastAnimateCall{}, m_animatePeriod{animatePeriod}, m_autoLoop{1}, m_animationDirectionRight{1}
 {
@@ -85,12 +86,12 @@ void SpriteElement::setAutoLoop(bool autoLoop)
     m_autoLoop = autoLoop;
 }
 
-void SpriteElement::setNbColonnes(int nb)
+void SpriteElement::setNbColonnes(unsigned int nb)
 {
     m_nbColonnes = nb;
 }
 
-void SpriteElement::setNbLignes(int nb)
+void SpriteElement::setNbLignes(unsigned int nb)
 {
     m_nbLignes = nb;
 }
@@ -128,14 +129,18 @@ void SpriteElement::animate()
     }
 }
 
-void SpriteElement::setAnimatePeriod(float a)
+void SpriteElement::setAnimatePeriod(unsigned int a)
 {
     m_animatePeriod = a;
 }
 
 void SpriteElement::refreshTextRect()
 {
-    setTextureRect(sf::IntRect{(int)((m_activeColonne-1) * (getTexture()->getSize().x / m_nbColonnes)), (int)((m_activeLigne-1) * (getTexture()->getSize().y / m_nbLignes)), (int)getTexture()->getSize().x / m_nbColonnes, (int)getTexture()->getSize().y / m_nbLignes});
+    setTextureRect(sf::IntRect{
+                       (int)((m_activeColonne-1) * (getTexture()->getSize().x / m_nbColonnes)),
+                       (int)((m_activeLigne-1) * (getTexture()->getSize().y / m_nbLignes)),
+                       (int)(getTexture()->getSize().x / m_nbColonnes),
+                       (int)(getTexture()->getSize().y / m_nbLignes)});
 }
 
 void SpriteElement::draw(sf::RenderWindow *window) const

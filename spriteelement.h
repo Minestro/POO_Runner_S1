@@ -2,7 +2,6 @@
 #define SPRITEELEMENT_H
 
 #include "graphicelement.h"
-#include <chrono>
 
 class SpriteElement: public GraphicElement, public sf::Sprite
 {
@@ -29,10 +28,10 @@ public:
     virtual void setPosition(float x, float y) override;
     void setRectPos(int ligne, int colonne=1);
     void setAutoLoop(bool autoLoop);
-    void setNbLignes(int nb);
-    void setNbColonnes(int nb);
+    void setNbLignes(unsigned int nb);
+    void setNbColonnes(unsigned int nb);
+    void setAnimatePeriod(unsigned int a);
     virtual void animate();
-    void setAnimatePeriod(float a);
     void refreshTextRect();
     void changeDirectionSprite(bool directionRight);
     virtual void draw(sf::RenderWindow *window) const;

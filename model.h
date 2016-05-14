@@ -8,7 +8,8 @@
 #include "const.h"
 #include "button.h"
 #include "text.h"
-#include "appsettings.h"
+
+class App;
 
 class Model
 {
@@ -22,7 +23,7 @@ protected:
     std::vector<std::pair<bool, Text*> >m_texts;
     std::vector<const Element*> m_deletedElements;
     std::pair<int, int> m_cursorPosition;
-    AppSettings *m_settings;
+    App *m_app;
 public:
     Model(float width, float height);
     virtual ~Model();
@@ -37,9 +38,10 @@ public:
     std::pair<float, float> getSize() const;
     std::pair<int, int> getCursorPosition() const;
     virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const = 0;
-    AppSettings &getAppSettings() const;
+    App &getApp();
+    const App &getApp() const;
     void setCursorPosition(int x, int y);
-    void setAppSettings(AppSettings *setting);
+    void setApp(App &app);
     Element *searchElementById(unsigned int id);
     void deleteElement(unsigned int id);
     void clearAll();

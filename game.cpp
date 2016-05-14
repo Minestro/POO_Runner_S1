@@ -300,3 +300,28 @@ void Game::setGameMode(int mode)
 {
     m_gameMode = mode;
 }
+
+void Game::setPause(bool a)
+{
+    m_pause = a;
+    if (m_pause)
+    {
+        //PAUSE_TEXT = 300, RESUME_BUTTON, SETTINGS_BUTTON, QUIT_BUTTON;
+        if (searchElementById(PAUSE_TEXT) == nullptr)
+        {
+            Text *pause = new Text{0, 200, GAME_SIZE_W, 50, 0, "PAUSE", 20, "score.ttf", ColorRGBA::White, text_effect::BREATH, 20, 1, 0};
+            pause->setId(pause_elem_id::PAUSE_TEXT);
+            m_texts.push_back(std::make_pair(1, pause));
+        }
+    } else {
+        for (unsigned int i = pause_elem_id::PAUSE_TEXT; i<pause_elem_id::NB_ELEMENTS; i++)
+        {
+            deleteElement(i);
+        }
+    }
+}
+
+bool Game::isPause() const
+{
+    return m_pause;
+}

@@ -1,4 +1,5 @@
 #include "textelement.h"
+#include "model.h"
 #include <iostream>
 
 std::map<std::string, sf::Font*> TextElement::m_listFonts;
@@ -148,7 +149,6 @@ void TextElement::generateTextForm()
     }
     setRotation(r);
     m_textForm.display();
-    m_textForm.getTexture().copyToImage().saveToFile("test.jpg");
 }
 
 void TextElement::draw(sf::RenderWindow *window) const

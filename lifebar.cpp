@@ -1,4 +1,5 @@
 #include "lifebar.h"
+#include "model.h"
 
 LifeBar::LifeBar(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_actualBarWidth{(unsigned int)width}, m_ratioLife{1.0f}
 {

@@ -1,4 +1,5 @@
 #include "rectangleshapeelement.h"
+#include "model.h"
 
 RectangleShapeElement::RectangleShapeElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, sf::Color color): GraphicElement::GraphicElement{zIndex}, RectangleShape::RectangleShape{sf::Vector2f{width, height}}
 {

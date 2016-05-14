@@ -25,13 +25,13 @@ void Menu::refreshContent()
     {
     case menuPage::HOME :
     {
-        Button *b1 = new Button{GAME_SIZE_W/2 - 100, 150, 200, 50, 0, "Jouer", menuPage::ESCAPE_MENU, this, button_type::TEXT_BUTTON};
+        Button *b1 = new Button{GAME_SIZE_W/2 - 100, 150, 200, 50, 0, "Jouer", menuPage::ESCAPE_MENU, & getApp(), button_type::TEXT_BUTTON};
         b1->addAction(button_action::CHANGE_PAGE);
-        Button *b2 = new Button{GAME_SIZE_W/2 - 100, 250, 200, 50, 0, "Regles", menuPage::RULES, this, button_type::TEXT_BUTTON};
+        Button *b2 = new Button{GAME_SIZE_W/2 - 100, 250, 200, 50, 0, "Regles", menuPage::RULES, & getApp(), button_type::TEXT_BUTTON};
         b2->addAction(button_action::CHANGE_PAGE);
-        Button *b3 = new Button{GAME_SIZE_W/2 - 100, 350, 200, 50, 0, "Options", menuPage::SETTINGS, this, button_type::TEXT_BUTTON};
+        Button *b3 = new Button{GAME_SIZE_W/2 - 100, 350, 200, 50, 0, "Options", menuPage::SETTINGS, & getApp(), button_type::TEXT_BUTTON};
         b3->addAction(button_action::CHANGE_PAGE);
-        Button *b4 = new Button{GAME_SIZE_W/2 - 100, 450, 200, 50, 0, "Quitter", menuPage::ESCAPE_MENU, this, button_type::TEXT_BUTTON};
+        Button *b4 = new Button{GAME_SIZE_W/2 - 100, 450, 200, 50, 0, "Quitter", menuPage::ESCAPE_MENU, & getApp(), button_type::TEXT_BUTTON};
         b4->addAction(button_action::EXIT_APP);
 
          m_buttons.push_back(std::make_pair(1, b1));
@@ -61,9 +61,9 @@ void Menu::refreshContent()
         m_texts.push_back(std::make_pair(1, new Text{GAME_SIZE_W/2 - 170, 250, 0, 0, 0, "Reculer", 20, "score.ttf" , ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0}));
         m_texts.push_back(std::make_pair(1, new Text{GAME_SIZE_W/2 - 170, 310, 0, 0, 0, "Avancer", 20, "score.ttf" , ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0}));
         m_texts.push_back(std::make_pair(1, new Text{GAME_SIZE_W/2 - 170, 370, 0, 0, 0, "Monter", 20, "score.ttf" , ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0}));
-        Button *b1 = new Button{GAME_SIZE_W/2 - 250, 550, 200, 50, 0, "Retour", menuPage::HOME, this, button_type::TEXT_BUTTON};
+        Button *b1 = new Button{GAME_SIZE_W/2 - 250, 550, 200, 50, 0, "Retour", menuPage::HOME, & getApp(), button_type::TEXT_BUTTON};
         b1->addAction(button_action::CHANGE_PAGE);
-        Button *b2 = new Button{GAME_SIZE_W/2 + 50 , 550, 200, 50, 0, "Liste des objets", menuPage::BONUSLIST, this, button_type::TEXT_BUTTON};
+        Button *b2 = new Button{GAME_SIZE_W/2 + 50 , 550, 200, 50, 0, "Liste des objets", menuPage::BONUSLIST, & getApp(), button_type::TEXT_BUTTON};
         b2->addAction(button_action::CHANGE_PAGE);
         m_buttons.push_back(std::make_pair(1, b1));
         m_buttons.push_back(std::make_pair(1, b2));
@@ -73,7 +73,7 @@ void Menu::refreshContent()
     {
         m_images.push_back(std::make_pair(1, new Image{0, 0, GAME_SIZE_W, GAME_SIZE_H, "FOND.png", 1, 0, 0}));
         m_images.push_back(std::make_pair(1, new Image{GAME_SIZE_W/2 - 250, 100, 500, 400, "textBox.png", 2, 0, 0}));
-        Button *b1 = new Button{GAME_SIZE_W/2 - 100 , 550, 200, 50, 0, "Retour", menuPage::HOME, this, button_type::TEXT_BUTTON};
+        Button *b1 = new Button{GAME_SIZE_W/2 - 100 , 550, 200, 50, 0, "Retour", menuPage::HOME, & getApp(), button_type::TEXT_BUTTON};
         b1->addAction(button_action::CHANGE_PAGE);
         m_texts.push_back(std::make_pair(1, new Text{GAME_SIZE_W/2 - 250, 100, 500, 70, 0, "Bonus", 30, "score.ttf" , ColorRGBA::Black, text_effect::NOTHING, 0, 1, 0}));
         m_bonus.push_back(std::make_pair(1, new Bonus{GAME_SIZE_W/2 - 230, 170, 40, 40, 0, 0, 0, 0, 0, 0}));
@@ -83,14 +83,15 @@ void Menu::refreshContent()
     }
     case menuPage::SETTINGS :
     {
+        m_texts.push_back(std::make_pair(1, new Text{GAME_SIZE_W/2 - 250, 100, 500, 70, 0, "Options", 30, "score.ttf" , ColorRGBA::Black, text_effect::NOTHING, 0, 1, 0}));
         m_images.push_back(std::make_pair(1, new Image{0, 0, GAME_SIZE_W, GAME_SIZE_H, "FOND.png", 1, 0, 0}));
         m_images.push_back(std::make_pair(1, new Image{GAME_SIZE_W/2 - 250, 100, 500, 400, "textBox.png", 2, 0, 0}));
-        Button *b1 = new Button{GAME_SIZE_W/2 - 100, 550, 200, 50, 0, "Retour", menuPage::HOME, this, button_type::TEXT_BUTTON};
+        Button *b1 = new Button{GAME_SIZE_W/2 - 100, 550, 200, 50, 0, "Retour", menuPage::HOME, & getApp(), button_type::TEXT_BUTTON};
         b1->addAction(button_action::CHANGE_PAGE);
         m_texts.push_back(std::make_pair(1, new Text{GAME_SIZE_W/2 - 170, 180, 0, 0, 0, "Plein ecran : ", 20, "score.ttf" , ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0}));
-        Button *b2 = new Button{GAME_SIZE_W / 2 - 50, 180, 25, 25, 0, "", menuPage::SETTINGS, this, button_type::RADIO_BUTTON};
+        Button *b2 = new Button{GAME_SIZE_W / 2 - 50, 180, 25, 25, 0, "", menuPage::SETTINGS, & getApp(), button_type::RADIO_BUTTON};
         b2->addAction(button_action::SET_FULL_SCREEN);
-        b2->setIsOn(m_settings->m_isFullScreen);
+        b2->setId(button_id::FULL_SCREEN_BUTTON);
         m_buttons.push_back(std::make_pair(1, b1));
         m_buttons.push_back(std::make_pair(1, b2));
         break;

@@ -1,5 +1,4 @@
 #include "graphicelement.h"
-#include <iostream>
 
 std::map<std::string, sf::Texture*> GraphicElement::m_listTextures;
 

@@ -25,11 +25,11 @@ sf::Event *Window::getEvent()
 
 void Window::refreshSettings(AppSettings &settings)
 {
-    sf::Vector2u size;
-    size.x = sf::VideoMode::getDesktopMode().width;
-    size.y = sf::VideoMode::getDesktopMode().height;
     if (m_isFullScreen != settings.m_isFullScreen)
     {
+        sf::Vector2u size;
+        size.x = sf::VideoMode::getDesktopMode().width;
+        size.y = sf::VideoMode::getDesktopMode().height;
         if (settings.m_isFullScreen)
         {
             m_isFullScreen = true;

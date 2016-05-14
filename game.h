@@ -11,12 +11,14 @@
 
 #define GAMEINTROTEXTID 101
 
+enum pause_elem_id{PAUSE_TEXT = 300, RESUME_BUTTON, SETTINGS_BUTTON, QUIT_BUTTON, NB_ELEMENTS};
 enum game_state{INTRO, RUNNING};
 enum game_mode{SOLO, MULTI_HOSTING, MULTI_CLIENT};
 
 class Game: public Model
 {
 private:
+    bool m_pause;
     int m_gameState;
     int m_gameMode;
     std::chrono::time_point<std::chrono::system_clock> m_lastMove;
@@ -42,6 +44,8 @@ public:
     void setGameState(int state);
     void setGameMode(int mode);
     void setSpeedPeriod(int period);
+    bool isPause() const;
+    void setPause(bool a);
 };
 
 #endif // GAME_H

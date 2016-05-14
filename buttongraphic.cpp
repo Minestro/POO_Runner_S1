@@ -1,6 +1,7 @@
 #include "buttongraphic.h"
+#include "model.h"
 
-ButtonGraphic::ButtonGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int nbLignes, unsigned int nbColonnes, std::string text, const sf::Font *font, unsigned int fontSize, sf::Color color, int style, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_size{width, height}, m_position{x, y}
+ButtonGraphic::ButtonGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int nbLignes, unsigned int nbColonnes, std::string text, const sf::Font *font, unsigned int fontSize, const sf::Color color, int style, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_size{width, height}, m_position{x, y}
 {
     m_text = new TextElement{zIndex, width, height, x, y, rotateAngle, text, font, fontSize, 1, 0, color, style};
     m_sprite = new SpriteElement{zIndex, width, height, x, y, rotateAngle, texture, nbLignes, nbColonnes, 1, 1, 0};

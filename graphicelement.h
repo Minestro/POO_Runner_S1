@@ -1,10 +1,14 @@
 #ifndef GRAPHICELEMENT_H
 #define GRAPHICELEMENT_H
 
+#include <chrono>
+#include <iostream>
 #include <list>
 #include <SFML/Graphics.hpp>
 #include "const.h"
-#include "model.h"
+
+class Element;
+class Model;
 
 struct HSLColor
 {

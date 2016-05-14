@@ -1,5 +1,5 @@
 #include "gamecharactergraphic.h"
-#include <iostream>
+#include "model.h"
 
 GameCharacterGraphic::GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int animatePeriod): SpriteElement::SpriteElement{zIndex, width, height, x, y, rotateAngle, texture, animatePeriod}
 {
@@ -50,8 +50,8 @@ void GameCharacterGraphic::refresh(const Element *el, Model *model)
                 setNbLignes(1);
                 setNbColonnes(81);
                 setRectPos(1);
+                setAutoLoop(0);
             }
-            setAutoLoop(0);
             if (m_activeColonne == m_nbColonnes)
             {
                 model->getDeletedElements().push_back(el);

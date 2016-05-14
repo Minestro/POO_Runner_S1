@@ -48,6 +48,9 @@ bool GameView::treatEvent()
             case sf::Keyboard::A :
                 m_model->getCharacters()[0].second->addScore(100);
                 break;
+            case sf::Keyboard::Escape:
+                m_model->setPause(!m_model->isPause());
+                break;
             default:
                 break;
             }

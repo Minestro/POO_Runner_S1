@@ -5,6 +5,7 @@
 #include <string>
 #include "graphicelement.h"
 #include "const.h"
+#include "appsettings.h"
 
 class Window: public sf::RenderWindow
 {

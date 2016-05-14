@@ -8,8 +8,6 @@ ColorRGBA::ColorRGBA(unsigned int cr, unsigned int cg, unsigned int cb, unsigned
 const ColorRGBA ColorRGBA::White = ColorRGBA{255, 255, 255};
 const ColorRGBA ColorRGBA::Black = ColorRGBA{0, 0, 0};
 
-unsigned int Element::idcpt = 0;
-
 Element::Element(float x, float y, float w, float h, float rotation, unsigned long int id): m_id{id}, m_position{x, y}, m_size{w, h}, m_rotation{rotation}
 {
 

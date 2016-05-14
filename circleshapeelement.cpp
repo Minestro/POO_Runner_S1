@@ -1,6 +1,7 @@
 #include "circleshapeelement.h"
+#include "model.h"
 
-CircleShapeElement::CircleShapeElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, sf::Color color): GraphicElement::GraphicElement{zIndex}, sf::CircleShape::CircleShape{(width+height)/4}
+CircleShapeElement::CircleShapeElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Color color): GraphicElement::GraphicElement{zIndex}, sf::CircleShape::CircleShape{(width+height)/4}
 {
     setSize(width, height);
     setOrigin(width/2, height/2);

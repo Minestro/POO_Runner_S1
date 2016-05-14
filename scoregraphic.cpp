@@ -1,4 +1,5 @@
 #include "scoregraphic.h"
+#include "model.h"
 
 ScoreGraphic::ScoreGraphic(unsigned int zIndex, float x, float y, float rotateAngle, const sf::Font *font, unsigned int fontSize, unsigned int refreshPeriod, sf::Color color, int style): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_showedScore{0}
 {

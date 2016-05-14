@@ -1,7 +1,7 @@
 #include "button.h"
-#include "menu.h"
+#include "app.h"
 
-Button::Button(float x, float y, float width, float height, float rotation, std::string text, int destinationPage, Menu *m, button_type type, bool isClickable): Element::Element{x, y, width, height, rotation}, m_text{text}, m_type{type}, m_isClickable{isClickable}, m_isOn{0}, m_destinationPage{destinationPage}, m_menu{m}, m_actions{}
+Button::Button(float x, float y, float width, float height, float rotation, std::string text, int destinationPage, App *m, button_type type, bool isClickable): Element::Element{x, y, width, height, rotation}, m_text{text}, m_type{type}, m_isClickable{isClickable}, m_isOn{0}, m_destinationPage{destinationPage}, m_app{m}, m_actions{}
 {
 
 }
@@ -28,7 +28,16 @@ bool Button::isClickable() const
 
 bool Button::isOn() const
 {
-    return m_isOn;
+    bool isOn;
+    switch (m_id)
+    {
+    case button_id::FULL_SCREEN_BUTTON:
+        isOn = m_app->getSettings().m_isFullScreen;
+        break;
+    default:
+        break;
+    }
+    return isOn;
 }
 
 void Button::setIsOn(bool on)
@@ -60,14 +69,14 @@ void Button::onClick()
         switch (m_actions[i])
         {
         case button_action::CHANGE_PAGE:
-            Button::changePage(this, m_menu);
+            Button::changePage(this, *m_app);
             break;
         case button_action::EXIT_APP:
-            m_menu->exitApp();
+            m_app->stop();
             break;
         case button_action::SET_FULL_SCREEN:
-            m_menu->getAppSettings().m_isFullScreen = !m_menu->getAppSettings().m_isFullScreen;
-            m_isOn = m_menu->getAppSettings().m_isFullScreen;
+            m_app->getSettings().m_isFullScreen = !m_app->getSettings().m_isFullScreen;
+            m_isOn = m_app->getSettings().m_isFullScreen;
             break;
         default:
             break;
@@ -80,7 +89,7 @@ int Button::getDestinationPage() const
     return m_destinationPage;
 }
 
-void Button::changePage(Button *sender, Menu *menu)
+void Button::changePage(const Button *sender, App &app)
 {
-    menu->setPage(sender->getDestinationPage());
+    app.getMenuModel().setPage(sender->getDestinationPage());
 }
