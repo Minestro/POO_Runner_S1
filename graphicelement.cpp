@@ -52,6 +52,11 @@ void GraphicElement::loadShaders()
     {
         m_listShaders.insert(std::make_pair(BLUR_EFFECT, blurShader));
     }
+    sf::Shader *pixelateShader = new sf::Shader{};
+    if (pixelateShader->loadFromFile("Ressources/Shaders/pixelate.frag", sf::Shader::Fragment))
+    {
+        m_listShaders.insert(std::make_pair(PIXELATE_EFFECT, pixelateShader));
+    }
 }
 
 void GraphicElement::clearShaders()

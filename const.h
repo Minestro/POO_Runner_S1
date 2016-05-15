@@ -7,14 +7,14 @@ const std::string FILES_LIST[] = {"menuBackground.png", "FOND1.png", "FOND2.png"
 
 const std::string FONTS_LIST[] = {"score.ttf"};
 
+const std::string PATTERNS_FILE = "Ressources/patternsList.xml";
+
 enum text_effect{NOTHING, BREATH, FLASH};
 
-
-const std::string PATTERNS_FILE = "Ressources/patternsList.xml";
-const int GAME_SIZE_W = 1280;
-const int GAME_SIZE_H = 720;
-const int MENU_SIZE_W = 800;
-const int MENU_SIZE_H = 600;
+const int MODEL_SIZE_W = 1280;
+const int MODEL_SIZE_H = 720;
+const unsigned int HUD_Z_INDEX = 10;
+const unsigned int MENU_Z_INDEX = 15;
 const unsigned int MAX_LIFE = 100;
 const unsigned int HAUTEUR_SOL = 630;
 const float GRAVITY = 0.15;

@@ -138,7 +138,7 @@ void TextElement::generateTextForm()
     sf::Text line {"", *getFont(), getCharacterSize()};
     line.setColor(sf::Color::White);
     line.setStyle(getStyle());
-    m_textForm.create(GAME_SIZE_W, GAME_SIZE_H);
+    m_textForm.create(MODEL_SIZE_W, MODEL_SIZE_H);
     m_textForm.setSmooth(1);
     m_textForm.clear(sf::Color::Transparent);
     for (unsigned int i = 0; i<m_textLines.size(); i++)

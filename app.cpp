@@ -1,6 +1,6 @@
 #include "app.h"
 
-App::App(): m_window{"Runner", sf::Style::Default, GAME_SIZE_W, GAME_SIZE_H}, m_settings{}, m_gameModel{GAME_SIZE_W, GAME_SIZE_H, STARTSPEEDPERIODGAME}, m_gameView{}, m_menuModel{GAME_SIZE_W, GAME_SIZE_H, menuPage::PRE_MENU}, m_menuView{}, m_drawTime{std::chrono::system_clock::now()}, m_drawPeriod{(unsigned int)((1.0f / FPS) * 1000)}, m_running{true}
+App::App(): m_window{"Runner", sf::Style::Default, MODEL_SIZE_W, MODEL_SIZE_H}, m_settings{}, m_gameModel{MODEL_SIZE_W, MODEL_SIZE_H, STARTSPEEDPERIODGAME}, m_gameView{}, m_menuModel{MODEL_SIZE_W, MODEL_SIZE_H, menuPage::PRE_MENU}, m_menuView{}, m_drawTime{std::chrono::system_clock::now()}, m_drawPeriod{(unsigned int)((1.0f / FPS) * 1000)}, m_running{true}
 {
     GraphicElement::loadTextures();
     TextElement::loadFonts();
@@ -92,15 +92,19 @@ void App::run()
             {
                 if (m_gameModel.isPause())
                 {
-                    if (m_gameView.getLayeredShader(6) == nullptr)
+                    if (m_gameView.getLayeredShader(HUD_Z_INDEX) == nullptr)
                     {
-                        m_gameView.addLayeredShader(GraphicElement::m_listShaders[BLUR_EFFECT], 6);
-                        m_gameView.getLayeredShader(6)->setParameter("texture", sf::Shader::CurrentTexture);
+                        m_gameView.addLayeredShader(GraphicElement::m_listShaders[PIXELATE_EFFECT], HUD_Z_INDEX);
+                        m_gameView.getLayeredShader(HUD_Z_INDEX)->setParameter("texture", sf::Shader::CurrentTexture);
+                        m_gameView.addLayeredShader(GraphicElement::m_listShaders[BLUR_EFFECT], HUD_Z_INDEX+1);
+                        m_gameView.getLayeredShader(HUD_Z_INDEX+1)->setParameter("texture", sf::Shader::CurrentTexture);
                     }
-                    m_gameView.getLayeredShader(6)->setParameter("blur_radius", m_gameModel.getBlurFade());
-                } else if (!m_gameModel.isPause() && m_gameView.getLayeredShader(6) != nullptr)
+                    m_gameView.getLayeredShader(HUD_Z_INDEX)->setParameter("pixel_threshold", m_gameModel.getBlurFade());
+                    m_gameView.getLayeredShader(HUD_Z_INDEX+1)->setParameter("blur_radius", m_gameModel.getBlurFade()/2);
+                } else if (!m_gameModel.isPause() && m_gameView.getLayeredShader(HUD_Z_INDEX) != nullptr)
                 {
-                    m_gameView.removeLayeredShader(6);
+                    m_gameView.removeLayeredShader(HUD_Z_INDEX);
+                    m_gameView.removeLayeredShader(HUD_Z_INDEX+1);
                 }
                 m_gameView.synchronise();
                 m_gameView.draw();

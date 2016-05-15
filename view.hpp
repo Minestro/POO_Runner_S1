@@ -103,12 +103,12 @@ public:
         m_window->clear();
         fillGraphicElementsList();
         unsigned int actualZIndex = 0;
-        std::vector<std::pair<sf::Sprite*, sf::RenderTexture*> > renderPart;
+        std::vector<sf::RenderTexture*> renderPart;
         for (unsigned int i = 0; i<m_layeredShader.size(); i++)
         {
-            renderPart.push_back(std::make_pair(new sf::Sprite, new sf::RenderTexture));
-            renderPart[i].second->create(GAME_SIZE_W, GAME_SIZE_H);
-            renderPart[i].second->clear(sf::Color::Transparent);
+            renderPart.push_back(new sf::RenderTexture);
+            renderPart[i]->create(MODEL_SIZE_W, MODEL_SIZE_H);
+            renderPart[i]->clear(sf::Color::Transparent);
         }
         unsigned int i = 0;
         for (std::pair<unsigned int, sf::Shader*> shader : m_layeredShader)
@@ -119,17 +119,28 @@ public:
                 {
                     if (ge->getZIndex() == actualZIndex)
                     {
-                        ge->draw(renderPart[i].second);
+                        ge->draw(renderPart[i]);
+                    } else if (ge->getZIndex() > actualZIndex)
+                    {
+                        break;
                     }
                 }
                 actualZIndex++;
             }
-            renderPart[i].second->display();
-            sf::RenderStates state;
+            renderPart[i]->display();
+            sf::RenderStates state{};
             state.shader = shader.second;
-            renderPart[i].first->setTexture(renderPart[i].second->getTexture());
-            m_window->draw(*renderPart[i].first, state);
+            if (i < m_layeredShader.size() - 1)
+            {
+                renderPart[i+1]->draw(sf::Sprite{renderPart[i]->getTexture()}, state);
+            } else {
+                m_window->draw(sf::Sprite{renderPart[i]->getTexture()}, state);
+            }
             i++;
+        }
+        if (actualZIndex > (*(m_drawableElementsList.end()-1))->getZIndex())
+        {
+            actualZIndex = (*(m_drawableElementsList.end()-1))->getZIndex();
         }
         std::vector <const GraphicElement*>::const_iterator it = m_drawableElementsList.begin();
         while ((**it).getZIndex() < actualZIndex)
@@ -142,10 +153,9 @@ public:
             ++it;
         }
         m_window->display();
-        for (std::pair<sf::Sprite*, sf::RenderTexture*> rp : renderPart)
+        for (sf::RenderTexture* rt : renderPart)
         {
-            delete rp.first;
-            delete rp.second;
+            delete rt;
         }
     }
 
@@ -162,8 +172,8 @@ public:
                 {
                     std::list<GraphicElement*> list;
                     list.push_back(new GameCharacterGraphic{5, character.second->getSize().first, character.second->getSize().second, character.second->getPosition().first, character.second->getPosition().second, character.second->getRotateAngle(), GraphicElement::m_listTextures["plane.png"], 1, 2, 1, 1, 50});
-                    list.push_back(new LifeBar{100, 200, 30, 1000, 600, 0, 20});
-                    list.push_back(new ScoreGraphic{100, 50, 600, 0, TextElement::m_listFonts["score.ttf"], 20, 5, sf::Color::White});
+                    list.push_back(new LifeBar{HUD_Z_INDEX, 200, 30, 1000, 600, 0, 20});
+                    list.push_back(new ScoreGraphic{HUD_Z_INDEX, 50, 600, 0, TextElement::m_listFonts["score.ttf"], 20, 5, sf::Color::White});
                     m_elementToGraphicElement.insert(std::make_pair(character.second, list));
                 }
                 character.first = 0;
@@ -260,7 +270,7 @@ public:
                 if (m_elementToGraphicElement.find(text.second) == m_elementToGraphicElement.end())
                 {
                     std::list<GraphicElement*> list;
-                    list.push_back(new TextElement{10, text.second->getSize().first, text.second->getSize().second, text.second->getPosition().first, text.second->getPosition().second, text.second->getRotateAngle(), text.second->getText(), TextElement::m_listFonts[text.second->getFont()], text.second->getFontSize(), text.second->getAutoRescale(), text.second->getlineBreak(), sf::Color{(sf::Uint8)text.second->getColor().r, (sf::Uint8)text.second->getColor().g, (sf::Uint8)text.second->getColor().b, (sf::Uint8)text.second->getColor().a}, 0, text.second->getEffect(), text.second->getEffectPeriod()});
+                    list.push_back(new TextElement{15, text.second->getSize().first, text.second->getSize().second, text.second->getPosition().first, text.second->getPosition().second, text.second->getRotateAngle(), text.second->getText(), TextElement::m_listFonts[text.second->getFont()], text.second->getFontSize(), text.second->getAutoRescale(), text.second->getlineBreak(), sf::Color{(sf::Uint8)text.second->getColor().r, (sf::Uint8)text.second->getColor().g, (sf::Uint8)text.second->getColor().b, (sf::Uint8)text.second->getColor().a}, 0, text.second->getEffect(), text.second->getEffectPeriod()});
                     m_elementToGraphicElement.insert(std::make_pair(text.second, list));
                 }
                 text.first = 0;
@@ -291,7 +301,7 @@ public:
                     default:
                         break;
                     }
-                    list.push_back(new ButtonGraphic{10, button.second->getSize().first, button.second->getSize().second, button.second->getPosition().first, button.second->getPosition().second, button.second->getRotateAngle(), GraphicElement::m_listTextures[texture], nbLignes, nbColonnes, button.second->getText(), TextElement::m_listFonts["score.ttf"], 20, sf::Color::White});
+                    list.push_back(new ButtonGraphic{15, button.second->getSize().first, button.second->getSize().second, button.second->getPosition().first, button.second->getPosition().second, button.second->getRotateAngle(), GraphicElement::m_listTextures[texture], nbLignes, nbColonnes, button.second->getText(), TextElement::m_listFonts["score.ttf"], 20, sf::Color::White});
                     m_elementToGraphicElement.insert(std::make_pair(button.second, list));
                 }
                 button.first = 0;

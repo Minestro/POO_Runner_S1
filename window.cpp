@@ -38,6 +38,6 @@ void Window::refreshSettings(AppSettings &settings)
             m_isFullScreen = false;
             create(sf::VideoMode{size.x, size.y}, m_title, sf::Style::Default);
         }
-        setView(sf::View{sf::FloatRect{0, 0, GAME_SIZE_W, GAME_SIZE_H}});
+        setView(sf::View{sf::FloatRect{0, 0, MODEL_SIZE_W, MODEL_SIZE_H}});
     }
 }

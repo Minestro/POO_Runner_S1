@@ -147,7 +147,7 @@ int ObstaclesBonusPattern::loadBonus(const XMLElement &bonus)
         }
     }
 
-    m_bonusList.push_back(Bonus{x + GAME_SIZE_W, y, width, height, r, -PIXELPERBACKGROUNDMOVE, 0.0f, mR, 0, type});
+    m_bonusList.push_back(Bonus{x + MODEL_SIZE_W, y, width, height, r, -PIXELPERBACKGROUNDMOVE, 0.0f, mR, 0, type});
     return XML_SUCCESS;
 }
 
@@ -201,6 +201,6 @@ int ObstaclesBonusPattern::loadObstacles(const XMLElement &obstacle)
         }
     }
 
-    m_obstaclesList.push_back(Obstacle{x + GAME_SIZE_W, y, width, height, r, -PIXELPERBACKGROUNDMOVE, 0.0f, mR, 0, (unsigned int)dammage, type});
+    m_obstaclesList.push_back(Obstacle{x + MODEL_SIZE_W, y, width, height, r, -PIXELPERBACKGROUNDMOVE, 0.0f, mR, 0, (unsigned int)dammage, type});
     return XML_SUCCESS;
 }

@@ -10,7 +10,7 @@
 class Element;
 class Model;
 
-enum Shaders_effects{BLUR_EFFECT};
+enum Shaders_effects{BLUR_EFFECT, PIXELATE_EFFECT};
 
 struct HSLColor
 {

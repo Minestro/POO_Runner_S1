@@ -8,8 +8,8 @@ Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{w
     GameCharacter *gc = new GameCharacter{100, 0, 100, 50, 0, 0, m_player};
     gc->setId(character_id::PLAYER1);
     m_characters.push_back(std::make_pair(1, gc));
-    Image *b1 = new Image{0, 0, GAME_SIZE_W, GAME_SIZE_H, "FOND2.png", 1, 0.5, 1, 0};
-    Image *b2 = new Image{0, 0, GAME_SIZE_W, GAME_SIZE_H, "FOND1.png", 2, 1.0, 1, 0};
+    Image *b1 = new Image{0, 0, MODEL_SIZE_W, MODEL_SIZE_H, "FOND2.png", 1, 0.5, 1, 0};
+    Image *b2 = new Image{0, 0, MODEL_SIZE_W, MODEL_SIZE_H, "FOND1.png", 2, 1.0, 1, 0};
     m_images.push_back(std::make_pair(1, b1));
     m_images.push_back(std::make_pair(1, b2));
 
@@ -88,7 +88,7 @@ void Game::nextStep()
         ++player1;
     }
 
-    if (m_pause && m_blurFade < 0.003)
+    if (m_pause && m_blurFade < 0.01)
     {
         m_blurFade += 0.00005;
     }
@@ -290,7 +290,7 @@ void Game::setGameState(int state)
     case game_state::INTRO:
         if (searchElementById(GAMEINTROTEXTID) == nullptr)
         {
-            Text *text = new Text{0, 600, GAME_SIZE_W, 50, 0, "Appuyez sur une touche pour lancer l'avion", 20, "score.ttf", ColorRGBA::White,text_effect::BREATH, 20, 1, 0};
+            Text *text = new Text{0, 600, MODEL_SIZE_W, 50, 0, "Appuyez sur une touche pour lancer l'avion", 20, "score.ttf", ColorRGBA::White,text_effect::BREATH, 20, 1, 0};
             m_texts.push_back(std::make_pair(1, text));
 
             text->setId(GAMEINTROTEXTID);
@@ -318,7 +318,7 @@ void Game::setPause(bool a)
         //PAUSE_TEXT = 300, RESUME_BUTTON, SETTINGS_BUTTON, QUIT_BUTTON;
         if (searchElementById(PAUSE_TEXT) == nullptr)
         {
-            Text *pause = new Text{0, 100, GAME_SIZE_W, 50, 0, "PAUSE", 20, "score.ttf", ColorRGBA::White, text_effect::NOTHING, 20, 1, 0};
+            Text *pause = new Text{0, 100, MODEL_SIZE_W, 50, 0, "PAUSE", 20, "score.ttf", ColorRGBA::White, text_effect::NOTHING, 20, 1, 0};
             pause->setId(pause_elem_id::PAUSE_TEXT);
             m_texts.push_back(std::make_pair(1, pause));
         }

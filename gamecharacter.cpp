@@ -87,10 +87,10 @@ void GameCharacter::move()
 {
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() >= m_movePeriod)
     {
-        Obstacle rightWall{GAME_SIZE_W, 0, 1, GAME_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
-        Obstacle leftWall {-1, 0, 1, GAME_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
-        Obstacle roof{0, -1, GAME_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
-        Obstacle ground{0, HAUTEUR_SOL, GAME_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
+        Obstacle rightWall{MODEL_SIZE_W, 0, 1, MODEL_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
+        Obstacle leftWall {-1, 0, 1, MODEL_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
+        Obstacle roof{0, -1, MODEL_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
+        Obstacle ground{0, HAUTEUR_SOL, MODEL_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
         if (m_state != character_state::DYING)
         {
             //On déplace latéralement le personnage
