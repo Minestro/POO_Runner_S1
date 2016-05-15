@@ -46,7 +46,7 @@ std::string ScoreGraphic::getClassName() const
     return "ScoreGraphic";
 }
 
-void ScoreGraphic::draw(sf::RenderWindow *window) const
+void ScoreGraphic::draw(sf::RenderTarget *window) const
 {
     m_prefixe->draw(window);
     m_score->draw(window);

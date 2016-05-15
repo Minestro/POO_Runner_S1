@@ -50,7 +50,7 @@ std::string ButtonGraphic::getClassName() const
     return "ButtonGraphic";
 }
 
-void ButtonGraphic::draw(sf::RenderWindow *window) const
+void ButtonGraphic::draw(sf::RenderTarget *window) const
 {
     m_sprite->draw(window);
     m_text->draw(window);

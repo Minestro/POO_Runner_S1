@@ -143,7 +143,7 @@ void SpriteElement::refreshTextRect()
                        (int)(getTexture()->getSize().y / m_nbLignes)});
 }
 
-void SpriteElement::draw(sf::RenderWindow *window) const
+void SpriteElement::draw(sf::RenderTarget *window) const
 {
     window->draw(*this);
 }

@@ -30,6 +30,7 @@ private:
     std::vector<ObstaclesBonusPattern> m_patternsList;
     unsigned long int m_nextPatternAt;
     int loadPatterns();
+    float m_blurFade;
 
 public:
     Game(float width, float height, unsigned int movePeriodMs);
@@ -41,6 +42,7 @@ public:
     unsigned int getSpeedPeriod() const;
     int getGameState() const;
     int getGameMode() const;
+    float getBlurFade() const;
     void setGameState(int state);
     void setGameMode(int mode);
     void setSpeedPeriod(int period);

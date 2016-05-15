@@ -28,7 +28,7 @@ bool Button::isClickable() const
 
 bool Button::isOn() const
 {
-    bool isOn;
+    bool isOn = false;
     switch (m_id)
     {
     case button_id::FULL_SCREEN_BUTTON:

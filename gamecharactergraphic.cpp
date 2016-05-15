@@ -16,7 +16,7 @@ GameCharacterGraphic::~GameCharacterGraphic()
     delete m_shadow;
 }
 
-void GameCharacterGraphic::draw(sf::RenderWindow *window) const
+void GameCharacterGraphic::draw(sf::RenderTarget *window) const
 {
     //m_shadow->draw(window);
     SpriteElement::draw(window);

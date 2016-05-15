@@ -35,7 +35,7 @@ std::string RectangleShapeElement::getClassName() const
     return "RectangleShapeElement";
 }
 
-void RectangleShapeElement::draw(sf::RenderWindow *window) const
+void RectangleShapeElement::draw(sf::RenderTarget *window) const
 {
     window->draw(*this);
 }

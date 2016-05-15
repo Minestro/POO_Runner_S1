@@ -13,7 +13,7 @@ public:
     virtual std::pair<float, float> getSize() const override;
     virtual std::pair<float, float> getPosition() const override;
     virtual std::string getClassName() const;
-    virtual void draw(sf::RenderWindow *window) const;
+    virtual void draw(sf::RenderTarget *window) const;
     virtual void refresh(const Element *el, Model *model);
 };
 

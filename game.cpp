@@ -2,7 +2,7 @@
 
 using namespace tinyxml2;
 
-Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_gameMode{game_mode::SOLO}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_player{nullptr}, m_distance{0}, m_powerActives{}, m_nextPatternAt{0}
+Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_pause{false}, m_gameMode{game_mode::SOLO}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_player{nullptr}, m_distance{0}, m_powerActives{}, m_nextPatternAt{0}, m_blurFade{0.0f}
 {
     m_player =  new Player;
     GameCharacter *gc = new GameCharacter{100, 0, 100, 50, 0, 0, m_player};
@@ -88,9 +88,14 @@ void Game::nextStep()
         ++player1;
     }
 
+    if (m_pause && m_blurFade < 0.003)
+    {
+        m_blurFade += 0.00005;
+    }
+
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMove).count() >= m_movePeriod)
     {
-        if (m_gameState == game_state::RUNNING)
+        if ((m_gameState == game_state::RUNNING) && (! m_pause))
         {
             //On créé des nouveaux obstacles et bonus en appelant un pattern aléatoire
             if (m_distance > m_nextPatternAt)
@@ -111,28 +116,31 @@ void Game::nextStep()
             }
         }
 
-        //On bouge les backgrounds
-        for (unsigned int i = 0; i<m_images.size(); i++)
+        if (!m_pause)
         {
-            m_images[i].second->move();
-        }
+            //On bouge les backgrounds
+            for (unsigned int i = 0; i<m_images.size(); i++)
+            {
+                m_images[i].second->move();
+            }
 
-        //On bouge les obstacles
-        for (unsigned int i = 0; i<m_obstacles.size(); i++)
-        {
-            m_obstacles[i].second->move();
-        }
+            //On bouge les obstacles
+            for (unsigned int i = 0; i<m_obstacles.size(); i++)
+            {
+                m_obstacles[i].second->move();
+            }
 
-        //On bouge les bonus
-        for (unsigned int i= 0; i<m_bonus.size(); i++)
-        {
-            m_bonus[i].second->move();
+            //On bouge les bonus
+            for (unsigned int i= 0; i<m_bonus.size(); i++)
+            {
+                m_bonus[i].second->move();
+            }
         }
 
         m_lastMove = std::chrono::system_clock::now();
     }
 
-    if (m_gameState == game_state::RUNNING)
+    if ((m_gameState == game_state::RUNNING) && (! m_pause))
     {
         //On bouge les personnages
         for (unsigned int i = 0; i<m_characters.size(); i++)
@@ -284,6 +292,7 @@ void Game::setGameState(int state)
         {
             Text *text = new Text{0, 600, GAME_SIZE_W, 50, 0, "Appuyez sur une touche pour lancer l'avion", 20, "score.ttf", ColorRGBA::White,text_effect::BREATH, 20, 1, 0};
             m_texts.push_back(std::make_pair(1, text));
+
             text->setId(GAMEINTROTEXTID);
         }
         break;
@@ -309,11 +318,12 @@ void Game::setPause(bool a)
         //PAUSE_TEXT = 300, RESUME_BUTTON, SETTINGS_BUTTON, QUIT_BUTTON;
         if (searchElementById(PAUSE_TEXT) == nullptr)
         {
-            Text *pause = new Text{0, 200, GAME_SIZE_W, 50, 0, "PAUSE", 20, "score.ttf", ColorRGBA::White, text_effect::BREATH, 20, 1, 0};
+            Text *pause = new Text{0, 100, GAME_SIZE_W, 50, 0, "PAUSE", 20, "score.ttf", ColorRGBA::White, text_effect::NOTHING, 20, 1, 0};
             pause->setId(pause_elem_id::PAUSE_TEXT);
             m_texts.push_back(std::make_pair(1, pause));
         }
     } else {
+        m_blurFade = 0;
         for (unsigned int i = pause_elem_id::PAUSE_TEXT; i<pause_elem_id::NB_ELEMENTS; i++)
         {
             deleteElement(i);
@@ -324,4 +334,9 @@ void Game::setPause(bool a)
 bool Game::isPause() const
 {
     return m_pause;
+}
+
+float Game::getBlurFade() const
+{
+    return m_blurFade;
 }

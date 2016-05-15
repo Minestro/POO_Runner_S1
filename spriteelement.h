@@ -34,7 +34,7 @@ public:
     virtual void animate();
     void refreshTextRect();
     void changeDirectionSprite(bool directionRight);
-    virtual void draw(sf::RenderWindow *window) const;
+    virtual void draw(sf::RenderTarget *window) const;
     virtual void refresh(const Element *el, Model *model);
 };
 

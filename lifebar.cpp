@@ -49,7 +49,7 @@ std::string LifeBar::getClassName() const
     return "LifeBar";
 }
 
-void LifeBar::draw(sf::RenderWindow *window) const
+void LifeBar::draw(sf::RenderTarget *window) const
 {
     m_bar->draw(window);
     m_sprite->draw(window);

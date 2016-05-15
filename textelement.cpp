@@ -151,7 +151,7 @@ void TextElement::generateTextForm()
     m_textForm.display();
 }
 
-void TextElement::draw(sf::RenderWindow *window) const
+void TextElement::draw(sf::RenderTarget *window) const
 {
     if (m_lineBreak)
     {

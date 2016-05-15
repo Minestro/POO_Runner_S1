@@ -1,6 +1,7 @@
 #include "graphicelement.h"
 
 std::map<std::string, sf::Texture*> GraphicElement::m_listTextures;
+std::map<int, sf::Shader*> GraphicElement::m_listShaders;
 
 GraphicElement::GraphicElement(unsigned int zIndex, unsigned int refreshPeriod):m_zIndex{zIndex}, m_lastRefeshCall{}, m_refreshPeriod{refreshPeriod}
 {
@@ -42,6 +43,23 @@ void GraphicElement::clearTextures()
         ++iterator;
     }
     m_listTextures.clear();
+}
+
+void GraphicElement::loadShaders()
+{
+    sf::Shader *blurShader = new sf::Shader{};
+    if (blurShader->loadFromFile("Ressources/Shaders/blur.frag", sf::Shader::Fragment))
+    {
+        m_listShaders.insert(std::make_pair(BLUR_EFFECT, blurShader));
+    }
+}
+
+void GraphicElement::clearShaders()
+{
+    for (std::pair<int, sf::Shader*> shader : m_listShaders)
+    {
+        delete shader.second;
+    }
 }
 
 float HueToRGB(float v1, float v2, float vH) {

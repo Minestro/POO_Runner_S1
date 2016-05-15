@@ -41,7 +41,7 @@ std::string CircleShapeElement::getClassName() const
     return "CircleShapeElement";
 }
 
-void CircleShapeElement::draw(sf::RenderWindow *window) const
+void CircleShapeElement::draw(sf::RenderTarget *window) const
 {
     window->draw(*this);
 }

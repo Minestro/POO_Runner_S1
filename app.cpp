@@ -4,6 +4,7 @@ App::App(): m_window{"Runner", sf::Style::Default, GAME_SIZE_W, GAME_SIZE_H}, m_
 {
     GraphicElement::loadTextures();
     TextElement::loadFonts();
+    GraphicElement::loadShaders();
     m_gameView.setModel(&m_gameModel);
     m_gameView.setWindow(&m_window);
     m_menuView.setModel(&m_menuModel);
@@ -16,6 +17,7 @@ App::~App()
 {
     GraphicElement::clearTextures();
     TextElement::clearFonts();
+    GraphicElement::clearShaders();
     m_window.close();
 }
 
@@ -88,6 +90,18 @@ void App::run()
             m_gameModel.nextStep();
             if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_drawTime).count() >= m_drawPeriod)
             {
+                if (m_gameModel.isPause())
+                {
+                    if (m_gameView.getLayeredShader(6) == nullptr)
+                    {
+                        m_gameView.addLayeredShader(GraphicElement::m_listShaders[BLUR_EFFECT], 6);
+                        m_gameView.getLayeredShader(6)->setParameter("texture", sf::Shader::CurrentTexture);
+                    }
+                    m_gameView.getLayeredShader(6)->setParameter("blur_radius", m_gameModel.getBlurFade());
+                } else if (!m_gameModel.isPause() && m_gameView.getLayeredShader(6) != nullptr)
+                {
+                    m_gameView.removeLayeredShader(6);
+                }
                 m_gameView.synchronise();
                 m_gameView.draw();
                 m_drawTime = std::chrono::system_clock::now();
