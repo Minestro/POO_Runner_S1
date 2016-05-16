@@ -111,7 +111,7 @@ public:
             renderPart[i]->clear(sf::Color::Transparent);
         }
         unsigned int i = 0;
-        for (std::pair<unsigned int, sf::Shader*> shader : m_layeredShader)
+        for (std::pair<const unsigned int, sf::Shader*> &shader : m_layeredShader)
         {
             while (actualZIndex < shader.first)
             {
@@ -164,7 +164,7 @@ public:
     {
         //Si le gameModel contient des nouveaux élements on les ajoutes à la liste elementToGraphicElement en lui associant un ou plusieurs GraphicElement
 
-        for (std::pair<bool, GameCharacter*> character: m_model->getCharacters())
+        for (std::pair<bool, GameCharacter*> &character: m_model->getCharacters())
         {
             if (character.first)
             {
@@ -180,7 +180,7 @@ public:
             }
         }
 
-        for (std::pair<bool, Obstacle*> obstacle : m_model->getObstacles())
+        for (std::pair<bool, Obstacle*> &obstacle : m_model->getObstacles())
         {
             if (obstacle.first)
             {
@@ -208,7 +208,7 @@ public:
             }
         }
 
-        for (std::pair<bool, Bonus*> bonus : m_model->getBonus())
+        for (std::pair<bool, Bonus*> &bonus : m_model->getBonus())
         {
             if (bonus.first)
             {
@@ -242,7 +242,7 @@ public:
             }
         }
 
-        for (std::pair<bool, Image*> image: m_model->getImages())
+        for (std::pair<bool, Image*> &image: m_model->getImages())
         {
             if (image.first)
             {
@@ -263,7 +263,7 @@ public:
             }
         }
 
-        for (std::pair<bool, Text*> text : m_model->getTexts())
+        for (std::pair<bool, Text*> &text : m_model->getTexts())
         {
             if (text.first)
             {
@@ -277,7 +277,7 @@ public:
             }
         }
 
-        for (std::pair<bool, Button*> button : m_model->getButtons())
+        for (std::pair<bool, Button*> &button : m_model->getButtons())
         {
             if (button.first)
             {

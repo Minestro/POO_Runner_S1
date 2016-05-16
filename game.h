@@ -5,13 +5,13 @@
 #include <vector>
 #include <ctime>
 #include <fstream>
-#include "model.h"
+//#include "model.h"
 #include "player.h"
 #include "obstaclesbonuspattern.h"
+#include "menu.h"
 
 #define GAMEINTROTEXTID 101
 
-enum pause_elem_id{PAUSE_TEXT = 300, RESUME_BUTTON, SETTINGS_BUTTON, QUIT_BUTTON, NB_ELEMENTS};
 enum game_state{INTRO, RUNNING};
 enum game_mode{SOLO, MULTI_HOSTING, MULTI_CLIENT};
 

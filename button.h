@@ -6,7 +6,7 @@
 #include <string>
 
 enum button_type {TEXT_BUTTON, ARROW_BUTTON, RADIO_BUTTON};
-enum button_action {CHANGE_PAGE, EXIT_APP, SET_FULL_SCREEN};
+enum button_action {CHANGE_PAGE, EXIT_APP, SET_FULL_SCREEN, RESUME_GAME};
 enum button_id {FULL_SCREEN_BUTTON = 200};
 
 class App;

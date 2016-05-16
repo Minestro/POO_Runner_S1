@@ -78,6 +78,9 @@ void Button::onClick()
             m_app->getSettings().m_isFullScreen = !m_app->getSettings().m_isFullScreen;
             m_isOn = m_app->getSettings().m_isFullScreen;
             break;
+        case button_action::RESUME_GAME:
+            m_app->getGameModel().setPause(0);
+            break;
         default:
             break;
         }

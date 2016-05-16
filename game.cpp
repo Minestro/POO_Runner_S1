@@ -313,22 +313,43 @@ void Game::setGameMode(int mode)
 void Game::setPause(bool a)
 {
     m_pause = a;
+    /*std::vector<std::pair<bool, GameCharacter*> > charactersList = getCharacters();
+    std::vector<std::pair<bool, Image*> > imagesList = getImages();
+    std::vector<std::pair<bool, Obstacle*> > obstaclesList = getObstacles();
+    std::vector<std::pair<bool, Bonus*> > bonusList = getBonus();
+    std::vector<std::pair<bool, Button*> > buttonsList = getButtons();
+    std::vector<std::pair<bool, Text*> > textsList = getTexts();*/
     if (m_pause)
     {
-        //PAUSE_TEXT = 300, RESUME_BUTTON, SETTINGS_BUTTON, QUIT_BUTTON;
-        if (searchElementById(PAUSE_TEXT) == nullptr)
-        {
-            Text *pause = new Text{0, 100, MODEL_SIZE_W, 50, 0, "PAUSE", 20, "score.ttf", ColorRGBA::White, text_effect::NOTHING, 20, 1, 0};
-            pause->setId(pause_elem_id::PAUSE_TEXT);
-            m_texts.push_back(std::make_pair(1, pause));
-        }
+        //Menu::refreshPageContent(this, menuPage::PAUSE);
     } else {
         m_blurFade = 0;
-        for (unsigned int i = pause_elem_id::PAUSE_TEXT; i<pause_elem_id::NB_ELEMENTS; i++)
-        {
-            deleteElement(i);
-        }
+        //Menu::refreshPageContent(this, menuPage::ESCAPE_MENU);
     }
+    /*for (std::pair<bool, GameCharacter*> &character : charactersList)
+    {
+        m_characters.push_back(character);
+    }
+    for (std::pair<bool, Image*> &image : imagesList)
+    {
+        m_images.push_back(image);
+    }
+    for (std::pair<bool, Obstacle*> &obstacle : obstaclesList)
+    {
+        m_obstacles.push_back(obstacle);
+    }
+    for (std::pair<bool, Bonus*> &bonus : bonusList)
+    {
+        m_bonus.push_back(bonus);
+    }
+    for (std::pair<bool, Button*> &button : buttonsList)
+    {
+        m_buttons.push_back(button);
+    }
+    for (std::pair<bool, Text*> &text : textsList)
+    {
+        m_texts.push_back(text);
+    }*/
 }
 
 bool Game::isPause() const
