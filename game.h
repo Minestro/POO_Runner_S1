@@ -48,6 +48,7 @@ public:
     void setSpeedPeriod(int period);
     bool isPause() const;
     void setPause(bool a);
+    void resetGame();
 };
 
 #endif // GAME_H

@@ -66,19 +66,14 @@ void Model::setCursorPosition(int x, int y)
     m_cursorPosition.second = y;
 }
 
-void Model::setApp(App &app)
+void Model::setApp(App *app)
 {
-    m_app = &app;
+    m_app = app;
 }
 
-App &Model::getApp()
+App *Model::getApp()
 {
-    return *m_app;
-}
-
-const App &Model::getApp() const
-{
-    return *m_app;
+    return m_app;
 }
 
 void Model::clearAll()

@@ -38,10 +38,10 @@ public:
     std::pair<float, float> getSize() const;
     std::pair<int, int> getCursorPosition() const;
     virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const = 0;
-    App &getApp();
+    App *getApp();
     const App &getApp() const;
     void setCursorPosition(int x, int y);
-    void setApp(App &app);
+    void setApp(App *app);
     Element *searchElementById(unsigned int id);
     void deleteElement(unsigned int id);
     void clearAll();

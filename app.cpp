@@ -9,8 +9,8 @@ App::App(): m_window{"Runner", sf::Style::Default, MODEL_SIZE_W, MODEL_SIZE_H}, 
     m_gameView.setWindow(&m_window);
     m_menuView.setModel(&m_menuModel);
     m_menuView.setWindow(&m_window);
-    m_gameModel.setApp(*this);
-    m_menuModel.setApp(*this);
+    m_gameModel.setApp(this);
+    m_menuModel.setApp(this);
 }
 
 App::~App()

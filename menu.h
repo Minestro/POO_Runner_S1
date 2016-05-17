@@ -19,7 +19,7 @@ public:
     int getActivePage() const;
     bool getExitApp() const;
     void exitApp();
-    static void refreshPageContent(Model *model, int page, int returnPage = menuPage::HOME);
+    static void refreshPageContent(Model *model, int page);
 };
 
 #endif // MENU_H

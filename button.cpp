@@ -72,7 +72,7 @@ void Button::onClick()
             Button::changePage(this, *m_app);
             break;
         case button_action::EXIT_APP:
-            m_app->stop();
+            m_app->getMenuModel().exitApp();
             break;
         case button_action::SET_FULL_SCREEN:
             m_app->getSettings().m_isFullScreen = !m_app->getSettings().m_isFullScreen;
@@ -80,6 +80,9 @@ void Button::onClick()
             break;
         case button_action::RESUME_GAME:
             m_app->getGameModel().setPause(0);
+            break;
+        case button_action::RESET_GAME:
+            m_app->getGameModel().resetGame();
             break;
         default:
             break;

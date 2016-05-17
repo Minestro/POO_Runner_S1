@@ -73,7 +73,7 @@ float Game::getPixelSpeed() const
 }
 
 //------------------------------------------------------------------------------
-// Input:   Rien
+// Input:   Rienb1
 // Output:  Rien
 // Return:  Rien
 // Purpose: Actualise tous les élements du modèle de jeu (déplacement des élements, test de collision, ajouts/ suppressions d'obstacles / bonus avant la prochaine actualisation de l'image
@@ -313,43 +313,13 @@ void Game::setGameMode(int mode)
 void Game::setPause(bool a)
 {
     m_pause = a;
-    /*std::vector<std::pair<bool, GameCharacter*> > charactersList = getCharacters();
-    std::vector<std::pair<bool, Image*> > imagesList = getImages();
-    std::vector<std::pair<bool, Obstacle*> > obstaclesList = getObstacles();
-    std::vector<std::pair<bool, Bonus*> > bonusList = getBonus();
-    std::vector<std::pair<bool, Button*> > buttonsList = getButtons();
-    std::vector<std::pair<bool, Text*> > textsList = getTexts();*/
     if (m_pause)
     {
-        //Menu::refreshPageContent(this, menuPage::PAUSE);
+        Menu::refreshPageContent(this, menuPage::PAUSE);
     } else {
         m_blurFade = 0;
-        //Menu::refreshPageContent(this, menuPage::ESCAPE_MENU);
+        Menu::refreshPageContent(this, menuPage::ESCAPE_MENU);
     }
-    /*for (std::pair<bool, GameCharacter*> &character : charactersList)
-    {
-        m_characters.push_back(character);
-    }
-    for (std::pair<bool, Image*> &image : imagesList)
-    {
-        m_images.push_back(image);
-    }
-    for (std::pair<bool, Obstacle*> &obstacle : obstaclesList)
-    {
-        m_obstacles.push_back(obstacle);
-    }
-    for (std::pair<bool, Bonus*> &bonus : bonusList)
-    {
-        m_bonus.push_back(bonus);
-    }
-    for (std::pair<bool, Button*> &button : buttonsList)
-    {
-        m_buttons.push_back(button);
-    }
-    for (std::pair<bool, Text*> &text : textsList)
-    {
-        m_texts.push_back(text);
-    }*/
 }
 
 bool Game::isPause() const
@@ -360,4 +330,21 @@ bool Game::isPause() const
 float Game::getBlurFade() const
 {
     return m_blurFade;
+}
+
+void Game::resetGame()
+{
+    m_pause = 0;
+    m_distance = 0;
+    setGameState(game_state::INTRO);
+    setSpeedPeriod(STARTSPEEDPERIODGAME);
+    clearAll();
+    m_player =  new Player;
+    GameCharacter *gc = new GameCharacter{100, 0, 100, 50, 0, 0, m_player};
+    gc->setId(character_id::PLAYER1);
+    m_characters.push_back(std::make_pair(1, gc));
+    Image *b1 = new Image{0, 0, MODEL_SIZE_W, MODEL_SIZE_H, "FOND2.png", 1, 0.5, 1, 0};
+    Image *b2 = new Image{0, 0, MODEL_SIZE_W, MODEL_SIZE_H, "FOND1.png", 2, 1.0, 1, 0};
+    m_images.push_back(std::make_pair(1, b1));
+    m_images.push_back(std::make_pair(1, b2));
 }
