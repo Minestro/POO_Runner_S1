@@ -15,25 +15,25 @@ class Button: public Element
 {
 private:
     std::string m_text;
-    button_type m_type;
+    int m_type;
     bool m_isClickable; //On peut immaginer que le bouton soit non cliquable par exemple qu'il soit grisé.
     bool m_isOn;
     int m_destinationPage;
     App *m_app;
-    std::vector<button_action> m_actions;
+    std::vector<int> m_actions;
 public:
-    Button(float x, float y, float width, float height, float rotation, std::string text, int destinationPage, App *p, button_type type = button_type::TEXT_BUTTON, bool isClickable = 1);
+    Button(float x, float y, float width, float height, float rotation, std::string text, int destinationPage, App *p, int type = button_type::TEXT_BUTTON, bool isClickable = 1);
     virtual ~Button() = default;
     bool isHover(int x, int y) const;
     void onClick();
     std::string getText() const;
-    button_type getType() const;
+    int getType() const;
     int getDestinationPage() const;
     bool isClickable() const;
     bool isOn() const;
     void setIsOn(bool on);
     std::string getClassName() const;
-    void addAction(button_action action);
+    void addAction(int action);
 
     static void changePage(const Button *sender, App &app);
 };

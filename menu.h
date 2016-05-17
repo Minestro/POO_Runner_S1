@@ -14,7 +14,7 @@ private:
     void loadModels();
     std::vector<ElementsList> m_menuModels;
 public:
-    Menu(float width, float height, int activePage);
+    Menu(float width, float height, int activePage, App *app);
     virtual ~Menu() = default;
     virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const;
     void setPage(unsigned int page);

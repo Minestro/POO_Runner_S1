@@ -38,9 +38,14 @@ void ElementsList::addElementsToModel(Model *model) const
     {
         model->getTexts().push_back(std::make_pair(1, new Text{m_textsList[i]}));
     }
+
+    for (unsigned int i = 0; i<m_buttonsList.size(); i++)
+    {
+        model->getButtons().push_back(std::make_pair(1, new Button{m_buttonsList[i]}));
+    }
 }
 
-void ElementsList::loadFromFile(const XMLDocument &file)
+void ElementsList::loadFromFile(const XMLDocument &file, App *app)
 {
     m_obstaclesList.clear();
     m_bonusList.clear();
@@ -121,12 +126,23 @@ void ElementsList::loadFromFile(const XMLDocument &file)
             }
         }
         while (textEl != nullptr);
+
+        const XMLElement *buttonEl = patternsList->FirstChildElement("Button");
+        do
+        {
+            if (buttonEl != nullptr)
+            {
+                loadButton(*buttonEl, app);
+                buttonEl = buttonEl->NextSiblingElement("Button");
+            }
+        }
+        while (buttonEl != nullptr);
     } else {
         throw XMLError(XML_ERROR_FILE_READ_ERROR);
     }
 }
 
-int ElementsList::loadBonus(const XMLElement &bonus)
+void ElementsList::loadBonus(const XMLElement &bonus)
 {
     float width;
     float height;
@@ -149,10 +165,9 @@ int ElementsList::loadBonus(const XMLElement &bonus)
     parseElementsText(e, bonus);
 
     m_bonusList.push_back(Bonus{x + MODEL_SIZE_W, y, width, height, r, -PIXELPERBACKGROUNDMOVE, 0.0f, mR, 0, type});
-    return XML_SUCCESS;
 }
 
-int ElementsList::loadObstacles(const XMLElement &obstacle)
+void ElementsList::loadObstacles(const XMLElement &obstacle)
 {
     float width;
     float height;
@@ -177,10 +192,9 @@ int ElementsList::loadObstacles(const XMLElement &obstacle)
     parseElementsText(e, obstacle);
 
     m_obstaclesList.push_back(Obstacle{x + MODEL_SIZE_W, y, width, height, r, -PIXELPERBACKGROUNDMOVE, 0.0f, mR, 0, (unsigned int)dammage, type});
-    return XML_SUCCESS;
 }
 
-int ElementsList::loadImages(const XMLElement &image)
+void ElementsList::loadImages(const XMLElement &image)
 {
     float width;
     float height;
@@ -208,11 +222,13 @@ int ElementsList::loadImages(const XMLElement &image)
 
     parseElementsText(e, image);
 
-    m_imagesList.push_back(Image{x, y, width, height, fileName, zIndex, coefSpeed, isSliding, movePeriod});
-    return XML_SUCCESS;
+    Image img{x, y, width, height, fileName, zIndex, coefSpeed, isSliding, movePeriod};
+    img.setId(id);
+    m_imagesList.push_back(img);
+
 }
 
-int ElementsList::loadText(const XMLElement &text)
+void ElementsList::loadText(const XMLElement &text)
 {
     float width;
     float height;
@@ -224,6 +240,7 @@ int ElementsList::loadText(const XMLElement &text)
     unsigned int fontSize;
     ColorRGBA color;
     int textEffect;
+    int id;
     unsigned int effectPeriod;
     bool isAutoRescale;
     bool isLineBreacker;
@@ -237,6 +254,7 @@ int ElementsList::loadText(const XMLElement &text)
     e.floatAttributeToTagName.push_back(std::make_pair(&rotateAngle, "RotateAngle"));
     e.uintAttributeToTagName.push_back(std::make_pair(&fontSize, "FontSize"));
     e.intAttributeToTagName.push_back(std::make_pair(&textEffect, "TextEffect"));
+    e.intAttributeToTagName.push_back(std::make_pair(&id, "ID"));
     e.uintAttributeToTagName.push_back(std::make_pair(&effectPeriod, "EffectPeriod"));
     e.boolAttributeToTagName.push_back(std::make_pair(&isAutoRescale, "IsAutoRescale"));
     e.boolAttributeToTagName.push_back(std::make_pair(&isLineBreacker, "IsLineBreack"));
@@ -246,8 +264,48 @@ int ElementsList::loadText(const XMLElement &text)
 
     parseElementsText(e, text);
 
-    m_textsList.push_back(Text{x, y, width, height, rotateAngle, textB, fontSize, font, color, textEffect, effectPeriod, isAutoRescale, isLineBreacker});
-    return XML_SUCCESS;
+    Text txt{x, y, width, height, rotateAngle, textB, fontSize, font, color, textEffect, effectPeriod, isAutoRescale, isLineBreacker};
+    txt.setId(id);
+    m_textsList.push_back(txt);
+}
+
+void ElementsList::loadButton(const XMLElement &button, App *app)
+{
+    float width;
+    float height;
+    float x;
+    float y;
+    float rotateAngle;
+    std::string text;
+    int destinationPage;
+    int type;
+    std::vector<int> actionsList;
+    int id;
+
+    VarToNodeName e;
+
+    e.floatAttributeToTagName.push_back(std::make_pair(&width, "SizeWidth"));
+    e.floatAttributeToTagName.push_back(std::make_pair(&height, "SizeHeight"));
+    e.floatAttributeToTagName.push_back(std::make_pair(&x, "PositionX"));
+    e.floatAttributeToTagName.push_back(std::make_pair(&y, "PositionY"));
+    e.floatAttributeToTagName.push_back(std::make_pair(&rotateAngle, "RotateAngle"));
+    e.intAttributeToTagName.push_back(std::make_pair(&destinationPage, "DestinationPage"));
+    e.intAttributeToTagName.push_back(std::make_pair(&id, "ID"));
+    e.intAttributeToTagName.push_back(std::make_pair(&type, "Type"));
+    e.stringAttributeToTagName.push_back(std::make_pair(&text, "String"));
+    e.listIntAttributeToTagName.push_back(std::make_pair(&actionsList, "ActionsList"));
+
+    parseElementsText(e, button);
+
+    Button bt{x, y, width, height, rotateAngle, text, destinationPage, app, type};
+    bt.setId(id);
+    for (int a : actionsList)
+    {
+        bt.addAction(a);
+    }
+    m_buttonsList.push_back(bt);
+
+
 }
 
 void ElementsList::parseElementsText(const VarToNodeName &e, const XMLElement &node) const
@@ -339,10 +397,40 @@ void ElementsList::parseElementsText(const VarToNodeName &e, const XMLElement &n
                 }
                 pos++;
             }
-            e.colorAttributeToTagName[i].first->r = std::stoi(colorS.substr(0, posVirgules[0]));
-            e.colorAttributeToTagName[i].first->g = std::stoi(colorS.substr(posVirgules[0]+1, posVirgules[1]));
-            e.colorAttributeToTagName[i].first->b = std::stoi(colorS.substr(posVirgules[1]+1, posVirgules[2]));
-            e.colorAttributeToTagName[i].first->a = std::stoi(colorS.substr(posVirgules[2]+1, posVirgules[3]));
+            if (posVirgules.size() == 3)
+            {
+                e.colorAttributeToTagName[i].first->r = std::stoi(colorS.substr(0, posVirgules[0]));
+                e.colorAttributeToTagName[i].first->g = std::stoi(colorS.substr(posVirgules[0]+1, posVirgules[1]-posVirgules[0]-1));
+                e.colorAttributeToTagName[i].first->b = std::stoi(colorS.substr(posVirgules[1]+1, posVirgules[2]-posVirgules[1]-1));
+                e.colorAttributeToTagName[i].first->a = std::stoi(colorS.substr(posVirgules[2]+1));
+            } else {
+                throw XMLError(XML_ERROR_PARSING_ELEMENT);
+            }
+        }
+    }
+
+    for (unsigned int i=0; i<e.listIntAttributeToTagName.size(); i++)
+    {
+        if (node.FirstChildElement(e.listIntAttributeToTagName[i].second.c_str()) == nullptr)
+        {
+            throw XMLError (XML_ERROR_PARSING_ELEMENT);
+        }
+        std::string listInt = node.FirstChildElement(e.listIntAttributeToTagName[i].second.c_str())->GetText();
+        unsigned int pos = 0;
+        unsigned int debut = 0;
+        while (pos != listInt.size())
+        {
+            if (listInt[pos] == ',')
+            {
+                e.listIntAttributeToTagName[i].first->push_back(std::stoi(listInt.substr(debut, pos-debut)));
+                debut = pos+1;
+            }
+            pos++;
+        }
+        e.listIntAttributeToTagName[i].first->push_back(std::stoi(listInt.substr(debut)));
+        if (e.listIntAttributeToTagName[i].first->size() < 1)
+        {
+            throw XMLError(XML_ERROR_PARSING_ELEMENT);
         }
     }
 }

@@ -25,7 +25,7 @@ protected:
     std::pair<int, int> m_cursorPosition;
     App *m_app;
 public:
-    Model(float width, float height);
+    Model(float width, float height, App *app = nullptr);
     virtual ~Model();
     std::vector<const Element*> &getDeletedElements();
     std::vector<std::pair<bool, GameCharacter*> > &getCharacters();

@@ -1,5 +1,5 @@
 <PatternList>
-	<NbPatterns>1</NbPatterns>
+	<NbPatterns>2</NbPatterns>
 	<Pattern id="1">
 	<Width>1280</Width>
 	<Image>
@@ -12,7 +12,7 @@
 		<CoefSpeed>0.5</CoefSpeed>
 		<IsSliding>1</IsSliding>
 		<MovePeriod>15</MovePeriod>
-		<ID>-1</ID>
+		<ID>210</ID>
 	</Image>
 	<Image>
 		<SizeWidth>1280.0</SizeWidth>
@@ -24,7 +24,7 @@
 		<CoefSpeed>1.0</CoefSpeed>
 		<IsSliding>1</IsSliding>
 		<MovePeriod>15</MovePeriod>
-		<ID>-1</ID>
+		<ID>211</ID>
 	</Image>
 	<Text>
 		<SizeWidth>1280.0</SizeWidth>
@@ -40,7 +40,70 @@
 		<EffectPeriod>20</EffectPeriod>
 		<IsAutoRescale>1</IsAutoRescale>
 		<IsLineBreack>0</IsLineBreack>
+		<ID>212</ID>
 	</Text>
 	</Pattern>
-
+	<Pattern id="2">
+		<Width>1280</Width>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>540.0</PositionX>
+			<PositionY>150.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Jouer</String>
+			<DestinationPage>0</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0, 4</ActionsList>
+			<ID>210</ID>
+		</Button>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>540.0</PositionX>
+			<PositionY>250.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Regles</String>
+			<DestinationPage>8</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0</ActionsList>
+			<ID>211</ID>
+		</Button>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>540.0</PositionX>
+			<PositionY>350.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Options</String>
+			<DestinationPage>5</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0</ActionsList>
+			<ID>212</ID>
+		</Button>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>540.0</PositionX>
+			<PositionY>450.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Quitter</String>
+			<DestinationPage>0</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>1</ActionsList>
+			<ID>213</ID>
+		</Button>
+		<Image>
+			<SizeWidth>1280.0</SizeWidth>
+			<SizeHeight>720.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>0.0</PositionY>
+			<FileName>menuBackground.png</FileName>
+			<ZIndex>1</ZIndex>
+			<CoefSpeed>0.0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>214</ID>
+		</Image>
+	</Pattern>
 </PatternList>

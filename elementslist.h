@@ -15,6 +15,7 @@ struct VarToNodeName
     std::vector<std::pair<std::string*, std::string> > stringAttributeToTagName;
     std::vector<std::pair<ColorRGBA*, std::string> > colorAttributeToTagName;
     std::vector<std::pair<unsigned int*, std::string> > uintAttributeToTagName;
+    std::vector<std::pair<std::vector<int>*, std::string> > listIntAttributeToTagName;
 };
 
 class ElementsList
@@ -26,15 +27,17 @@ private:
     std::vector<Obstacle> m_obstaclesList;
     std::vector<Image> m_imagesList;
     std::vector<Text> m_textsList;
+    std::vector<Button> m_buttonsList;
 
-    int loadBonus(const tinyxml2::XMLElement &bonus);
-    int loadObstacles(const tinyxml2::XMLElement &obstacle);
-    int loadImages(const tinyxml2::XMLElement &image);
-    int loadText(const tinyxml2::XMLElement &text);
+    void loadBonus(const tinyxml2::XMLElement &bonus);
+    void loadObstacles(const tinyxml2::XMLElement &obstacle);
+    void loadImages(const tinyxml2::XMLElement &image);
+    void loadText(const tinyxml2::XMLElement &text);
+    void loadButton(const tinyxml2::XMLElement &button, App *app);
     void parseElementsText(const VarToNodeName &e, const tinyxml2::XMLElement &node) const;
 public:
     ElementsList(unsigned int id);
-    void loadFromFile(const tinyxml2::XMLDocument &file);
+    void loadFromFile(const tinyxml2::XMLDocument &file, App *app);
     void addElementsToModel(Model *model) const;
     unsigned int getWidth() const;
     unsigned int getId() const;

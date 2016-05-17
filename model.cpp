@@ -1,7 +1,7 @@
 #include "model.h"
 #include "app.h"
 
-Model::Model(float width, float height): m_size{width, height}, m_characters{}, m_images{}, m_obstacles{}, m_bonus{}, m_texts{}, m_deletedElements{}, m_cursorPosition{0, 0}, m_app{nullptr}
+Model::Model(float width, float height, App *app): m_size{width, height}, m_characters{}, m_images{}, m_obstacles{}, m_bonus{}, m_texts{}, m_deletedElements{}, m_cursorPosition{0, 0}, m_app{app}
 {
 
 }

@@ -3,7 +3,7 @@
 
 using namespace tinyxml2;
 
-Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{width, height}, m_pause{false}, m_gameMode{game_mode::SOLO}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_player{nullptr}, m_distance{0}, m_powerActives{}, m_nextPatternAt{0}, m_blurFade{0.0f}
+Game::Game(float width, float height, unsigned int movePeriodMs, App *app): Model::Model{width, height, app}, m_pause{false}, m_gameMode{game_mode::SOLO}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_player{nullptr}, m_distance{0}, m_powerActives{}, m_nextPatternAt{0}, m_blurFade{0.0f}
 {
     m_player =  new Player;
     GameCharacter *gc = new GameCharacter{100, 0, 100, 50, 0, 0, m_player};
@@ -63,7 +63,7 @@ void Game::loadPatterns()
     for (unsigned int i=0; (int)i<nbPatterns; i++)
     {
         ElementsList op{i};
-        op.loadFromFile(patternsFile);
+        op.loadFromFile(patternsFile, m_app);
         m_patternsList.push_back(op);
     }
 }
@@ -170,12 +170,7 @@ void Game::nextStep()
                     if (obstacle->second->getType() == obstacle_type::MINE)
                     {
                         obstacle->second->setState(obstacle_state::EXPLODE);
-                    }
-                    if (obstacle->second->getType() == obstacle_type::NUAGE)
-                    {
-                        obstacle->second->setState(obstacle_state::EXPLODE);
-                    }
-                    else {
+                    } else {
                         m_deletedElements.push_back(obstacle->second);
                         m_obstacles.erase(obstacle);
                         increment = false;

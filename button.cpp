@@ -1,7 +1,7 @@
 #include "button.h"
 #include "app.h"
 
-Button::Button(float x, float y, float width, float height, float rotation, std::string text, int destinationPage, App *m, button_type type, bool isClickable): Element::Element{x, y, width, height, rotation}, m_text{text}, m_type{type}, m_isClickable{isClickable}, m_isOn{0}, m_destinationPage{destinationPage}, m_app{m}, m_actions{}
+Button::Button(float x, float y, float width, float height, float rotation, std::string text, int destinationPage, App *m, int type, bool isClickable): Element::Element{x, y, width, height, rotation}, m_text{text}, m_type{type}, m_isClickable{isClickable}, m_isOn{0}, m_destinationPage{destinationPage}, m_app{m}, m_actions{}
 {
 
 }
@@ -16,7 +16,7 @@ std::string Button::getText() const
     return m_text;
 }
 
-button_type Button::getType() const
+int Button::getType() const
 {
     return m_type;
 }
@@ -45,7 +45,7 @@ void Button::setIsOn(bool on)
     m_isOn = on;
 }
 
-void Button::addAction(button_action action)
+void Button::addAction(int action)
 {
     m_actions.push_back(action);
 }

@@ -3,7 +3,7 @@
 
 using namespace tinyxml2;
 
-Menu::Menu(float width, float height, int activePage): Model::Model{width, height}, m_activePage{activePage}, m_exitApp{0}, m_menuModels{}
+Menu::Menu(float width, float height, int activePage, App *app): Model::Model{width, height, app}, m_activePage{activePage}, m_exitApp{0}, m_menuModels{}
 {
     try
     {
@@ -14,6 +14,7 @@ Menu::Menu(float width, float height, int activePage): Model::Model{width, heigh
         std::cout << "Erreur lors de la lecture du fichier " << MENU_MODELS_FILE << " . Code erreur : " << std::to_string(er) << std::endl;
         exitApp();
     }
+
     setPage(activePage);
 }
 
@@ -39,27 +40,15 @@ void Menu::refreshPageContent(Model *model, int page)
     {
     case menuPage::HOME :
     {
-        Button *b1 = new Button{model->getSize().first/2 - 100, 150, 200, 50, 0, "Jouer", menuPage::ESCAPE_MENU, model->getApp(), button_type::TEXT_BUTTON};
-        b1->setId(210);
-        b1->addAction(button_action::CHANGE_PAGE);
-        b1->addAction(button_action::RESET_GAME);
-        Button *b2 = new Button{model->getSize().first/2 - 100, 250, 200, 50, 0, "Regles", menuPage::RULES, model->getApp(), button_type::TEXT_BUTTON};
-        b2->setId(211);
-        b2->addAction(button_action::CHANGE_PAGE);
-        Button *b3 = new Button{model->getSize().first/2 - 100, 350, 200, 50, 0, "Options", menuPage::SETTINGS, model->getApp(), button_type::TEXT_BUTTON};
-        b3->setId(212);
-        b3->addAction(button_action::CHANGE_PAGE);
-        Button *b4 = new Button{model->getSize().first/2 - 100, 450, 200, 50, 0, "Quitter", menuPage::ESCAPE_MENU, model->getApp(), button_type::TEXT_BUTTON};
-        b4->setId(213);
-        b4->addAction(button_action::EXIT_APP);
-        Image *i = new Image{0, 0, model->getSize().first, model->getSize().second, "menuBackground.png", 1, 0, 0};
-        i->setId(214);
-
-         model->getButtons().push_back(std::make_pair(1, b1));
-         model->getButtons().push_back(std::make_pair(1, b2));
-         model->getButtons().push_back(std::make_pair(1, b3));
-         model->getButtons().push_back(std::make_pair(1, b4));
-         model->getImages().push_back(std::make_pair(1, i));
+        std::vector<ElementsList>::iterator preMenu = m_menuModels.begin();
+        while (preMenu != m_menuModels.end() && preMenu->getId() != (unsigned int)page)
+        {
+            ++preMenu;
+        }
+        if (preMenu != m_menuModels.end())
+        {
+            preMenu->addElementsToModel(this);
+        }
         break;
     }
     case menuPage::PRE_MENU :
@@ -216,7 +205,7 @@ void Menu::loadModels()
     for (unsigned int i=menuPage::PRE_MENU; (int)i<menuPage::PRE_MENU + nbPatterns; i++)
     {
         ElementsList op{i};
-        op.loadFromFile(modelsFile);
+        op.loadFromFile(modelsFile, m_app);
         m_menuModels.push_back(op);
     }
 }
