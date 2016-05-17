@@ -1,9 +1,16 @@
 #include "menu.h"
 #include <iostream>
 
-Menu::Menu(float width, float height, int activePage): Model::Model{width, height}, m_activePage{activePage}, m_exitApp{0}
+using namespace tinyxml2;
+
+Menu::Menu(float width, float height, int activePage): Model::Model{width, height}, m_activePage{activePage}, m_exitApp{0}, m_menuModels{}
 {
     setPage(activePage);
+    int returnCode = loadModels();
+    if (returnCode != XML_SUCCESS)
+    {
+        std::cerr << "Erreur lors de la lecture du fichier du menu. Code Erreur : " << returnCode << std::endl;
+    }
 }
 
 std::pair<float, float> Menu::getCharacterSpeed(const GameCharacter *gc) const
@@ -53,15 +60,15 @@ void Menu::refreshPageContent(Model *model, int page)
     }
     case menuPage::PRE_MENU :
     {
-        Image *i1 = new Image{0, 0, model->getSize().first, model->getSize().second, "FOND2.png", 1, 0.5, 1, STARTSPEEDPERIODGAME};
-        i1->setId(210);
-        Image *i2 = new Image{0, 0, model->getSize().first, model->getSize().second, "FOND1.png", 2, 1.0, 1, STARTSPEEDPERIODGAME};
-        i2->setId(211);
-        Text *t = new Text{0, 600, model->getSize().first, 50, 0, "Appuyez sur une touche pour continuer", 20, "score.ttf", ColorRGBA::White,text_effect::BREATH, 20, 1, 0};
-        t->setId(212);
-        model->getImages().push_back(std::make_pair(1, i1));
-        model->getImages().push_back(std::make_pair(1, i2));
-        model->getTexts().push_back(std::make_pair(1, t));
+        std::vector<ElementsList>::iterator preMenu = m_menuModels.begin();
+        while (preMenu != m_menuModels.end() && preMenu->getId() != PRE_MENU)
+        {
+            ++preMenu;
+        }
+        if (preMenu != m_menuModels.end())
+        {
+            preMenu->addElementsToModel(this);
+        }
         break;
     }
     case menuPage::RULES :
@@ -175,6 +182,44 @@ void Menu::refreshPageContent(Model *model, int page)
     default:
         break;
     }
+}
+
+int Menu::loadModels()
+{
+    int nbPatterns = 0;
+    int returnCode;
+    XMLDocument modelsFile;
+    returnCode = modelsFile.LoadFile(MENU_MODELS_FILE.c_str());
+    if (returnCode != XML_SUCCESS)
+    {
+        return returnCode;
+    }
+    const XMLNode *pRoot = modelsFile.FirstChild();
+    if (pRoot == nullptr)
+    {
+        return XML_ERROR_FILE_READ_ERROR;
+    }
+    const XMLElement *nbPatternsNode = pRoot->FirstChildElement("NbPatterns");
+    if (nbPatternsNode == nullptr)
+    {
+        return XML_ERROR_PARSING_ELEMENT;
+    }
+    returnCode = nbPatternsNode->QueryIntText(&nbPatterns);
+    if (returnCode != XML_SUCCESS)
+    {
+        return returnCode;
+    }
+    for (unsigned int i=0; (int)i<nbPatterns; i++)
+    {
+        ElementsList op{i};
+        returnCode = op.loadFromFile(modelsFile);
+        if (returnCode != XML_SUCCESS)
+        {
+            return returnCode;
+        }
+        m_menuModels.push_back(op);
+    }
+    return XML_SUCCESS;
 }
 
 void Menu::refresh()

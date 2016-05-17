@@ -1,0 +1,46 @@
+<PatternList>
+	<NbPatterns>1</NbPatterns>
+	<Pattern id="2">
+	<Width>1280</Width>
+	<Image>
+		<SizeWidth>1280.0</SizeWidth>
+		<SizeHeight>720.0</SizeHeight>
+		<PositionX>0.0</PositionX>
+		<PositionY>0.0</PositionY>
+		<FileName>FOND2.png</FileName>
+		<ZIndex>1</ZIndex>
+		<CoefSpeed>0.5</CoefSpeed>
+		<IsSliding>1</IsSliding>
+		<MovePeriod>15</MovePeriod>
+		<ID>-1</ID>
+	</Image>
+	<Image>
+		<SizeWidth>1280.0</SizeWidth>
+		<SizeHeight>720.0</SizeHeight>
+		<PositionX>0.0</PositionX>
+		<PositionY>0.0</PositionY>
+		<FileName>FOND1.png</FileName>
+		<ZIndex>2</ZIndex>
+		<CoefSpeed>1.0</CoefSpeed>
+		<IsSliding>1</IsSliding>
+		<MovePeriod>15</MovePeriod>
+		<ID>-1</ID>
+	</Image>
+	<Text>
+		<SizeWidth>1280.0</SizeWidth>
+		<SizeHeight>50.0</SizeHeight>
+		<PositionX>0.0</PositionX>
+		<PositionY>600.0</PositionY>
+		<RotateAngle>0.0</RotateAngle>
+		<String>Appuyez sur une touche pour continuer</String>
+		<FontSize>20</FontSize>
+		<Font>score.ttf</Font>
+		<Color>255, 255, 255, 0</Color>
+		<TextEffect>2</TextEffect>
+		<EffectPeriod>20</EffectPeriod>
+		<IsAutoRescale>1</IsAutoRescale>
+		<IsLineBreak>0</IsLineBreak>
+	</Text>
+	</Pattern>
+
+</PatternList>

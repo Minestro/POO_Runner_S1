@@ -1,4 +1,5 @@
 #include "game.h"
+#include "app.h"
 
 using namespace tinyxml2;
 
@@ -56,7 +57,7 @@ int Game::loadPatterns()
     }
     for (unsigned int i=0; (int)i<nbPatterns; i++)
     {
-        ObstaclesBonusPattern op{i, this};
+        ElementsList op{i};
         returnCode = op.loadFromFile(patternsFile);
         if (returnCode != XML_SUCCESS)
         {
@@ -101,7 +102,7 @@ void Game::nextStep()
             if (m_distance > m_nextPatternAt)
             {
                 int ran = rand()% m_patternsList.size();
-                m_patternsList[ran].addElementsToModel();
+                m_patternsList[ran].addElementsToModel(this);
                 m_nextPatternAt = m_distance + m_patternsList[ran].getWidth();
             }
 
@@ -320,10 +321,10 @@ void Game::setPause(bool a)
     m_pause = a;
     if (m_pause)
     {
-        Menu::refreshPageContent(this, menuPage::PAUSE);
+        getApp()->getMenuModel().refreshPageContent(this, menuPage::PAUSE);
     } else {
         m_blurFade = 0;
-        Menu::refreshPageContent(this, menuPage::ESCAPE_MENU);
+        getApp()->getMenuModel().refreshPageContent(this, menuPage::ESCAPE_MENU);
     }
 }
 

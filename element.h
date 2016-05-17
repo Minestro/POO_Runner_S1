@@ -12,6 +12,7 @@ enum pointsName{UL, UR, DL, DR};
 
 struct ColorRGBA
 {
+    ColorRGBA();
     ColorRGBA(unsigned int cr, unsigned int cg, unsigned int cb, unsigned int alpha = 255);
     unsigned int r, g, b, a;
     static const ColorRGBA White;

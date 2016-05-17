@@ -5,9 +5,8 @@
 #include <vector>
 #include <ctime>
 #include <fstream>
-//#include "model.h"
 #include "player.h"
-#include "obstaclesbonuspattern.h"
+#include "elementslist.h"
 #include "menu.h"
 
 #define GAMEINTROTEXTID 101
@@ -27,7 +26,7 @@ private:
     Player *m_player;
     unsigned long int m_distance;
     std::vector<std::pair <bool, std::chrono::time_point<std::chrono::system_clock> > > m_powerActives; //Pour chaque pouvoir on associ un bool pour savoir si il est activé et un time point qui définit jusqu'à quand le pouvoir est actif.
-    std::vector<ObstaclesBonusPattern> m_patternsList;
+    std::vector<ElementsList> m_patternsList;
     unsigned long int m_nextPatternAt;
     int loadPatterns();
     float m_blurFade;
