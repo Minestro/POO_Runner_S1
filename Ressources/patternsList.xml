@@ -850,10 +850,9 @@
 		<SizeHeight>40.0</SizeHeight>
 		<PositionX>250.0</PositionX>
 		<PositionY>300</PositionY>
-		<Type>0</Type>
 		<Dammage>10</Dammage>
 		<RotateAngle>0.0</RotateAngle>
-		<RotateMovement>1.0</RotateMovement>
+		<RotateMovement>0.0</RotateMovement>
 	</Obstacle>
 	</Pattern>
 

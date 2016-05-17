@@ -198,6 +198,12 @@ public:
                         nbColonnes = 1;
                         animationPeriod = 100;
                         break;
+                    case obstacle_type::NUAGE:
+                        texture = "nuages.png";
+                        nbLignes = 1;
+                        nbColonnes =4;
+                        animationPeriod = 100;
+                        break;
                     default:
                         break;
                     }

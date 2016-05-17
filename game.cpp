@@ -169,7 +169,12 @@ void Game::nextStep()
                     if (obstacle->second->getType() == obstacle_type::MINE)
                     {
                         obstacle->second->setState(obstacle_state::EXPLODE);
-                    } else {
+                    }
+                    if (obstacle->second->getType() == obstacle_type::NUAGE)
+                    {
+                        obstacle->second->setState(obstacle_state::EXPLODE);
+                    }
+                    else {
                         m_deletedElements.push_back(obstacle->second);
                         m_obstacles.erase(obstacle);
                         increment = false;
