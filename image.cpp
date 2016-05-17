@@ -19,7 +19,7 @@ void Image::move()
 {
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() > m_movePeriod && m_isSliding)
     {
-        if (m_position.first - 10 > -m_size.first)
+        if (m_position.first - (m_movement.first * m_coefSpeed) > -m_size.first)
         {
             m_position.first += m_movement.first * m_coefSpeed;
         } else {

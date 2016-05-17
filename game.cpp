@@ -18,11 +18,16 @@ Game::Game(float width, float height, unsigned int movePeriodMs): Model::Model{w
     setSpeedPeriod(m_movePeriod);
     m_powerActives.resize(power_list::NB_POWER - 1);
 
-    int returnCode = loadPatterns();
-    if (returnCode != XML_SUCCESS)
+    try
     {
-        std::cerr << "Erreur lors de la lecture du fichier des definitions des obstacles. Code Erreur : " << returnCode << std::endl;
+        loadPatterns();
     }
+    catch (const XMLError &er)
+    {
+        std::cout << "Erreur lord de la lecture de " << PATTERNS_FILE << " Code erreur : " <<  std::to_string(er) << std::endl;
+        m_app->getMenuModel().exitApp();
+    }
+
 }
 
 Game::~Game()
@@ -30,7 +35,7 @@ Game::~Game()
     delete m_player;
 }
 
-int Game::loadPatterns()
+void Game::loadPatterns()
 {
     int nbPatterns = 0;
     int returnCode;
@@ -38,34 +43,29 @@ int Game::loadPatterns()
     returnCode = patternsFile.LoadFile(PATTERNS_FILE.c_str());
     if (returnCode != XML_SUCCESS)
     {
-        return returnCode;
+        throw XMLError(returnCode);
     }
     const XMLNode *pRoot = patternsFile.FirstChild();
     if (pRoot == nullptr)
     {
-        return XML_ERROR_FILE_READ_ERROR;
+        throw XMLError (XML_ERROR_FILE_READ_ERROR);
     }
     const XMLElement *nbPatternsNode = pRoot->FirstChildElement("NbPatterns");
     if (nbPatternsNode == nullptr)
     {
-        return XML_ERROR_PARSING_ELEMENT;
+        throw XMLError (XML_ERROR_PARSING_ELEMENT);
     }
     returnCode = nbPatternsNode->QueryIntText(&nbPatterns);
     if (returnCode != XML_SUCCESS)
     {
-        return returnCode;
+        throw XMLError (returnCode);
     }
     for (unsigned int i=0; (int)i<nbPatterns; i++)
     {
         ElementsList op{i};
-        returnCode = op.loadFromFile(patternsFile);
-        if (returnCode != XML_SUCCESS)
-        {
-            return returnCode;
-        }
+        op.loadFromFile(patternsFile);
         m_patternsList.push_back(op);
     }
-    return XML_SUCCESS;
 }
 
 float Game::getPixelSpeed() const
@@ -336,6 +336,7 @@ float Game::getBlurFade() const
 void Game::resetGame()
 {
     m_pause = 0;
+    m_blurFade = 0;
     m_distance = 0;
     setGameState(game_state::INTRO);
     setSpeedPeriod(STARTSPEEDPERIODGAME);

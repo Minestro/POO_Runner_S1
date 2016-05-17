@@ -5,12 +5,16 @@ using namespace tinyxml2;
 
 Menu::Menu(float width, float height, int activePage): Model::Model{width, height}, m_activePage{activePage}, m_exitApp{0}, m_menuModels{}
 {
-    setPage(activePage);
-    int returnCode = loadModels();
-    if (returnCode != XML_SUCCESS)
+    try
     {
-        std::cerr << "Erreur lors de la lecture du fichier du menu. Code Erreur : " << returnCode << std::endl;
+        loadModels();
     }
+    catch (const XMLError &er)
+    {
+        std::cout << "Erreur lors de la lecture du fichier " << MENU_MODELS_FILE << " . Code erreur : " << std::to_string(er) << std::endl;
+        exitApp();
+    }
+    setPage(activePage);
 }
 
 std::pair<float, float> Menu::getCharacterSpeed(const GameCharacter *gc) const
@@ -61,7 +65,7 @@ void Menu::refreshPageContent(Model *model, int page)
     case menuPage::PRE_MENU :
     {
         std::vector<ElementsList>::iterator preMenu = m_menuModels.begin();
-        while (preMenu != m_menuModels.end() && preMenu->getId() != PRE_MENU)
+        while (preMenu != m_menuModels.end() && preMenu->getId() != (unsigned int)page)
         {
             ++preMenu;
         }
@@ -184,7 +188,7 @@ void Menu::refreshPageContent(Model *model, int page)
     }
 }
 
-int Menu::loadModels()
+void Menu::loadModels()
 {
     int nbPatterns = 0;
     int returnCode;
@@ -192,34 +196,29 @@ int Menu::loadModels()
     returnCode = modelsFile.LoadFile(MENU_MODELS_FILE.c_str());
     if (returnCode != XML_SUCCESS)
     {
-        return returnCode;
+        throw XMLError (returnCode);
     }
     const XMLNode *pRoot = modelsFile.FirstChild();
     if (pRoot == nullptr)
     {
-        return XML_ERROR_FILE_READ_ERROR;
+        throw XMLError (XML_ERROR_FILE_READ_ERROR);
     }
     const XMLElement *nbPatternsNode = pRoot->FirstChildElement("NbPatterns");
     if (nbPatternsNode == nullptr)
     {
-        return XML_ERROR_PARSING_ELEMENT;
+        throw XMLError (XML_ERROR_PARSING_ELEMENT);
     }
     returnCode = nbPatternsNode->QueryIntText(&nbPatterns);
     if (returnCode != XML_SUCCESS)
     {
-        return returnCode;
+        throw XMLError (returnCode);
     }
-    for (unsigned int i=0; (int)i<nbPatterns; i++)
+    for (unsigned int i=menuPage::PRE_MENU; (int)i<menuPage::PRE_MENU + nbPatterns; i++)
     {
         ElementsList op{i};
-        returnCode = op.loadFromFile(modelsFile);
-        if (returnCode != XML_SUCCESS)
-        {
-            return returnCode;
-        }
+        op.loadFromFile(modelsFile);
         m_menuModels.push_back(op);
     }
-    return XML_SUCCESS;
 }
 
 void Menu::refresh()

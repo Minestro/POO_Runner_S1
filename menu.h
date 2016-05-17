@@ -11,7 +11,7 @@ class Menu: public Model
 private:
     int m_activePage;
     bool m_exitApp;
-    int loadModels();
+    void loadModels();
     std::vector<ElementsList> m_menuModels;
 public:
     Menu(float width, float height, int activePage);

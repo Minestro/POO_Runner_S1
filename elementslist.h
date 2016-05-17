@@ -6,7 +6,16 @@
 #include "model.h"
 #include "TinyXml2/tinyxml2.h"
 
-
+struct VarToNodeName
+{
+    VarToNodeName() = default;
+    std::vector<std::pair<int*, std::string> > intAttributeToTagName;
+    std::vector<std::pair<float*, std::string> > floatAttributeToTagName;
+    std::vector<std::pair<bool*, std::string> > boolAttributeToTagName;
+    std::vector<std::pair<std::string*, std::string> > stringAttributeToTagName;
+    std::vector<std::pair<ColorRGBA*, std::string> > colorAttributeToTagName;
+    std::vector<std::pair<unsigned int*, std::string> > uintAttributeToTagName;
+};
 
 class ElementsList
 {
@@ -22,9 +31,10 @@ private:
     int loadObstacles(const tinyxml2::XMLElement &obstacle);
     int loadImages(const tinyxml2::XMLElement &image);
     int loadText(const tinyxml2::XMLElement &text);
+    void parseElementsText(const VarToNodeName &e, const tinyxml2::XMLElement &node) const;
 public:
     ElementsList(unsigned int id);
-    int loadFromFile(const tinyxml2::XMLDocument &file);
+    void loadFromFile(const tinyxml2::XMLDocument &file);
     void addElementsToModel(Model *model) const;
     unsigned int getWidth() const;
     unsigned int getId() const;

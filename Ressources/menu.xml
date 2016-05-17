@@ -1,6 +1,6 @@
 <PatternList>
 	<NbPatterns>1</NbPatterns>
-	<Pattern id="2">
+	<Pattern id="1">
 	<Width>1280</Width>
 	<Image>
 		<SizeWidth>1280.0</SizeWidth>
@@ -36,10 +36,10 @@
 		<FontSize>20</FontSize>
 		<Font>score.ttf</Font>
 		<Color>255, 255, 255, 0</Color>
-		<TextEffect>2</TextEffect>
+		<TextEffect>1</TextEffect>
 		<EffectPeriod>20</EffectPeriod>
 		<IsAutoRescale>1</IsAutoRescale>
-		<IsLineBreak>0</IsLineBreak>
+		<IsLineBreack>0</IsLineBreack>
 	</Text>
 	</Pattern>
 

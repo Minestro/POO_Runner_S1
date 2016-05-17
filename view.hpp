@@ -100,7 +100,7 @@ public:
 
     void draw()
     {
-        m_window->clear();
+        m_window->clear(sf::Color::White);
         fillGraphicElementsList();
         if (m_drawableElementsList.size() > 0)
         {
