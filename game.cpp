@@ -171,9 +171,6 @@ void Game::nextStep()
                     {
                         obstacle->second->setState(obstacle_state::EXPLODE);
                     }
-                    if (obstacle->second->getType() == obstacle_type::NUAGE)
-                    {
-                        obstacle->second->setState(obstacle_state::EXPLODE);
                     }
                     else {
                         m_deletedElements.push_back(obstacle->second);

@@ -844,10 +844,10 @@
 
 	</Pattern>
 	<Pattern id="6">
-	<Width>700</Width>
+	<Width>150</Width>
 	<Obstacle>
-		<SizeWidth>250.0</SizeWidth>
-		<SizeHeight>40.0</SizeHeight>
+		<SizeWidth>90.0</SizeWidth>
+		<SizeHeight>80.0</SizeHeight>
 		<PositionX>250.0</PositionX>
 		<PositionY>300</PositionY>
 		<Type>1</Type>
