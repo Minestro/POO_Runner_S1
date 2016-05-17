@@ -8,6 +8,7 @@ const std::string FILES_LIST[] = {"menuBackground.png", "FOND1.png", "FOND2.png"
 const std::string FONTS_LIST[] = {"score.ttf"};
 
 const std::string PATTERNS_FILE = "Ressources/patternsList.xml";
+const std::string MENU_MODELS_FILE = "Ressources/menu.xml";
 
 enum text_effect{NOTHING, BREATH, FLASH};
 
