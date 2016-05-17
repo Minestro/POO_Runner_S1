@@ -5,7 +5,7 @@ Text::Text(float x, float y, float width, float height, float rotation, std::str
 
 }
 
-Text::Text(float x, float y, float width, float height, float rotation, std::string text, unsigned int fontSize, std::string font, ColorRGBA color, text_effect effect, unsigned int effectPeriod, bool autoRescale, bool lineBreak): Element{x, y, width, height, rotation}, m_lineBreak{lineBreak}, m_autoRescale{autoRescale}, m_text{text}, m_fontSize{fontSize}, m_color{color}, m_font{font}, m_effect{effect}, m_effectPeriod{effectPeriod}
+Text::Text(float x, float y, float width, float height, float rotation, std::string text, unsigned int fontSize, std::string font, ColorRGBA color, int effect, unsigned int effectPeriod, bool autoRescale, bool lineBreak): Element{x, y, width, height, rotation}, m_lineBreak{lineBreak}, m_autoRescale{autoRescale}, m_text{text}, m_fontSize{fontSize}, m_color{color}, m_font{font}, m_effect{effect}, m_effectPeriod{effectPeriod}
 {
 
 }
@@ -40,7 +40,7 @@ std::string Text::getFont() const
     return m_font;
 }
 
-text_effect Text::getEffect() const
+int Text::getEffect() const
 {
     return m_effect;
 }

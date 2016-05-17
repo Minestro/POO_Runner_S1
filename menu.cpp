@@ -60,15 +60,15 @@ void Menu::refreshPageContent(Model *model, int page)
     }
     case menuPage::PRE_MENU :
     {
-        Image *i1 = new Image{0, 0, model->getSize().first, model->getSize().second, "FOND2.png", 1, 0.5, 1, STARTSPEEDPERIODGAME};
-        i1->setId(210);
-        Image *i2 = new Image{0, 0, model->getSize().first, model->getSize().second, "FOND1.png", 2, 1.0, 1, STARTSPEEDPERIODGAME};
-        i2->setId(211);
-        Text *t = new Text{0, 600, model->getSize().first, 50, 0, "Appuyez sur une touche pour continuer", 20, "score.ttf", ColorRGBA::White,text_effect::BREATH, 20, 1, 0};
-        t->setId(212);
-        model->getImages().push_back(std::make_pair(1, i1));
-        model->getImages().push_back(std::make_pair(1, i2));
-        model->getTexts().push_back(std::make_pair(1, t));
+        std::vector<ElementsList>::iterator preMenu = m_menuModels.begin();
+        while (preMenu != m_menuModels.end() && preMenu->getId() != PRE_MENU)
+        {
+            ++preMenu;
+        }
+        if (preMenu != m_menuModels.end())
+        {
+            preMenu->addElementsToModel(this);
+        }
         break;
     }
     case menuPage::RULES :

@@ -4,7 +4,7 @@
 
 std::map<std::string, sf::Font*> TextElement::m_listFonts;
 
-TextElement::TextElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, std::string text, const sf::Font *font, unsigned int fontSize, bool autoRescale, bool lineBreak, sf::Color color, int style, text_effect effect, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, sf::Text{text, *font, fontSize}, m_realPosition{x, y}, m_realSize{width, height}, m_autoRescale{autoRescale}, m_lineBreak{lineBreak}, m_textLines{}, m_effect{effect}, m_breath{1}, m_textForm{}, m_alphaChannel{255}
+TextElement::TextElement(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, std::string text, const sf::Font *font, unsigned int fontSize, bool autoRescale, bool lineBreak, sf::Color color, int style, int effect, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, sf::Text{text, *font, fontSize}, m_realPosition{x, y}, m_realSize{width, height}, m_autoRescale{autoRescale}, m_lineBreak{lineBreak}, m_textLines{}, m_effect{effect}, m_breath{1}, m_textForm{}, m_alphaChannel{255}
 {
     if (m_lineBreak)
     {

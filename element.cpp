@@ -1,5 +1,10 @@
 #include "element.h"
 
+ColorRGBA::ColorRGBA(): r{255}, g{255}, b{255}, a{0}
+{
+
+}
+
 ColorRGBA::ColorRGBA(unsigned int cr, unsigned int cg, unsigned int cb, unsigned int alpha): r{cr}, g{cg}, b{cb}, a{alpha}
 {
 

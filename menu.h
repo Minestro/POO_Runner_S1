@@ -11,8 +11,8 @@ class Menu: public Model
 private:
     int m_activePage;
     bool m_exitApp;
-    std::vector<ElementsList> m_menuModels;
     int loadModels();
+    std::vector<ElementsList> m_menuModels;
 public:
     Menu(float width, float height, int activePage);
     virtual ~Menu() = default;
@@ -22,7 +22,7 @@ public:
     int getActivePage() const;
     bool getExitApp() const;
     void exitApp();
-    static void refreshPageContent(Model *model, int page);
+    void refreshPageContent(Model *model, int page);
 };
 
 #endif // MENU_H

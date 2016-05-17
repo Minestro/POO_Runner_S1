@@ -102,60 +102,63 @@ public:
     {
         m_window->clear();
         fillGraphicElementsList();
-        unsigned int actualZIndex = 0;
-        std::vector<sf::RenderTexture*> renderPart;
-        for (unsigned int i = 0; i<m_layeredShader.size(); i++)
+        if (m_drawableElementsList.size() > 0)
         {
-            renderPart.push_back(new sf::RenderTexture);
-            renderPart[i]->create(MODEL_SIZE_W, MODEL_SIZE_H);
-            renderPart[i]->clear(sf::Color::Transparent);
-        }
-        unsigned int i = 0;
-        for (std::pair<const unsigned int, sf::Shader*> &shader : m_layeredShader)
-        {
-            while (actualZIndex < shader.first)
+            unsigned int actualZIndex = 0;
+            std::vector<sf::RenderTexture*> renderPart;
+            for (unsigned int i = 0; i<m_layeredShader.size(); i++)
             {
-                for (const GraphicElement* ge : m_drawableElementsList)
+                renderPart.push_back(new sf::RenderTexture);
+                renderPart[i]->create(MODEL_SIZE_W, MODEL_SIZE_H);
+                renderPart[i]->clear(sf::Color::Transparent);
+            }
+            unsigned int i = 0;
+            for (std::pair<const unsigned int, sf::Shader*> &shader : m_layeredShader)
+            {
+                while (actualZIndex < shader.first)
                 {
-                    if (ge->getZIndex() == actualZIndex)
+                    for (const GraphicElement* ge : m_drawableElementsList)
                     {
-                        ge->draw(renderPart[i]);
-                    } else if (ge->getZIndex() > actualZIndex)
-                    {
-                        break;
+                        if (ge->getZIndex() == actualZIndex)
+                        {
+                            ge->draw(renderPart[i]);
+                        } else if (ge->getZIndex() > actualZIndex)
+                        {
+                            break;
+                        }
                     }
+                    actualZIndex++;
                 }
-                actualZIndex++;
+                renderPart[i]->display();
+                sf::RenderStates state{};
+                state.shader = shader.second;
+                if (i < m_layeredShader.size() - 1)
+                {
+                    renderPart[i+1]->draw(sf::Sprite{renderPart[i]->getTexture()}, state);
+                } else {
+                    m_window->draw(sf::Sprite{renderPart[i]->getTexture()}, state);
+                }
+                i++;
             }
-            renderPart[i]->display();
-            sf::RenderStates state{};
-            state.shader = shader.second;
-            if (i < m_layeredShader.size() - 1)
+            if (actualZIndex > (*(m_drawableElementsList.end()-1))->getZIndex())
             {
-                renderPart[i+1]->draw(sf::Sprite{renderPart[i]->getTexture()}, state);
-            } else {
-                m_window->draw(sf::Sprite{renderPart[i]->getTexture()}, state);
+                actualZIndex = (*(m_drawableElementsList.end()-1))->getZIndex();
             }
-            i++;
-        }
-        if (actualZIndex > (*(m_drawableElementsList.end()-1))->getZIndex())
-        {
-            actualZIndex = (*(m_drawableElementsList.end()-1))->getZIndex();
-        }
-        std::vector <const GraphicElement*>::const_iterator it = m_drawableElementsList.begin();
-        while ((**it).getZIndex() < actualZIndex)
-        {
-            ++it;
-        }
-        while (it != m_drawableElementsList.end())
-        {
-            (**it).draw(m_window);
-            ++it;
-        }
-        m_window->display();
-        for (sf::RenderTexture* rt : renderPart)
-        {
-            delete rt;
+            std::vector <const GraphicElement*>::const_iterator it = m_drawableElementsList.begin();
+            while ((**it).getZIndex() < actualZIndex)
+            {
+                ++it;
+            }
+            while (it != m_drawableElementsList.end())
+            {
+                (**it).draw(m_window);
+                ++it;
+            }
+            m_window->display();
+            for (sf::RenderTexture* rt : renderPart)
+            {
+                delete rt;
+            }
         }
     }
 

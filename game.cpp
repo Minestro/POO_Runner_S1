@@ -1,4 +1,5 @@
 #include "game.h"
+#include "app.h"
 
 using namespace tinyxml2;
 
@@ -315,10 +316,10 @@ void Game::setPause(bool a)
     m_pause = a;
     if (m_pause)
     {
-        Menu::refreshPageContent(this, menuPage::PAUSE);
+        getApp()->getMenuModel().refreshPageContent(this, menuPage::PAUSE);
     } else {
         m_blurFade = 0;
-        Menu::refreshPageContent(this, menuPage::ESCAPE_MENU);
+        getApp()->getMenuModel().refreshPageContent(this, menuPage::ESCAPE_MENU);
     }
 }
 

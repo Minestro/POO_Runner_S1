@@ -27,6 +27,7 @@ public:
     int loadFromFile(const tinyxml2::XMLDocument &file);
     void addElementsToModel(Model *model) const;
     unsigned int getWidth() const;
+    unsigned int getId() const;
 };
 
 #endif // OBSTACLESBONUSPATTERN_H
