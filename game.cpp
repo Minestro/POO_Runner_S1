@@ -167,7 +167,7 @@ void Game::nextStep()
                     {
                         m_characters[0].second->removeLife(obstacle->second->getDammage());
                     }
-                    if (obstacle->second->getType() == obstacle_type::MINE)
+                    if (obstacle->second->getType() == obstacle_type::MINE ||obstacle->second->getType() == obstacle_type::NUAGE ||obstacle->second->getType() == obstacle_type::BARRE )
                     {
                         obstacle->second->setState(obstacle_state::EXPLODE);
                     } else {
@@ -204,6 +204,9 @@ void Game::nextStep()
                         m_characters[0].second->addScore(1000);
                         break;
                     case bonus_type::SOINS:
+                        m_characters[0].second->addLife(10);
+                        break;
+                    case bonus_type::INVINSIBLE:
                         m_characters[0].second->addLife(10);
                         break;
                     default:
