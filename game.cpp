@@ -333,9 +333,9 @@ void Game::resetGame()
     m_pause = 0;
     m_blurFade = 0;
     m_distance = 0;
-    setGameState(game_state::INTRO);
     setSpeedPeriod(STARTSPEEDPERIODGAME);
     clearAll();
+    setGameState(game_state::INTRO);
     GameCharacter *gc = new GameCharacter{100, 0, 100, 50, 0, 0, m_player};
     gc->setId(character_id::PLAYER1);
     m_characters.push_back(std::make_pair(1, gc));
