@@ -32,7 +32,7 @@ private:
     float m_blurFade;
 
 public:
-    Game(float width, float height, unsigned int movePeriodMs, App *app);
+    Game(float width, float height, App *app);
     virtual ~Game();
     virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const;
     void nextStep();

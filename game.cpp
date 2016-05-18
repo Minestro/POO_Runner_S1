@@ -3,17 +3,10 @@
 
 using namespace tinyxml2;
 
-Game::Game(float width, float height, unsigned int movePeriodMs, App *app): Model::Model{width, height, app}, m_pause{false}, m_gameMode{game_mode::SOLO}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{movePeriodMs}, m_player{nullptr}, m_distance{0}, m_powerActives{}, m_nextPatternAt{0}, m_blurFade{0.0f}
+Game::Game(float width, float height, App *app): Model::Model{width, height, app}, m_pause{false}, m_gameMode{game_mode::SOLO}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{STARTSPEEDPERIODGAME}, m_player{nullptr}, m_distance{0}, m_powerActives{}, m_nextPatternAt{0}, m_blurFade{0.0f}
 {
     m_player =  new Player;
-    GameCharacter *gc = new GameCharacter{100, 0, 100, 50, 0, 0, m_player};
-    gc->setId(character_id::PLAYER1);
-    m_characters.push_back(std::make_pair(1, gc));
-    Image *b1 = new Image{0, 0, MODEL_SIZE_W, MODEL_SIZE_H, "FOND2.png", 1, 0.5, 1, 0};
-    Image *b2 = new Image{0, 0, MODEL_SIZE_W, MODEL_SIZE_H, "FOND1.png", 2, 1.0, 1, 0};
-    m_images.push_back(std::make_pair(1, b1));
-    m_images.push_back(std::make_pair(1, b2));
-    setSpeedPeriod(m_movePeriod);
+    resetGame();
     m_powerActives.resize(power_list::NB_POWER - 1);
 
     try

@@ -337,9 +337,9 @@ public:
                         delete *it2;
                         ++it2;
                     }
-                    delete it->first;
                     m_elementToGraphicElement.erase(it);
                 }
+                delete el;
             }
             m_model->getDeletedElements().clear();
         }
