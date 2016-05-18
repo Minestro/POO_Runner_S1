@@ -92,6 +92,18 @@ void ButtonGraphic::refresh(const Element *el, Model *model)
                 m_sprite->setRectPos(1, 2);
             }
             break;
+        case button_type::SAVE_BUTTON:
+            if (button->second->isHover(model->getCursorPosition().first, model->getCursorPosition().second) && button->second->isClickable())
+            {
+                m_sprite->setRectPos(1, 2);
+            } else {
+                m_sprite->setRectPos(1, 1);
+            }
+            if (button->second->isSelected())
+            {
+                m_sprite->setRectPos(1, 3);
+            }
+            break;
         default:
             break;
         }

@@ -6,8 +6,6 @@
 
 class GameCharacterGraphic: public SpriteElement
 {
-private:
-    CircleShapeElement *m_shadow;
 public:
     GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int animatePeriod = 0);
     GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int nbLignes, unsigned int nbColonnes, unsigned int activeLigne = 1, unsigned int activeColonne = 1, unsigned int animatePeriod = 0);

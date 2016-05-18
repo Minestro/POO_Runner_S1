@@ -7,11 +7,7 @@ std::vector<ElementsList> Menu::menuModels;
 
 Menu::Menu(float width, float height, int activePage, App *app): Model::Model{width, height, app}, m_activePage{activePage}, m_exitApp{0}
 {
-}
 
-std::pair<float, float> Menu::getCharacterSpeed(const GameCharacter *gc) const
-{
-    return (gc->getPixelSpeed());
 }
 
 void Menu::setPage(unsigned int page)
@@ -35,6 +31,23 @@ void Menu::refreshPageContent(Model *model, int page)
     {
         preMenu->addElementsToModel(model);
     }
+
+   if (page == menuPage::SELECT_SAVEFILE)
+   {
+       unsigned int j=0;
+        for (unsigned int i = button_id::SELECT_SAVE_1; i<button_id::SELECT_SAVE_5+1; i++)
+        {
+            Button *b = new Button{(float)20 + (j*250) , 160, 240, 200, 0, "", menuPage::SELECT_SAVEFILE, model->getApp(), button_type::SAVE_BUTTON, 1};
+            b->setId(i);
+            b->addAction(button_action::SET_SELECTED);
+            model->getButtons().push_back(std::make_pair(1, b));
+            j++;
+        }
+        Button *b2 = new Button{MODEL_SIZE_W/2 - 300 , 600, 200, 50, 0, "Charger", menuPage::SELECT_SAVEFILE, model->getApp(), button_type::TEXT_BUTTON, 1};
+        b2->setId(button_id::LOAD_SAVE_BUTTON);
+        b2->addAction(button_action::LOAD_SAVE);
+        model->getButtons().push_back(std::make_pair(1, b2));
+   }
 }
 
 void Menu::loadModels(App *app)
@@ -86,6 +99,11 @@ int Menu::getActivePage() const
 bool Menu::getExitApp() const
 {
     return m_exitApp;
+}
+
+std::string Menu::getClassName() const
+{
+    return "Menu";
 }
 
 void Menu::exitApp()

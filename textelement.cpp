@@ -42,7 +42,7 @@ void TextElement::setText(std::string text)
             }
             wordCount++;
             lineGraphic.setString(m_textLines[l] + word);
-            if (lineGraphic.getLocalBounds().width > m_realSize.first)
+            if (lineGraphic.getLocalBounds().width > m_realSize.first || word == "\n")
             {
                 if (wordCount == 1)
                 {
@@ -99,7 +99,7 @@ void TextElement::setPosition(float x, float y)
     m_realPosition.second = y;
     if (m_autoRescale)
     {
-        sf::Text::setPosition(((m_realSize.first-(getLocalBounds().width*getScale().x))/2)+m_realPosition.first, ((m_realSize.second-(getLocalBounds().height*getScale().y))/2)+ m_realPosition.second);
+        sf::Text::setPosition(((m_realSize.first-(getLocalBounds().width*getScale().x))/2)+m_realPosition.first, (m_realSize.second/2)-(getLocalBounds().height*getScale().y/2) + m_realPosition.second - 5);
     } else {
         sf::Text::setPosition(x, y);
     }

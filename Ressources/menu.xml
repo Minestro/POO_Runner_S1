@@ -1,10 +1,10 @@
 <PatternList>
-	<NbPatterns>10</NbPatterns>
+	<NbPatterns>11</NbPatterns>
 	<Pattern id="1">
 	<Width>1280</Width>
 	<Image>
 		<SizeWidth>1280.0</SizeWidth>
-		<SizeHeight>720.0</SizeHeight>
+		<SizeHeight>730.0</SizeHeight>
 		<PositionX>0.0</PositionX>
 		<PositionY>0.0</PositionY>
 		<FileName>FOND2.png</FileName>
@@ -16,7 +16,7 @@
 	</Image>
 	<Image>
 		<SizeWidth>1280.0</SizeWidth>
-		<SizeHeight>720.0</SizeHeight>
+		<SizeHeight>730.0</SizeHeight>
 		<PositionX>0.0</PositionX>
 		<PositionY>0.0</PositionY>
 		<FileName>FOND1.png</FileName>
@@ -34,10 +34,10 @@
 		<RotateAngle>0.0</RotateAngle>
 		<String>Appuyez sur une touche pour continuer</String>
 		<FontSize>20</FontSize>
-		<Font>score.ttf</Font>
+		<Font>The_Happy_Giraffe.ttf</Font>
 		<Color>255, 255, 255, 255</Color>
 		<TextEffect>1</TextEffect>
-		<EffectPeriod>20</EffectPeriod>
+		<EffectPeriod>30</EffectPeriod>
 		<IsAutoRescale>1</IsAutoRescale>
 		<IsLineBreack>0</IsLineBreack>
 		<ID>212</ID>
@@ -95,7 +95,7 @@
 		</Button>
 		<Image>
 			<SizeWidth>1280.0</SizeWidth>
-			<SizeHeight>720.0</SizeHeight>
+			<SizeHeight>730.0</SizeHeight>
 			<PositionX>0.0</PositionX>
 			<PositionY>0.0</PositionY>
 			<FileName>menuBackground.png</FileName>
@@ -122,7 +122,7 @@
 			<RotateAngle>0.0</RotateAngle>
 			<String>Options</String>
 			<FontSize>30</FontSize>
-			<Font>score.ttf</Font>
+			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
 			<TextEffect>0</TextEffect>
 			<EffectPeriod>0</EffectPeriod>
@@ -132,7 +132,7 @@
 		</Text>
 		<Image>
 			<SizeWidth>1280.0</SizeWidth>
-			<SizeHeight>720.0</SizeHeight>
+			<SizeHeight>730.0</SizeHeight>
 			<PositionX>0.0</PositionX>
 			<PositionY>0.0</PositionY>
 			<FileName>FOND.png</FileName>
@@ -169,7 +169,7 @@
 		<Button>
 			<SizeWidth>25.0</SizeWidth>
 			<SizeHeight>25.0</SizeHeight>
-			<PositionX>590.0</PositionX>
+			<PositionX>600.0</PositionX>
 			<PositionY>180.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
 			<String></String>
@@ -186,7 +186,7 @@
 			<RotateAngle>0.0</RotateAngle>
 			<String>Plein Ecran :</String>
 			<FontSize>20</FontSize>
-			<Font>score.ttf</Font>
+			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
 			<TextEffect>0</TextEffect>
 			<EffectPeriod>0</EffectPeriod>
@@ -208,7 +208,7 @@
 			<RotateAngle>0.0</RotateAngle>
 			<String>Pause</String>
 			<FontSize>20</FontSize>
-			<Font>score.ttf</Font>
+			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>255, 255, 255, 255</Color>
 			<TextEffect>0</TextEffect>
 			<EffectPeriod>0</EffectPeriod>
@@ -245,7 +245,7 @@
 		<Width>1280</Width>
 		<Image>
 			<SizeWidth>1280.0</SizeWidth>
-			<SizeHeight>720.0</SizeHeight>
+			<SizeHeight>730.0</SizeHeight>
 			<PositionX>0.0</PositionX>
 			<PositionY>0.0</PositionY>
 			<FileName>FOND.png</FileName>
@@ -275,7 +275,7 @@
 			<RotateAngle>0.0</RotateAngle>
 			<String>Regles</String>
 			<FontSize>30</FontSize>
-			<Font>score.ttf</Font>
+			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
 			<TextEffect>0</TextEffect>
 			<EffectPeriod>0</EffectPeriod>
@@ -291,7 +291,7 @@
 			<RotateAngle>0.0</RotateAngle>
 			<String>Pilotez l'avion le plus loin possible en evitant les obstacles et en ramassant un maximum de pieces possible !</String>
 			<FontSize>20</FontSize>
-			<Font>score.ttf</Font>
+			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
 			<TextEffect>0</TextEffect>
 			<EffectPeriod>0</EffectPeriod>
@@ -343,7 +343,7 @@
 			<RotateAngle>0.0</RotateAngle>
 			<String>Reculer</String>
 			<FontSize>20</FontSize>
-			<Font>score.ttf</Font>
+			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
 			<TextEffect>0</TextEffect>
 			<EffectPeriod>0</EffectPeriod>
@@ -359,7 +359,7 @@
 			<RotateAngle>0.0</RotateAngle>
 			<String>Avancer</String>
 			<FontSize>20</FontSize>
-			<Font>score.ttf</Font>
+			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
 			<TextEffect>0</TextEffect>
 			<EffectPeriod>0</EffectPeriod>
@@ -375,7 +375,7 @@
 			<RotateAngle>0.0</RotateAngle>
 			<String>Monter</String>
 			<FontSize>20</FontSize>
-			<Font>score.ttf</Font>
+			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
 			<TextEffect>0</TextEffect>
 			<EffectPeriod>0</EffectPeriod>
@@ -412,7 +412,7 @@
 		<Width>1280</Width>
 		<Image>
 			<SizeWidth>1280.0</SizeWidth>
-			<SizeHeight>720.0</SizeHeight>
+			<SizeHeight>730.0</SizeHeight>
 			<PositionX>0.0</PositionX>
 			<PositionY>0.0</PositionY>
 			<FileName>FOND.png</FileName>
@@ -454,7 +454,7 @@
 			<RotateAngle>0.0</RotateAngle>
 			<String>Bonus</String>
 			<FontSize>30</FontSize>
-			<Font>score.ttf</Font>
+			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
 			<TextEffect>0</TextEffect>
 			<EffectPeriod>0</EffectPeriod>
@@ -470,7 +470,7 @@
 			<RotateAngle>0.0</RotateAngle>
 			<String>Augmente votre score de 1000</String>
 			<FontSize>20</FontSize>
-			<Font>score.ttf</Font>
+			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
 			<TextEffect>0</TextEffect>
 			<EffectPeriod>0</EffectPeriod>
@@ -499,13 +499,44 @@
 			<RotateAngle>0.0</RotateAngle>
 			<String>Appuyez sur une touche pour lancer l'avion</String>
 			<FontSize>20</FontSize>
-			<Font>score.ttf</Font>
+			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>255, 255, 255, 255</Color>
 			<TextEffect>1</TextEffect>
-			<EffectPeriod>20</EffectPeriod>
+			<EffectPeriod>30</EffectPeriod>
 			<IsAutoRescale>1</IsAutoRescale>
 			<IsLineBreack>0</IsLineBreack>
 			<ID>210</ID>
 		</Text>
+	</Pattern>
+	<Pattern id="11">
+		<Width>1280</Width>
+		<Text>
+			<SizeWidth>1280.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>50.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Selectionnez la partie a charger</String>
+			<FontSize>20</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>255, 255, 255, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>1</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>210</ID>
+		</Text>
+		<Image>
+			<SizeWidth>1280.0</SizeWidth>
+			<SizeHeight>730.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>0.0</PositionY>
+			<FileName>FOND.png</FileName>
+			<ZIndex>1</ZIndex>
+			<CoefSpeed>0.0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>211</ID>
+		</Image>
 	</Pattern>
 </PatternList>

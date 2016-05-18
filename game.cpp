@@ -5,7 +5,7 @@ using namespace tinyxml2;
 
 Game::Game(float width, float height, App *app): Model::Model{width, height, app}, m_pause{false}, m_gameMode{game_mode::SOLO}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{STARTSPEEDPERIODGAME}, m_player{nullptr}, m_distance{0}, m_powerActives{}, m_nextPatternAt{0}, m_blurFade{0.0f}
 {
-    m_player =  new Player;
+    m_player =  new Player{1};
     resetGame();
     m_powerActives.resize(power_list::NB_POWER - 1);
 
@@ -245,11 +245,6 @@ void Game::nextStep()
     }
 }
 
-std::pair<float, float> Game::getCharacterSpeed(const GameCharacter *gc) const
-{
-    return {gc->getPixelSpeed().first - getPixelSpeed(), gc->getPixelSpeed().second};
-}
-
 unsigned int Game::getSpeedPeriod() const
 {
     return m_movePeriod;
@@ -292,6 +287,11 @@ void Game::setGameState(int state)
         break;
     }
 
+}
+
+std::string Game::getClassName() const
+{
+    return "Game";
 }
 
 void Game::setGameMode(int mode)

@@ -284,7 +284,7 @@ public:
                 if (m_elementToGraphicElement.find(text.second) == m_elementToGraphicElement.end())
                 {
                     std::list<GraphicElement*> list;
-                    list.push_back(new TextElement{15, text.second->getSize().first, text.second->getSize().second, text.second->getPosition().first, text.second->getPosition().second, text.second->getRotateAngle(), text.second->getText(), TextElement::m_listFonts[text.second->getFont()], text.second->getFontSize(), text.second->getAutoRescale(), text.second->getlineBreak(), sf::Color{(sf::Uint8)text.second->getColor().r, (sf::Uint8)text.second->getColor().g, (sf::Uint8)text.second->getColor().b, (sf::Uint8)text.second->getColor().a}, 0, text.second->getEffect(), text.second->getEffectPeriod()});
+                    list.push_back(new TextElement{MENU_Z_INDEX, text.second->getSize().first, text.second->getSize().second, text.second->getPosition().first, text.second->getPosition().second, text.second->getRotateAngle(), text.second->getText(), TextElement::m_listFonts[text.second->getFont()], text.second->getFontSize(), text.second->getAutoRescale(), text.second->getlineBreak(), sf::Color{(sf::Uint8)text.second->getColor().r, (sf::Uint8)text.second->getColor().g, (sf::Uint8)text.second->getColor().b, (sf::Uint8)text.second->getColor().a}, 0, text.second->getEffect(), text.second->getEffectPeriod()});
                     m_elementToGraphicElement.insert(std::make_pair(text.second, list));
                 }
                 text.first = 0;
@@ -312,10 +312,34 @@ public:
                         nbLignes = 1;
                         nbColonnes = 2;
                         break;
+                    case button_type::SAVE_BUTTON:
+                        texture = "savesButton.png";
+                        nbLignes = 1;
+                        nbColonnes = 3;
+                        break;
                     default:
                         break;
                     }
-                    list.push_back(new ButtonGraphic{15, button.second->getSize().first, button.second->getSize().second, button.second->getPosition().first, button.second->getPosition().second, button.second->getRotateAngle(), GraphicElement::m_listTextures[texture], nbLignes, nbColonnes, button.second->getText(), TextElement::m_listFonts["score.ttf"], 20, sf::Color::White});
+                    list.push_back(new ButtonGraphic{MENU_Z_INDEX, button.second->getSize().first, button.second->getSize().second, button.second->getPosition().first, button.second->getPosition().second, button.second->getRotateAngle(), GraphicElement::m_listTextures[texture], nbLignes, nbColonnes, button.second->getText(), TextElement::m_listFonts["Beautiful_Heartbeat.otf"], 30, sf::Color::White});
+                    if (button.second->getType() == button_type::SAVE_BUTTON)
+                    {
+                        try
+                        {
+                            bool isActive = Player::isActive(button.second->getId() - button_id::SELECT_SAVE_1);
+                            if (!isActive)
+                            {
+                                list.push_back(new TextElement{MENU_Z_INDEX+1, button.second->getSize().first, button.second->getSize().second, button.second->getPosition().first, button.second->getPosition().second, button.second->getRotateAngle(), "VIDE", TextElement::m_listFonts["Beautiful_Heartbeat.otf"], 30, 1, 0, sf::Color::White});
+                            } else {
+                                Player pla{button.second->getId() - button_id::SELECT_SAVE_1};
+                                pla.loadSaveFromFile();
+                                list.push_back(new TextElement{MENU_Z_INDEX+1, button.second->getSize().first, button.second->getSize().second, button.second->getPosition().first, button.second->getPosition().second, button.second->getRotateAngle(), "    " + pla.getName() + " \n \n Meilleur Score : " + std::to_string(pla.getBestScore()) + " \n Argent : " + std::to_string(pla.getMoney()), TextElement::m_listFonts["Beautiful_Heartbeat.otf"], 30, 1, 0, sf::Color::White});
+                            }
+                        }
+                        catch (tinyxml2::XMLError er)
+                        {
+                            std::cout << "Erreur lors de la lecture du fichier de sauvegarde. Erreur : " << std::to_string(er) << std::endl;
+                        }
+                    }
                     m_elementToGraphicElement.insert(std::make_pair(button.second, list));
                 }
                 button.first = 0;

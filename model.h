@@ -37,7 +37,8 @@ public:
 
     std::pair<float, float> getSize() const;
     std::pair<int, int> getCursorPosition() const;
-    virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const = 0;
+    virtual std::string getClassName() const = 0;
+
     App *getApp();
     const App &getApp() const;
     void setCursorPosition(int x, int y);

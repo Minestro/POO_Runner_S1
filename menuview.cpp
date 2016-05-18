@@ -36,7 +36,7 @@ bool MenuView::treatEvent()
         case sf::Event::KeyPressed:
             if (m_model->getActivePage() == menuPage::PRE_MENU)
             {
-                m_model->setPage(menuPage::HOME);
+                m_model->setPage(menuPage::SELECT_SAVEFILE);
             }
             break;
         default:

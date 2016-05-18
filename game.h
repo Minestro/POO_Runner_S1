@@ -9,8 +9,6 @@
 #include "elementslist.h"
 #include "menu.h"
 
-#define GAMEINTROTEXTID 101
-
 enum game_state{INTRO, RUNNING};
 enum game_mode{SOLO, MULTI_HOSTING, MULTI_CLIENT};
 
@@ -34,7 +32,6 @@ private:
 public:
     Game(float width, float height, App *app);
     virtual ~Game();
-    virtual std::pair<float, float> getCharacterSpeed(const GameCharacter *gc) const;
     void nextStep();
     float getPixelSpeed() const;
     unsigned long int getDistance() const;
@@ -42,6 +39,7 @@ public:
     int getGameState() const;
     int getGameMode() const;
     float getBlurFade() const;
+    virtual std::string getClassName() const;
     void setGameState(int state);
     void setGameMode(int mode);
     void setSpeedPeriod(int period);
