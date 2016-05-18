@@ -207,6 +207,11 @@ public:
                         nbColonnes =4;
                         animationPeriod = 100;
                         break;
+                    case obstacle_type::BARRE:
+                        texture = "BarreObstacle.png";
+                        nbLignes = 1;
+                        nbColonnes = 11;
+                        animationPeriod = 100;
                     default:
                         break;
                     }

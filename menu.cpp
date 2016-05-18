@@ -26,7 +26,6 @@ void Menu::refreshPageContent(Model *model, int page)
     {
         model->deleteElement(i);
     }
-
     std::vector<ElementsList>::iterator preMenu = Menu::menuModels.begin();
     while (preMenu != Menu::menuModels.end() && preMenu->getId() != (unsigned int)page)
     {

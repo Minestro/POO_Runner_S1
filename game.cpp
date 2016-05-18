@@ -13,8 +13,6 @@ Game::Game(float width, float height, unsigned int movePeriodMs, App *app): Mode
     Image *b2 = new Image{0, 0, MODEL_SIZE_W, MODEL_SIZE_H, "FOND1.png", 2, 1.0, 1, 0};
     m_images.push_back(std::make_pair(1, b1));
     m_images.push_back(std::make_pair(1, b2));
-
-    setGameState(game_state::INTRO);
     setSpeedPeriod(m_movePeriod);
     m_powerActives.resize(power_list::NB_POWER - 1);
 
