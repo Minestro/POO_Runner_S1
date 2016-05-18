@@ -289,16 +289,10 @@ void Game::setGameState(int state)
     switch (m_gameState)
     {
     case game_state::INTRO:
-        if (searchElementById(GAMEINTROTEXTID) == nullptr)
-        {
-            Text *text = new Text{0, 600, MODEL_SIZE_W, 50, 0, "Appuyez sur une touche pour lancer l'avion", 20, "score.ttf", ColorRGBA::White,text_effect::BREATH, 20, 1, 0};
-            m_texts.push_back(std::make_pair(1, text));
-
-            text->setId(GAMEINTROTEXTID);
-        }
+        Menu::refreshPageContent(this, menuPage::INTRO_GAME);
         break;
     case game_state::RUNNING:
-        deleteElement(GAMEINTROTEXTID);
+        Menu::refreshPageContent(this, menuPage::ESCAPE_MENU);
         break;
     default:
         break;
@@ -341,7 +335,6 @@ void Game::resetGame()
     setGameState(game_state::INTRO);
     setSpeedPeriod(STARTSPEEDPERIODGAME);
     clearAll();
-    m_player =  new Player;
     GameCharacter *gc = new GameCharacter{100, 0, 100, 50, 0, 0, m_player};
     gc->setId(character_id::PLAYER1);
     m_characters.push_back(std::make_pair(1, gc));

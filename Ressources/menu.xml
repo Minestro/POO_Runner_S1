@@ -1,5 +1,5 @@
 <PatternList>
-	<NbPatterns>2</NbPatterns>
+	<NbPatterns>10</NbPatterns>
 	<Pattern id="1">
 	<Width>1280</Width>
 	<Image>
@@ -35,7 +35,7 @@
 		<String>Appuyez sur une touche pour continuer</String>
 		<FontSize>20</FontSize>
 		<Font>score.ttf</Font>
-		<Color>255, 255, 255, 0</Color>
+		<Color>255, 255, 255, 255</Color>
 		<TextEffect>1</TextEffect>
 		<EffectPeriod>20</EffectPeriod>
 		<IsAutoRescale>1</IsAutoRescale>
@@ -105,5 +105,407 @@
 			<MovePeriod>0</MovePeriod>
 			<ID>214</ID>
 		</Image>
+	</Pattern>
+	<Pattern id="3">
+		<Width>1280</Width>
+	</Pattern>
+	<Pattern id="4">
+		<Width>1280</Width>
+	</Pattern>
+	<Pattern id="5">
+		<Width>1280</Width>
+		<Text>
+			<SizeWidth>500.0</SizeWidth>
+			<SizeHeight>70.0</SizeHeight>
+			<PositionX>390.0</PositionX>
+			<PositionY>100.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Options</String>
+			<FontSize>30</FontSize>
+			<Font>score.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>1</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>210</ID>
+		</Text>
+		<Image>
+			<SizeWidth>1280.0</SizeWidth>
+			<SizeHeight>720.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>0.0</PositionY>
+			<FileName>FOND.png</FileName>
+			<ZIndex>1</ZIndex>
+			<CoefSpeed>0.0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>211</ID>
+		</Image>
+		<Image>
+			<SizeWidth>500.0</SizeWidth>
+			<SizeHeight>400.0</SizeHeight>
+			<PositionX>390.0</PositionX>
+			<PositionY>100.0</PositionY>
+			<FileName>textBox.png</FileName>
+			<ZIndex>2</ZIndex>
+			<CoefSpeed>0.0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>212</ID>
+		</Image>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>540.0</PositionX>
+			<PositionY>550.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Retour</String>
+			<DestinationPage>2</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0</ActionsList>
+			<ID>213</ID>
+		</Button>
+		<Button>
+			<SizeWidth>25.0</SizeWidth>
+			<SizeHeight>25.0</SizeHeight>
+			<PositionX>590.0</PositionX>
+			<PositionY>180.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String></String>
+			<DestinationPage>5</DestinationPage>
+			<Type>2</Type>
+			<ActionsList>2</ActionsList>
+			<ID>200</ID>
+		</Button>
+		<Text>
+			<SizeWidth>0.0</SizeWidth>
+			<SizeHeight>0.0</SizeHeight>
+			<PositionX>470.0</PositionX>
+			<PositionY>180.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Plein Ecran :</String>
+			<FontSize>20</FontSize>
+			<Font>score.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>0</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>214</ID>
+		</Text>
+	</Pattern>
+	<Pattern id="6">
+		<Width>1280</Width>
+	</Pattern>
+	<Pattern id="7">
+		<Width>1280</Width>
+		<Text>
+			<SizeWidth>1280.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>0.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Pause</String>
+			<FontSize>20</FontSize>
+			<Font>score.ttf</Font>
+			<Color>255, 255, 255, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>1</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>210</ID>
+		</Text>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>540.0</PositionX>
+			<PositionY>250.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Reprendre</String>
+			<DestinationPage>2</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>3</ActionsList>
+			<ID>211</ID>
+		</Button>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>540.0</PositionX>
+			<PositionY>350.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Quitter</String>
+			<DestinationPage>2</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0</ActionsList>
+			<ID>212</ID>
+		</Button>
+	</Pattern>
+	<Pattern id="8">
+		<Width>1280</Width>
+		<Image>
+			<SizeWidth>1280.0</SizeWidth>
+			<SizeHeight>720.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>0.0</PositionY>
+			<FileName>FOND.png</FileName>
+			<ZIndex>1</ZIndex>
+			<CoefSpeed>1.0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>210</ID>
+		</Image>
+		<Image>
+			<SizeWidth>500.0</SizeWidth>
+			<SizeHeight>400.0</SizeHeight>
+			<PositionX>390.0</PositionX>
+			<PositionY>100.0</PositionY>
+			<FileName>textBox.png</FileName>
+			<ZIndex>2</ZIndex>
+			<CoefSpeed>0.0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>211</ID>
+		</Image>
+		<Text>
+			<SizeWidth>500.0</SizeWidth>
+			<SizeHeight>70.0</SizeHeight>
+			<PositionX>390.0</PositionX>
+			<PositionY>100.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Regles</String>
+			<FontSize>30</FontSize>
+			<Font>score.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>1</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>212</ID>
+		</Text>
+		<Text>
+			<SizeWidth>460.0</SizeWidth>
+			<SizeHeight>150.0</SizeHeight>
+			<PositionX>410.0</PositionX>
+			<PositionY>170.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Pilotez l'avion le plus loin possible en evitant les obstacles et en ramassant un maximum de pieces possible !</String>
+			<FontSize>20</FontSize>
+			<Font>score.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>1</IsAutoRescale>
+			<IsLineBreack>1</IsLineBreack>
+			<ID>213</ID>
+		</Text>
+		<Image>
+			<SizeWidth>40.0</SizeWidth>
+			<SizeHeight>40.0</SizeHeight>
+			<PositionX>410.0</PositionX>
+			<PositionY>250.0</PositionY>
+			<FileName>leftKey.png</FileName>
+			<ZIndex>3</ZIndex>
+			<CoefSpeed>0.0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>214</ID>
+		</Image>
+		<Image>
+			<SizeWidth>40.0</SizeWidth>
+			<SizeHeight>40.0</SizeHeight>
+			<PositionX>410.0</PositionX>
+			<PositionY>310.0</PositionY>
+			<FileName>rightKey.png</FileName>
+			<ZIndex>3</ZIndex>
+			<CoefSpeed>0.0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>215</ID>
+		</Image>
+		<Image>
+			<SizeWidth>40.0</SizeWidth>
+			<SizeHeight>40.0</SizeHeight>
+			<PositionX>410.0</PositionX>
+			<PositionY>370.0</PositionY>
+			<FileName>upKey.png</FileName>
+			<ZIndex>3</ZIndex>
+			<CoefSpeed>0.0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>216</ID>
+		</Image>
+		<Text>
+			<SizeWidth>0.0</SizeWidth>
+			<SizeHeight>0.0</SizeHeight>
+			<PositionX>470.0</PositionX>
+			<PositionY>250.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Reculer</String>
+			<FontSize>20</FontSize>
+			<Font>score.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>0</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>217</ID>
+		</Text>
+		<Text>
+			<SizeWidth>0.0</SizeWidth>
+			<SizeHeight>0.0</SizeHeight>
+			<PositionX>470.0</PositionX>
+			<PositionY>310.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Avancer</String>
+			<FontSize>20</FontSize>
+			<Font>score.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>0</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>218</ID>
+		</Text>
+		<Text>
+			<SizeWidth>0.0</SizeWidth>
+			<SizeHeight>0.0</SizeHeight>
+			<PositionX>470.0</PositionX>
+			<PositionY>370.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Monter</String>
+			<FontSize>20</FontSize>
+			<Font>score.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>0</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>219</ID>
+		</Text>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>390.0</PositionX>
+			<PositionY>550.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Retour</String>
+			<DestinationPage>2</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0</ActionsList>
+			<ID>220</ID>
+		</Button>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>690.0</PositionX>
+			<PositionY>550.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Liste des objets</String>
+			<DestinationPage>9</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0</ActionsList>
+			<ID>221</ID>
+		</Button>
+	</Pattern>
+	<Pattern id="9">
+		<Width>1280</Width>
+		<Image>
+			<SizeWidth>1280.0</SizeWidth>
+			<SizeHeight>720.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>0.0</PositionY>
+			<FileName>FOND.png</FileName>
+			<ZIndex>1</ZIndex>
+			<CoefSpeed>0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>210</ID>
+		</Image>
+		<Image>
+			<SizeWidth>500.0</SizeWidth>
+			<SizeHeight>400.0</SizeHeight>
+			<PositionX>390.0</PositionX>
+			<PositionY>100.0</PositionY>
+			<FileName>textBox.png</FileName>
+			<ZIndex>2</ZIndex>
+			<CoefSpeed>0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>211</ID>
+		</Image>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>540.0</PositionX>
+			<PositionY>550.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Retour</String>
+			<DestinationPage>2</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0</ActionsList>
+			<ID>212</ID>
+		</Button>
+		<Text>
+			<SizeWidth>500.0</SizeWidth>
+			<SizeHeight>70.0</SizeHeight>
+			<PositionX>390.0</PositionX>
+			<PositionY>100.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Bonus</String>
+			<FontSize>30</FontSize>
+			<Font>score.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>1</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>213</ID>
+		</Text>
+		<Text>
+			<SizeWidth>0.0</SizeWidth>
+			<SizeHeight>0.0</SizeHeight>
+			<PositionX>470.0</PositionX>
+			<PositionY>180.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Augmente votre score de 1000</String>
+			<FontSize>20</FontSize>
+			<Font>score.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>0</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>214</ID>
+		</Text>
+		<Bonus>
+			<SizeWidth>40.0</SizeWidth>
+			<SizeHeight>40.0</SizeHeight>
+			<PositionX>-870.0</PositionX>
+			<PositionY>170.0</PositionY>
+			<Type>0</Type>
+			<RotateAngle>0.0</RotateAngle>
+			<RotateMovement>0.0</RotateMovement>
+			<ID>215</ID>
+		</Bonus>
+	</Pattern>
+	<Pattern id="10">
+		<Width>1280</Width>
+		<Text>
+			<SizeWidth>1280.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>600.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Appuyez sur une touche pour lancer l'avion</String>
+			<FontSize>20</FontSize>
+			<Font>score.ttf</Font>
+			<Color>255, 255, 255, 255</Color>
+			<TextEffect>1</TextEffect>
+			<EffectPeriod>20</EffectPeriod>
+			<IsAutoRescale>1</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>210</ID>
+		</Text>
 	</Pattern>
 </PatternList>

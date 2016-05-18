@@ -151,10 +151,12 @@ void ElementsList::loadBonus(const XMLElement &bonus)
     int type;
     float mR;
     float r;
+    int id;
 
     VarToNodeName e;
 
     e.intAttributeToTagName.push_back(std::make_pair(&type, "Type"));
+    e.intAttributeToTagName.push_back(std::make_pair(&id, "ID"));
     e.floatAttributeToTagName.push_back(std::make_pair(&width, "SizeWidth"));
     e.floatAttributeToTagName.push_back(std::make_pair(&height, "SizeHeight"));
     e.floatAttributeToTagName.push_back(std::make_pair(&x, "PositionX"));
@@ -164,7 +166,9 @@ void ElementsList::loadBonus(const XMLElement &bonus)
 
     parseElementsText(e, bonus);
 
-    m_bonusList.push_back(Bonus{x + MODEL_SIZE_W, y, width, height, r, -PIXELPERBACKGROUNDMOVE, 0.0f, mR, 0, type});
+    Bonus bo{x + MODEL_SIZE_W, y, width, height, r, -PIXELPERBACKGROUNDMOVE, 0.0f, mR, 0, type};
+    bo.setId(id);
+    m_bonusList.push_back(bo);
 }
 
 void ElementsList::loadObstacles(const XMLElement &obstacle)
@@ -177,11 +181,13 @@ void ElementsList::loadObstacles(const XMLElement &obstacle)
     int dammage;
     float mR;
     float r;
+    int id;
 
     VarToNodeName e;
 
     e.intAttributeToTagName.push_back(std::make_pair(&type, "Type"));
     e.intAttributeToTagName.push_back(std::make_pair(&dammage, "Dammage"));
+    e.intAttributeToTagName.push_back(std::make_pair(&id, "ID"));
     e.floatAttributeToTagName.push_back(std::make_pair(&width, "SizeWidth"));
     e.floatAttributeToTagName.push_back(std::make_pair(&height, "SizeHeight"));
     e.floatAttributeToTagName.push_back(std::make_pair(&x, "PositionX"));
@@ -191,7 +197,9 @@ void ElementsList::loadObstacles(const XMLElement &obstacle)
 
     parseElementsText(e, obstacle);
 
-    m_obstaclesList.push_back(Obstacle{x + MODEL_SIZE_W, y, width, height, r, -PIXELPERBACKGROUNDMOVE, 0.0f, mR, 0, (unsigned int)dammage, type});
+    Obstacle ob{x + MODEL_SIZE_W, y, width, height, r, -PIXELPERBACKGROUNDMOVE, 0.0f, mR, 0, (unsigned int)dammage, type};
+    ob.setId(id);
+    m_obstaclesList.push_back(ob);
 }
 
 void ElementsList::loadImages(const XMLElement &image)
@@ -326,14 +334,24 @@ void ElementsList::parseElementsText(const VarToNodeName &e, const XMLElement &n
 
     for (unsigned int i=0; i<e.intAttributeToTagName.size(); i++)
     {
+        bool defaultId = false;
         if (node.FirstChildElement(e.intAttributeToTagName[i].second.c_str()) == nullptr)
         {
-            throw XMLError (XML_ERROR_PARSING_ELEMENT);
+            if (e.intAttributeToTagName[i].second == "ID")
+            {
+                *e.intAttributeToTagName[i].first = 0;
+                defaultId = true;
+            } else {
+                throw XMLError (XML_ERROR_PARSING_ELEMENT);
+            }
         }
-        returnCode = node.FirstChildElement(e.intAttributeToTagName[i].second.c_str())->QueryIntText(e.intAttributeToTagName[i].first);
-        if (returnCode != XML_SUCCESS)
+        if (!defaultId)
         {
-            throw XMLError (returnCode);
+            returnCode = node.FirstChildElement(e.intAttributeToTagName[i].second.c_str())->QueryIntText(e.intAttributeToTagName[i].first);
+            if (returnCode != XML_SUCCESS)
+            {
+                throw XMLError (returnCode);
+            }
         }
     }
 
@@ -369,10 +387,12 @@ void ElementsList::parseElementsText(const VarToNodeName &e, const XMLElement &n
         {
             throw XMLError (XML_ERROR_PARSING_ELEMENT);
         }
-        *e.stringAttributeToTagName[i].first = node.FirstChildElement(e.stringAttributeToTagName[i].second.c_str())->GetText();
-        if (e.stringAttributeToTagName[i].first->size() == 0)
+        const char * content = node.FirstChildElement(e.stringAttributeToTagName[i].second.c_str())->GetText();
+        if (content != nullptr)
         {
-            throw XMLError (XML_ERROR_PARSING_ELEMENT);
+            *e.stringAttributeToTagName[i].first = content;
+        } else {
+            *e.stringAttributeToTagName[i].first = "";
         }
     }
 

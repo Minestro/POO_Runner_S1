@@ -1,10 +1,22 @@
 #include "app.h"
 
+using namespace tinyxml2;
+
 App::App(): m_window{"Runner", sf::Style::Default, MODEL_SIZE_W, MODEL_SIZE_H}, m_settings{}, m_gameModel{MODEL_SIZE_W, MODEL_SIZE_H, STARTSPEEDPERIODGAME, this}, m_gameView{}, m_menuModel{MODEL_SIZE_W, MODEL_SIZE_H, menuPage::PRE_MENU, this}, m_menuView{}, m_drawTime{std::chrono::system_clock::now()}, m_drawPeriod{(unsigned int)((1.0f / FPS) * 1000)}, m_running{true}
 {
     GraphicElement::loadTextures();
     TextElement::loadFonts();
     GraphicElement::loadShaders();
+    try
+    {
+        Menu::loadModels(this);
+    }
+    catch (const XMLError &er)
+    {
+        std::cout << "Erreur lors de la lecture du fichier " << MENU_MODELS_FILE << " . Code erreur : " << std::to_string(er) << std::endl;
+        m_menuModel.exitApp();
+    }
+    Menu::refreshPageContent(&m_menuModel, m_menuModel.getActivePage());
     m_gameView.setModel(&m_gameModel);
     m_gameView.setWindow(&m_window);
     m_menuView.setModel(&m_menuModel);
