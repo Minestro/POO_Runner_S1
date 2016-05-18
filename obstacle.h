@@ -3,7 +3,7 @@
 
 #include "movableelement.h"
 
-enum obstacle_type{MINE,NUAGE};
+enum obstacle_type{MINE,NUAGE,BARRE};
 enum obstacle_state{ACTIVE, EXPLODE};
 
 class Obstacle: public MovableElement
