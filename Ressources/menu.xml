@@ -1,5 +1,5 @@
 <PatternList>
-	<NbPatterns>11</NbPatterns>
+	<NbPatterns>12</NbPatterns>
 	<Pattern id="1">
 	<Width>1280</Width>
 	<Image>
@@ -538,5 +538,72 @@
 			<MovePeriod>0</MovePeriod>
 			<ID>211</ID>
 		</Image>
+	</Pattern>
+	<Pattern id="12">
+		<Width>1280</Width>
+		<Text>
+			<SizeWidth>1280.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>50.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Entrez votre pseudo</String>
+			<FontSize>20</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>255, 255, 255, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>1</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>210</ID>
+		</Text>
+		<Image>
+			<SizeWidth>1280.0</SizeWidth>
+			<SizeHeight>730.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>0.0</PositionY>
+			<FileName>FOND.png</FileName>
+			<ZIndex>1</ZIndex>
+			<CoefSpeed>0.0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>211</ID>
+		</Image>
+		<Image>
+			<SizeWidth>400.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>440.0</PositionX>
+			<PositionY>200.0</PositionY>
+			<FileName>textBox.png</FileName>
+			<ZIndex>2</ZIndex>
+			<CoefSpeed>0.0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>212</ID>
+		</Image>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>390.0</PositionX>
+			<PositionY>550.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Retour</String>
+			<DestinationPage>11</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0</ActionsList>
+			<ID>213</ID>
+		</Button>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>690.0</PositionX>
+			<PositionY>550.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Confirmer</String>
+			<DestinationPage>2</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>9</ActionsList>
+			<ID>214</ID>
+		</Button>
 	</Pattern>
 </PatternList>

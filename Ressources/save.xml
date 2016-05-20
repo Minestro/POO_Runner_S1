@@ -1,52 +1,52 @@
 <SaveFile>
-	<Save id ="0">
-		<Active>0</Active>
-		<NickName></NickName>
-		<Upgrade1></Upgrade1>
-		<Upgrade2></Upgrade2>
-		<Upgrade3></Upgrade3>
-		<Upgrade4></Upgrade4>
-		<BestScore></BestScore>
-		<Money></Money>
-	</Save>
-	<Save id ="1">
-		<Active>0</Active>
-		<NickName></NickName>
-		<Upgrade1></Upgrade1>
-		<Upgrade2></Upgrade2>
-		<Upgrade3></Upgrade3>
-		<Upgrade4></Upgrade4>
-		<BestScore></BestScore>
-		<Money></Money>
-	</Save>
-	<Save id ="2">
-		<Active>1</Active>
-		<NickName>Minestro</NickName>
-		<Upgrade1>200</Upgrade1>
-		<Upgrade2>200</Upgrade2>
-		<Upgrade3>200</Upgrade3>
-		<Upgrade4>200</Upgrade4>
-		<BestScore>2400</BestScore>
-		<Money>554</Money>
-	</Save>
-	<Save id ="3">
-		<Active>0</Active>
-		<NickName></NickName>
-		<Upgrade1></Upgrade1>
-		<Upgrade2></Upgrade2>
-		<Upgrade3></Upgrade3>
-		<Upgrade4></Upgrade4>
-		<BestScore></BestScore>
-		<Money></Money>
-	</Save>
-	<Save id ="4">
-		<Active>0</Active>
-		<NickName></NickName>
-		<Upgrade1></Upgrade1>
-		<Upgrade2></Upgrade2>
-		<Upgrade3></Upgrade3>
-		<Upgrade4></Upgrade4>
-		<BestScore></BestScore>
-		<Money></Money>
-	</Save>
+    <Save id="0">
+        <Active>0</Active>
+        <NickName/>
+        <Upgrade1/>
+        <Upgrade2/>
+        <Upgrade3/>
+        <Upgrade4/>
+        <BestScore/>
+        <Money/>
+    </Save>
+    <Save id="1">
+        <Active>0</Active>
+        <NickName/>
+        <Upgrade1/>
+        <Upgrade2/>
+        <Upgrade3/>
+        <Upgrade4/>
+        <BestScore/>
+        <Money/>
+    </Save>
+    <Save id="2">
+        <Active>0</Active>
+        <NickName/>
+        <Upgrade1/>
+        <Upgrade2/>
+        <Upgrade3/>
+        <Upgrade4>200</Upgrade4>
+        <BestScore/>
+        <Money/>
+    </Save>
+    <Save id="3">
+        <Active>0</Active>
+        <NickName></NickName>
+        <Upgrade1></Upgrade1>
+        <Upgrade2></Upgrade2>
+        <Upgrade3></Upgrade3>
+        <Upgrade4/>
+        <BestScore></BestScore>
+        <Money></Money>
+    </Save>
+    <Save id="4">
+        <Active>0</Active>
+        <NickName/>
+        <Upgrade1/>
+        <Upgrade2/>
+        <Upgrade3/>
+        <Upgrade4/>
+        <BestScore/>
+        <Money/>
+    </Save>
 </SaveFile>
