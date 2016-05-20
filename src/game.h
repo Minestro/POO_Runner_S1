@@ -29,6 +29,11 @@ private:
     void loadPatterns();
     float m_blurFade;
 
+    void addElements();
+    void moveElements();
+    void collisionsTest();
+    GameCharacter *getCharacterById(unsigned int id);
+
 public:
     Game(float width, float height, App *app);
     virtual ~Game();
