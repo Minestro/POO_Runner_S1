@@ -1,13 +1,13 @@
 <SaveFile>
     <Save id="0">
-        <Active>0</Active>
-        <NickName/>
-        <Upgrade1/>
-        <Upgrade2/>
-        <Upgrade3/>
+        <Active>1</Active>
+        <NickName>Minestro</NickName>
+        <Upgrade1>5000</Upgrade1>
+        <Upgrade2>5000</Upgrade2>
+        <Upgrade3>5000</Upgrade3>
         <Upgrade4/>
-        <BestScore/>
-        <Money/>
+        <BestScore>0</BestScore>
+        <Money>0</Money>
     </Save>
     <Save id="1">
         <Active>0</Active>

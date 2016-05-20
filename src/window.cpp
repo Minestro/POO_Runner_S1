@@ -7,7 +7,7 @@ Window::Window(std::string title, int style, float modelSizeW, float modelSizeH)
     size.x = sf::VideoMode::getDesktopMode().width;
     size.y = sf::VideoMode::getDesktopMode().height;
     this->create(sf::VideoMode(size.x, size.y), title, style);
-    this->setVerticalSyncEnabled(0);
+    this->setVerticalSyncEnabled(1);
     this->setPosition(sf::Vector2i{0, 0});
     this->setView(sf::View{sf::FloatRect{0, 0, modelSizeW, modelSizeH}});
 }

@@ -299,7 +299,7 @@ public:
                 {
                     std::list<GraphicElement*> list;
                     std::string texture;
-                    unsigned int nbLignes, nbColonnes;
+                    unsigned int nbLignes, nbColonnes = 0;
                     switch (button.second->getType())
                     {
                     case button_type::TEXT_BUTTON:

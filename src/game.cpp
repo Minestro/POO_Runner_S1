@@ -342,6 +342,7 @@ void Game::resetGame()
     m_pause = 0;
     m_blurFade = 0;
     m_distance = 0;
+    m_nextPatternAt = 0;
     setSpeedPeriod(STARTSPEEDPERIODGAME);
     clearAll();
     setGameState(game_state::INTRO);
