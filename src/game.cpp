@@ -83,6 +83,13 @@ float Game::getPixelSpeed() const
 //------------------------------------------------------------------------------
 void Game::nextStep()
 {
+    if (m_app->getMenuModel().getActivePage() == menuPage::ESCAPE_MENU && (m_gameState == game_state::RUNNING || m_gameState == game_state::INTRO) && !m_pause && getCharacterById(character_id::PLAYER1)->getState() == character_state::ALIVE)
+    {
+        m_app->getSound().setCharacterSoundPlay(1);
+    } else {
+        m_app->getSound().setCharacterSoundPlay(0);
+    }
+
     //Effet de blur
     if (m_pause && m_blurFade < 0.01)
     {
@@ -93,6 +100,7 @@ void Game::nextStep()
     {
         addElements();
         moveElements();
+        checkEndGame();
         m_lastMove = std::chrono::system_clock::now();
     }
 
@@ -103,9 +111,10 @@ void Game::nextStep()
         //On test si un personnage n'a plus de vie
         for (unsigned int i=0; i<m_characters.size(); i++)
         {
-            if (m_characters[i].second->getLife() == 0)
+            if (m_characters[i].second->getLife() == 0 && m_characters[i].second->getState() != character_state::DYING)
             {
-                m_characters[i].second->setSate(character_state::DYING);
+                m_characters[i].second->setState(character_state::DYING);
+                m_app->getSound().playSound("crash.wav");
             }
         }
 
@@ -270,6 +279,18 @@ void Game::moveElements()
             m_bonus[i].second->move();
         }
     }
+    GameCharacter *player1 = getCharacterById(character_id::PLAYER1);
+    if (player1 != nullptr)
+    {
+        float pitch;
+        if (player1->getMovement().second != 0.0)
+        {
+            pitch = 1.0 - (float) player1->getMovement().second/(float)CHARACTER_MAX_SPEED/4.0 ;
+        } else {
+            pitch = 1.0;
+        }
+        m_app->getSound().setCharacterSoundPitch(pitch);
+    }
 }
 
 void Game::collisionsTest()
@@ -299,9 +320,10 @@ void Game::collisionsTest()
                 {
                     player1->removeLife(obstacle->second->getDammage());
                 }
-                if (obstacle->second->getType() == obstacle_type::MINE ||obstacle->second->getType() == obstacle_type::NUAGE ||obstacle->second->getType() == obstacle_type::BARRE )
+                if (obstacle->second->getType() == obstacle_type::MINE)
                 {
                     obstacle->second->setState(obstacle_state::EXPLODE);
+                    m_app->getSound().playSound("explosion.wav");
                 } else {
                     m_deletedElements.push_back(obstacle->second);
                     m_obstacles.erase(obstacle);
@@ -333,6 +355,7 @@ void Game::collisionsTest()
                 switch (bonus->second->getType())               //Action différente suivant le type de bonus
                 {
                 case bonus_type::PIECE:
+                    m_app->getSound().playSound("coin.wav");
                     player1->addScore(1000);
                     break;
                 case bonus_type::SOINS:
@@ -374,5 +397,23 @@ GameCharacter *Game::getCharacterById(unsigned int id)
         return player->second;
     } else {
         return nullptr;
+    }
+}
+
+void Game::checkEndGame()
+{
+    bool allDead = true;
+    std::vector<std::pair<bool, GameCharacter*> >::iterator character = m_characters.begin();
+    while (allDead && character != m_characters.end())
+    {
+        if (character->second->getState() != character_state::DEAD)
+        {
+            allDead = false;
+        }
+        ++character;
+    }
+    if (allDead)
+    {
+        m_app->getMenuModel().setPage(menuPage::GAME_ENDED);
     }
 }

@@ -1,11 +1,11 @@
 #include "gamecharactergraphic.h"
 #include "model.h"
 
-GameCharacterGraphic::GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int animatePeriod): SpriteElement::SpriteElement{zIndex, width, height, x, y, rotateAngle, texture, animatePeriod}
+GameCharacterGraphic::GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int animatePeriod): SpriteElement::SpriteElement{zIndex, width, height, x, y, rotateAngle, texture, animatePeriod}, m_show{1}
 {
 }
 
-GameCharacterGraphic::GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int nbLignes, unsigned int nbColonnes, unsigned int activeLigne, unsigned int activeColonne, unsigned int animatePeriod): SpriteElement::SpriteElement{zIndex, width, height, x, y, rotateAngle, texture, nbLignes, nbColonnes, activeLigne, activeColonne, 1, animatePeriod}
+GameCharacterGraphic::GameCharacterGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int nbLignes, unsigned int nbColonnes, unsigned int activeLigne, unsigned int activeColonne, unsigned int animatePeriod): SpriteElement::SpriteElement{zIndex, width, height, x, y, rotateAngle, texture, nbLignes, nbColonnes, activeLigne, activeColonne, 1, animatePeriod}, m_show{1}
 {
 }
 
@@ -15,7 +15,10 @@ GameCharacterGraphic::~GameCharacterGraphic()
 
 void GameCharacterGraphic::draw(sf::RenderTarget *window) const
 {
-    SpriteElement::draw(window);
+    if (m_show)
+    {
+        SpriteElement::draw(window);
+    }
 }
 
 void GameCharacterGraphic::refresh(const Element *el, Model *model)
@@ -40,15 +43,15 @@ void GameCharacterGraphic::refresh(const Element *el, Model *model)
                 setNbColonnes(81);
                 setRectPos(1);
                 setAutoLoop(0);
+                setAnimatePeriod(20);
             }
             if (m_activeColonne == m_nbColonnes)
             {
-                model->getDeletedElements().push_back(el);
-                model->getCharacters().erase(it);
+                it->second->setState(character_state::DEAD);
+                m_show = false;
             }
             break;
         default:
-
             break;
         }
     }

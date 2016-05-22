@@ -7,6 +7,11 @@ const std::string FILES_LIST[] = {"menuBackground.png", "FOND1.png", "FOND2.png"
 
 const std::string FONTS_LIST[] = {"score.ttf", "Beautiful_Heartbeat.otf", "The_Happy_Giraffe.ttf"};
 
+const std::string SOUNDS_LIST[] = {"coin.wav", "plane.wav", "explosion.wav", "crash.wav", "click.wav"};
+
+const std::string MUSIC_GAME_FILE = "Ressources/Default/Musics/arcade.ogg";
+const std::string MUSIC_MENU_FILE = "Ressources/Default/Musics/welcome_screen.ogg";
+
 const std::string PATTERNS_FILE = "Ressources/patternsList.xml";
 const std::string MENU_MODELS_FILE = "Ressources/menu.xml";
 const std::string SAVE_FILE = "Ressources/save.xml";

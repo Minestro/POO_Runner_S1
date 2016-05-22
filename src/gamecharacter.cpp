@@ -73,12 +73,12 @@ void GameCharacter::addScore(unsigned int score)
     m_score += score;
 }
 
-character_state GameCharacter::getState() const
+int GameCharacter::getState() const
 {
     return m_state;
 }
 
-void GameCharacter::setSate(character_state state)
+void GameCharacter::setState(int state)
 {
     m_state = state;
 }
@@ -93,7 +93,7 @@ void GameCharacter::move()
         Obstacle ground{0, HAUTEUR_SOL, MODEL_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
         if (m_state != character_state::DYING)
         {
-            //On déplace latéralement le personnage
+            //On déplace latéralement l'avion
             if (m_movingRight && m_movement.first < CHARACTER_MAX_SPEED)
             {
                 m_movement.first += ACCELERATION_CHARACTER;
@@ -102,7 +102,7 @@ void GameCharacter::move()
                 m_movement.first -= ACCELERATION_CHARACTER;
             }
 
-            //Si le vecteur mouvement x est supérieur à 0, on décelère la balle
+            //Si le vecteur mouvement x est supérieur à 0, on décelère l'avion
             if (m_movement.first > 0)
             {
                 m_movement.first -= (ACCELERATION_CHARACTER/2);
@@ -111,7 +111,7 @@ void GameCharacter::move()
                 m_movement.first += (ACCELERATION_CHARACTER/2);
             }
 
-            // Si la balle est en lair, on applique la gravité
+            // Si l'avion est en lair, on applique la gravité
             if (!m_ascending)
             {
                 m_movement.second += GRAVITY;

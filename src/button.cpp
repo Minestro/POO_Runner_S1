@@ -64,6 +64,12 @@ bool Button::isOn() const
     case menu_specific_elements::FULL_SCREEN_BUTTON:
         isOn = m_model->getApp()->getSettings().m_isFullScreen;
         break;
+    case menu_specific_elements::MUSIC_ACTIVE_BUTTON:
+        isOn = m_model->getApp()->getSettings().m_musicVolume == 100;
+        break;
+    case menu_specific_elements::SOUNDS_ACTIVE_BUTTON:
+        isOn = m_model->getApp()->getSettings().m_effectVolume == 100;
+        break;
     default:
         break;
     }
@@ -127,6 +133,22 @@ void Button::onClick()
                 break;
             case button_action::SET_FULL_SCREEN:
                 m_model->getApp()->getSettings().m_isFullScreen = !m_model->getApp()->getSettings().m_isFullScreen;
+                break;
+            case button_action::SET_MUSIC:
+                if (m_model->getApp()->getSettings().m_musicVolume == 100)
+                {
+                    m_model->getApp()->getSettings().m_musicVolume = 0;
+                } else {
+                    m_model->getApp()->getSettings().m_musicVolume = 100;
+                }
+                break;
+            case button_action::SET_SOUNDS:
+                if (m_model->getApp()->getSettings().m_effectVolume == 100)
+                {
+                    m_model->getApp()->getSettings().m_effectVolume = 0;
+                } else {
+                    m_model->getApp()->getSettings().m_effectVolume = 100;
+                }
                 break;
             case button_action::RESUME_GAME:
                 m_model->getApp()->getGameModel().setPause(0);
@@ -228,6 +250,27 @@ void Button::onClick()
                     catch (XMLError e)
                     {
                         std::cout << "Erreur lors de l'ecriture du fichier des profiles. Code : " << std::to_string(e) << std::endl;
+                    }
+                }
+                break;
+            }
+            case button_action::SAVE_GAME_BUTTON:
+            {
+                GameCharacter *player1 = m_model->getApp()->getGameModel().getCharacterById(character_id::PLAYER1);
+                if (player1 != nullptr)
+                {
+                    m_model->getApp()->getGameModel().getPlayer()->addMoney(player1->getScore()/1000);
+                    if (m_model->getApp()->getGameModel().getPlayer()->getBestScore() < player1->getScore())
+                    {
+                        m_model->getApp()->getGameModel().getPlayer()->setBestScore(player1->getScore());
+                    }
+                    try
+                    {
+                        m_model->getApp()->getGameModel().getPlayer()->saveProfile();
+                    }
+                    catch (XMLError e)
+                    {
+                        std::cout << "Erreur lors de l'écriture du fichier des profiles. Code : " << std::to_string(e) << std::endl;
                     }
                 }
                 break;

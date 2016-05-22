@@ -17,6 +17,7 @@ struct ColorRGBA
     unsigned int r, g, b, a;
     static const ColorRGBA White;
     static const ColorRGBA Black;
+    static const ColorRGBA Red;
 };
 
 class Element

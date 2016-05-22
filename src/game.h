@@ -32,7 +32,7 @@ private:
     void addElements();
     void moveElements();
     void collisionsTest();
-    GameCharacter *getCharacterById(unsigned int id);
+    void checkEndGame();
 
 public:
     Game(float width, float height, App *app);
@@ -53,6 +53,7 @@ public:
     bool isPause() const;
     void setPause(bool a);
     void resetGame();
+    GameCharacter *getCharacterById(unsigned int id);
 };
 
 #endif // GAME_H

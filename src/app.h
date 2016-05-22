@@ -8,6 +8,7 @@
 #include "appsettings.h"
 #include "menuview.h"
 #include "gameview.h"
+#include "sound.h"
 
 class Element;
 
@@ -20,6 +21,7 @@ private:
     GameView m_gameView;
     Menu m_menuModel;
     MenuView m_menuView;
+    Sound m_sound;
     std::chrono::time_point<std::chrono::system_clock> m_drawTime;
     unsigned int m_drawPeriod;
     bool m_running;
@@ -39,6 +41,8 @@ public:
     const Menu &getMenuModel() const;
     MenuView &getMenuView();
     const MenuView &getMenuView() const;
+    Sound &getSound();
+    const Sound &getSound() const;
     void run();
     void stop();
 };

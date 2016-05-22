@@ -1,5 +1,5 @@
 <PatternList>
-	<NbPatterns>12</NbPatterns>
+	<NbPatterns>13</NbPatterns>
 	<Pattern id="1">
 	<Width>1280</Width>
 	<Image>
@@ -12,7 +12,7 @@
 		<CoefSpeed>0.5</CoefSpeed>
 		<IsSliding>1</IsSliding>
 		<MovePeriod>15</MovePeriod>
-		<ID>210</ID>
+		<ID>220</ID>
 	</Image>
 	<Image>
 		<SizeWidth>1280.0</SizeWidth>
@@ -24,7 +24,7 @@
 		<CoefSpeed>1.0</CoefSpeed>
 		<IsSliding>1</IsSliding>
 		<MovePeriod>15</MovePeriod>
-		<ID>211</ID>
+		<ID>221</ID>
 	</Image>
 	<Text>
 		<SizeWidth>1280.0</SizeWidth>
@@ -40,7 +40,7 @@
 		<EffectPeriod>30</EffectPeriod>
 		<IsAutoRescale>1</IsAutoRescale>
 		<IsLineBreack>0</IsLineBreack>
-		<ID>212</ID>
+		<ID>222</ID>
 	</Text>
 	</Pattern>
 	<Pattern id="2">
@@ -55,7 +55,7 @@
 			<DestinationPage>0</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0, 4</ActionsList>
-			<ID>210</ID>
+			<ID>220</ID>
 		</Button>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
@@ -67,7 +67,7 @@
 			<DestinationPage>8</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
-			<ID>211</ID>
+			<ID>221</ID>
 		</Button>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
@@ -79,7 +79,7 @@
 			<DestinationPage>5</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
-			<ID>212</ID>
+			<ID>222</ID>
 		</Button>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
@@ -91,7 +91,7 @@
 			<DestinationPage>0</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>1</ActionsList>
-			<ID>213</ID>
+			<ID>223</ID>
 		</Button>
 		<Image>
 			<SizeWidth>1280.0</SizeWidth>
@@ -103,7 +103,7 @@
 			<CoefSpeed>0.0</CoefSpeed>
 			<IsSliding>0</IsSliding>
 			<MovePeriod>0</MovePeriod>
-			<ID>214</ID>
+			<ID>224</ID>
 		</Image>
 	</Pattern>
 	<Pattern id="3">
@@ -128,7 +128,7 @@
 			<EffectPeriod>0</EffectPeriod>
 			<IsAutoRescale>1</IsAutoRescale>
 			<IsLineBreack>0</IsLineBreack>
-			<ID>210</ID>
+			<ID>220</ID>
 		</Text>
 		<Image>
 			<SizeWidth>1280.0</SizeWidth>
@@ -140,7 +140,7 @@
 			<CoefSpeed>0.0</CoefSpeed>
 			<IsSliding>0</IsSliding>
 			<MovePeriod>0</MovePeriod>
-			<ID>211</ID>
+			<ID>221</ID>
 		</Image>
 		<Image>
 			<SizeWidth>500.0</SizeWidth>
@@ -152,7 +152,7 @@
 			<CoefSpeed>0.0</CoefSpeed>
 			<IsSliding>0</IsSliding>
 			<MovePeriod>0</MovePeriod>
-			<ID>212</ID>
+			<ID>222</ID>
 		</Image>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
@@ -164,7 +164,7 @@
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
-			<ID>213</ID>
+			<ID>223</ID>
 		</Button>
 		<Button>
 			<SizeWidth>25.0</SizeWidth>
@@ -192,7 +192,63 @@
 			<EffectPeriod>0</EffectPeriod>
 			<IsAutoRescale>0</IsAutoRescale>
 			<IsLineBreack>0</IsLineBreack>
-			<ID>214</ID>
+			<ID>224</ID>
+		</Text>
+		<Button>
+			<SizeWidth>25.0</SizeWidth>
+			<SizeHeight>25.0</SizeHeight>
+			<PositionX>600.0</PositionX>
+			<PositionY>280.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String></String>
+			<DestinationPage>5</DestinationPage>
+			<Type>2</Type>
+			<ActionsList>11</ActionsList>
+			<ID>201</ID>
+		</Button>
+		<Text>
+			<SizeWidth>0.0</SizeWidth>
+			<SizeHeight>0.0</SizeHeight>
+			<PositionX>470.0</PositionX>
+			<PositionY>280.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Musique :</String>
+			<FontSize>20</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>0</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>225</ID>
+		</Text>
+		<Button>
+			<SizeWidth>25.0</SizeWidth>
+			<SizeHeight>25.0</SizeHeight>
+			<PositionX>600.0</PositionX>
+			<PositionY>380.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String></String>
+			<DestinationPage>5</DestinationPage>
+			<Type>2</Type>
+			<ActionsList>12</ActionsList>
+			<ID>202</ID>
+		</Button>
+		<Text>
+			<SizeWidth>0.0</SizeWidth>
+			<SizeHeight>0.0</SizeHeight>
+			<PositionX>470.0</PositionX>
+			<PositionY>380.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Bruitages :</String>
+			<FontSize>20</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>0</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>226</ID>
 		</Text>
 	</Pattern>
 	<Pattern id="6">
@@ -214,7 +270,7 @@
 			<EffectPeriod>0</EffectPeriod>
 			<IsAutoRescale>1</IsAutoRescale>
 			<IsLineBreack>0</IsLineBreack>
-			<ID>210</ID>
+			<ID>220</ID>
 		</Text>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
@@ -226,7 +282,7 @@
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>3</ActionsList>
-			<ID>211</ID>
+			<ID>221</ID>
 		</Button>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
@@ -238,7 +294,7 @@
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
-			<ID>212</ID>
+			<ID>222</ID>
 		</Button>
 	</Pattern>
 	<Pattern id="8">
@@ -253,7 +309,7 @@
 			<CoefSpeed>1.0</CoefSpeed>
 			<IsSliding>0</IsSliding>
 			<MovePeriod>0</MovePeriod>
-			<ID>210</ID>
+			<ID>220</ID>
 		</Image>
 		<Image>
 			<SizeWidth>500.0</SizeWidth>
@@ -265,7 +321,7 @@
 			<CoefSpeed>0.0</CoefSpeed>
 			<IsSliding>0</IsSliding>
 			<MovePeriod>0</MovePeriod>
-			<ID>211</ID>
+			<ID>221</ID>
 		</Image>
 		<Text>
 			<SizeWidth>500.0</SizeWidth>
@@ -281,7 +337,7 @@
 			<EffectPeriod>0</EffectPeriod>
 			<IsAutoRescale>1</IsAutoRescale>
 			<IsLineBreack>0</IsLineBreack>
-			<ID>212</ID>
+			<ID>222</ID>
 		</Text>
 		<Text>
 			<SizeWidth>460.0</SizeWidth>
@@ -297,7 +353,7 @@
 			<EffectPeriod>0</EffectPeriod>
 			<IsAutoRescale>1</IsAutoRescale>
 			<IsLineBreack>1</IsLineBreack>
-			<ID>213</ID>
+			<ID>223</ID>
 		</Text>
 		<Image>
 			<SizeWidth>40.0</SizeWidth>
@@ -309,7 +365,7 @@
 			<CoefSpeed>0.0</CoefSpeed>
 			<IsSliding>0</IsSliding>
 			<MovePeriod>0</MovePeriod>
-			<ID>214</ID>
+			<ID>224</ID>
 		</Image>
 		<Image>
 			<SizeWidth>40.0</SizeWidth>
@@ -321,7 +377,7 @@
 			<CoefSpeed>0.0</CoefSpeed>
 			<IsSliding>0</IsSliding>
 			<MovePeriod>0</MovePeriod>
-			<ID>215</ID>
+			<ID>225</ID>
 		</Image>
 		<Image>
 			<SizeWidth>40.0</SizeWidth>
@@ -333,7 +389,7 @@
 			<CoefSpeed>0.0</CoefSpeed>
 			<IsSliding>0</IsSliding>
 			<MovePeriod>0</MovePeriod>
-			<ID>216</ID>
+			<ID>226</ID>
 		</Image>
 		<Text>
 			<SizeWidth>0.0</SizeWidth>
@@ -349,7 +405,7 @@
 			<EffectPeriod>0</EffectPeriod>
 			<IsAutoRescale>0</IsAutoRescale>
 			<IsLineBreack>0</IsLineBreack>
-			<ID>217</ID>
+			<ID>227</ID>
 		</Text>
 		<Text>
 			<SizeWidth>0.0</SizeWidth>
@@ -365,7 +421,7 @@
 			<EffectPeriod>0</EffectPeriod>
 			<IsAutoRescale>0</IsAutoRescale>
 			<IsLineBreack>0</IsLineBreack>
-			<ID>218</ID>
+			<ID>228</ID>
 		</Text>
 		<Text>
 			<SizeWidth>0.0</SizeWidth>
@@ -381,7 +437,7 @@
 			<EffectPeriod>0</EffectPeriod>
 			<IsAutoRescale>0</IsAutoRescale>
 			<IsLineBreack>0</IsLineBreack>
-			<ID>219</ID>
+			<ID>229</ID>
 		</Text>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
@@ -393,7 +449,7 @@
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
-			<ID>220</ID>
+			<ID>230</ID>
 		</Button>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
@@ -405,7 +461,7 @@
 			<DestinationPage>9</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
-			<ID>221</ID>
+			<ID>231</ID>
 		</Button>
 	</Pattern>
 	<Pattern id="9">
@@ -420,7 +476,7 @@
 			<CoefSpeed>0</CoefSpeed>
 			<IsSliding>0</IsSliding>
 			<MovePeriod>0</MovePeriod>
-			<ID>210</ID>
+			<ID>220</ID>
 		</Image>
 		<Image>
 			<SizeWidth>500.0</SizeWidth>
@@ -432,7 +488,7 @@
 			<CoefSpeed>0</CoefSpeed>
 			<IsSliding>0</IsSliding>
 			<MovePeriod>0</MovePeriod>
-			<ID>211</ID>
+			<ID>221</ID>
 		</Image>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
@@ -444,7 +500,7 @@
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
-			<ID>212</ID>
+			<ID>222</ID>
 		</Button>
 		<Text>
 			<SizeWidth>500.0</SizeWidth>
@@ -460,7 +516,7 @@
 			<EffectPeriod>0</EffectPeriod>
 			<IsAutoRescale>1</IsAutoRescale>
 			<IsLineBreack>0</IsLineBreack>
-			<ID>213</ID>
+			<ID>223</ID>
 		</Text>
 		<Text>
 			<SizeWidth>0.0</SizeWidth>
@@ -476,7 +532,7 @@
 			<EffectPeriod>0</EffectPeriod>
 			<IsAutoRescale>0</IsAutoRescale>
 			<IsLineBreack>0</IsLineBreack>
-			<ID>214</ID>
+			<ID>224</ID>
 		</Text>
 		<Bonus>
 			<SizeWidth>40.0</SizeWidth>
@@ -486,7 +542,7 @@
 			<Type>0</Type>
 			<RotateAngle>0.0</RotateAngle>
 			<RotateMovement>0.0</RotateMovement>
-			<ID>215</ID>
+			<ID>225</ID>
 		</Bonus>
 	</Pattern>
 	<Pattern id="10">
@@ -505,7 +561,7 @@
 			<EffectPeriod>30</EffectPeriod>
 			<IsAutoRescale>1</IsAutoRescale>
 			<IsLineBreack>0</IsLineBreack>
-			<ID>210</ID>
+			<ID>220</ID>
 		</Text>
 	</Pattern>
 	<Pattern id="11">
@@ -524,7 +580,7 @@
 			<EffectPeriod>0</EffectPeriod>
 			<IsAutoRescale>1</IsAutoRescale>
 			<IsLineBreack>0</IsLineBreack>
-			<ID>210</ID>
+			<ID>220</ID>
 		</Text>
 		<Image>
 			<SizeWidth>1280.0</SizeWidth>
@@ -536,7 +592,7 @@
 			<CoefSpeed>0.0</CoefSpeed>
 			<IsSliding>0</IsSliding>
 			<MovePeriod>0</MovePeriod>
-			<ID>211</ID>
+			<ID>221</ID>
 		</Image>
 	</Pattern>
 	<Pattern id="12">
@@ -555,7 +611,7 @@
 			<EffectPeriod>0</EffectPeriod>
 			<IsAutoRescale>1</IsAutoRescale>
 			<IsLineBreack>0</IsLineBreack>
-			<ID>210</ID>
+			<ID>220</ID>
 		</Text>
 		<Image>
 			<SizeWidth>1280.0</SizeWidth>
@@ -567,7 +623,7 @@
 			<CoefSpeed>0.0</CoefSpeed>
 			<IsSliding>0</IsSliding>
 			<MovePeriod>0</MovePeriod>
-			<ID>211</ID>
+			<ID>221</ID>
 		</Image>
 		<Image>
 			<SizeWidth>400.0</SizeWidth>
@@ -579,7 +635,7 @@
 			<CoefSpeed>0.0</CoefSpeed>
 			<IsSliding>0</IsSliding>
 			<MovePeriod>0</MovePeriod>
-			<ID>212</ID>
+			<ID>222</ID>
 		</Image>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
@@ -591,7 +647,7 @@
 			<DestinationPage>11</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
-			<ID>213</ID>
+			<ID>223</ID>
 		</Button>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
@@ -603,7 +659,50 @@
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>9</ActionsList>
-			<ID>214</ID>
+			<ID>224</ID>
 		</Button>
+	</Pattern>
+	<Pattern id="13">
+	<Width>1280</Width>
+		<Image>
+			<SizeWidth>1280.0</SizeWidth>
+			<SizeHeight>730.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>0.0</PositionY>
+			<FileName>FOND.png</FileName>
+			<ZIndex>1</ZIndex>
+			<CoefSpeed>0.0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>220</ID>
+		</Image>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>540.0</PositionX>
+			<PositionY>550.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Retour au menu</String>
+			<DestinationPage>2</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0, 10</ActionsList>
+			<ID>222</ID>
+		</Button>
+		<Text>
+			<SizeWidth>1280.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>50.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>VOUS ETES MORT</String>
+			<FontSize>50</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>255, 255, 255, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>1</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>223</ID>
+		</Text>
 	</Pattern>
 </PatternList>

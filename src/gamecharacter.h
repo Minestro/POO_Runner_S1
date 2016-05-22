@@ -6,7 +6,7 @@
 #include "movableelement.h"
 #include "player.h"
 
-enum character_state{ALIVE, DYING};
+enum character_state{ALIVE, DYING, DEAD};
 enum character_id{PLAYER1 = 1, PLAYER2, PLAYER3, PLAYER4};
 
 class GameCharacter: public MovableElement
@@ -19,7 +19,7 @@ private:
     bool m_ascending;
     unsigned int m_life;
     Player *m_player;
-    character_state m_state;
+    int m_state;
 public:
     GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life = MAX_LIFE);
     virtual ~GameCharacter();
@@ -28,8 +28,8 @@ public:
     void removeLife (unsigned int life);
     unsigned int getLife() const;
     unsigned int getScore() const;
-    character_state getState() const;
-    void setSate(character_state state);
+    int getState() const;
+    void setState(int state);
     void ascend(bool a);
     void leftMove(bool ml);
     void rightMove(bool mr);

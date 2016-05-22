@@ -28,6 +28,7 @@ public:
     unsigned int getBestScore() const;
     unsigned int getId() const;
     void setNickName(std::string name);
+    void setBestScore(unsigned int score);
     void saveProfile() const;
     void loadSaveFromFile();
     bool buy(unsigned int upgradeId);

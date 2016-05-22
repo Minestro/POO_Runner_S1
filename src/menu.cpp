@@ -20,7 +20,7 @@ void Menu::setPage(unsigned int page)
 
 void Menu::refreshPageContent(Model *model, int page)
 {
-    for (unsigned int i = 200; i<222; i++)
+    for (unsigned int i = 200; i<232; i++)
     {
         model->deleteElement(i);
     }
@@ -61,6 +61,24 @@ void Menu::refreshPageContent(Model *model, int page)
         Text *t = new runner::Text{440, 200, 400, 50, 0, "", 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 1, 0};
         t->setId(menu_specific_elements::INPUT_TEXT);
         model->getTexts().push_back(std::make_pair(1, t));
+   } else if (page == menuPage::GAME_ENDED)
+   {
+        GameCharacter *player1 = model->getApp()->getGameModel().getCharacterById(character_id::PLAYER1);
+        if (player1 != nullptr)
+        {
+            if (model->getApp()->getGameModel().getPlayer()->getBestScore() < player1->getScore())
+            {
+                Text *t = new Text{0, 130, MODEL_SIZE_W, 50, 0, "Meilleur Score !", 20, "The_Happy_Giraffe.ttf", ColorRGBA::Red, text_effect::FLASH, 500, 1, 0};
+                t->setId(214);
+                model->getTexts().push_back(std::make_pair(1, t));
+            }
+            Text *t2 = new Text{100, 200, 0, 0, 0, "Score : " + std::to_string(player1->getScore()), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
+            t2->setId(215);
+            Text *t3 = new Text{100, 300, 0, 0, 0, "Argent : " + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney()) + " + " + std::to_string(player1->getScore()/1000) + " = " + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney() + player1->getScore()/1000), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
+            t3->setId(216);
+            model->getTexts().push_back(std::make_pair(1, t2));
+            model->getTexts().push_back(std::make_pair(1, t3));
+        }
    }
 }
 

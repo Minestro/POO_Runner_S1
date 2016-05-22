@@ -5,8 +5,8 @@
 struct AppSettings
 {
     bool m_isFullScreen;
-    float m_musicVolume;
-    float m_effectVolume;
+    int m_musicVolume;
+    int m_effectVolume;
     AppSettings();
 };
 

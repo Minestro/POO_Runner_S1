@@ -2,11 +2,13 @@
 
 using namespace tinyxml2;
 
-App::App(): m_window{"Runner", sf::Style::Default, MODEL_SIZE_W, MODEL_SIZE_H}, m_settings{}, m_gameModel{MODEL_SIZE_W, MODEL_SIZE_H, this}, m_gameView{}, m_menuModel{MODEL_SIZE_W, MODEL_SIZE_H, menuPage::PRE_MENU, this}, m_menuView{}, m_drawTime{std::chrono::system_clock::now()}, m_drawPeriod{(unsigned int)((1.0f / FPS) * 1000)}, m_running{true}
+App::App(): m_window{"Runner", sf::Style::Default, MODEL_SIZE_W, MODEL_SIZE_H}, m_settings{}, m_gameModel{MODEL_SIZE_W, MODEL_SIZE_H, this}, m_gameView{}, m_menuModel{MODEL_SIZE_W, MODEL_SIZE_H, menuPage::PRE_MENU, this}, m_menuView{}, m_sound{}, m_drawTime{std::chrono::system_clock::now()}, m_drawPeriod{(unsigned int)((1.0f / FPS) * 1000)}, m_running{true}
 {
     GraphicElement::loadTextures();
     TextGraphic::loadFonts();
     GraphicElement::loadShaders();
+    Sound::loadSoundsBuffers();
+    m_sound.setCharacterBuffer("plane.wav");
     try
     {
         Menu::loadModels(this);
@@ -28,6 +30,7 @@ App::~App()
     GraphicElement::clearTextures();
     TextGraphic::clearFonts();
     GraphicElement::clearShaders();
+    Sound::clearSoundsBuffers();
     m_window.close();
 }
 
@@ -90,8 +93,19 @@ const MenuView &App::getMenuView() const
     return m_menuView;
 }
 
+Sound &App::getSound()
+{
+    return m_sound;
+}
+
+const Sound &App::getSound() const
+{
+    return m_sound;
+}
+
 void App::run()
 {
+    m_sound.playMusic(MUSIC_GAME_FILE);
     while (m_running)
     {
         sf::sleep(sf::milliseconds(1));
@@ -131,6 +145,8 @@ void App::run()
             }
             m_running = !m_menuView.treatEvent();
         }
+        m_sound.setVolumeMusic(m_settings.m_musicVolume);
+        m_sound.setVolumeSounds(m_settings.m_effectVolume);
         m_window.refreshSettings(m_settings);
     }
 }

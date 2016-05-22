@@ -56,6 +56,11 @@ unsigned int Player::getId() const
     return m_id;
 }
 
+void Player::setBestScore(unsigned int score)
+{
+    m_bestScore = score;
+}
+
 void Player::saveProfile() const
 {
     int returnCode;

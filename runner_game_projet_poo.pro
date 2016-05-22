@@ -6,9 +6,10 @@ CONFIG -= qt
 win32 {
     LIBS += -LC:/SFML/lib
     INCLUDEPATH += C:/SFML/include
+    LIBS += -lsfml-main
 }
 
-LIBS += -lsfml-audio -lsfml-graphics -lsfml-main -lsfml-network -lsfml-window -lsfml-system
+LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-window -lsfml-system
 
 QMAKE_LFLAGS += -static-libgcc
 QMAKE_CXXFLAGS += -std=c++11
@@ -44,7 +45,8 @@ HEADERS += \
     src/textgraphic.h \
     src/view.hpp \
     src/window.h \
-    src/TinyXml2/tinyxml2.h
+    src/TinyXml2/tinyxml2.h \
+    src/sound.h
 
 SOURCES += \
     src/app.cpp \
@@ -76,5 +78,6 @@ SOURCES += \
     src/textgraphic.cpp \
     src/tu.cpp \
     src/window.cpp \
-    src/TinyXml2/tinyxml2.cpp
+    src/TinyXml2/tinyxml2.cpp \
+    src/sound.cpp
 

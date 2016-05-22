@@ -1,5 +1,6 @@
 #include "buttongraphic.h"
 #include "model.h"
+#include "app.h"
 
 ButtonGraphic::ButtonGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int nbLignes, unsigned int nbColonnes, std::string text, const sf::Font *font, unsigned int fontSize, const sf::Color color, int style, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_size{width, height}, m_position{x, y}
 {
@@ -77,6 +78,10 @@ void ButtonGraphic::refresh(const Element *el, Model *model)
             m_text->refresh(el, model);
             if (button->second->isHover(model->getCursorPosition().first, model->getCursorPosition().second) && button->second->isClickable())
             {
+                if (m_sprite->getActiveColonne() == 1)
+                {
+                    model->getApp()->getSound().playSound("click.wav");
+                }
                 m_sprite->setRectPos(1, 2);
             } else if (!button->second->isClickable()) {
                 m_sprite->setRectPos(1, 3);
@@ -97,6 +102,10 @@ void ButtonGraphic::refresh(const Element *el, Model *model)
         case button_type::SAVE_BUTTON:
             if (button->second->isHover(model->getCursorPosition().first, model->getCursorPosition().second) && button->second->isClickable())
             {
+                if (m_sprite->getActiveColonne() == 1)
+                {
+                    model->getApp()->getSound().playSound("click.wav");
+                }
                 m_sprite->setRectPos(1, 2);
             } else {
                 m_sprite->setRectPos(1, 1);
