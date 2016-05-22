@@ -63,6 +63,7 @@ void Menu::refreshPageContent(Model *model, int page)
         model->getTexts().push_back(std::make_pair(1, t));
    } else if (page == menuPage::GAME_ENDED)
    {
+        model->getApp()->getSound().stopAll();
         GameCharacter *player1 = model->getApp()->getGameModel().getCharacterById(character_id::PLAYER1);
         if (player1 != nullptr)
         {

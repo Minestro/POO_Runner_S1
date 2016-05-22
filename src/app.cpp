@@ -105,7 +105,6 @@ const Sound &App::getSound() const
 
 void App::run()
 {
-    m_sound.playMusic(MUSIC_GAME_FILE);
     while (m_running)
     {
         sf::sleep(sf::milliseconds(1));
@@ -136,6 +135,7 @@ void App::run()
             }
             m_running = !m_gameView.treatEvent();
         } else {
+            m_sound.playMusic(MUSIC_MENU_FILE);
             m_menuModel.refresh();
             if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_drawTime).count() >= m_drawPeriod)
             {

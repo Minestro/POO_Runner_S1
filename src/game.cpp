@@ -86,8 +86,9 @@ void Game::nextStep()
     if (m_app->getMenuModel().getActivePage() == menuPage::ESCAPE_MENU && (m_gameState == game_state::RUNNING || m_gameState == game_state::INTRO) && !m_pause && getCharacterById(character_id::PLAYER1)->getState() == character_state::ALIVE)
     {
         m_app->getSound().setCharacterSoundPlay(1);
+        m_app->getSound().playMusic(MUSIC_GAME_FILE);
     } else {
-        m_app->getSound().setCharacterSoundPlay(0);
+        m_app->getSound().pauseAll();
     }
 
     //Effet de blur
@@ -197,8 +198,10 @@ void Game::setPause(bool a)
     m_pause = a;
     if (m_pause)
     {
+        getApp()->getSound().pauseAll();
         getApp()->getMenuModel().refreshPageContent(this, menuPage::PAUSE);
     } else {
+        getApp()->getSound().playAll();
         m_blurFade = 0;
         getApp()->getMenuModel().refreshPageContent(this, menuPage::ESCAPE_MENU);
     }
@@ -362,6 +365,8 @@ void Game::collisionsTest()
                     player1->addLife(10);
                     break;
                 case bonus_type::INVINSIBLE:
+                    m_powerActives[INVINCIBILITY].first = true ;
+                    m_powerActives[INVINCIBILITY].second = std::chrono::time_point<std::chrono::system_clock> (std::chrono::milliseconds(m_player->getTimePower(INVINCIBILITY)) + std::chrono::system_clock::now().time_since_epoch());
                     player1->addLife(10);
                     break;
                 default:

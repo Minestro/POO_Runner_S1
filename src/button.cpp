@@ -141,6 +141,8 @@ void Button::onClick()
                 } else {
                     m_model->getApp()->getSettings().m_musicVolume = 100;
                 }
+                m_model->getApp()->getSound().stopAll();
+                m_model->getApp()->getSound().playMusic();
                 break;
             case button_action::SET_SOUNDS:
                 if (m_model->getApp()->getSettings().m_effectVolume == 100)
@@ -149,6 +151,8 @@ void Button::onClick()
                 } else {
                     m_model->getApp()->getSettings().m_effectVolume = 100;
                 }
+                m_model->getApp()->getSound().stopAll();
+                m_model->getApp()->getSound().playMusic();
                 break;
             case button_action::RESUME_GAME:
                 m_model->getApp()->getGameModel().setPause(0);

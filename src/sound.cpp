@@ -2,7 +2,7 @@
 
 std::map<std::string, sf::SoundBuffer*> Sound::m_listSounds;
 
-Sound::Sound(): m_sounds{}, m_characterSound{}, m_music{}
+Sound::Sound(): m_sounds{}, m_characterSound{}, m_music{}, m_currentMusic{}
 {
 }
 
@@ -40,12 +40,20 @@ void Sound::playSound(std::string sound, bool loop)
 
 void Sound::playMusic(std::string music)
 {
-    if (!m_music.openFromFile(music))
+    if (m_currentMusic != music || m_music.getStatus() != sf::Sound::Status::Playing)
     {
-        std::cout << "Erreur lors du chargement de la musique " << music << std::endl;
+        if (music == "")
+        {
+            music = m_currentMusic;
+        }
+        if (!m_music.openFromFile(music))
+        {
+            std::cout << "Erreur lors du chargement de la musique " << music << std::endl;
+        }
+        m_music.setLoop(1);
+        m_currentMusic = music;
+        m_music.play();
     }
-    m_music.play();
-    m_music.setLoop(1);
 }
 
 void Sound::setVolumeMusic(unsigned int volume)
@@ -88,4 +96,18 @@ void Sound::stopAll()
     m_sounds.stop();
     m_music.stop();
     m_characterSound.stop();
+}
+
+void Sound::pauseAll()
+{
+    m_sounds.pause();
+    m_music.pause();
+    m_characterSound.pause();
+}
+
+void Sound::playAll()
+{
+    m_sounds.play();
+    m_music.play();
+    m_characterSound.play();
 }

@@ -246,6 +246,13 @@ public:
                         nbColonnes = 2;
                         animationPeriod = 200;
                         break;
+                    case bonus_type::INVINSIBLE:
+                        texture = "Invincibility.png";
+                        nbLignes = 1;
+                        nbColonnes = 18;
+                        animationPeriod = 50;
+                        break;
+
                     default:
                         break;
                     }
