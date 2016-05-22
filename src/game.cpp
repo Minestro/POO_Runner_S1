@@ -287,39 +287,40 @@ void Game::collisionsTest()
 
     GameCharacter *player1 = getCharacterById(character_id::PLAYER1);
     //Test des collisions avec les obstacles
-    std::vector<std::pair<bool, Obstacle *> >::iterator obstacle = m_obstacles.begin();
-    while (obstacle != m_obstacles.end())
-    {
-        bool increment = true;
-        if (player1 != nullptr)
+
+        std::vector<std::pair<bool, Obstacle *> >::iterator obstacle = m_obstacles.begin();
+        while (obstacle != m_obstacles.end())
         {
-            if (obstacle->second->collision(player1))
+            bool increment = true;
+            if (player1 != nullptr)
             {
-                if (obstacle->second->getState() != obstacle_state::EXPLODE)
+                if (obstacle->second->collision(player1))
                 {
-                    player1->removeLife(obstacle->second->getDammage());
-                }
-                if (obstacle->second->getType() == obstacle_type::MINE ||obstacle->second->getType() == obstacle_type::NUAGE ||obstacle->second->getType() == obstacle_type::BARRE )
-                {
-                    obstacle->second->setState(obstacle_state::EXPLODE);
-                } else {
-                    m_deletedElements.push_back(obstacle->second);
-                    m_obstacles.erase(obstacle);
-                    increment = false;
+                    if (obstacle->second->getState() != obstacle_state::EXPLODE && !m_powerActives[INVINCIBILITY].first)
+                    {
+                        player1->removeLife(obstacle->second->getDammage());
+                    }
+                    if (obstacle->second->getType() == obstacle_type::MINE ||obstacle->second->getType() == obstacle_type::NUAGE ||obstacle->second->getType() == obstacle_type::BARRE )
+                    {
+                        obstacle->second->setState(obstacle_state::EXPLODE);
+                    } else {
+                        m_deletedElements.push_back(obstacle->second);
+                        m_obstacles.erase(obstacle);
+                        increment = false;
+                    }
                 }
             }
+            if (obstacle->second->getPosition().first < -obstacle->second->getSize().first)
+            {
+                m_deletedElements.push_back(obstacle->second);
+                m_obstacles.erase(obstacle);
+                increment = false;
+            }
+            if (increment)
+            {
+                ++obstacle;
+            }
         }
-        if (obstacle->second->getPosition().first < -obstacle->second->getSize().first)
-        {
-            m_deletedElements.push_back(obstacle->second);
-            m_obstacles.erase(obstacle);
-            increment = false;
-        }
-        if (increment)
-        {
-            ++obstacle;
-        }
-    }
 
     //Test des collisions avec les bonus
     std::vector<std::pair<bool, Bonus *> >::iterator bonus = m_bonus.begin();   //Declaration d'un iterator pour parcourir les bonus
@@ -328,6 +329,7 @@ void Game::collisionsTest()
         bool increment = true;              //Ce booléen indique si l'on a supprimé un bonus. Lorsqu'on supprime un bonus, tous les bonus suivants se retrouvent décalés du coup on incrémente pas l'iterator pour passer au bonus suivant
         if (player1 != nullptr)
         {
+            //bool test;
             if (bonus->second->collision(player1))      //Si il y a collision avec le personnage 1
             {
                 switch (bonus->second->getType())               //Action différente suivant le type de bonus
@@ -339,11 +341,11 @@ void Game::collisionsTest()
                     player1->addLife(10);
                     break;
                 case bonus_type::INVINSIBLE:
-                    m_powerActives[1].first= true ;
-                    m_powerActives[1].seconde =std::chrono::time_point<std::chrono::system_clock> (std::chrono::milliseconds(m_player->getTimePower(INVINCIBILITY)))+ std::chrono::system_clock::now ;
-
-                    player1->addLife(10);
+                    m_powerActives[INVINCIBILITY].first= true ;
+                    m_powerActives[INVINCIBILITY].second =std::chrono::time_point<std::chrono::system_clock> (std::chrono::milliseconds(m_player->getTimePower(INVINCIBILITY)) + std::chrono::system_clock::now().time_since_epoch());
+                    std::cout<<m_player->getTimePower(INVINCIBILITY)<< std::endl;
                     break;
+
                 default:
                     break;
                 }
@@ -362,6 +364,14 @@ void Game::collisionsTest()
         {
             ++bonus;
         }
+    }
+    // on actualise m_powerActive
+    for (int i=0; i<m_powerActives.size(); i++)
+    {
+
+        if (std::chrono::system_clock::now() > m_powerActives[i].second)
+            m_powerActives[i].first=false;
+
     }
 }
 
