@@ -328,8 +328,11 @@ void Game::collisionsTest()
                     }
                     if (obstacle->second->getType() == obstacle_type::MINE)
                     {
-                        obstacle->second->setState(obstacle_state::EXPLODE);
-                        m_app->getSound().playSound("explosion.wav");
+                        if (obstacle->second->getState() != obstacle_state::EXPLODE)
+                        {
+                            obstacle->second->setState(obstacle_state::EXPLODE);
+                            m_app->getSound().playSound("explosion.wav");
+                        }
                     } else {
                         m_deletedElements.push_back(obstacle->second);
                         m_obstacles.erase(obstacle);
@@ -370,7 +373,6 @@ void Game::collisionsTest()
                     break;
                 case bonus_type::INVINSIBLE:
                     m_powerActives[INVINCIBILITY].second =std::chrono::time_point<std::chrono::system_clock> (std::chrono::milliseconds(m_player->getTimePower(INVINCIBILITY)) + std::chrono::system_clock::now().time_since_epoch());
-                    std::cout<<m_player->getTimePower(INVINCIBILITY)<< std::endl;
                     break;
 
                 default:
@@ -439,4 +441,9 @@ void Game::refreshActivesPowers()
             m_powerActives[i].first = true;
         }
     }
+}
+
+const std::vector<std::pair<bool, std::chrono::time_point<std::chrono::system_clock> > > &Game::getActivesPowers() const
+{
+    return m_powerActives;
 }

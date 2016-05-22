@@ -55,6 +55,7 @@ public:
     void setPause(bool a);
     void resetGame();
     GameCharacter *getCharacterById(unsigned int id);
+    const std::vector<std::pair<bool, std::chrono::time_point<std::chrono::system_clock> > > &getActivesPowers() const;
 };
 
 #endif // GAME_H

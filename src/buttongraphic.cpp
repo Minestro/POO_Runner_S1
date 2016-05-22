@@ -2,10 +2,10 @@
 #include "model.h"
 #include "app.h"
 
-ButtonGraphic::ButtonGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int nbLignes, unsigned int nbColonnes, std::string text, const sf::Font *font, unsigned int fontSize, const sf::Color color, int style, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_size{width, height}, m_position{x, y}
+ButtonGraphic::ButtonGraphic(unsigned int zIndex, const sf::Texture *texture, unsigned int nbLignes, unsigned int nbColonnes, std::string text, const sf::Font *font, unsigned int fontSize, const sf::Color color, int style, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_size{}, m_position{}
 {
-    m_text = new TextGraphic{zIndex, width, height, x, y, rotateAngle, text, font, fontSize, 1, 0, color, style};
-    m_sprite = new SpriteElement{zIndex, width, height, x, y, rotateAngle, texture, nbLignes, nbColonnes, 1, 1, 0};
+    m_text = new TextGraphic{zIndex, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, text, font, fontSize, 1, 0, color, style};
+    m_sprite = new SpriteElement{zIndex, texture, nbLignes, nbColonnes, 1, 1, 0};
 }
 
 ButtonGraphic::~ButtonGraphic()
@@ -66,11 +66,10 @@ void ButtonGraphic::refresh(const Element *el, Model *model)
     }
     if (button != model->getButtons().end())
     {
-        m_size = el->getSize();
-        m_sprite->setSize(m_size.first, m_size.second);
-        m_position = el->getPosition();
-        m_sprite->setPosition(m_position.first, m_position.second);
+        setSize(el->getSize().first, el->getSize().second);
+        setPosition(el->getPosition().first, el->getPosition().second);
         setRotation(el->getRotateAngle());
+
         switch (button->second->getType())
         {
         case button_type::TEXT_BUTTON:

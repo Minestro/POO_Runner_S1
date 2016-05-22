@@ -70,13 +70,13 @@ void Menu::refreshPageContent(Model *model, int page)
             if (model->getApp()->getGameModel().getPlayer()->getBestScore() < player1->getScore())
             {
                 Text *t = new Text{0, 130, MODEL_SIZE_W, 50, 0, "Meilleur Score !", 20, "The_Happy_Giraffe.ttf", ColorRGBA::Red, text_effect::FLASH, 500, 1, 0};
-                t->setId(214);
+                t->setId(224);
                 model->getTexts().push_back(std::make_pair(1, t));
             }
             Text *t2 = new Text{100, 200, 0, 0, 0, "Score : " + std::to_string(player1->getScore()), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
-            t2->setId(215);
+            t2->setId(225);
             Text *t3 = new Text{100, 300, 0, 0, 0, "Argent : " + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney()) + " + " + std::to_string(player1->getScore()/1000) + " = " + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney() + player1->getScore()/1000), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
-            t3->setId(216);
+            t3->setId(226);
             model->getTexts().push_back(std::make_pair(1, t2));
             model->getTexts().push_back(std::make_pair(1, t3));
         }

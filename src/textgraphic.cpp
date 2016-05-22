@@ -87,7 +87,7 @@ void TextGraphic::setSize(float width, float height)
         }
         setText(text);
     }
-    if ((getLocalBounds().width > m_realSize.first || getLocalBounds().height > m_realSize.second) && m_autoRescale)
+    if ((getLocalBounds().width > m_realSize.first || getLocalBounds().height > m_realSize.second) && m_autoRescale && m_realSize.first != 0.0f && m_realSize.second != 0.0f)
     {
         rescale(m_realSize.first, m_realSize.second);
     }

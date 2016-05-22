@@ -3,9 +3,11 @@
 
 LifeBar::LifeBar(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, unsigned int refreshPeriod): GraphicElement::GraphicElement{zIndex, refreshPeriod}, m_actualBarWidth{(unsigned int)width}, m_ratioLife{1.0f}
 {
-    m_sprite = new SpriteElement{zIndex, width, height, x, y, rotateAngle, GraphicElement::m_listTextures["life.png"]};
+    m_sprite = new SpriteElement{zIndex, GraphicElement::m_listTextures["life.png"]};
     m_bar = new RectangleShapeElement{zIndex, width, height, x, y, rotateAngle, sf::Color::Green};
     setPosition(x, y);
+    setSize(width, height);
+    setRotation(rotateAngle);
 }
 
 LifeBar::~LifeBar()
@@ -55,7 +57,6 @@ void LifeBar::draw(sf::RenderTarget *window) const
     m_sprite->draw(window);
 }
 
-#include <iostream>
 void LifeBar::refresh(const Element *el, Model *model)
 {
     std::vector<std::pair<bool, GameCharacter*> >::const_iterator it = model->getCharacters().begin();

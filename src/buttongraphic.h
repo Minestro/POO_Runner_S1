@@ -12,7 +12,7 @@ private:
     TextGraphic *m_text;
     SpriteElement *m_sprite;
 public:
-    ButtonGraphic(unsigned int zIndex, float width, float height, float x, float y, float rotateAngle, const sf::Texture *texture, unsigned int nbLignes, unsigned int nbColonnes, std::string text, const sf::Font *font, unsigned int fontSize, const sf::Color color, int style = 0, unsigned int refreshPeriod = 0);
+    ButtonGraphic(unsigned int zIndex, const sf::Texture *texture, unsigned int nbLignes, unsigned int nbColonnes, std::string text, const sf::Font *font, unsigned int fontSize, const sf::Color color, int style = 0, unsigned int refreshPeriod = 0);
     virtual ~ButtonGraphic();
     virtual void setSize(float width, float height);
     virtual void setPosition(float x, float y);

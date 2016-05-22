@@ -174,8 +174,8 @@ public:
                 if (m_elementToGraphicElement.find(character.second) == m_elementToGraphicElement.end())
                 {
                     std::list<GraphicElement*> list;
-                    list.push_back(new GameCharacterGraphic{5, character.second->getSize().first, character.second->getSize().second, character.second->getPosition().first, character.second->getPosition().second, character.second->getRotateAngle(), GraphicElement::m_listTextures["plane.png"], 1, 2, 1, 1, 50});
-                    list.push_back(new LifeBar{HUD_Z_INDEX, 200, 30, 1000, 600, 0, 20});
+                    list.push_back(new GameCharacterGraphic{5, GraphicElement::m_listTextures["plane.png"], 1, 2, 1, 1, 50});
+                    list.push_back(new LifeBar{HUD_Z_INDEX, 200, 30, 1100, 600, 0, 20});
                     list.push_back(new ScoreGraphic{HUD_Z_INDEX, 50, 600, 0, TextGraphic::m_listFonts["score.ttf"], 20, 5, sf::Color::White});
                     m_elementToGraphicElement.insert(std::make_pair(character.second, list));
                 }
@@ -215,7 +215,7 @@ public:
                     default:
                         break;
                     }
-                    list.push_back(new SpriteElement{5, obstacle.second->getSize().first, obstacle.second->getSize().second, obstacle.second->getPosition().first, obstacle.second->getPosition().second, obstacle.second->getRotateAngle(), GraphicElement::m_listTextures[texture], nbLignes, nbColonnes, 1, 1, 1, animationPeriod});
+                    list.push_back(new SpriteElement{5, GraphicElement::m_listTextures[texture], nbLignes, nbColonnes, 1, 1, 1, animationPeriod});
                     m_elementToGraphicElement.insert(std::make_pair(obstacle.second, list));
                 }
                 obstacle.first = 0;
@@ -256,7 +256,7 @@ public:
                     default:
                         break;
                     }
-                    list.push_back(new SpriteElement{5, bonus.second->getSize().first, bonus.second->getSize().second, bonus.second->getPosition().first, bonus.second->getPosition().second, bonus.second->getRotateAngle(), GraphicElement::m_listTextures[texture], nbLignes, nbColonnes, 1, 1, 1, animationPeriod});
+                    list.push_back(new SpriteElement{5, GraphicElement::m_listTextures[texture], nbLignes, nbColonnes, 1, 1, 1, animationPeriod});
                     m_elementToGraphicElement.insert(std::make_pair(bonus.second, list));
                 }
                 bonus.first = 0;
@@ -271,7 +271,7 @@ public:
                 {
                     std::list<GraphicElement*> list;
                     sf::Texture *texture = GraphicElement::m_listTextures[image.second->getBackgroundFileName()];
-                    SpriteElement *se = new SpriteElement{(unsigned int)image.second->getZIndex(), image.second->getSize().first, image.second->getSize().second, image.second->getPosition().first, image.second->getPosition().second, image.second->getRotateAngle(), texture};
+                    SpriteElement *se = new SpriteElement{(unsigned int)image.second->getZIndex(), texture};
                     if (image.second->isSliding())
                     {
                         texture->setRepeated(1);
@@ -327,7 +327,7 @@ public:
                     default:
                         break;
                     }
-                    list.push_back(new ButtonGraphic{MENU_Z_INDEX, button.second->getSize().first, button.second->getSize().second, button.second->getPosition().first, button.second->getPosition().second, button.second->getRotateAngle(), GraphicElement::m_listTextures[texture], nbLignes, nbColonnes, button.second->getText(), TextGraphic::m_listFonts["Beautiful_Heartbeat.otf"], 30, sf::Color::White});
+                    list.push_back(new ButtonGraphic{MENU_Z_INDEX, GraphicElement::m_listTextures[texture], nbLignes, nbColonnes, button.second->getText(), TextGraphic::m_listFonts["Beautiful_Heartbeat.otf"], 30, sf::Color::White});
                     if (button.second->getType() == button_type::SAVE_BUTTON)
                     {
                         try
