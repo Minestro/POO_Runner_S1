@@ -33,6 +33,7 @@ private:
     void moveElements();
     void collisionsTest();
     void checkEndGame();
+    void refreshActivesPowers();
 
 public:
     Game(float width, float height, App *app);
