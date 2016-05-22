@@ -33,6 +33,7 @@ public:
     bool buy(unsigned int upgradeId);
     void addMoney(unsigned int money);
     unsigned int getMoney() const;
+    unsigned int getTimePower(power_list power) const;
 
     static void eraseProfil(unsigned int i);
     static bool isActive(unsigned int i);

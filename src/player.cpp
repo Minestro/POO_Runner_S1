@@ -282,3 +282,7 @@ const XMLElement *Player::getConstNodePlayerId(unsigned int id, XMLDocument &sav
     const XMLElement *el = Player::getNodePlayerId(id, saveFile);
     return el;
 }
+unsigned int Player::getTimePower(power_list power) const
+{
+    return m_powerUpgrades[power];
+}

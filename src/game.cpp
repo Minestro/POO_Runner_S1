@@ -339,6 +339,9 @@ void Game::collisionsTest()
                     player1->addLife(10);
                     break;
                 case bonus_type::INVINSIBLE:
+                    m_powerActives[1].first= true ;
+                    m_powerActives[1].seconde =std::chrono::time_point<std::chrono::system_clock> (std::chrono::milliseconds(m_player->getTimePower(INVINCIBILITY)))+ std::chrono::system_clock::now ;
+
                     player1->addLife(10);
                     break;
                 default:
