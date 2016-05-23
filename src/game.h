@@ -5,6 +5,7 @@
 #include <vector>
 #include <ctime>
 #include <fstream>
+#include <math.h>
 #include "player.h"
 #include "elementslist.h"
 #include "menu.h"

@@ -24,6 +24,7 @@ const int FPS = 60;
 
 const unsigned int HUD_Z_INDEX = 10;
 const unsigned int MENU_Z_INDEX = 15;
+
 const unsigned int MAX_LIFE = 100;
 const unsigned int ROOF_HEIGHT = 630;
 const float GRAVITY = 0.15;
@@ -33,6 +34,8 @@ const int CHARACTERSPEEDPERIOD = 10;
 const int STARTSPEEDPERIODGAME = 15;
 const int PIXELPERBACKGROUNDMOVE = 3;
 const int ACCELERATION_PERIOD = 30;     //en secondes
+
+const float MAGNET_RADIUS = 200.0;
 const unsigned int UPGRADE_COST = 1000;
 const unsigned int SEC_PER_UPGRADE = 5;
 const unsigned int MAX_UPGRADE_SEC = 40;
