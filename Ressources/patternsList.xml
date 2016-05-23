@@ -851,7 +851,7 @@
 		<PositionX>250.0</PositionX>
 		<PositionY>300</PositionY>
 		<Type>1</Type>
-		<Dammage>10</Dammage>
+		<Dammage>30</Dammage>
 		<RotateAngle>0.0</RotateAngle>
 		<RotateMovement>0.0</RotateMovement>
 	</Obstacle>
@@ -864,7 +864,7 @@
 		<PositionX>250.0</PositionX>
 		<PositionY>300</PositionY>
 		<Type>2</Type>
-		<Dammage>10</Dammage>
+		<Dammage>20</Dammage>
 		<RotateAngle>0.0</RotateAngle>
 		<RotateMovement>1.0</RotateMovement>
 	</Obstacle>

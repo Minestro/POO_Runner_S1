@@ -1,5 +1,5 @@
 <PatternList>
-	<NbPatterns>13</NbPatterns>
+	<NbPatterns>14</NbPatterns>
 	<Pattern id="1">
 	<Width>1280</Width>
 	<Image>
@@ -542,18 +542,6 @@
 			<MovePeriod>0</MovePeriod>
 			<ID>221</ID>
 		</Image>
-		<Button>
-			<SizeWidth>200.0</SizeWidth>
-			<SizeHeight>50.0</SizeHeight>
-			<PositionX>540.0</PositionX>
-			<PositionY>550.0</PositionY>
-			<RotateAngle>0.0</RotateAngle>
-			<String>Retour</String>
-			<DestinationPage>2</DestinationPage>
-			<Type>0</Type>
-			<ActionsList>0</ActionsList>
-			<ID>222</ID>
-		</Button>
 		<Text>
 			<SizeWidth>500.0</SizeWidth>
 			<SizeHeight>70.0</SizeHeight>
@@ -596,6 +584,84 @@
 			<RotateMovement>0.0</RotateMovement>
 			<ID>225</ID>
 		</Bonus>
+		<Bonus>
+			<SizeWidth>40.0</SizeWidth>
+			<SizeHeight>40.0</SizeHeight>
+			<PositionX>-870.0</PositionX>
+			<PositionY>250.0</PositionY>
+			<Type>1</Type>
+			<RotateAngle>0.0</RotateAngle>
+			<RotateMovement>0.0</RotateMovement>
+			<ID>226</ID>
+		</Bonus>
+		<Text>
+			<SizeWidth>0.0</SizeWidth>
+			<SizeHeight>0.0</SizeHeight>
+			<PositionX>470.0</PositionX>
+			<PositionY>260.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Vous rend invincible pendant 5 sec ou plus</String>
+			<FontSize>20</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>0</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>227</ID>
+		</Text>
+		<Bonus>
+			<SizeWidth>40.0</SizeWidth>
+			<SizeHeight>40.0</SizeHeight>
+			<PositionX>-870.0</PositionX>
+			<PositionY>330.0</PositionY>
+			<Type>3</Type>
+			<RotateAngle>0.0</RotateAngle>
+			<RotateMovement>0.0</RotateMovement>
+			<ID>228</ID>
+		</Bonus>
+		<Text>
+			<SizeWidth>0.0</SizeWidth>
+			<SizeHeight>0.0</SizeHeight>
+			<PositionX>470.0</PositionX>
+			<PositionY>340.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Augmente votre niveau de vie de 10</String>
+			<FontSize>20</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>0</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>229</ID>
+		</Text>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>390.0</PositionX>
+			<PositionY>550.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Retour</String>
+			<DestinationPage>2</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0</ActionsList>
+			<ID>230</ID>
+		</Button>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>690.0</PositionX>
+			<PositionY>550.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Liste des obstacle</String>
+			<DestinationPage>14</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0</ActionsList>
+			<ID>231</ID>
+		</Button>
+
+
 	</Pattern>
 	<Pattern id="10">
 		<Width>1280</Width>
@@ -756,5 +822,144 @@
 			<IsLineBreack>0</IsLineBreack>
 			<ID>223</ID>
 		</Text>
+	</Pattern>
+	<Pattern id="14">
+		<Width>1280</Width>
+		<Image>
+			<SizeWidth>1280.0</SizeWidth>
+			<SizeHeight>730.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>0.0</PositionY>
+			<FileName>FOND.png</FileName>
+			<ZIndex>1</ZIndex>
+			<CoefSpeed>0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>220</ID>
+		</Image>
+		<Image>
+			<SizeWidth>500.0</SizeWidth>
+			<SizeHeight>400.0</SizeHeight>
+			<PositionX>390.0</PositionX>
+			<PositionY>100.0</PositionY>
+			<FileName>textBox.png</FileName>
+			<ZIndex>2</ZIndex>
+			<CoefSpeed>0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>221</ID>
+		</Image>
+		<Text>
+			<SizeWidth>500.0</SizeWidth>
+			<SizeHeight>70.0</SizeHeight>
+			<PositionX>390.0</PositionX>
+			<PositionY>100.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Obstacle</String>
+			<FontSize>30</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>1</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>223</ID>
+		</Text>
+		<Text>
+			<SizeWidth>0.0</SizeWidth>
+			<SizeHeight>0.0</SizeHeight>
+			<PositionX>470.0</PositionX>
+			<PositionY>180.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Diminue votre niveau de vie de 30</String>
+			<FontSize>20</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>0</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>224</ID>
+		</Text>
+		<Obstacle>
+			<SizeWidth>40.0</SizeWidth>
+			<SizeHeight>40.0</SizeHeight>
+			<PositionX>-870.0</PositionX>
+			<PositionY>170.0</PositionY>
+			<Type>1</Type>
+			<Dammage>0</Dammage>
+			<RotateAngle>0.0</RotateAngle>
+			<RotateMovement>0.0</RotateMovement>
+			<ID>225</ID>
+		</Obstacle>
+		<Obstacle>
+			<SizeWidth>40.0</SizeWidth>
+			<SizeHeight>40.0</SizeHeight>
+			<PositionX>-870.0</PositionX>
+			<PositionY>250.0</PositionY>
+			<Type>2</Type>
+			<Dammage>0</Dammage>
+			<RotateAngle>0.0</RotateAngle>
+			<RotateMovement>1.0</RotateMovement>
+			<ID>226</ID>
+		</Obstacle>
+		<Text>
+			<SizeWidth>0.0</SizeWidth>
+			<SizeHeight>0.0</SizeHeight>
+			<PositionX>470.0</PositionX>
+			<PositionY>260.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Diminue votre niveau de vie de 20</String>
+			<FontSize>20</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>0</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>227</ID>
+		</Text>
+		<Obstacle>
+			<SizeWidth>40.0</SizeWidth>
+			<SizeHeight>40.0</SizeHeight>
+			<PositionX>-870.0</PositionX>
+			<PositionY>330.0</PositionY>
+			<Type>0</Type>
+			<Dammage>0</Dammage>
+			<RotateAngle>0.0</RotateAngle>
+			<RotateMovement>0.0</RotateMovement>
+			<ID>228</ID>
+		</Obstacle>
+		<Text>
+			<SizeWidth>0.0</SizeWidth>
+			<SizeHeight>0.0</SizeHeight>
+			<PositionX>470.0</PositionX>
+			<PositionY>340.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Diminue votre niveau de vie de 10</String>
+			<FontSize>20</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>0</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>229</ID>
+		</Text>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>430.0</PositionX>
+			<PositionY>550.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Retour</String>
+			<DestinationPage>2</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0</ActionsList>
+			<ID>230</ID>
+		</Button>
+
+
+
 	</Pattern>
 </PatternList>
