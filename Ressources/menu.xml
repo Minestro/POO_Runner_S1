@@ -63,8 +63,8 @@
 			<PositionX>540.0</PositionX>
 			<PositionY>250.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Regles</String>
-			<DestinationPage>8</DestinationPage>
+			<String>Magasin</String>
+			<DestinationPage>4</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
 			<ID>221</ID>
@@ -75,8 +75,8 @@
 			<PositionX>540.0</PositionX>
 			<PositionY>350.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Options</String>
-			<DestinationPage>5</DestinationPage>
+			<String>Regles</String>
+			<DestinationPage>8</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
 			<ID>222</ID>
@@ -87,11 +87,23 @@
 			<PositionX>540.0</PositionX>
 			<PositionY>450.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
+			<String>Options</String>
+			<DestinationPage>5</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0</ActionsList>
+			<ID>223</ID>
+		</Button>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>540.0</PositionX>
+			<PositionY>650.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
 			<String>Quitter</String>
 			<DestinationPage>0</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>1</ActionsList>
-			<ID>223</ID>
+			<ID>224</ID>
 		</Button>
 		<Image>
 			<SizeWidth>1280.0</SizeWidth>
@@ -103,7 +115,7 @@
 			<CoefSpeed>0.0</CoefSpeed>
 			<IsSliding>0</IsSliding>
 			<MovePeriod>0</MovePeriod>
-			<ID>224</ID>
+			<ID>225</ID>
 		</Image>
 	</Pattern>
 	<Pattern id="3">
@@ -111,6 +123,46 @@
 	</Pattern>
 	<Pattern id="4">
 		<Width>1280</Width>
+		<Image>
+			<SizeWidth>1280.0</SizeWidth>
+			<SizeHeight>730.0</SizeHeight>
+			<PositionX>0.0</PositionX>
+			<PositionY>0.0</PositionY>
+			<FileName>FOND.png</FileName>
+			<ZIndex>1</ZIndex>
+			<CoefSpeed>0.0</CoefSpeed>
+			<IsSliding>0</IsSliding>
+			<MovePeriod>0</MovePeriod>
+			<ID>221</ID>
+		</Image>
+		<Text>
+			<SizeWidth>500.0</SizeWidth>
+			<SizeHeight>70.0</SizeHeight>
+			<PositionX>390.0</PositionX>
+			<PositionY>100.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Magasin</String>
+			<FontSize>30</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>1</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>220</ID>
+		</Text>
+		<Button>
+			<SizeWidth>200.0</SizeWidth>
+			<SizeHeight>50.0</SizeHeight>
+			<PositionX>540.0</PositionX>
+			<PositionY>550.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Retour</String>
+			<DestinationPage>2</DestinationPage>
+			<Type>0</Type>
+			<ActionsList>0</ActionsList>
+			<ID>222</ID>
+		</Button>
 	</Pattern>
 	<Pattern id="5">
 		<Width>1280</Width>

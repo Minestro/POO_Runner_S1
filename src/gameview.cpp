@@ -81,7 +81,7 @@ bool GameView::treatEvent()
         case sf::Event::MouseMoved:
             m_model->setCursorPosition(m_window->mapPixelToCoords(sf::Vector2i{sf::Mouse::getPosition(*m_window).x, sf::Mouse::getPosition(*m_window).y}).x, m_window->mapPixelToCoords(sf::Vector2i{sf::Mouse::getPosition(*m_window).x, sf::Mouse::getPosition(*m_window).y}).y);
             break;
-        case sf::Event::MouseButtonPressed:
+        case sf::Event::MouseButtonReleased:
             switch (m_window->getEvent()->mouseButton.button)
             {
             case sf::Mouse::Left:
