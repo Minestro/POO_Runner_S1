@@ -6,38 +6,38 @@
         <Upgrade2>5000</Upgrade2>
         <Upgrade3>5000</Upgrade3>
         <Upgrade4/>
-        <BestScore>0</BestScore>
+        <BestScore>786</BestScore>
         <Money>0</Money>
     </Save>
     <Save id="1">
-        <Active>1</Active>
-        <NickName>Morgane</NickName>
-        <Upgrade1>5000</Upgrade1>
-        <Upgrade2>5000</Upgrade2>
-        <Upgrade3>5000</Upgrade3>
-        <Upgrade4/>
-        <BestScore>57168</BestScore>
-        <Money>203</Money>
-    </Save>
-    <Save id="2">
         <Active>0</Active>
         <NickName/>
         <Upgrade1/>
         <Upgrade2/>
         <Upgrade3/>
-        <Upgrade4>200</Upgrade4>
+        <Upgrade4/>
         <BestScore/>
         <Money/>
     </Save>
+    <Save id="2">
+        <Active>1</Active>
+        <NickName>plop</NickName>
+        <Upgrade1>5000</Upgrade1>
+        <Upgrade2>5000</Upgrade2>
+        <Upgrade3>5000</Upgrade3>
+        <Upgrade4>200</Upgrade4>
+        <BestScore>0</BestScore>
+        <Money>0</Money>
+    </Save>
     <Save id="3">
         <Active>0</Active>
-        <NickName></NickName>
-        <Upgrade1></Upgrade1>
-        <Upgrade2></Upgrade2>
-        <Upgrade3></Upgrade3>
+        <NickName/>
+        <Upgrade1/>
+        <Upgrade2/>
+        <Upgrade3/>
         <Upgrade4/>
-        <BestScore></BestScore>
-        <Money></Money>
+        <BestScore/>
+        <Money/>
     </Save>
     <Save id="4">
         <Active>0</Active>

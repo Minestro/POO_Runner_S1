@@ -34,7 +34,7 @@ public:
     std::pair<float, float> getSize() const;
     std::pair<float, float> getPosition() const;
     float getRotateAngle() const;
-    unsigned long int getId() const;
+    unsigned int getId() const;
     std::vector<std::pair<float, float> > getPointsAfterRotation() const;
     void setSize(float w, float h);
     void setPosition(float x, float y);

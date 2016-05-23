@@ -156,7 +156,7 @@ float Element::getRotateAngle() const
     return m_rotation;
 }
 
-unsigned long Element::getId() const
+unsigned int Element::getId() const
 {
     return m_id;
 }

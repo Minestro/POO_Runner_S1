@@ -85,7 +85,7 @@ void Sound::setCharacterSoundPlay(bool play)
     if (!play && m_characterSound.getStatus() == sf::Sound::Status::Playing)
     {
         m_characterSound.pause();
-    } else if (play && m_characterSound.getStatus() == sf::Sound::Status::Paused)
+    } else if (play && (m_characterSound.getStatus() == sf::Sound::Status::Paused || m_characterSound.getStatus() == sf::Sound::Status::Stopped))
     {
         m_characterSound.play();
     }
