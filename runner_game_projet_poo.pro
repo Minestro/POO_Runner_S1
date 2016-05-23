@@ -46,7 +46,8 @@ HEADERS += \
     src/view.hpp \
     src/window.h \
     src/TinyXml2/tinyxml2.h \
-    src/sound.h
+    src/sound.h \
+    src/effect.h
 
 SOURCES += \
     src/app.cpp \
@@ -79,5 +80,6 @@ SOURCES += \
     src/tu.cpp \
     src/window.cpp \
     src/TinyXml2/tinyxml2.cpp \
-    src/sound.cpp
+    src/sound.cpp \
+    src/effect.cpp
 

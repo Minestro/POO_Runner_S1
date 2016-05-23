@@ -5,7 +5,6 @@ std::map<int, sf::Shader*> GraphicElement::m_listShaders;
 
 GraphicElement::GraphicElement(unsigned int zIndex, unsigned int refreshPeriod):m_zIndex{zIndex}, m_lastRefeshCall{}, m_refreshPeriod{refreshPeriod}
 {
-
 }
 
 unsigned int GraphicElement::getZIndex() const

@@ -252,7 +252,11 @@ public:
                         nbColonnes = 18;
                         animationPeriod = 50;
                         break;
-
+                    case bonus_type::MAGNET:
+                        texture = "magnet.png";
+                        nbLignes = 1;
+                        nbColonnes = 1;
+                        animationPeriod = 0;
                     default:
                         break;
                     }

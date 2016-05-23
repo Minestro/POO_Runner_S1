@@ -33,6 +33,7 @@ private:
     void moveElements();
     void collisionsTest();
     void checkEndGame();
+    void magnetCoins(const GameCharacter *character);
     void refreshActivesPowers();
 
 public:

@@ -3,11 +3,11 @@
 
 #include <string>
 
-const std::string FILES_LIST[] = {"menuBackground.png", "FOND1.png", "FOND2.png", "FOND.png", "textBox.png", "buttons.png", "life.png", "logo.jpeg", "explosion.png", "coin.png", "plane.png", "mine.png", "leftKey.png", "rightKey.png", "downKey.png", "upKey.png","Soins.png", "radioButton.png", "nuages.png", "BarreObstacle.png", "Invincibility.png", "savesButton.png"};
+const std::string FILES_LIST[] = {"menuBackground.png", "FOND1.png", "FOND2.png", "FOND.png", "textBox.png", "buttons.png", "life.png", "logo.jpeg", "explosion.png", "coin.png", "plane.png", "mine.png", "leftKey.png", "rightKey.png", "downKey.png", "upKey.png","Soins.png", "radioButton.png", "nuages.png", "BarreObstacle.png", "Invincibility.png", "savesButton.png", "magnet.png"};
 
 const std::string FONTS_LIST[] = {"score.ttf", "Beautiful_Heartbeat.otf", "The_Happy_Giraffe.ttf"};
 
-const std::string SOUNDS_LIST[] = {"coin.wav", "plane.wav", "explosion.wav", "crash.wav", "click.wav"};
+const std::string SOUNDS_LIST[] = {"coin.wav", "plane.wav", "explosion.wav", "crash.wav", "click.wav", "bonus.wav"};
 
 const std::string MUSIC_GAME_FILE = "Ressources/Default/Musics/arcade.ogg";
 const std::string MUSIC_MENU_FILE = "Ressources/Default/Musics/welcome_screen.ogg";
@@ -34,9 +34,9 @@ const int STARTSPEEDPERIODGAME = 15;
 const int PIXELPERBACKGROUNDMOVE = 3;
 const int ACCELERATION_PERIOD = 30;     //en secondes
 const unsigned int UPGRADE_COST = 1000;
-const unsigned int SEC_PER_UPGRADE = 3;
-const unsigned int MAX_UPGRADE_SEC = 15;
-const unsigned int DEFAULT_UPGRADE_SEC = 5;
+const unsigned int SEC_PER_UPGRADE = 5;
+const unsigned int MAX_UPGRADE_SEC = 40;
+const unsigned int DEFAULT_UPGRADE_SEC = 15;
 const unsigned int NB_MAX_SAVES = 5;
 const unsigned int MAX_NICKNAME_LENGHT = 20;
 

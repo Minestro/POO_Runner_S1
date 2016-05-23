@@ -85,7 +85,9 @@ bool GameView::treatEvent()
             switch (m_window->getEvent()->mouseButton.button)
             {
             case sf::Mouse::Left:
-                for (unsigned int i = 0; i<m_model->getButtons().size(); i++)
+            {
+                unsigned int nbButtons = m_model->getButtons().size();
+                for (unsigned int i = 0; i<nbButtons; i++)
                 {
                     if (m_model->getButtons()[i].second->isHover(m_model->getCursorPosition().first, m_model->getCursorPosition().second))
                     {
@@ -93,6 +95,7 @@ bool GameView::treatEvent()
                     }
                 }
                 break;
+            }
             default:
                 break;
             }

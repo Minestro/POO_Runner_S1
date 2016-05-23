@@ -1,15 +1,5 @@
 <SaveFile>
     <Save id="0">
-        <Active>1</Active>
-        <NickName>Minestro</NickName>
-        <Upgrade1>5000</Upgrade1>
-        <Upgrade2>5000</Upgrade2>
-        <Upgrade3>5000</Upgrade3>
-        <Upgrade4/>
-        <BestScore>786</BestScore>
-        <Money>0</Money>
-    </Save>
-    <Save id="1">
         <Active>0</Active>
         <NickName/>
         <Upgrade1/>
@@ -19,15 +9,25 @@
         <BestScore/>
         <Money/>
     </Save>
-    <Save id="2">
+    <Save id="1">
         <Active>1</Active>
-        <NickName>lolk</NickName>
-        <Upgrade1>5000</Upgrade1>
-        <Upgrade2>5000</Upgrade2>
-        <Upgrade3>5000</Upgrade3>
+        <NickName>toto</NickName>
+        <Upgrade1>15000</Upgrade1>
+        <Upgrade2>15000</Upgrade2>
+        <Upgrade3>15000</Upgrade3>
+        <Upgrade4/>
+        <BestScore>54837</BestScore>
+        <Money>66</Money>
+    </Save>
+    <Save id="2">
+        <Active>0</Active>
+        <NickName/>
+        <Upgrade1/>
+        <Upgrade2/>
+        <Upgrade3/>
         <Upgrade4>200</Upgrade4>
-        <BestScore>392204</BestScore>
-        <Money>392</Money>
+        <BestScore/>
+        <Money/>
     </Save>
     <Save id="3">
         <Active>0</Active>

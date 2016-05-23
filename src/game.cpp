@@ -228,6 +228,11 @@ void Game::resetGame()
     setSpeedPeriod(STARTSPEEDPERIODGAME);
     clearAll();
     setGameState(game_state::INTRO);
+    for (std::pair <bool, std::chrono::time_point<std::chrono::system_clock> > &power : m_powerActives)
+    {
+        power.first = false;
+        power.second = std::chrono::system_clock::now();
+    }
     GameCharacter *gc = new GameCharacter{100, 0, 100, 50, 0, 0, m_player};
     gc->setId(character_id::PLAYER1);
     m_characters.push_back(std::make_pair(1, gc));
@@ -284,6 +289,7 @@ void Game::moveElements()
             m_bonus[i].second->move();
         }
     }
+
     GameCharacter *player1 = getCharacterById(character_id::PLAYER1);
     if (player1 != nullptr)
     {
@@ -307,6 +313,9 @@ void Game::collisionsTest()
         {
             m_characters[i].second->setMovement(-PIXELPERBACKGROUNDMOVE, 0);
             m_characters[i].second->setMovePeriod(m_movePeriod);
+        } else if (m_powerActives[MAGNETISATION].first && m_gameState == game_state::RUNNING && m_characters[i].second->getState() == character_state::ALIVE)
+        {
+
         }
         m_characters[i].second->move();
     }
@@ -372,9 +381,13 @@ void Game::collisionsTest()
                     player1->addLife(10);
                     break;
                 case bonus_type::INVINSIBLE:
+                    m_app->getSound().playSound("bonus.wav");
                     m_powerActives[INVINCIBILITY].second =std::chrono::time_point<std::chrono::system_clock> (std::chrono::milliseconds(m_player->getTimePower(INVINCIBILITY)) + std::chrono::system_clock::now().time_since_epoch());
                     break;
-
+                case bonus_type::MAGNET:
+                    m_app->getSound().playSound("coin.wav");
+                    m_powerActives[MAGNETISATION].second =std::chrono::time_point<std::chrono::system_clock> (std::chrono::milliseconds(m_player->getTimePower(MAGNETISATION)) + std::chrono::system_clock::now().time_since_epoch());
+                    break;
                 default:
                     break;
                 }
@@ -446,4 +459,9 @@ void Game::refreshActivesPowers()
 const std::vector<std::pair<bool, std::chrono::time_point<std::chrono::system_clock> > > &Game::getActivesPowers() const
 {
     return m_powerActives;
+}
+
+void Game::magnetCoins(const GameCharacter *character)
+{
+
 }

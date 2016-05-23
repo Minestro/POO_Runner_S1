@@ -8,7 +8,7 @@
 #include "const.h"
 #include "TinyXml2/tinyxml2.h"
 
-enum power_list{INVINCIBILITY, SLOW_TIME, FASTER_ASCEND, NB_POWER};
+enum power_list{INVINCIBILITY, MAGNETISATION, FASTER_ASCEND, NB_POWER};
 
 class Player
 {

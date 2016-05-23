@@ -47,8 +47,8 @@ void GameCharacterGraphic::refresh(const Element *el, Model *model)
                 case INVINCIBILITY:
                     powerText += "Invincibilite";
                     break;
-                case SLOW_TIME:
-                    powerText += "Temps ralenti";
+                case MAGNETISATION:
+                    powerText += "Magnetisation";
                     break;
                 case FASTER_ASCEND:
                     powerText += "Meilleure vitesse de monte";
