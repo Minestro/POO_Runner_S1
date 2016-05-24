@@ -3,6 +3,10 @@
 #include "obstacle.h"
 
 unsigned int GameCharacter::nbCharacters = 0;
+Obstacle GameCharacter::rightWall = Obstacle{MODEL_SIZE_W, 0, 1, MODEL_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
+Obstacle GameCharacter::leftWall = Obstacle{-1, 0, 1, MODEL_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
+Obstacle GameCharacter::roof = Obstacle{0, -1, MODEL_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
+Obstacle GameCharacter::ground = Obstacle{0, ROOF_HEIGHT, MODEL_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
 
 GameCharacter::GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life): MovableElement{x, y, w, h, 0.0f, mx, my, 0.0f, CHARACTERSPEEDPERIOD}, m_score{0}, m_movingLeft{0}, m_movingRight{0}, m_ascending{0}, m_life{life}, m_player{player}, m_state{character_state::ALIVE}
 {
@@ -87,10 +91,6 @@ void GameCharacter::move()
 {
     if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMoveCall).count() >= m_movePeriod)
     {
-        Obstacle rightWall{MODEL_SIZE_W, 0, 1, MODEL_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
-        Obstacle leftWall {-1, 0, 1, MODEL_SIZE_H, 0, 0, 0, 0, 0, 0, -1};
-        Obstacle roof{0, -1, MODEL_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
-        Obstacle ground{0, ROOF_HEIGHT, MODEL_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
         if (m_state != character_state::DYING)
         {
             //On déplace latéralement l'avion

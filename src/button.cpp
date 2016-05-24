@@ -50,7 +50,7 @@ bool Button::isClickable() const
         break;
     }
     case menu_specific_elements::UPGRADE_BUTTON1:
-        if (m_model->getApp()->getGameModel().getPlayer()->getMoney() >= UPGRADE_COST)
+        if (m_model->getApp()->getGameModel().getPlayer()->getMoney() >= UPGRADE_COST && m_model->getApp()->getGameModel().getPlayer()->getTimePower(m_id - menu_specific_elements::UPGRADE_BUTTON1) < MAX_UPGRADE_SEC*1000)
         {
             isClickable = true;
         } else {
@@ -58,7 +58,7 @@ bool Button::isClickable() const
         }
         break;
     case menu_specific_elements::UPGRADE_BUTTON2:
-        if (m_model->getApp()->getGameModel().getPlayer()->getMoney() >= UPGRADE_COST)
+        if (m_model->getApp()->getGameModel().getPlayer()->getMoney() >= UPGRADE_COST && m_model->getApp()->getGameModel().getPlayer()->getTimePower(m_id - menu_specific_elements::UPGRADE_BUTTON1) < MAX_UPGRADE_SEC*1000)
         {
             isClickable = true;
         } else {
@@ -66,7 +66,7 @@ bool Button::isClickable() const
         }
         break;
     case menu_specific_elements::UPGRADE_BUTTON3:
-        if (m_model->getApp()->getGameModel().getPlayer()->getMoney() >= UPGRADE_COST)
+        if (m_model->getApp()->getGameModel().getPlayer()->getMoney() >= UPGRADE_COST && m_model->getApp()->getGameModel().getPlayer()->getTimePower(m_id - menu_specific_elements::UPGRADE_BUTTON1) < MAX_UPGRADE_SEC*1000)
         {
             isClickable = true;
         } else {

@@ -5,6 +5,7 @@ Obstacle::Obstacle(float x, float y, float w, float h, float rotation, float mx,
 {
 
 }
+
 unsigned int Obstacle::getDammage() const
 {
     return m_dammage;

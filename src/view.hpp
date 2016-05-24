@@ -174,7 +174,7 @@ public:
                 if (m_elementToGraphicElement.find(character.second) == m_elementToGraphicElement.end())
                 {
                     std::list<GraphicElement*> list;
-                    list.push_back(new GameCharacterGraphic{5, GraphicElement::m_listTextures["plane.png"], 1, 2, 1, 1, 50});
+                    list.push_back(new GameCharacterGraphic{5, GraphicElement::m_listTextures["plane.png"], 2, 2, 1, 1, 50});
                     list.push_back(new LifeBar{HUD_Z_INDEX, 200, 30, 1100, 600, 0, 20});
                     list.push_back(new ScoreGraphic{HUD_Z_INDEX, 50, 600, 0, TextGraphic::m_listFonts["score.ttf"], 20, 5, sf::Color::White});
                     m_elementToGraphicElement.insert(std::make_pair(character.second, list));
@@ -259,7 +259,7 @@ public:
                         animationPeriod = 0;
                         break;
                     case bonus_type::SLOW_TIME_BONUS:
-                        texture = "magnet.png";
+                        texture = "Slow.png";
                         nbLignes= 1;
                         nbColonnes = 1 ;
                         animationPeriod = 0;
@@ -360,12 +360,6 @@ public:
                     }
                     m_elementToGraphicElement.insert(std::make_pair(button.second, list));
                     button.first = 0;
-                } else {
-                    for (GraphicElement *ge : m_elementToGraphicElement[button.second])
-                    {
-                        delete ge;
-                    }
-                    m_elementToGraphicElement.erase(button.second);
                 }
             }
         }

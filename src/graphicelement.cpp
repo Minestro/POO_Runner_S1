@@ -27,6 +27,11 @@ void GraphicElement::loadTextures(std::string themeName)
         if (!(iterator->second->loadFromFile("Ressources/" + themeName + "/Textures/" + FILES_LIST[i])))
         {
             std::cout << "Erreur lors du chargement de l'image" << "Ressources/" << themeName << "/Textures/" << FILES_LIST[i] << std::endl;
+            srand(time(nullptr));
+            sf::RenderTexture errText{};
+            errText.create(1, 1);
+            errText.clear(sf::Color{(sf::Uint8)(std::rand()%255), (sf::Uint8)(std::rand()%255), (sf::Uint8)(std::rand()%255)});
+            *iterator->second = errText.getTexture();
         } else {
             iterator->second->setSmooth(true);
         }

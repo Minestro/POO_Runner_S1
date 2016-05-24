@@ -26,6 +26,7 @@ const unsigned int HUD_Z_INDEX = 10;
 const unsigned int MENU_Z_INDEX = 15;
 
 const unsigned int MAX_LIFE = 100;
+const unsigned int INVINCIBILITY_TIME_AFTER_HIT_MS = 2000;
 const unsigned int ROOF_HEIGHT = 630;
 const float GRAVITY = 0.15;
 const float CHARACTER_MAX_SPEED = 5;
@@ -38,8 +39,8 @@ const int ACCELERATION_PERIOD = 30;     //en secondes
 const float MAGNET_RADIUS = 200.0;
 const unsigned int UPGRADE_COST = 1000;
 const unsigned int SEC_PER_UPGRADE = 5;
-const unsigned int MAX_UPGRADE_SEC = 40;
-const unsigned int DEFAULT_UPGRADE_SEC = 15;
+const unsigned int MAX_UPGRADE_SEC = 30;
+const unsigned int DEFAULT_UPGRADE_SEC = 10;
 const unsigned int NB_MAX_SAVES = 5;
 const unsigned int MAX_NICKNAME_LENGHT = 20;
 

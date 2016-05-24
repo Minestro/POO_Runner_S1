@@ -38,16 +38,17 @@ void GameCharacterGraphic::refresh(const Element *el, Model *model)
     {
         std::string powerText = "";
         unsigned int i = 0;
-        for (std::pair <bool, std::chrono::time_point<std::chrono::system_clock> > power : model->getApp()->getGameModel().getActivesPowers())
+        for (const std::pair <bool, std::chrono::time_point<std::chrono::system_clock> > &power : model->getApp()->getGameModel().getActivesPowers())
         {
             if (power.first)
             {
-                powerText = Player::getStringPower(i);
+                powerText += Player::getStringPower(i);
                 powerText += " : " + std::to_string(-std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now()-power.second).count()) + " s   ";
             }
             i++;
         }
         m_powerActiveText.setText(powerText);
+
         switch (it->second->getState())
         {
         case character_state::DYING:
@@ -64,6 +65,15 @@ void GameCharacterGraphic::refresh(const Element *el, Model *model)
             {
                 it->second->setState(character_state::DEAD);
                 m_show = false;
+            }
+            break;
+        case character_state::ALIVE:
+            if (model->getApp()->getGameModel().getActivesPowers()[power_list::INVINCIBILITY].first && getActiveColonne() == 1)
+            {
+                setRectPos(2, 1);
+            } else if (!model->getApp()->getGameModel().getActivesPowers()[power_list::INVINCIBILITY].first && getActiveColonne() == 2)
+            {
+                setRectPos(1, 1);
             }
             break;
         default:

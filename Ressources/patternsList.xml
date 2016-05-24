@@ -866,10 +866,10 @@
 	<Pattern id="7">
 	<Width>750</Width>
 	<Obstacle>
-		<SizeWidth>62.0</SizeWidth>
-		<SizeHeight>236.0</SizeHeight>
+		<SizeWidth>50.0</SizeWidth>
+		<SizeHeight>630.0</SizeHeight>
 		<PositionX>250.0</PositionX>
-		<PositionY>300</PositionY>
+		<PositionY>0</PositionY>
 		<Type>2</Type>
 		<Dammage>20</Dammage>
 		<RotateAngle>0.0</RotateAngle>

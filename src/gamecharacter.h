@@ -1,4 +1,3 @@
-
 #ifndef GAMECHARACTER_H
 #define GAMECHARACTER_H
 
@@ -8,6 +7,8 @@
 
 enum character_state{ALIVE, DYING, DEAD};
 enum character_id{PLAYER1 = 1, PLAYER2, PLAYER3, PLAYER4};
+
+class Obstacle;
 
 class GameCharacter: public MovableElement
 {
@@ -20,6 +21,8 @@ private:
     unsigned int m_life;
     Player *m_player;
     int m_state;
+
+    static Obstacle roof, ground, rightWall, leftWall;
 public:
     GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life = MAX_LIFE);
     virtual ~GameCharacter();

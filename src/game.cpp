@@ -127,7 +127,7 @@ void Game::nextStep()
         }
 
         //On augmente la vitesse
-       // std::cout<< m_movePeriod<<std::endl;
+        // std::cout<< m_movePeriod<<std::endl;
         if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now()-m_lastAcceleration).count() >= ACCELERATION_PERIOD)
         {
             setSpeedPeriod(--m_movePeriod);
@@ -250,7 +250,7 @@ void Game::resetGame()
 
 void Game::addElements()
 {
-    srand(time(nullptr));
+    std::srand(time(nullptr));
     if ((m_gameState == game_state::RUNNING) && (! m_pause))
     {
         //On créé des nouveaux obstacles et bonus en appelant un pattern aléatoire
@@ -340,43 +340,48 @@ void Game::collisionsTest()
     GameCharacter *player1 = getCharacterById(character_id::PLAYER1);
     //Test des collisions avec les obstacles
 
-        std::vector<std::pair<bool, Obstacle *> >::iterator obstacle = m_obstacles.begin();
-        while (obstacle != m_obstacles.end())
+    std::vector<std::pair<bool, Obstacle *> >::iterator obstacle = m_obstacles.begin();
+    while (obstacle != m_obstacles.end())
+    {
+        bool increment = true;
+        if (player1 != nullptr)
         {
-            bool increment = true;
-            if (player1 != nullptr)
+            if (obstacle->second->collision(player1))
             {
-                if (obstacle->second->collision(player1))
+                if (obstacle->second->getState() != obstacle_state::EXPLODE && !m_powerActives[INVINCIBILITY].first)
                 {
-                    if (obstacle->second->getState() != obstacle_state::EXPLODE && !m_powerActives[INVINCIBILITY].first)
+                    player1->removeLife(obstacle->second->getDammage());
+                }
+                if (obstacle->second->getType() == obstacle_type::MINE)
+                {
+                    if (obstacle->second->getState() != obstacle_state::EXPLODE)
                     {
-                        player1->removeLife(obstacle->second->getDammage());
+                        obstacle->second->setState(obstacle_state::EXPLODE);
+                        m_app->getSound().playSound("explosion.wav");
                     }
-                    if (obstacle->second->getType() == obstacle_type::MINE)
+                } else if (obstacle->second->getType() == obstacle_type::BARRE || obstacle->second->getType() == obstacle_type::NUAGE) {
+                    if (std::chrono::duration_cast<std::chrono::milliseconds>(m_powerActives[INVINCIBILITY].second - std::chrono::system_clock::now()).count() < INVINCIBILITY_TIME_AFTER_HIT_MS)
                     {
-                        if (obstacle->second->getState() != obstacle_state::EXPLODE)
-                        {
-                            obstacle->second->setState(obstacle_state::EXPLODE);
-                            m_app->getSound().playSound("explosion.wav");
-                        }
-                    } else {
-                        m_deletedElements.push_back(obstacle->second);
-                        m_obstacles.erase(obstacle);
-                        increment = false;
+                        m_powerActives[INVINCIBILITY].second = std::chrono::time_point<std::chrono::system_clock> (std::chrono::milliseconds(INVINCIBILITY_TIME_AFTER_HIT_MS) + std::chrono::system_clock::now().time_since_epoch());
                     }
+                } else {
+                    m_deletedElements.push_back(obstacle->second);
+                    m_obstacles.erase(obstacle);
+                    increment = false;
                 }
             }
-            if (obstacle->second->getPosition().first < -obstacle->second->getSize().first)
-            {
-                m_deletedElements.push_back(obstacle->second);
-                m_obstacles.erase(obstacle);
-                increment = false;
-            }
-            if (increment)
-            {
-                ++obstacle;
-            }
         }
+        if (obstacle->second->getPosition().first < -obstacle->second->getSize().first)
+        {
+            m_deletedElements.push_back(obstacle->second);
+            m_obstacles.erase(obstacle);
+            increment = false;
+        }
+        if (increment)
+        {
+            ++obstacle;
+        }
+    }
 
     //Test des collisions avec les bonus
     std::vector<std::pair<bool, Bonus *> >::iterator bonus = m_bonus.begin();   //Declaration d'un iterator pour parcourir les bonus
