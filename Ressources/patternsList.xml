@@ -1,5 +1,5 @@
 <PatternList>
-	<NbPatterns>9</NbPatterns>
+	<NbPatterns>10</NbPatterns>
 	<Pattern id="0">
 		<Width>1280</Width>
 		<Bonus>
@@ -888,6 +888,17 @@
 			<RotateMovement>0.0</RotateMovement>
 		</Bonus>
 	</Pattern>
-
+<Pattern id="9">
+	<Width> 750 </Width>
+	<Bonus>
+		<SizeWidth>40.0</SizeWidth>
+		<SizeHeight>40.0</SizeHeight>
+		<PositionX>40.0</PositionX>
+		<PositionY>300.0</PositionY>
+		<Type>4</Type>
+		<RotateAngle>0.0</RotateAngle>
+		<RotateMovement>0.0</RotateMovement>
+	</Bonus>
+</Pattern>
 
 </PatternList>
