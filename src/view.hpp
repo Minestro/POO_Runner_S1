@@ -257,16 +257,14 @@ public:
                         nbLignes = 1;
                         nbColonnes = 1;
                         animationPeriod = 0;
-                     case bonus_type::SLOW_TIME_BONUS:
-                        texture = "Slow.png";
+                        break;
+                    case bonus_type::SLOW_TIME_BONUS:
+                        texture = "magnet.png";
                         nbLignes= 1;
                         nbColonnes = 1 ;
                         animationPeriod = 0;
+                        break;
                     default:
-                        texture = "magnet.png"; // A changer
-                        nbLignes = 1;
-                        nbColonnes = 1;
-                        animationPeriod = 0;
                         break;
                     }
                     list.push_back(new SpriteElement{5, GraphicElement::m_listTextures[texture], nbLignes, nbColonnes, 1, 1, 1, animationPeriod});

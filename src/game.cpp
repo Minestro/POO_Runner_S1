@@ -6,7 +6,7 @@ using namespace tinyxml2;
 Game::Game(float width, float height, App *app): Model::Model{width, height, app}, m_pause{false}, m_gameMode{game_mode::SOLO}, m_lastMove{}, m_lastAcceleration{}, m_movePeriod{STARTSPEEDPERIODGAME}, m_player{nullptr}, m_distance{0}, m_powerActives{}, m_nextPatternAt{0}, m_blurFade{0.0f}
 {
     resetGame();
-    m_powerActives.resize(power_list::NB_POWER - 1);
+    m_powerActives.resize(power_list::NB_POWER);
 
     try
     {
@@ -99,7 +99,12 @@ void Game::nextStep()
 
     refreshActivesPowers();
 
-    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMove).count() >= m_movePeriod)
+    unsigned int period = m_movePeriod;
+    if (m_powerActives[power_list::SLOW_TIME].first)
+    {
+        period = period * 2;
+    }
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_lastMove).count() >= period)
     {
         addElements();
         moveElements();
@@ -126,7 +131,6 @@ void Game::nextStep()
         if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now()-m_lastAcceleration).count() >= ACCELERATION_PERIOD)
         {
             setSpeedPeriod(--m_movePeriod);
-
             m_lastAcceleration = std::chrono::system_clock::now();
         }
     } else if (m_gameState == game_state::INTRO) {
@@ -298,6 +302,10 @@ void Game::moveElements()
             {
                 magnetCoins(m_characters[i].second);
             }
+            if (m_characters[i].second->getState() == character_state::DYING)
+            {
+                m_characters[i].second->move();
+            }
         }
     }
 
@@ -323,9 +331,10 @@ void Game::collisionsTest()
         if(m_characters[i].second->getState() == character_state::DYING)
         {
             m_characters[i].second->setMovement(-PIXELPERBACKGROUNDMOVE, 0);
-            m_characters[i].second->setMovePeriod(m_movePeriod);
+        } else if (m_characters[i].second->getState() != character_state::DYING)
+        {
+            m_characters[i].second->move();
         }
-        m_characters[i].second->move();
     }
 
     GameCharacter *player1 = getCharacterById(character_id::PLAYER1);
@@ -399,7 +408,6 @@ void Game::collisionsTest()
                 case bonus_type::SLOW_TIME_BONUS:
                     m_app->getSound().playSound("bonus.wav");
                     m_powerActives[SLOW_TIME].second= std::chrono::time_point<std::chrono::system_clock> (std::chrono::milliseconds(m_player->getTimePower(SLOW_TIME)) + std::chrono::system_clock::now().time_since_epoch());
-                    std::cout<<"slow"<<std::endl;
                 default:
                     break;
                 }
