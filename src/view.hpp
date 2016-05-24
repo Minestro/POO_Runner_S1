@@ -257,6 +257,11 @@ public:
                         nbLignes = 1;
                         nbColonnes = 1;
                         animationPeriod = 0;
+                     case bonus_type::SLOW_TIME_BONUS:
+                        texture = "Slow.png";
+                        nbLignes= 1;
+                        nbColonnes = 1 ;
+                        animationPeriod = 0;
                     default:
                         texture = "magnet.png"; // A changer
                         nbLignes = 1;

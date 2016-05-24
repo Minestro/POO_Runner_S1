@@ -122,9 +122,11 @@ void Game::nextStep()
         }
 
         //On augmente la vitesse
+       // std::cout<< m_movePeriod<<std::endl;
         if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now()-m_lastAcceleration).count() >= ACCELERATION_PERIOD)
         {
             setSpeedPeriod(--m_movePeriod);
+
             m_lastAcceleration = std::chrono::system_clock::now();
         }
     } else if (m_gameState == game_state::INTRO) {
@@ -394,6 +396,10 @@ void Game::collisionsTest()
                     m_app->getSound().playSound("coin.wav");
                     m_powerActives[MAGNETISATION].second =std::chrono::time_point<std::chrono::system_clock> (std::chrono::milliseconds(m_player->getTimePower(MAGNETISATION)) + std::chrono::system_clock::now().time_since_epoch());
                     break;
+                case bonus_type::SLOW_TIME_BONUS:
+                    m_app->getSound().playSound("bonus.wav");
+                    m_powerActives[SLOW_TIME].second= std::chrono::time_point<std::chrono::system_clock> (std::chrono::milliseconds(m_player->getTimePower(SLOW_TIME)) + std::chrono::system_clock::now().time_since_epoch());
+                    std::cout<<"slow"<<std::endl;
                 default:
                     break;
                 }
