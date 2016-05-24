@@ -12,12 +12,12 @@
     <Save id="1">
         <Active>1</Active>
         <NickName>minestro</NickName>
-        <Upgrade1>20000</Upgrade1>
-        <Upgrade2>40000</Upgrade2>
+        <Upgrade1>15000</Upgrade1>
+        <Upgrade2>15000</Upgrade2>
         <Upgrade3>15000</Upgrade3>
         <Upgrade4/>
         <BestScore>0</BestScore>
-        <Money>560</Money>
+        <Money>0</Money>
     </Save>
     <Save id="2">
         <Active>0</Active>
