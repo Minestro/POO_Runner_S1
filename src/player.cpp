@@ -287,7 +287,26 @@ const XMLElement *Player::getConstNodePlayerId(unsigned int id, XMLDocument &sav
     const XMLElement *el = Player::getNodePlayerId(id, saveFile);
     return el;
 }
-unsigned int Player::getTimePower(power_list power) const
+unsigned int Player::getTimePower(int power) const
 {
     return m_powerUpgrades[power];
+}
+
+std::string Player::getStringPower(unsigned int idPower)
+{
+    switch (idPower)
+    {
+    case INVINCIBILITY:
+        return "Invincibilite";
+        break;
+    case MAGNETISATION:
+        return "Magnetisation";
+        break;
+    case SLOW_TIME:
+        return "Temps ralentit";
+        break;
+    default:
+        return "";
+        break;
+    }
 }

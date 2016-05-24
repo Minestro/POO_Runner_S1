@@ -234,13 +234,13 @@ public:
                     nbLignes = nbColonnes = animationPeriod = 0;
                     switch (bonus.second->getType())
                     {
-                    case bonus_type::PIECE:
+                    case bonus_type::COIN:
                         texture = "coin.png";
                         nbLignes = 1;
                         nbColonnes = 10;
                         animationPeriod = 100;
                         break;
-                    case bonus_type::SOINS:
+                    case bonus_type::MEDIC:
                         texture = "Soins.png";
                         nbLignes = 1;
                         nbColonnes = 2;
@@ -258,6 +258,10 @@ public:
                         nbColonnes = 1;
                         animationPeriod = 0;
                     default:
+                        texture = "magnet.png"; // A changer
+                        nbLignes = 1;
+                        nbColonnes = 1;
+                        animationPeriod = 0;
                         break;
                     }
                     list.push_back(new SpriteElement{5, GraphicElement::m_listTextures[texture], nbLignes, nbColonnes, 1, 1, 1, animationPeriod});

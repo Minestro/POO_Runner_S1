@@ -20,7 +20,7 @@ void Menu::setPage(unsigned int page)
 
 void Menu::refreshPageContent(Model *model, int page)
 {
-    for (unsigned int i = 200; i<232; i++)
+    for (unsigned int i = 200; i<300; i++)
     {
         model->deleteElement(i);
     }
@@ -79,6 +79,44 @@ void Menu::refreshPageContent(Model *model, int page)
             t3->setId(226);
             model->getTexts().push_back(std::make_pair(1, t2));
             model->getTexts().push_back(std::make_pair(1, t3));
+        }
+   } else if (page == menuPage::SHOP)
+   {
+       Text *money = new Text{40, 150, MODEL_SIZE_W, 30, 0, "Argent : " + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney()), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
+       money->setId(223);
+       model->getTexts().push_back(std::make_pair(1, money));
+        for (unsigned int i = 0; i<power_list::NB_POWER; i++)
+        {
+            std::pair<float, float> posBox = std::make_pair(40 + ((float)i*MODEL_SIZE_W/(power_list::NB_POWER)), 200);
+            std::pair<float, float> sizeBox =  std::make_pair(MODEL_SIZE_W/(power_list::NB_POWER)-(power_list::NB_POWER+2 * 40), 300);
+            Image *texbox = new Image{posBox.first, posBox.second, sizeBox.first, sizeBox.second, "textBox.png", 3, 0};
+            texbox->setId(224 + 4*i);
+            model->getImages().push_back(std::make_pair(1, texbox));
+            Text *powerName = new Text{posBox.first, posBox.second + 20, sizeBox.first, 50, 0, Player::getStringPower(i), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 1, 0};
+            powerName->setId(224 + 4*i+1);
+            model->getTexts().push_back(std::make_pair(1, powerName));
+            int bonusId;
+            switch (i)
+            {
+            case INVINCIBILITY:
+                bonusId = bonus_type::INVINSIBLE;
+                break;
+            case MAGNETISATION:
+                bonusId = bonus_type::MAGNET;
+                break;
+            case SLOW_TIME:
+                bonusId = bonus_type::SLOW_TIME_BONUS;
+                break;
+            default:
+                bonusId = bonus_type::MAGNET;
+                break;
+            }
+            Bonus *bonus = new Bonus{posBox.first + sizeBox.first/2 - 20, posBox.second + 70, 40, 40, 0, 0, 0, 0, 0, bonusId};
+            bonus->setId(224 + 4*i +2);
+            model->getBonus().push_back(std::make_pair(1, bonus));
+            Text *level = new Text{posBox.first + 20, posBox.second + 120, sizeBox.first, 50, 0, "Duree : " + std::to_string(model->getApp()->getGameModel().getPlayer()->getTimePower(i)/1000) + " secondes", 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
+            level->setId(224 + 4*i + 3);
+            model->getTexts().push_back(std::make_pair(1, level));
         }
    }
 }

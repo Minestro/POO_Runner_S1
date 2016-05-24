@@ -288,6 +288,15 @@ void Game::moveElements()
         {
             m_bonus[i].second->move();
         }
+
+        //On bouge les pièces si le joueur a le bonus magnet
+        for (unsigned int i=0; i<m_characters.size(); i++)
+        {
+            if (m_powerActives[MAGNETISATION].first && m_gameState == game_state::RUNNING && m_characters[i].second->getState() == character_state::ALIVE)
+            {
+                magnetCoins(m_characters[i].second);
+            }
+        }
     }
 
     GameCharacter *player1 = getCharacterById(character_id::PLAYER1);
@@ -313,9 +322,6 @@ void Game::collisionsTest()
         {
             m_characters[i].second->setMovement(-PIXELPERBACKGROUNDMOVE, 0);
             m_characters[i].second->setMovePeriod(m_movePeriod);
-        } else if (m_powerActives[MAGNETISATION].first && m_gameState == game_state::RUNNING && m_characters[i].second->getState() == character_state::ALIVE)
-        {
-            magnetCoins(m_characters[i].second);
         }
         m_characters[i].second->move();
     }
@@ -373,11 +379,11 @@ void Game::collisionsTest()
             {
                 switch (bonus->second->getType())               //Action différente suivant le type de bonus
                 {
-                case bonus_type::PIECE:
+                case bonus_type::COIN:
                     m_app->getSound().playSound("coin.wav");
                     player1->addScore(1000);
                     break;
-                case bonus_type::SOINS:
+                case bonus_type::MEDIC:
                     player1->addLife(10);
                     break;
                 case bonus_type::INVINSIBLE:
@@ -468,14 +474,14 @@ void Game::magnetCoins(const GameCharacter *character)
     characterCenterPos.second = character->getPosition().second + character->getSize().second/2;
     for (std::pair<bool, Bonus*> &bonus : m_bonus)
     {
-        if (bonus.second->getType() == bonus_type::PIECE)
+        if (bonus.second->getType() == bonus_type::COIN)
         {
             coinCenterPos.first = bonus.second->getPosition().first + bonus.second->getSize().first/2;
             coinCenterPos.second = bonus.second->getPosition().second + bonus.second->getSize().second/2;
             float distance = std::sqrt(std::pow(std::abs(coinCenterPos.first - characterCenterPos.first),2) + std::pow(std::abs(coinCenterPos.second - characterCenterPos.second), 2));
             if (distance <= MAGNET_RADIUS)
             {
-                bonus.second->setPosition(bonus.second->getPosition().first + (characterCenterPos.first - coinCenterPos.first)*(0.005), bonus.second->getPosition().second + (characterCenterPos.second - coinCenterPos.second)*(0.005));
+                bonus.second->setPosition(bonus.second->getPosition().first + (characterCenterPos.first - coinCenterPos.first)*(0.05), bonus.second->getPosition().second + (characterCenterPos.second - coinCenterPos.second)*(0.05));
             }
         }
     }

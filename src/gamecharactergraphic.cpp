@@ -42,20 +42,7 @@ void GameCharacterGraphic::refresh(const Element *el, Model *model)
         {
             if (power.first)
             {
-                switch (i)
-                {
-                case INVINCIBILITY:
-                    powerText += "Invincibilite";
-                    break;
-                case MAGNETISATION:
-                    powerText += "Magnetisation";
-                    break;
-                case FASTER_ASCEND:
-                    powerText += "Meilleure vitesse de monte";
-                    break;
-                default:
-                    break;
-                }
+                powerText = Player::getStringPower(i);
                 powerText += " : " + std::to_string(-std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now()-power.second).count()) + " s   ";
             }
             i++;

@@ -8,7 +8,7 @@
 #include "const.h"
 #include "TinyXml2/tinyxml2.h"
 
-enum power_list{INVINCIBILITY, MAGNETISATION, FASTER_ASCEND, NB_POWER};
+enum power_list{INVINCIBILITY, MAGNETISATION, SLOW_TIME, NB_POWER};
 
 class Player
 {
@@ -34,8 +34,9 @@ public:
     bool buy(unsigned int upgradeId);
     void addMoney(unsigned int money);
     unsigned int getMoney() const;
-    unsigned int getTimePower(power_list power) const;
+    unsigned int getTimePower(int power) const;
 
+    static std::string getStringPower(unsigned int idPower);
     static void eraseProfil(unsigned int i);
     static bool isActive(unsigned int i);
 
