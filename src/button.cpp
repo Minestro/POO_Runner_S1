@@ -49,6 +49,30 @@ bool Button::isClickable() const
         }
         break;
     }
+    case menu_specific_elements::UPGRADE_BUTTON1:
+        if (m_model->getApp()->getGameModel().getPlayer()->getMoney() >= UPGRADE_COST)
+        {
+            isClickable = true;
+        } else {
+            isClickable = false;
+        }
+        break;
+    case menu_specific_elements::UPGRADE_BUTTON2:
+        if (m_model->getApp()->getGameModel().getPlayer()->getMoney() >= UPGRADE_COST)
+        {
+            isClickable = true;
+        } else {
+            isClickable = false;
+        }
+        break;
+    case menu_specific_elements::UPGRADE_BUTTON3:
+        if (m_model->getApp()->getGameModel().getPlayer()->getMoney() >= UPGRADE_COST)
+        {
+            isClickable = true;
+        } else {
+            isClickable = false;
+        }
+        break;
     default:
         break;
     }
@@ -152,17 +176,28 @@ void Button::onClick()
                     m_model->getApp()->getSettings().m_effectVolume = 100;
                 }
                 break;
+            case button_action::BUY_UPGRADE:
+                if (m_id >= menu_specific_elements::UPGRADE_BUTTON1 && m_id <= menu_specific_elements::UPGRADE_BUTTON3)
+                {
+                    m_model->getApp()->getGameModel().getPlayer()->buy(m_id - menu_specific_elements::UPGRADE_BUTTON1);
+                    try
+                    {
+                        m_model->getApp()->getGameModel().getPlayer()->saveProfile();
+                    }
+                    catch (XMLError e)
+                    {
+                        std::cout << "Erreur lors de l'enregistrement du fichier des profils. Code : " << std::to_string(e) << std::endl;
+                    }
+                }
+                break;
             case button_action::RESUME_GAME:
                 m_model->getApp()->getGameModel().setPause(0);
                 break;
             case button_action::RESET_GAME:
                 m_model->getApp()->getGameModel().resetGame();
                 break;
-            case button_action::REFRESH_VIEW_BUTTONS:
-                for (std::pair<bool, Button*> &b:m_model->getButtons())
-                {
-                    b.first = 1;
-                }
+            case button_action::REFRESH_VIEW:
+                Menu::refreshPageContent(m_model, m_model->getApp()->getMenuModel().getActivePage());
                 break;
             case button_action::SET_SELECTED:
             {
