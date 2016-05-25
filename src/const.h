@@ -40,7 +40,7 @@ const float MAGNET_RADIUS = 200.0;
 const unsigned int UPGRADE_COST = 1000;
 const unsigned int SEC_PER_UPGRADE = 5;
 const unsigned int MAX_UPGRADE_SEC = 30;
-const unsigned int DEFAULT_UPGRADE_SEC = 10;
+const unsigned int DEFAULT_UPGRADE_SEC = 5;
 const unsigned int NB_MAX_SAVES = 5;
 const unsigned int MAX_NICKNAME_LENGHT = 20;
 

@@ -636,6 +636,32 @@
 			<IsLineBreack>0</IsLineBreack>
 			<ID>229</ID>
 		</Text>
+		<Bonus>
+			<SizeWidth>40.0</SizeWidth>
+			<SizeHeight>40.0</SizeHeight>
+			<PositionX>-870.0</PositionX>
+			<PositionY>400.0</PositionY>
+			<Type>4</Type>
+			<RotateAngle>0.0</RotateAngle>
+			<RotateMovement>0.0</RotateMovement>
+			<ID>230</ID>
+		</Bonus>
+		<Text>
+			<SizeWidth>0.0</SizeWidth>
+			<SizeHeight>0.0</SizeHeight>
+			<PositionX>470.0</PositionX>
+			<PositionY>410.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>Ralenti la vitesse du jeu </String>
+			<FontSize>20</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>0</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>231</ID>
+		</Text>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
 			<SizeHeight>50.0</SizeHeight>
@@ -646,7 +672,7 @@
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
-			<ID>230</ID>
+			<ID>232</ID>
 		</Button>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
@@ -658,7 +684,7 @@
 			<DestinationPage>14</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
-			<ID>231</ID>
+			<ID>233</ID>
 		</Button>
 
 
@@ -871,7 +897,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>180.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Diminue votre niveau de vie de 30</String>
+			<String>Diminue votre niveau de vie de 20</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -909,7 +935,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>260.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Diminue votre niveau de vie de 20</String>
+			<String>Diminue votre niveau de vie de 30</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>

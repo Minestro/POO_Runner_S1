@@ -1,5 +1,6 @@
 <PatternList>
 	<NbPatterns>10</NbPatterns>
+	<!--- Forme "Coins !" --->
 	<Pattern id="0">
 		<Width>1280</Width>
 		<Bonus>
@@ -470,17 +471,9 @@
 			<RotateMovement>0.0</RotateMovement>
 		</Bonus>
 	</Pattern>
+	<!--- Bombe seule --->
 	<Pattern id="1">
 		<Width>777</Width>
-		<Bonus>
-			<SizeWidth>0.0</SizeWidth>
-			<SizeHeight>0.0</SizeHeight>
-			<PositionX>0.0</PositionX>
-			<PositionY>0.0</PositionY>
-			<Type>0</Type>
-			<RotateAngle>0.0</RotateAngle>
-			<RotateMovement>0</RotateMovement>
-		</Bonus>
 		<Obstacle>
 			<SizeWidth>40.0</SizeWidth>
 			<SizeHeight>40.0</SizeHeight>
@@ -492,6 +485,7 @@
 			<RotateMovement>0.0</RotateMovement>
 		</Obstacle>
 	</Pattern>
+	<!--- Piece en flèche --->
 	<Pattern id="2">
 		<Width>1280</Width>
 		<Bonus>
@@ -639,6 +633,7 @@
 			<RotateMovement>0.0</RotateMovement>
 		</Bonus>
 	</Pattern>
+	<!--- ligne verticale 5 bombes --->
 	<Pattern id="3">
 		<Width>777</Width>
 		<Obstacle>
@@ -692,6 +687,7 @@
 			<RotateMovement>0.0</RotateMovement>
 		</Obstacle>
 	</Pattern>
+	<!--- ligne verticale bombes et pièces -->
 	<Pattern id="4">
 		<Width>777</Width>
 		<Obstacle>
@@ -838,31 +834,34 @@
 			<RotateMovement>0.0</RotateMovement>
 		</Obstacle>
 	</Pattern>
+	<!-- Bonus soins --->
 	<Pattern id="5">
 		<Width>777</Width>
 		<Bonus>
-			<SizeWidth>40.0</SizeWidth>
-			<SizeHeight>40.0</SizeHeight>
+			<SizeWidth>45.0</SizeWidth>
+			<SizeHeight>45.0</SizeHeight>
 			<PositionX>100.0</PositionX>
-			<PositionY>400.0</PositionY>
+			<PositionY>250.0</PositionY>
 			<Type>3</Type>
 			<RotateAngle>0.0</RotateAngle>
 			<RotateMovement>0.0</RotateMovement>
 		</Bonus>
 	</Pattern>
+	<!--- Obstacle Nuage --->
 	<Pattern id="6">
 	<Width>750</Width>
 	<Obstacle>
-		<SizeWidth>90.0</SizeWidth>
-		<SizeHeight>80.0</SizeHeight>
-		<PositionX>250.0</PositionX>
-		<PositionY>300</PositionY>
+		<SizeWidth>130.0</SizeWidth>
+		<SizeHeight>140.0</SizeHeight>
+		<PositionX>150.0</PositionX>
+		<PositionY>150</PositionY>
 		<Type>1</Type>
-		<Dammage>30</Dammage>
+		<Dammage>20</Dammage>
 		<RotateAngle>0.0</RotateAngle>
 		<RotateMovement>0.0</RotateMovement>
 	</Obstacle>
 	</Pattern>
+	<!--- Obstacle Barre en rotation --->
 	<Pattern id="7">
 	<Width>750</Width>
 	<Obstacle>
@@ -871,11 +870,12 @@
 		<PositionX>250.0</PositionX>
 		<PositionY>0</PositionY>
 		<Type>2</Type>
-		<Dammage>20</Dammage>
+		<Dammage>30</Dammage>
 		<RotateAngle>0.0</RotateAngle>
 		<RotateMovement>1.0</RotateMovement>
 	</Obstacle>
 	</Pattern>
+	<!--- Bonus invinsible -->
 	<Pattern id="8">
 		<Width> 750 </Width>
 		<Bonus>
@@ -888,13 +888,14 @@
 			<RotateMovement>0.0</RotateMovement>
 		</Bonus>
 	</Pattern>
+	<!--- Bonus Ralentissement --->
 <Pattern id="9">
 	<Width> 750 </Width>
 	<Bonus>
-		<SizeWidth>40.0</SizeWidth>
-		<SizeHeight>40.0</SizeHeight>
+		<SizeWidth>60.0</SizeWidth>
+		<SizeHeight>60.0</SizeHeight>
 		<PositionX>40.0</PositionX>
-		<PositionY>300.0</PositionY>
+		<PositionY>400.0</PositionY>
 		<Type>4</Type>
 		<RotateAngle>0.0</RotateAngle>
 		<RotateMovement>0.0</RotateMovement>
