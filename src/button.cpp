@@ -43,7 +43,7 @@ bool Button::isClickable() const
                 }
                 catch (XMLError e)
                 {
-                    std::cout << "Erreur lors de l'ecriture du fichier des profiles. Code : " << std::to_string(e) << std::endl;
+                    std::cout << "Error when trying to write profile file. Code : " << std::to_string(e) << std::endl;
                 }
             }
         }
@@ -186,7 +186,7 @@ void Button::onClick()
                     }
                     catch (XMLError e)
                     {
-                        std::cout << "Erreur lors de l'enregistrement du fichier des profils. Code : " << std::to_string(e) << std::endl;
+                        std::cout << "Error when trying to save profile. Code : " << std::to_string(e) << std::endl;
                     }
                 }
                 break;
@@ -211,9 +211,9 @@ void Button::onClick()
                         {
                             if (Player::isActive(m_id - menu_specific_elements::SELECT_SAVE_1) == true)
                             {
-                                b.second->setText("Charger");
+                                b.second->setText(Text::getMessage(m_model->getApp()->getSettings().m_lang, "LOAD"));
                             } else {
-                                b.second->setText("Nouveau");
+                                b.second->setText(Text::getMessage(m_model->getApp()->getSettings().m_lang, "NEW"));
                             }
                         }
                     }
@@ -245,7 +245,7 @@ void Button::onClick()
                 }
                 catch (XMLError e)
                 {
-                    std::cout << "Erreur lors de la lecture du fichier des profiles. Code : " << std::to_string(e) << std::endl;
+                    std::cout << "Error when trying to load profile. Code : " << std::to_string(e) << std::endl;
                 }
 
                 break;
@@ -263,7 +263,7 @@ void Button::onClick()
                         }
                         catch (XMLError e)
                         {
-                            std::cout << "Erreur lors de l'ecriture du fichier des profiles. Code : " << std::to_string(e) << std::endl;
+                            std::cout << "Error when trying to load profile. Code : " << std::to_string(e) << std::endl;
                         }
                     }
                 }
@@ -286,7 +286,7 @@ void Button::onClick()
                     }
                     catch (XMLError e)
                     {
-                        std::cout << "Erreur lors de l'ecriture du fichier des profiles. Code : " << std::to_string(e) << std::endl;
+                        std::cout << "Error when trying to save profile. Code : " << std::to_string(e) << std::endl;
                     }
                 }
                 break;
@@ -307,7 +307,7 @@ void Button::onClick()
                     }
                     catch (XMLError e)
                     {
-                        std::cout << "Erreur lors de l'écriture du fichier des profiles. Code : " << std::to_string(e) << std::endl;
+                        std::cout << "Error when trying to save profile. Code : " << std::to_string(e) << std::endl;
                     }
                 }
                 break;

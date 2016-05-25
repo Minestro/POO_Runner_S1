@@ -32,7 +32,7 @@
 		<PositionX>0.0</PositionX>
 		<PositionY>600.0</PositionY>
 		<RotateAngle>0.0</RotateAngle>
-		<String>Appuyez sur une touche pour continuer</String>
+		<String>MENUINTRO</String>
 		<FontSize>20</FontSize>
 		<Font>The_Happy_Giraffe.ttf</Font>
 		<Color>255, 255, 255, 255</Color>
@@ -51,7 +51,7 @@
 			<PositionX>540.0</PositionX>
 			<PositionY>150.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Jouer</String>
+			<String>PLAY</String>
 			<DestinationPage>0</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0, 4</ActionsList>
@@ -63,7 +63,7 @@
 			<PositionX>540.0</PositionX>
 			<PositionY>250.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Magasin</String>
+			<String>SHOP</String>
 			<DestinationPage>4</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
@@ -75,7 +75,7 @@
 			<PositionX>540.0</PositionX>
 			<PositionY>350.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Regles</String>
+			<String>RULES</String>
 			<DestinationPage>8</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
@@ -87,7 +87,7 @@
 			<PositionX>540.0</PositionX>
 			<PositionY>450.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Options</String>
+			<String>SETTINGS</String>
 			<DestinationPage>5</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
@@ -99,7 +99,7 @@
 			<PositionX>540.0</PositionX>
 			<PositionY>550.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Quitter</String>
+			<String>QUIT</String>
 			<DestinationPage>0</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>1</ActionsList>
@@ -141,7 +141,7 @@
 			<PositionX>390.0</PositionX>
 			<PositionY>50.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Magasin</String>
+			<String>SHOP</String>
 			<FontSize>30</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -157,7 +157,7 @@
 			<PositionX>540.0</PositionX>
 			<PositionY>550.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Retour</String>
+			<String>RETURN</String>
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
@@ -172,7 +172,7 @@
 			<PositionX>390.0</PositionX>
 			<PositionY>100.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Options</String>
+			<String>SETTINGS</String>
 			<FontSize>30</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -212,7 +212,7 @@
 			<PositionX>540.0</PositionX>
 			<PositionY>550.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Retour</String>
+			<String>RETURN</String>
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
@@ -236,7 +236,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>180.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Plein Ecran :</String>
+			<String>FULLSCREEN</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -264,7 +264,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>280.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Musique :</String>
+			<String>MUSIQUE</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -292,7 +292,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>380.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Bruitages :</String>
+			<String>SOUND</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -314,7 +314,7 @@
 			<PositionX>0.0</PositionX>
 			<PositionY>0.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Pause</String>
+			<String>PAUSE</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>255, 255, 255, 255</Color>
@@ -330,7 +330,7 @@
 			<PositionX>540.0</PositionX>
 			<PositionY>250.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Reprendre</String>
+			<String>RESUME</String>
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>3</ActionsList>
@@ -342,7 +342,7 @@
 			<PositionX>540.0</PositionX>
 			<PositionY>350.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Quitter</String>
+			<String>QUIT</String>
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
@@ -381,7 +381,7 @@
 			<PositionX>390.0</PositionX>
 			<PositionY>100.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Regles</String>
+			<String>RULES</String>
 			<FontSize>30</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -397,7 +397,7 @@
 			<PositionX>410.0</PositionX>
 			<PositionY>170.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Pilotez l'avion le plus loin possible en evitant les obstacles et en ramassant un maximum de pieces possible !</String>
+			<String>RULESDES</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -449,7 +449,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>250.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Reculer</String>
+			<String>MOVEB</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -465,7 +465,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>310.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Avancer</String>
+			<String>MOVEF</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -481,7 +481,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>370.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Monter</String>
+			<String>ASCEND</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -497,7 +497,7 @@
 			<PositionX>390.0</PositionX>
 			<PositionY>550.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Retour</String>
+			<String>RETURN</String>
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
@@ -509,7 +509,7 @@
 			<PositionX>690.0</PositionX>
 			<PositionY>550.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Liste des objets</String>
+			<String>BONUSLIST</String>
 			<DestinationPage>9</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
@@ -548,7 +548,7 @@
 			<PositionX>390.0</PositionX>
 			<PositionY>100.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Bonus</String>
+			<String>BONUS</String>
 			<FontSize>30</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -564,7 +564,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>180.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Augmente votre score de 1000</String>
+			<String>COINDES</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -600,7 +600,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>260.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Vous rend invincible pendant 5 sec ou plus</String>
+			<String>INVINDES</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -626,7 +626,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>340.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Augmente votre niveau de vie de 10</String>
+			<String>MEDICDES</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -652,7 +652,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>410.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Ralenti la vitesse du jeu </String>
+			<String>SLOWTIMEDES</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -668,7 +668,7 @@
 			<PositionX>390.0</PositionX>
 			<PositionY>550.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Retour</String>
+			<String>RETURN</String>
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
@@ -680,7 +680,7 @@
 			<PositionX>690.0</PositionX>
 			<PositionY>550.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Liste des obstacle</String>
+			<String>OBSTACLESLIST</String>
 			<DestinationPage>14</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
@@ -697,7 +697,7 @@
 			<PositionX>0.0</PositionX>
 			<PositionY>600.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Appuyez sur une touche pour lancer l'avion</String>
+			<String>GAMEINTRO</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>255, 255, 255, 255</Color>
@@ -716,7 +716,7 @@
 			<PositionX>0.0</PositionX>
 			<PositionY>50.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Selectionnez la partie a charger</String>
+			<String>SELECTPROFILE</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>255, 255, 255, 255</Color>
@@ -747,7 +747,7 @@
 			<PositionX>0.0</PositionX>
 			<PositionY>50.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Entrez votre pseudo</String>
+			<String>ENTERNICKNAME</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>255, 255, 255, 255</Color>
@@ -787,7 +787,7 @@
 			<PositionX>390.0</PositionX>
 			<PositionY>550.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Retour</String>
+			<String>RETURN</String>
 			<DestinationPage>11</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
@@ -799,7 +799,7 @@
 			<PositionX>690.0</PositionX>
 			<PositionY>550.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Confirmer</String>
+			<String>COMFIRM</String>
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>9</ActionsList>
@@ -826,7 +826,7 @@
 			<PositionX>540.0</PositionX>
 			<PositionY>550.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Retour au menu</String>
+			<String>RETURN</String>
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0, 10</ActionsList>
@@ -838,7 +838,7 @@
 			<PositionX>0.0</PositionX>
 			<PositionY>50.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>VOUS ETES MORT</String>
+			<String>YOURDEAD</String>
 			<FontSize>50</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>255, 255, 255, 255</Color>
@@ -881,7 +881,7 @@
 			<PositionX>390.0</PositionX>
 			<PositionY>100.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Obstacle</String>
+			<String>OBSTACLE</String>
 			<FontSize>30</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -897,7 +897,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>180.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Diminue votre niveau de vie de 20</String>
+			<String>CLOUDDES</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -935,7 +935,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>260.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Diminue votre niveau de vie de 30</String>
+			<String>BARDES</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -962,7 +962,7 @@
 			<PositionX>470.0</PositionX>
 			<PositionY>340.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Diminue votre niveau de vie de 10</String>
+			<String>MINEDES</String>
 			<FontSize>20</FontSize>
 			<Font>The_Happy_Giraffe.ttf</Font>
 			<Color>0, 0, 0, 255</Color>
@@ -975,10 +975,10 @@
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
 			<SizeHeight>50.0</SizeHeight>
-			<PositionX>430.0</PositionX>
+			<PositionX>540.0</PositionX>
 			<PositionY>550.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
-			<String>Retour</String>
+			<String>RETURN</String>
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>

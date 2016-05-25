@@ -26,7 +26,6 @@ void GraphicElement::loadTextures(std::string themeName)
         iterator = m_listTextures.insert(iterator, std::make_pair(FILES_LIST[i], new sf::Texture));
         if (!(iterator->second->loadFromFile("Ressources/" + themeName + "/Textures/" + FILES_LIST[i])))
         {
-            std::cout << "Erreur lors du chargement de l'image" << "Ressources/" << themeName << "/Textures/" << FILES_LIST[i] << std::endl;
             srand(time(nullptr));
             sf::RenderTexture errText{};
             errText.create(1, 1);

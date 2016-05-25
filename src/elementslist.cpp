@@ -1,4 +1,5 @@
 #include "elementslist.h"
+#include "app.h"
 
 using namespace runner;
 using namespace tinyxml2;
@@ -122,7 +123,7 @@ void ElementsList::loadFromFile(const XMLDocument &file, Model *model)
         {
             if (textEl != nullptr)
             {
-                loadText(*textEl);
+                loadText(*textEl, model);
                 textEl = textEl->NextSiblingElement("Text");
             }
         }
@@ -237,7 +238,7 @@ void ElementsList::loadImages(const XMLElement &image)
 
 }
 
-void ElementsList::loadText(const XMLElement &text)
+void ElementsList::loadText(const XMLElement &text, Model *model)
 {
     float width;
     float height;
@@ -273,7 +274,7 @@ void ElementsList::loadText(const XMLElement &text)
 
     parseElementsText(e, text);
 
-    Text txt{x, y, width, height, rotateAngle, textB, fontSize, font, color, textEffect, effectPeriod, isAutoRescale, isLineBreacker};
+    Text txt{x, y, width, height, rotateAngle, Text::getMessage(model->getApp()->getSettings().m_lang, textB), fontSize, font, color, textEffect, effectPeriod, isAutoRescale, isLineBreacker};
     txt.setId(id);
     m_textsList.push_back(txt);
 }
@@ -306,7 +307,7 @@ void ElementsList::loadButton(const XMLElement &button, Model *model)
 
     parseElementsText(e, button);
 
-    Button bt{x, y, width, height, rotateAngle, text, destinationPage, model, type};
+    Button bt{x, y, width, height, rotateAngle, Text::getMessage(model->getApp()->getSettings().m_lang, text), destinationPage, model, type};
     bt.setId(id);
     for (int a : actionsList)
     {

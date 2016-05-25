@@ -32,7 +32,7 @@ private:
     void loadBonus(const tinyxml2::XMLElement &bonus);
     void loadObstacles(const tinyxml2::XMLElement &obstacle);
     void loadImages(const tinyxml2::XMLElement &image);
-    void loadText(const tinyxml2::XMLElement &text);
+    void loadText(const tinyxml2::XMLElement &text, Model *model);
     void loadButton(const tinyxml2::XMLElement &button, Model *model);
     void parseElementsText(const VarToNodeName &e, const tinyxml2::XMLElement &node) const;
 public:

@@ -42,7 +42,7 @@ void GameCharacterGraphic::refresh(const Element *el, Model *model)
         {
             if (power.first)
             {
-                powerText += Player::getStringPower(i);
+                powerText += Player::getStringPower(i, model->getApp()->getSettings().m_lang);
                 powerText += " : " + std::to_string(-std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now()-power.second).count()) + " s   ";
             }
             i++;

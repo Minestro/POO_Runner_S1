@@ -1,5 +1,9 @@
 #include "text.h"
+
 using namespace runner;
+
+std::unordered_map<std::string, std::string> Text::m_langFileToName;
+std::vector<std::map<std::string, std::string> > Text::m_messages;
 
 Text::Text(float x, float y, float width, float height, float rotation, std::string text, unsigned int fontSize, std::string font, bool autoRescale, bool lineBreak): Element{x, y, width, height, rotation}, m_lineBreak{lineBreak}, m_autoRescale{autoRescale}, m_text{text}, m_fontSize{fontSize}, m_color{ColorRGBA::White}, m_font{font}, m_effect{text_effect::NOTHING}, m_effectPeriod{0}
 {
@@ -59,4 +63,67 @@ bool Text::getlineBreak() const
 unsigned int Text::getEffectPeriod() const
 {
     return m_effectPeriod;
+}
+
+void Text::loadLanguages()
+{
+    DIR * rep = opendir("./Ressources/langs/");
+
+    if (rep != nullptr)
+    {
+        struct dirent * ent;
+        std::string fileName;
+        while ((ent = readdir(rep)) != nullptr)
+        {
+            fileName = ent->d_name;
+            if (fileName.find(".lang") != std::string::npos)
+            {
+                std::ifstream fileStream{std::string("Ressources/langs/" + fileName).c_str(), std::ios::in};
+                if (!fileStream)
+                {
+                    std::cout << "Error when trying to open " << fileName << std::endl;
+                } else {
+                    std::string content;
+                    std::map<std::string, std::string> messagesMap;
+                    std::getline(fileStream, content);
+                    m_langFileToName.insert(std::make_pair(content.substr(content.find('=')+1), fileName));
+                    while (std::getline(fileStream, content))
+                    {
+                        if (KEY_MESSAGES.find(content.substr(0, content.find('='))) != KEY_MESSAGES.end())
+                        {
+                            messagesMap.insert(std::make_pair(content.substr(0, content.find('=')), content.substr(content.find('=')+1)));
+                        }
+                    }
+                    m_messages.push_back(messagesMap);
+                    fileStream.close();
+                }
+            }
+        }
+        std::vector<std::map<std::string, std::string> > messages = m_messages;
+        closedir(rep);
+    }
+}
+
+std::string Text::getMessage(unsigned int langId, const std::string &messageKey)
+{
+    if (langId > m_langFileToName.size()-1)
+    {
+        return "";
+    }
+    if (m_messages[langId].find(messageKey) == m_messages[langId].end())
+    {
+        return "";
+    } else {
+        return m_messages[langId][messageKey];
+    }
+}
+
+std::vector<std::string> Text::getLangsList()
+{
+    std::vector<std::string> langList;
+    for (const std::pair<std::string, std::string> &lang : m_langFileToName)
+    {
+        langList.push_back(lang.first);
+    }
+    return langList;
 }

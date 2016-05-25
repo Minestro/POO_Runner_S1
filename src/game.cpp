@@ -14,7 +14,7 @@ Game::Game(float width, float height, App *app): Model::Model{width, height, app
     }
     catch (const XMLError &er)
     {
-        std::cout << "Erreur lord de la lecture de " << PATTERNS_FILE << " Code erreur : " <<  std::to_string(er) << std::endl;
+        std::cout << "Error when loading " << PATTERNS_FILE << " Code : " <<  std::to_string(er) << std::endl;
         m_app->getMenuModel().exitApp();
     }
 

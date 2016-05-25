@@ -15,7 +15,7 @@ void Sound::loadSoundsBuffers(std::string themeName)
         iterator = m_listSounds.insert(iterator, std::make_pair(SOUNDS_LIST[i], new sf::SoundBuffer));
         if (!(iterator->second->loadFromFile("Ressources/" + themeName + "/Sounds/" + SOUNDS_LIST[i])))
         {
-            std::cout << "Erreur lors du chargement du son" << "Ressources/" << themeName << "/Sounds/" << SOUNDS_LIST[i] << std::endl;
+
         }
     }
 }
@@ -48,7 +48,7 @@ void Sound::playMusic(std::string music)
         }
         if (!m_music.openFromFile(music))
         {
-            std::cout << "Erreur lors du chargement de la musique " << music << std::endl;
+
         }
         m_music.setLoop(1);
         m_currentMusic = music;

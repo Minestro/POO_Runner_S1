@@ -1,5 +1,7 @@
 #include "player.h"
+#include "text.h"
 
+using namespace runner;
 using namespace tinyxml2;
 
 Player::Player(): m_bestScore{0}, m_nickName{"Guest"}, m_money{0}, m_id{NB_MAX_SAVES+1}, m_powerUpgrades{}
@@ -25,7 +27,7 @@ Player::Player(unsigned int i): m_bestScore{0}, m_nickName{"Guest"}, m_money{0},
     }
     catch (XMLError e)
     {
-        std::cout << "Erreur lors du chargement du profil. Code Erreur : " << std::to_string(e) << std::endl;
+        std::cout << "Error when trying to load the profile file. Code : " << std::to_string(e) << std::endl;
         m_bestScore = 0;
         m_nickName = "Guest";
         m_money = 0;
@@ -292,18 +294,18 @@ unsigned int Player::getTimePower(int power) const
     return m_powerUpgrades[power];
 }
 
-std::string Player::getStringPower(unsigned int idPower)
+std::string Player::getStringPower(unsigned int idPower, unsigned int langId)
 {
     switch (idPower)
     {
     case INVINCIBILITY:
-        return "Invincibilite";
+        return Text::getMessage(langId, "INVINCIBILITY");
         break;
     case MAGNETISATION:
-        return "Magnetisation";
+        return Text::getMessage(langId, "MAGNETISATION");
         break;
     case SLOW_TIME:
-        return "Temps ralentit";
+        return Text::getMessage(langId, "SLOWTIME");
         break;
     default:
         return "";

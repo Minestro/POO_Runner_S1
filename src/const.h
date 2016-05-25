@@ -2,6 +2,7 @@
 #define CONST_H
 
 #include <string>
+#include <set>
 
 const std::string FILES_LIST[] = {"menuBackground.png", "FOND1.png", "FOND2.png", "FOND.png", "textBox.png", "buttons.png", "life.png", "logo.jpeg", "explosion.png", "coin.png", "plane.png", "mine.png", "leftKey.png", "rightKey.png", "downKey.png", "upKey.png","Soins.png", "radioButton.png", "nuages.png", "BarreObstacle.png", "Invincibility.png", "savesButton.png", "magnet.png", "Slow.png"};
 
@@ -15,6 +16,9 @@ const std::string MUSIC_MENU_FILE = "Ressources/Default/Musics/welcome_screen.og
 const std::string PATTERNS_FILE = "Ressources/patternsList.xml";
 const std::string MENU_MODELS_FILE = "Ressources/menu.xml";
 const std::string SAVE_FILE = "Ressources/save.xml";
+const std::string SETTINGS_FILE = "settings.config";
+
+const std::set<std::string> KEY_MESSAGES = {"ERASE", "LOAD", "NEW", "BSCORE", "MONEY", "EMPTY", "PLAY", "SHOP", "RULES", "SETTINGS", "QUIT", "DURATION", "UPGRADE", "COST", "INVINCIBILITY", "MAGNETISATION", "SLOWTIME", "RULESDES", "MOVEF", "MOVEB", "ASCEND", "BONUSLIST", "RETURN", "BONUS", "COINDES", "INVINDES", "MEDICDES", "MAGNETDES", "SLOWTIMEDES", "OBSTACLESLIST", "OBSTACLE", "CLOUDDES", "BARDES", "MINEDES", "FULLSCREEN", "MUSIQUE", "SOUND", "GAMEINTRO", "MENUINTRO", "RESUME", "PAUSE", "NEWHIGHSCORE", "SCORE", "SELECTPROFILE", "COMFIRM", "ENTERNICKNAME", "YOURDEAD"};
 
 enum text_effect{NOTHING, BREATH, FLASH};
 

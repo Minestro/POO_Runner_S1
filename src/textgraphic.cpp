@@ -251,7 +251,7 @@ void TextGraphic::loadFonts(std::string themeName)
         iterator = m_listFonts.insert(iterator, std::make_pair(FONTS_LIST[i], new sf::Font));
         if (!(iterator->second->loadFromFile("Ressources/" + themeName + "/Fonts/" + FONTS_LIST[i])))
         {
-            std::cout << "Erreur lors du chargement de la police" << "Ressources/" << themeName << "/Fonts/" << FONTS_LIST[i] << std::endl;
+
         }
     }
 }

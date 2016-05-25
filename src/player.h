@@ -36,7 +36,7 @@ public:
     unsigned int getMoney() const;
     unsigned int getTimePower(int power) const;
 
-    static std::string getStringPower(unsigned int idPower);
+    static std::string getStringPower(unsigned int idPower, unsigned int langId);
     static void eraseProfil(unsigned int i);
     static bool isActive(unsigned int i);
 

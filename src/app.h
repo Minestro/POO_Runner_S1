@@ -10,7 +10,8 @@
 #include "gameview.h"
 #include "sound.h"
 
-class Element;
+//class Element;
+
 
 class App
 {

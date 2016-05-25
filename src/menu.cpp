@@ -45,11 +45,11 @@ void Menu::refreshPageContent(Model *model, int page)
             model->getButtons().push_back(std::make_pair(1, b));
             j++;
         }
-        Button *b2 = new Button{MODEL_SIZE_W/2 , 600, 200, 50, 0, "Charger", menuPage::HOME, model, button_type::TEXT_BUTTON, 1};
+        Button *b2 = new Button{MODEL_SIZE_W/2 , 600, 200, 50, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "LOAD"), menuPage::HOME, model, button_type::TEXT_BUTTON, 1};
         b2->setId(menu_specific_elements::LOAD_SAVE_BUTTON);
         b2->addAction(button_action::LOAD_SAVE);
 
-        Button *b3 = new Button{MODEL_SIZE_W/2 - 300, 600, 200, 50, 0, "Ecraser", menuPage::SELECT_SAVEFILE, model, button_type::TEXT_BUTTON, 1};
+        Button *b3 = new Button{MODEL_SIZE_W/2 - 300, 600, 200, 50, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "ERASE"), menuPage::SELECT_SAVEFILE, model, button_type::TEXT_BUTTON, 1};
         b3->setId(menu_specific_elements::ERASE_SAVE_BUTTON);
         b3->addAction(button_action::ERASE_SAVE);
         b3->addAction(button_action::REFRESH_VIEW);
@@ -69,20 +69,20 @@ void Menu::refreshPageContent(Model *model, int page)
         {
             if (model->getApp()->getGameModel().getPlayer()->getBestScore() < player1->getScore())
             {
-                Text *t = new Text{0, 130, MODEL_SIZE_W, 50, 0, "Meilleur Score !", 20, "The_Happy_Giraffe.ttf", ColorRGBA::Red, text_effect::FLASH, 500, 1, 0};
+                Text *t = new Text{0, 130, MODEL_SIZE_W, 50, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "NEWHIGHSCORE"), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Red, text_effect::FLASH, 500, 1, 0};
                 t->setId(224);
                 model->getTexts().push_back(std::make_pair(1, t));
             }
-            Text *t2 = new Text{100, 200, 0, 0, 0, "Score : " + std::to_string(player1->getScore()), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
+            Text *t2 = new Text{100, 200, 0, 0, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "SCORE") + std::to_string(player1->getScore()), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
             t2->setId(225);
-            Text *t3 = new Text{100, 300, 0, 0, 0, "Argent : " + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney()) + " + " + std::to_string(player1->getScore()/1000) + " = " + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney() + player1->getScore()/1000), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
+            Text *t3 = new Text{100, 300, 0, 0, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "MONEY") + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney()) + " + " + std::to_string(player1->getScore()/1000) + " = " + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney() + player1->getScore()/1000), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
             t3->setId(226);
             model->getTexts().push_back(std::make_pair(1, t2));
             model->getTexts().push_back(std::make_pair(1, t3));
         }
    } else if (page == menuPage::SHOP)
    {
-       Text *money = new Text{40, 150, MODEL_SIZE_W, 30, 0, "Argent : " + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney()), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
+       Text *money = new Text{40, 150, MODEL_SIZE_W, 30, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "MONEY") + " : " + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney()), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
        money->setId(223);
        model->getTexts().push_back(std::make_pair(1, money));
         for (unsigned int i = 0; i<power_list::NB_POWER; i++)
@@ -92,7 +92,7 @@ void Menu::refreshPageContent(Model *model, int page)
             Image *texbox = new Image{posBox.first, posBox.second, sizeBox.first, sizeBox.second, "textBox.png", 3, 0};
             texbox->setId(224 + 5*i);
             model->getImages().push_back(std::make_pair(1, texbox));
-            Text *powerName = new Text{posBox.first, posBox.second + 20, sizeBox.first, 50, 0, Player::getStringPower(i), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 1, 0};
+            Text *powerName = new Text{posBox.first, posBox.second + 20, sizeBox.first, 50, 0, Player::getStringPower(i, model->getApp()->getSettings().m_lang), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 1, 0};
             powerName->setId(224 + 5*i+1);
             model->getTexts().push_back(std::make_pair(1, powerName));
             int bonusId;
@@ -114,13 +114,13 @@ void Menu::refreshPageContent(Model *model, int page)
             Bonus *bonus = new Bonus{posBox.first + sizeBox.first/2 - 20, posBox.second + 70, 40, 40, 0, 0, 0, 0, 0, bonusId};
             bonus->setId(224 + 5*i +2);
             model->getBonus().push_back(std::make_pair(1, bonus));
-            Text *level = new Text{posBox.first + 20, posBox.second + 120, sizeBox.first, 50, 0, "Duree : " + std::to_string(model->getApp()->getGameModel().getPlayer()->getTimePower(i)/1000) + " secondes", 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
+            Text *level = new Text{posBox.first + 20, posBox.second + 120, sizeBox.first, 50, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "DURATION") + " : " + std::to_string(model->getApp()->getGameModel().getPlayer()->getTimePower(i)/1000) + " secondes", 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
             level->setId(224 + 5*i + 3);
             model->getTexts().push_back(std::make_pair(1, level));
-            Text *prix = new Text{posBox.first + 20, posBox.second + 170, sizeBox.first, 50, 0, "Prix : " + std::to_string(UPGRADE_COST), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
+            Text *prix = new Text{posBox.first + 20, posBox.second + 170, sizeBox.first, 50, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "COST") + " : " + std::to_string(UPGRADE_COST), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
             prix->setId(224 + 5*i + 4);
             model->getTexts().push_back(std::make_pair(1, prix));
-            Button *buyButton = new Button{posBox.first + sizeBox.first/2 - 100, posBox.second + 220, 200, 50, 0, "Ameliorer", 0, model};
+            Button *buyButton = new Button{posBox.first + sizeBox.first/2 - 100, posBox.second + 220, 200, 50, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "UPGRADE"), 0, model};
             buyButton->setId(UPGRADE_BUTTON1 + i);
             buyButton->addAction(button_action::BUY_UPGRADE);
             buyButton->addAction(button_action::REFRESH_VIEW);

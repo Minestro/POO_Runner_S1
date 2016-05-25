@@ -8,6 +8,7 @@ App::App(): m_window{"Runner", sf::Style::Default, MODEL_SIZE_W, MODEL_SIZE_H}, 
     TextGraphic::loadFonts();
     GraphicElement::loadShaders();
     Sound::loadSoundsBuffers();
+    runner::Text::loadLanguages();
     m_sound.setCharacterBuffer("plane.wav");
     try
     {
@@ -15,7 +16,7 @@ App::App(): m_window{"Runner", sf::Style::Default, MODEL_SIZE_W, MODEL_SIZE_H}, 
     }
     catch (const XMLError &er)
     {
-        std::cout << "Erreur lors de la lecture du fichier " << MENU_MODELS_FILE << " . Code erreur : " << std::to_string(er) << std::endl;
+        std::cout << "Error when loading file " << MENU_MODELS_FILE << " . Code : " << std::to_string(er) << std::endl;
         m_menuModel.exitApp();
     }
     Menu::refreshPageContent(&m_menuModel, m_menuModel.getActivePage());
