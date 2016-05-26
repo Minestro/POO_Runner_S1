@@ -108,7 +108,7 @@ std::string Text::getMessage(unsigned int langId, const std::string &messageKey)
 {
     if (langId > m_langFileToName.size()-1)
     {
-        return "";
+        langId = 0;
     }
     if (m_messages[langId].find(messageKey) == m_messages[langId].end())
     {
@@ -125,5 +125,6 @@ std::vector<std::string> Text::getLangsList()
     {
         langList.push_back(lang.first);
     }
+    std::reverse(langList.begin(), langList.end());
     return langList;
 }

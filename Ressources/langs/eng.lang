@@ -1,6 +1,6 @@
 LANG=English
 ERASE=Erase
-LOAD=Charger
+LOAD=Load
 NEW=New
 BSCORE=Best score
 MONEY=Money
@@ -45,4 +45,4 @@ SCORE=Score
 SELECTPROFILE=Select your profile
 COMFIRM=Comfirm
 ENTERNICKNAME=Enter your nickname
-YOURDEAD=YOU ARE DEAD
+YOURDEAD=GAME OVER

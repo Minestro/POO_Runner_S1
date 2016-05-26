@@ -7,7 +7,7 @@
 #include <string>
 
 enum button_type {TEXT_BUTTON, ARROW_BUTTON, RADIO_BUTTON, SAVE_BUTTON};
-enum button_action {CHANGE_PAGE, EXIT_APP, SET_FULL_SCREEN, RESUME_GAME, RESET_GAME, SET_SELECTED, ERASE_SAVE, LOAD_SAVE, REFRESH_VIEW, SET_PLAYER_NAME, SAVE_GAME_BUTTON, SET_MUSIC, SET_SOUNDS, BUY_UPGRADE};
+enum button_action {CHANGE_PAGE, EXIT_APP, SET_FULL_SCREEN, RESUME_GAME, RESET_GAME, SET_SELECTED, ERASE_SAVE, LOAD_SAVE, REFRESH_VIEW, SET_PLAYER_NAME, SAVE_GAME_BUTTON, SET_MUSIC, SET_SOUNDS, BUY_UPGRADE, SET_LANG, REFRESH_LANGS};
 
 class Model;
 
@@ -16,7 +16,7 @@ class Button: public Element
 private:
     std::string m_text;
     int m_type;
-    bool m_isClickable; //On peut immaginer que le bouton soit non cliquable par exemple qu'il soit grisé.
+    bool m_isClickable;
     bool m_isOn;
     bool m_isSelected;
     int m_destinationPage;
@@ -38,6 +38,7 @@ public:
     void setText(std::string text);
     std::string getClassName() const;
     void addAction(int action);
+
     Button *getTheSelectedButton();
     const Button *getTheSelectedButton() const;
 };

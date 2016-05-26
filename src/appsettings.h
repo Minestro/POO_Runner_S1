@@ -10,7 +10,7 @@ struct AppSettings
     bool m_isFullScreen;
     unsigned int m_musicVolume;
     unsigned int m_effectVolume;
-    unsigned int m_lang = 1;
+    unsigned int m_lang;
     AppSettings();
     ~AppSettings();
 

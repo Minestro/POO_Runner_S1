@@ -340,25 +340,6 @@ public:
                         break;
                     }
                     list.push_back(new ButtonGraphic{MENU_Z_INDEX, GraphicElement::m_listTextures[texture], nbLignes, nbColonnes, button.second->getText(), TextGraphic::m_listFonts["Beautiful_Heartbeat.otf"], 30, sf::Color::White});
-                    if (button.second->getType() == button_type::SAVE_BUTTON)
-                    {
-                        try
-                        {
-                            bool isActive = Player::isActive(button.second->getId() - menu_specific_elements::SELECT_SAVE_1);
-                            if (!isActive)
-                            {
-                                //list.push_back(new TextGraphic{MENU_Z_INDEX+1, button.second->getSize().first, button.second->getSize().second, button.second->getPosition().first, button.second->getPosition().second, button.second->getRotateAngle(), runner::Text::getMessage(m_model->getApp()->getSettings().m_lang, "EMPTY"), TextGraphic::m_listFonts["Beautiful_Heartbeat.otf"], 30, 1, 0, sf::Color::White});
-                            } else {
-                                Player pla{button.second->getId() - menu_specific_elements::SELECT_SAVE_1};
-                                pla.loadSaveFromFile();
-                                //list.push_back(new TextGraphic{MENU_Z_INDEX+1, button.second->getSize().first, button.second->getSize().second, button.second->getPosition().first, button.second->getPosition().second, button.second->getRotateAngle(), "    " + pla.getName() + " \n \n" + runner::Text::getMessage(m_model->getApp()->getSettings().m_lang, "BSCORE") + std::to_string(pla.getBestScore()) + " \n" + runner::Text::getMessage(m_model->getApp()->getSettings().m_lang, "MONEY") + std::to_string(pla.getMoney()), TextGraphic::m_listFonts["Beautiful_Heartbeat.otf"], 30, 1, 0, sf::Color::White});
-                            }
-                        }
-                        catch (tinyxml2::XMLError er)
-                        {
-                            std::cout << "Error when trying to load profile. Code : " << std::to_string(er) << std::endl;
-                        }
-                    }
                     m_elementToGraphicElement.insert(std::make_pair(button.second, list));
                     button.first = 0;
                 }

@@ -20,10 +20,13 @@ void Menu::setPage(unsigned int page)
 
 void Menu::refreshPageContent(Model *model, int page)
 {
+    //On efface du modèle tous les anciens éléments du menu de la page précédente c'est à dire avec les éléments dont l'id se situe entre 200 et 300
     for (unsigned int i = 200; i<300; i++)
     {
         model->deleteElement(i);
     }
+
+    //On ajoute les éléments du fichier menu.xml en fonction de la page
     std::vector<ElementsList>::iterator preMenu = Menu::menuModels.begin();
     while (preMenu != Menu::menuModels.end() && preMenu->getId() != (unsigned int)page)
     {
@@ -34,6 +37,9 @@ void Menu::refreshPageContent(Model *model, int page)
         preMenu->addElementsToModel(model);
     }
 
+    // Il se peut que certaines pages contiennent un nombre variable d'éléments comme pour l'écran des sauvegardes où le nb de sauvegardes peut être changé. On ne peut donc les définir à l'avance dans le XML. Ils sont donc malheureusement codés "à la dure dans le code" (c'est pas beau)
+
+    //PAGE SELECTION PROFIL
    if (page == menuPage::SELECT_SAVEFILE)
    {
        unsigned int j=0;
@@ -56,12 +62,11 @@ void Menu::refreshPageContent(Model *model, int page)
 
         model->getButtons().push_back(std::make_pair(1, b2));
         model->getButtons().push_back(std::make_pair(1, b3));
-   } else if (page == menuPage::CHARACCTER_SET_NAME)
-   {
-        Text *t = new runner::Text{440, 200, 400, 50, 0, "", 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 1, 0};
-        t->setId(menu_specific_elements::INPUT_TEXT);
-        model->getTexts().push_back(std::make_pair(1, t));
-   } else if (page == menuPage::GAME_ENDED)
+   }
+
+
+   // PAGE DE FIN DE PARTIE
+   else if (page == menuPage::GAME_ENDED)
    {
         model->getApp()->getSound().pauseAll();
         GameCharacter *player1 = model->getApp()->getGameModel().getCharacterById(character_id::PLAYER1);
@@ -69,18 +74,23 @@ void Menu::refreshPageContent(Model *model, int page)
         {
             if (model->getApp()->getGameModel().getPlayer()->getBestScore() < player1->getScore())
             {
-                Text *t = new Text{0, 130, MODEL_SIZE_W, 50, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "NEWHIGHSCORE"), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Red, text_effect::FLASH, 500, 1, 0};
+                Text *t = new Text{0, 130, MODEL_SIZE_W, 50, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "NEWHIGHSCORE"), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Red, text_effect::FLASH, 500, 1 , 0};
                 t->setId(224);
                 model->getTexts().push_back(std::make_pair(1, t));
             }
-            Text *t2 = new Text{100, 200, 0, 0, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "SCORE") + std::to_string(player1->getScore()), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
+            Text *t2 = new Text{100, 200, 0, 0, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "SCORE") + " : " + std::to_string(player1->getScore()), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
             t2->setId(225);
-            Text *t3 = new Text{100, 300, 0, 0, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "MONEY") + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney()) + " + " + std::to_string(player1->getScore()/1000) + " = " + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney() + player1->getScore()/1000), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
+            Text *t3 = new Text{100, 300, 0, 0, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "MONEY") + " : " + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney()) + " + " + std::to_string(player1->getScore()/1000) + " = " + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney() + player1->getScore()/1000), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
             t3->setId(226);
             model->getTexts().push_back(std::make_pair(1, t2));
             model->getTexts().push_back(std::make_pair(1, t3));
         }
-   } else if (page == menuPage::SHOP)
+   }
+
+
+
+   //MAGASIN
+   else if (page == menuPage::SHOP)
    {
        Text *money = new Text{40, 150, MODEL_SIZE_W, 30, 0, Text::getMessage(model->getApp()->getSettings().m_lang, "MONEY") + " : " + std::to_string(model->getApp()->getGameModel().getPlayer()->getMoney()), 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
        money->setId(223);
@@ -127,10 +137,29 @@ void Menu::refreshPageContent(Model *model, int page)
             model->getButtons().push_back(std::make_pair(1, buyButton));
         }
    }
+
+
+   //OPTIONS
+   else if (page == menuPage::SETTINGS)
+   {
+       for (unsigned int i = 0; i<Text::getLangsList().size(); i++)
+       {
+            Text *langName = new Text{470,(float) 350 + i*50, 0, 0, 0, Text::getLangsList()[i], 20, "The_Happy_Giraffe.ttf", ColorRGBA::Black, text_effect::NOTHING, 0, 0, 0};
+            langName->setId(227 + i);
+            Button *button = new Button{600, (float) 350 + i*50, 25, 25, 0, "", 0, model, button_type::RADIO_BUTTON};
+            button->addAction(button_action::SET_LANG);
+            button->addAction(button_action::REFRESH_LANGS);
+            button->addAction(button_action::REFRESH_VIEW);
+            button->setId(menu_specific_elements::LANG_BUTTON + i);
+            model->getButtons().push_back(std::make_pair(1, button));
+            model->getTexts().push_back(std::make_pair(1, langName));
+       }
+   }
 }
 
 void Menu::loadModels(App *app)
 {
+    Menu::menuModels.clear();
     int nbPatterns = 0;
     int returnCode;
     XMLDocument modelsFile;

@@ -250,7 +250,7 @@
 			<SizeWidth>25.0</SizeWidth>
 			<SizeHeight>25.0</SizeHeight>
 			<PositionX>600.0</PositionX>
-			<PositionY>280.0</PositionY>
+			<PositionY>230.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
 			<String></String>
 			<DestinationPage>5</DestinationPage>
@@ -262,7 +262,7 @@
 			<SizeWidth>0.0</SizeWidth>
 			<SizeHeight>0.0</SizeHeight>
 			<PositionX>470.0</PositionX>
-			<PositionY>280.0</PositionY>
+			<PositionY>230.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
 			<String>MUSIQUE</String>
 			<FontSize>20</FontSize>
@@ -278,7 +278,7 @@
 			<SizeWidth>25.0</SizeWidth>
 			<SizeHeight>25.0</SizeHeight>
 			<PositionX>600.0</PositionX>
-			<PositionY>380.0</PositionY>
+			<PositionY>280.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
 			<String></String>
 			<DestinationPage>5</DestinationPage>
@@ -290,7 +290,7 @@
 			<SizeWidth>0.0</SizeWidth>
 			<SizeHeight>0.0</SizeHeight>
 			<PositionX>470.0</PositionX>
-			<PositionY>380.0</PositionY>
+			<PositionY>280.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
 			<String>SOUND</String>
 			<FontSize>20</FontSize>
@@ -588,7 +588,7 @@
 			<SizeWidth>40.0</SizeWidth>
 			<SizeHeight>40.0</SizeHeight>
 			<PositionX>-870.0</PositionX>
-			<PositionY>250.0</PositionY>
+			<PositionY>230.0</PositionY>
 			<Type>1</Type>
 			<RotateAngle>0.0</RotateAngle>
 			<RotateMovement>0.0</RotateMovement>
@@ -598,7 +598,7 @@
 			<SizeWidth>0.0</SizeWidth>
 			<SizeHeight>0.0</SizeHeight>
 			<PositionX>470.0</PositionX>
-			<PositionY>260.0</PositionY>
+			<PositionY>240.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
 			<String>INVINDES</String>
 			<FontSize>20</FontSize>
@@ -614,7 +614,7 @@
 			<SizeWidth>40.0</SizeWidth>
 			<SizeHeight>40.0</SizeHeight>
 			<PositionX>-870.0</PositionX>
-			<PositionY>330.0</PositionY>
+			<PositionY>280.0</PositionY>
 			<Type>3</Type>
 			<RotateAngle>0.0</RotateAngle>
 			<RotateMovement>0.0</RotateMovement>
@@ -624,7 +624,7 @@
 			<SizeWidth>0.0</SizeWidth>
 			<SizeHeight>0.0</SizeHeight>
 			<PositionX>470.0</PositionX>
-			<PositionY>340.0</PositionY>
+			<PositionY>290.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
 			<String>MEDICDES</String>
 			<FontSize>20</FontSize>
@@ -640,7 +640,7 @@
 			<SizeWidth>40.0</SizeWidth>
 			<SizeHeight>40.0</SizeHeight>
 			<PositionX>-870.0</PositionX>
-			<PositionY>400.0</PositionY>
+			<PositionY>330.0</PositionY>
 			<Type>4</Type>
 			<RotateAngle>0.0</RotateAngle>
 			<RotateMovement>0.0</RotateMovement>
@@ -650,7 +650,7 @@
 			<SizeWidth>0.0</SizeWidth>
 			<SizeHeight>0.0</SizeHeight>
 			<PositionX>470.0</PositionX>
-			<PositionY>410.0</PositionY>
+			<PositionY>340.0</PositionY>
 			<RotateAngle>0.0</RotateAngle>
 			<String>SLOWTIMEDES</String>
 			<FontSize>20</FontSize>
@@ -662,6 +662,32 @@
 			<IsLineBreack>0</IsLineBreack>
 			<ID>231</ID>
 		</Text>
+		<Text>
+			<SizeWidth>0.0</SizeWidth>
+			<SizeHeight>0.0</SizeHeight>
+			<PositionX>470.0</PositionX>
+			<PositionY>390.0</PositionY>
+			<RotateAngle>0.0</RotateAngle>
+			<String>MAGNETDES</String>
+			<FontSize>20</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>0</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>232</ID>
+		</Text>
+		<Bonus>
+			<SizeWidth>40.0</SizeWidth>
+			<SizeHeight>40.0</SizeHeight>
+			<PositionX>-870.0</PositionX>
+			<PositionY>380.0</PositionY>
+			<Type>2</Type>
+			<RotateAngle>0.0</RotateAngle>
+			<RotateMovement>0.0</RotateMovement>
+			<ID>233</ID>
+		</Bonus>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
 			<SizeHeight>50.0</SizeHeight>
@@ -672,7 +698,7 @@
 			<DestinationPage>2</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
-			<ID>232</ID>
+			<ID>234</ID>
 		</Button>
 		<Button>
 			<SizeWidth>200.0</SizeWidth>
@@ -684,10 +710,8 @@
 			<DestinationPage>14</DestinationPage>
 			<Type>0</Type>
 			<ActionsList>0</ActionsList>
-			<ID>233</ID>
+			<ID>235</ID>
 		</Button>
-
-
 	</Pattern>
 	<Pattern id="10">
 		<Width>1280</Width>
@@ -805,6 +829,22 @@
 			<ActionsList>9</ActionsList>
 			<ID>224</ID>
 		</Button>
+		<Text>
+			<SizeWidth>400</SizeWidth>
+			<SizeHeight>50</SizeHeight>
+			<PositionX>440</PositionX>
+			<PositionY>200</PositionY>
+			<RotateAngle>0</RotateAngle>
+			<String></String>
+			<FontSize>20</FontSize>
+			<Font>The_Happy_Giraffe.ttf</Font>
+			<Color>0, 0, 0, 255</Color>
+			<TextEffect>0</TextEffect>
+			<EffectPeriod>0</EffectPeriod>
+			<IsAutoRescale>1</IsAutoRescale>
+			<IsLineBreack>0</IsLineBreack>
+			<ID>205</ID>
+		</Text>
 	</Pattern>
 	<Pattern id="13">
 	<Width>1280</Width>
@@ -984,8 +1024,5 @@
 			<ActionsList>0</ActionsList>
 			<ID>230</ID>
 		</Button>
-
-
-
 	</Pattern>
 </PatternList>

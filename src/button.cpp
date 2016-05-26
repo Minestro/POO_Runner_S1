@@ -17,7 +17,27 @@ std::string Button::getClassName() const
 
 std::string Button::getText() const
 {
-    return m_text;
+    std::string finalText = m_text;
+    if (m_type == button_type::SAVE_BUTTON)
+    {
+        try
+        {
+            bool isActive = Player::isActive(m_id - menu_specific_elements::SELECT_SAVE_1);
+            if (!isActive)
+            {
+                finalText = Text::getMessage(m_model->getApp()->getSettings().m_lang, "EMPTY");
+            } else {
+                Player pla{m_id - menu_specific_elements::SELECT_SAVE_1};
+                pla.loadSaveFromFile();
+                finalText =  "    " + pla.getName() + " \n \n" + runner::Text::getMessage(m_model->getApp()->getSettings().m_lang, "BSCORE") + " : " + std::to_string(pla.getBestScore()) + " \n" + runner::Text::getMessage(m_model->getApp()->getSettings().m_lang, "MONEY") + " : " + std::to_string(pla.getMoney());
+            }
+        }
+        catch (tinyxml2::XMLError er)
+        {
+            std::cout << "Error when trying to load profile. Code : " << std::to_string(er) << std::endl;
+        }
+    }
+    return finalText;
 }
 
 int Button::getType() const
@@ -96,6 +116,10 @@ bool Button::isOn() const
         break;
     default:
         break;
+    }
+    if (m_id >= menu_specific_elements::LANG_BUTTON)
+    {
+        isOn = m_model->getApp()->getSettings().m_lang == m_id - menu_specific_elements::LANG_BUTTON;
     }
     return isOn;
 }
@@ -199,10 +223,15 @@ void Button::onClick()
             case button_action::REFRESH_VIEW:
                 Menu::refreshPageContent(m_model, m_model->getApp()->getMenuModel().getActivePage());
                 break;
+            case button_action::SET_LANG:
+                if (m_id >= menu_specific_elements::LANG_BUTTON && m_id <= menu_specific_elements::LANG_BUTTON + Text::getLangsList().size())
+                {
+                    m_model->getApp()->getSettings().m_lang = m_id - menu_specific_elements::LANG_BUTTON;
+                }
+                break;
             case button_action::SET_SELECTED:
             {
                 setSelected(1);
-
                 if (m_model->getApp()->getMenuModel().getActivePage() == menuPage::SELECT_SAVEFILE && m_type == button_type::SAVE_BUTTON)
                 {
                     for (std::pair <bool, Button*> &b: m_model->getApp()->getMenuModel().getButtons())
@@ -312,6 +341,8 @@ void Button::onClick()
                 }
                 break;
             }
+            case button_action::REFRESH_LANGS:
+                Menu::loadModels(m_model->getApp());
             default:
                 break;
             }

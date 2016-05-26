@@ -28,6 +28,7 @@ bool MenuView::treatEvent()
                     if (m_model->getButtons()[i].second->isHover(m_model->getCursorPosition().first, m_model->getCursorPosition().second))
                     {
                         m_model->getButtons()[i].second->onClick();
+                        break;
                     }
                 }
                 break;
