@@ -1,0 +1,39 @@
+FOND2.png, FOND.png, FOND1.png 
+	-Creator : http://bevouliin.com/
+	-License : http://bevouliin.com/license/
+Soins.png 
+	Creator : Morgane Julien
+Coin.png
+	-Creator : http://opengameart.org/
+	-License : GPL 3.0
+Explosition.png
+	 find on : http://hasgraphics.com/
+	-license : http://hasgraphics.com/about/
+Magnet.png
+	-find on : https://www.vectoropenstock.com/
+	-license : Under Attribution license.
+planes.png
+	find on : http://opengameart.org/
+	licences: CC BY 3.0 (share and adapt)
+BarreObstacle.png 
+	find on : http://opengameart.org/
+	licences : CC BY 3.0 (share and adapt)
+invincibility.png
+	find on : http://opengameart.org/
+	licences : CC BY 3.0
+button.png
+	creator: matheszabi
+	licence: https://openclipart.org/share
+nuages.png
+	find on : http://opengameart.org/
+	licences : CC BY 3.0
+DownKey, LeftKey, RightKey, UpKey 
+	find on : http://fr.freepik.com/
+	licences : CC BY 4.0
+Music :
+	find on : http://www.dl-sounds.com/royalty-free/category/video-game/
+	licences : http://www.dl-sounds.com/license/
+Sound :
+	find on : https://www.freesound.org/browse/tags/sound-effects/
+	licences : https://www.freesound.org/help/tos_web/
+
