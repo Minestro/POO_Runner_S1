@@ -1,4 +1,3 @@
-#ifndef OBSTACLESBONUSPATTERN_H
 /*Copyright (C) 2015 Original code by Jacquot Alexandre - Julien Morgane
 
 This program is free software; you can redistribute it and/or modify
@@ -15,6 +14,7 @@ You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.*/
 
+#ifndef OBSTACLESBONUSPATTERN_H
 #define OBSTACLESBONUSPATTERN_H
 #define TIXML_USE_STL
 
@@ -38,7 +38,7 @@ class ElementsList
 {
 private:
     unsigned int m_id;
-    unsigned int m_width;
+    unsigned int m_width;       //Largeur du pattern utile en jeu pour définir la position du prochain pattern d'obstacles
     std::vector<Bonus> m_bonusList;
     std::vector<Obstacle> m_obstaclesList;
     std::vector<Image> m_imagesList;
@@ -54,7 +54,7 @@ private:
 public:
     ElementsList(unsigned int id);
     void loadFromFile(const tinyxml2::XMLDocument &file, Model *model);
-    void addElementsToModel(Model *model) const;
+    void addElementsToModel(Model *model) const;        //Ajout des élements du pattern au modèle pour affichage
     unsigned int getWidth() const;
     unsigned int getId() const;
 };

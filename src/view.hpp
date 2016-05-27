@@ -35,11 +35,12 @@ class View
 {
 protected:
     ModelT *m_model;
-    std::map <const Element*, std::list<GraphicElement*> > m_elementToGraphicElement;
-    std::vector <const GraphicElement*> m_drawableElementsList;
-    std::map<unsigned int, sf::Shader*> m_layeredShader;
+    std::map <const Element*, std::list<GraphicElement*> > m_elementToGraphicElement;       //Associe un élément du modèle à une liste d'objets graphiques
+    std::vector <const GraphicElement*> m_drawableElementsList;     //Liste des objets graphiques triés par leur zIndex prêts à être déssiner
+    std::map<unsigned int, sf::Shader*> m_layeredShader;        //Contient une liste de shaders de couche à appliquer lors du rendu avec son zIndex. Par exemple un shader à la couche s'appliquera à tous les objets graphiques jusqu'au zIndex 10 les autres avec zIndex >10 ne seront pas affecter par ce shader
     Window *m_window;
 
+    //Ajoute un objet graphique au vecteur drawableelementsList à la bonne position en fonction de son zIndex
     void insertGraphicElementIntoList(GraphicElement *ge)
     {
         std::vector<const GraphicElement*>::iterator it = m_drawableElementsList.begin();
@@ -74,6 +75,7 @@ public:
     }
     virtual ~View()
     {
+        //On delete tous les objets graphiques
         std::map<const Element*, std::list<GraphicElement *> >::iterator map = m_elementToGraphicElement.begin();
         while (map != m_elementToGraphicElement.end())
         {
@@ -121,7 +123,7 @@ public:
         if (m_drawableElementsList.size() > 0)
         {
             unsigned int actualZIndex = 0;
-            std::vector<sf::RenderTexture*> renderPart;
+            std::vector<sf::RenderTexture*> renderPart; //Un render part correspond à un pré rendu de l'image. Il y en a 1 par shader de couche. Les éléments sont d'abords déssinés sur cet renderTexture puis le shader est appliqué dessus.
             for (unsigned int i = 0; i<m_layeredShader.size(); i++)
             {
                 renderPart.push_back(new sf::RenderTexture);
@@ -160,6 +162,7 @@ public:
             {
                 actualZIndex = (*(m_drawableElementsList.end()-1))->getZIndex();
             }
+            //Une fois tous les shaders appliqués on déssine les objets graphiques restant qui n'on pas de layered shader
             std::vector <const GraphicElement*>::const_iterator it = m_drawableElementsList.begin();
             while ((**it).getZIndex() < actualZIndex)
             {
@@ -185,9 +188,9 @@ public:
 
         for (std::pair<bool, GameCharacter*> &character: m_model->getCharacters())
         {
-            if (character.first)
+            if (character.first)    //Si l'élement du modèle est nouveau
             {
-                if (m_elementToGraphicElement.find(character.second) == m_elementToGraphicElement.end())
+                if (m_elementToGraphicElement.find(character.second) == m_elementToGraphicElement.end()) //On regarde que l'objet graphique n'existe pas déjà
                 {
                     std::list<GraphicElement*> list;
                     list.push_back(new GameCharacterGraphic{5, GraphicElement::m_listTextures["plane.png"], 2, 2, 1, 1, 50});
@@ -195,7 +198,7 @@ public:
                     list.push_back(new ScoreGraphic{HUD_Z_INDEX, 50, 600, 0, TextGraphic::m_listFonts["score.ttf"], 20, 5, sf::Color::White});
                     m_elementToGraphicElement.insert(std::make_pair(character.second, list));
                 }
-                character.first = 0;
+                character.first = 0;        //On passe le booléen de l'élément à 0. L'objet graphique est créé
             }
         }
 
@@ -373,12 +376,12 @@ public:
                     std::list<GraphicElement*>::const_iterator it2 = it->second.begin();
                     while(it2 != it->second.end())
                     {
-                        delete *it2;
+                        delete *it2;            //On supprime tous les objets graphqiues associés à cet élément
                         ++it2;
                     }
                     m_elementToGraphicElement.erase(it);
                 }
-                delete el;
+                delete el;      //On supprime l'élément
             }
             m_model->getDeletedElements().clear();
         }

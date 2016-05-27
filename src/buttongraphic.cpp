@@ -76,7 +76,7 @@ void ButtonGraphic::draw(sf::RenderTarget *window) const
 void ButtonGraphic::refresh(const Element *el, Model *model)
 {
     std::vector<std::pair<bool, Button*> >::const_iterator button = model->getButtons().begin();
-    while (button != model->getButtons().end() && button->second != el)
+    while (button != model->getButtons().end() && button->second != el) //On recherche le bouton dans le modèle à partir de son pointeur
     {
         ++button;
     }

@@ -130,7 +130,7 @@ void App::run()
             m_gameModel.nextStep();
             if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()-m_drawTime).count() >= m_drawPeriod)
             {
-                if (m_gameModel.isPause())
+                if (m_gameModel.isPause()) //Si le jeu est en pause, on applique un shader de couche
                 {
                     if (m_gameView.getLayeredShader(HUD_Z_INDEX) == nullptr)
                     {

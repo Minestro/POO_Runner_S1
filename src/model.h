@@ -31,14 +31,14 @@ class Model
 {
 protected:
     std::pair<float, float> m_size;
-    std::vector<std::pair<bool, GameCharacter*> > m_characters;
+    std::vector<std::pair<bool, GameCharacter*> > m_characters;     //Pour chaque liste, le booléen indique que la vue doit créer l'objet graphique
     std::vector<std::pair<bool, Image*> > m_images;
     std::vector<std::pair<bool, Obstacle*> >m_obstacles;
     std::vector<std::pair<bool, Bonus*> > m_bonus;
     std::vector<std::pair<bool, Button*> > m_buttons;
     std::vector<std::pair<bool, runner::Text*> >m_texts;
-    std::vector<const Element*> m_deletedElements;
-    std::pair<int, int> m_cursorPosition;
+    std::vector<const Element*> m_deletedElements;      //Les éléments à supprimer sont placés ici. La vue se chargera de les delete
+    std::pair<int, int> m_cursorPosition;       //Position de la souris
     App *m_app;
 public:
     Model(float width, float height, App *app = nullptr);

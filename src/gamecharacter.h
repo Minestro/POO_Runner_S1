@@ -35,12 +35,11 @@ private:
     bool m_movingRight;
     bool m_ascending;
     unsigned int m_life;
-    Player *m_player;
     int m_state;
 
     static Obstacle roof, ground, rightWall, leftWall;
 public:
-    GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life = MAX_LIFE);
+    GameCharacter(float x, float y, float w, float h, float mx, float my, unsigned int life = MAX_LIFE);
     virtual ~GameCharacter();
     void addLife (unsigned int life);
     void addScore(unsigned int score);

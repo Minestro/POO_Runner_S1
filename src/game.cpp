@@ -255,7 +255,7 @@ void Game::resetGame()
         power.first = false;
         power.second = std::chrono::system_clock::now();
     }
-    GameCharacter *gc = new GameCharacter{100, 0, 100, 50, 0, 0, m_player};
+    GameCharacter *gc = new GameCharacter{100, 0, 100, 50, 0, 0};
     gc->setId(character_id::PLAYER1);
     m_characters.push_back(std::make_pair(1, gc));
     Image *b1 = new Image{0, 0, MODEL_SIZE_W, MODEL_SIZE_H, "FOND2.png", 1, 0.5, 1, 0};

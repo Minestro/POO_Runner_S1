@@ -1,11 +1,3 @@
-#ifndef TEXT_H
-#define TEXT_H
-
-#include <dirent.h>
-#include <map>
-#include <unordered_map>
-#include <fstream>
-#include <iostream>
 /*Copyright (C) 2015 Original code by Jacquot Alexandre - Julien Morgane
 
 This program is free software; you can redistribute it and/or modify
@@ -21,6 +13,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.*/
+
+#ifndef TEXT_H
+#define TEXT_H
+
+#include <dirent.h>
+#include <map>
+#include <unordered_map>
+#include <fstream>
+#include <iostream>
 
 #include <algorithm>
 #include "element.h"
@@ -39,8 +40,8 @@ namespace runner
         int m_effect;
         unsigned int m_effectPeriod;
 
-        static std::unordered_map<std::string, std::string> m_langFileToName;
-        static std::vector<std::map<std::string, std::string> > m_messages;
+        static std::unordered_map<std::string, std::string> m_langFileToName;       //Associe le nom d'une langue au fichier
+        static std::vector<std::map<std::string, std::string> > m_messages;         //Assorcie un keyword à un texte pour chaque langue
 
     public:
         Text(float x, float y, float width, float height, float rotation, std::string text, unsigned int fontSize, std::string font, bool autoRescale = 1, bool lineBreak = 1);
@@ -59,7 +60,7 @@ namespace runner
 
         static void loadLanguages();
         static std::string getMessage(unsigned int langId, const std::string &messageKey);
-        static std::vector<std::string> getLangsList();
+        static std::vector<std::string> getLangsList();     //Renvoi la liste des noms de langues disponibles
     };
 }
 

@@ -64,10 +64,10 @@ void Element::setPosition(float x, float y)
 //------------------------------------------------------------------------------
 bool Element::collision(const Element *el) const
 {
-    if ((int)getRotateAngle()%360 == 0 && (int)el->getRotateAngle()%360 ==0)
+    if ((int)getRotateAngle()%360 == 0 && (int)el->getRotateAngle()%360 ==0) //Si les deux éléments ont un angle de rotation de 0, méthode classique
     {
         return ((el->getPosition().first < m_position.first + m_size.first && el->getPosition().first + el->getSize().first > m_position.first) && (el->getPosition().second < m_position.second + m_size.second && el->getPosition().second + el->getSize().second > m_position.second));
-    } else {
+    } else { //Sinon on applique le théorème des axes sépérateurs
         std::vector<std::vector<std::pair<float, float> > > points;
         std::vector<const Element*> rectangles;
         std::vector<std::pair<float, float> > axis;
@@ -78,21 +78,21 @@ bool Element::collision(const Element *el) const
 
         for (unsigned int i=0; i<rectangles.size(); i++)
         {
-            points[i] = rectangles[i]->getPointsAfterRotation();
+            points[i] = rectangles[i]->getPointsAfterRotation();        //Calcul des nouvelles coordonnées des points
         }
 
-
+        //Création des axes correspondant aux côtés des rectangles
         axis.push_back(std::make_pair(points[0][UR].first - points[0][UL].first, points[0][UR].second - points[0][UL].second));
         axis.push_back(std::make_pair(points[0][UR].first - points[0][DR].first, points[0][UR].second - points[0][DR].second));
         axis.push_back(std::make_pair(points[1][UL].first - points[1][DL].first, points[1][UL].second - points[1][DL].second));
         axis.push_back(std::make_pair(points[1][UL].first - points[1][UR].first, points[1][UL].second - points[1][UR].second));
         bool collision = true;
         unsigned int i =0;
-        while (i<axis.size() && collision)
+        while (i<axis.size() && collision)  //Si deux axes ne sont pas en "collision", on arrête il n y a pas collision
         {
             std::vector<std::vector<int> > scalarValuesPoints;
             scalarValuesPoints.resize(rectangles.size());
-            for (unsigned int j=0; j<rectangles.size(); j++)
+            for (unsigned int j=0; j<rectangles.size(); j++)    //Projection des points sur les axes
             {
                 for (unsigned int k=0; k<points[j].size(); k++)
                 {
@@ -106,6 +106,7 @@ bool Element::collision(const Element *el) const
             minA = maxA = *scalarValuesPoints[0].begin();
             minB = maxB = *scalarValuesPoints[1].begin();
 
+            //Test de la supperposition des valueur scalaires des axes pour les deux rectangles
             for (int scalarValue : scalarValuesPoints[0])
             {
                 if (scalarValue < minA)

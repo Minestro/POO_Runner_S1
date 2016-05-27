@@ -35,7 +35,7 @@ TextGraphic::TextGraphic(unsigned int zIndex, float width, float height, float x
 
 void TextGraphic::setText(std::string text)
 {
-    if (m_lineBreak)
+    if (m_lineBreak)        //Algorithme qui arrange le texte si le retour à la ligne est activé
     {
         m_textLines.clear();
         int i = 0;

@@ -22,14 +22,14 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 class SpriteElement: public GraphicElement, public sf::Sprite
 {
 protected:
-    unsigned int m_nbLignes;
-    unsigned int m_nbColonnes;
+    unsigned int m_nbLignes;            //Le nb de ligne c'est à dire le nb d'images par ligne
+    unsigned int m_nbColonnes;          //Le nb d'images par colonnes
     unsigned int m_activeLigne;
     unsigned int m_activeColonne;
     std::chrono::time_point<std::chrono::system_clock> m_lastAnimateCall;
     unsigned int m_animatePeriod;
-    bool m_autoLoop;
-    bool m_animationDirectionRight;
+    bool m_autoLoop;                        //Le rectangle de lecture revient au début une fois qu'il a atteint la fin de la colonne
+    bool m_animationDirectionRight;         //Le rectangle de lecture se déplace de gauche à droite = true ou de droite à gauche = false
     void rescale(float width, float height);
 public:
     SpriteElement(unsigned int zIndex, const sf::Texture *texture, unsigned int animatePeriod = 0);

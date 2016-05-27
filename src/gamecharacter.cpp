@@ -24,7 +24,7 @@ Obstacle GameCharacter::leftWall = Obstacle{-1, 0, 1, MODEL_SIZE_H, 0, 0, 0, 0, 
 Obstacle GameCharacter::roof = Obstacle{0, -1, MODEL_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
 Obstacle GameCharacter::ground = Obstacle{0, ROOF_HEIGHT, MODEL_SIZE_W, 1, 0, 0, 0, 0, 0, 0, -1};
 
-GameCharacter::GameCharacter(float x, float y, float w, float h, float mx, float my, Player *player, unsigned int life): MovableElement{x, y, w, h, 0.0f, mx, my, 0.0f, CHARACTERSPEEDPERIOD}, m_score{0}, m_movingLeft{0}, m_movingRight{0}, m_ascending{0}, m_life{life}, m_player{player}, m_state{character_state::ALIVE}
+GameCharacter::GameCharacter(float x, float y, float w, float h, float mx, float my, unsigned int life): MovableElement{x, y, w, h, 0.0f, mx, my, 0.0f, CHARACTERSPEEDPERIOD}, m_score{0}, m_movingLeft{0}, m_movingRight{0}, m_ascending{0}, m_life{life}, m_state{character_state::ALIVE}
 {
     GameCharacter::nbCharacters ++;
 }

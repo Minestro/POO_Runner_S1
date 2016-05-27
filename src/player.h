@@ -33,9 +33,9 @@ private:
     std::string m_nickName;
     unsigned int m_money;
     unsigned int m_id;
-    unsigned int m_powerUpgrades[power_list::NB_POWER];     //Associe un pouvoir à une durée.
+    unsigned int m_powerUpgrades[power_list::NB_POWER];     //Associe un pouvoir à une durée d'activation totale
 
-    static tinyxml2::XMLElement *getNodePlayerId(unsigned int id, tinyxml2::XMLDocument &saveFile);
+    static tinyxml2::XMLElement *getNodePlayerId(unsigned int id, tinyxml2::XMLDocument &saveFile);     //Renvoi le noeud du fichier XML correspondant au joueur avex un certain ID
     static const tinyxml2::XMLElement *getConstNodePlayerId(unsigned int id, tinyxml2::XMLDocument &saveFile);
 public:
     Player();
@@ -54,7 +54,7 @@ public:
 
     static std::string getStringPower(unsigned int idPower, unsigned int langId);
     static void eraseProfil(unsigned int i);
-    static bool isActive(unsigned int i);
+    static bool isActive(unsigned int i);           //Un profil active est un profil que l'on peut charger. Une sauvegarde vide n'est pas active
 
 };
 

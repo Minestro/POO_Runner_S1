@@ -26,13 +26,13 @@ private:
     void rescale(float width, float height);
     std::pair<float, float> m_realPosition;
     std::pair<float, float> m_realSize;
-    bool m_autoRescale;
+    bool m_autoRescale;                     //Si le texte est auto rescale il se mettra au centre du rectangle si il a de la place sinon il sera compressé.
     bool m_lineBreak;
-    std::vector<std::string> m_textLines;
+    std::vector<std::string> m_textLines;       //Pour les textes avec un retour à la ligne uniquement. Contient le contenu ligne par ligne
     int m_effect;
     bool m_breath;
-    sf::RenderTexture m_textForm;
-    int m_alphaChannel;
+    sf::RenderTexture m_textForm;       //Pour les textes avec un retour à ligne uniquement. C'est un pré rendu sur lequel on effectura les transformations si il y en a.
+    int m_alphaChannel;                 //Transparence du texte
 
     void generateTextForm();
 public:

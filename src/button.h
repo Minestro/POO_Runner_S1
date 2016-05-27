@@ -33,11 +33,11 @@ private:
     std::string m_text;
     int m_type;
     bool m_isClickable;
-    bool m_isOn;
+    bool m_isOn;                    //Pour les boutons du type radio
     bool m_isSelected;
     int m_destinationPage;
     Model *m_model;
-    std::vector<int> m_actions;
+    std::vector<int> m_actions;     //Une liste d'actions à executer lors du clique sur le bouton
 public:
     Button(float x, float y, float width, float height, float rotation, std::string text, int destinationPage, Model *m, int type = button_type::TEXT_BUTTON, bool isClickable = 1);
     virtual ~Button() = default;

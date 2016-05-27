@@ -39,7 +39,7 @@ class GraphicElement
 {
 protected:
     GraphicElement(unsigned int zIndex, unsigned int refreshPeriod = 0);
-    unsigned int m_zIndex;
+    unsigned int m_zIndex;          //A quel "couche" doit on afficher l'objet lors du rendu de  l'image
     std::chrono::time_point<std::chrono::system_clock> m_lastRefeshCall;
     unsigned int m_refreshPeriod;
 public:

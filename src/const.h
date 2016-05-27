@@ -1,16 +1,3 @@
-#ifndef CONST_H
-#define CONST_H
-
-#include <string>
-#include <set>
-
-const std::string FILES_LIST[] = {"menuBackground.png", "FOND1.png", "FOND2.png", "FOND.png", "textBox.png", "buttons.png", "life.png", "logo.jpeg", "explosion.png", "coin.png", "plane.png", "mine.png", "leftKey.png", "rightKey.png", "downKey.png", "upKey.png","Soins.png", "radioButton.png", "nuages.png", "BarreObstacle.png", "Invincibility.png", "savesButton.png", "magnet.png", "Slow.png"};
-
-const std::string FONTS_LIST[] = {"score.ttf", "Beautiful_Heartbeat.otf", "The_Happy_Giraffe.ttf"};
-
-const std::string SOUNDS_LIST[] = {"coin.wav", "plane.wav", "explosion.wav", "crash.wav", "click.wav", "bonus.wav"};
-
-const std::string MUSIC_GAME_FILE = "Ressources/Default/Musics/arcade.ogg";
 /*Copyright (C) 2015 Original code by Jacquot Alexandre - Julien Morgane
 
 This program is free software; you can redistribute it and/or modify
@@ -27,6 +14,20 @@ You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.*/
 
+#ifndef CONST_H
+#define CONST_H
+
+#include <string>
+#include <set>
+
+const std::string FILES_LIST[] = {"menuBackground.png", "FOND1.png", "FOND2.png", "FOND.png", "textBox.png", "buttons.png", "life.png", "logo.jpeg", "explosion.png", "coin.png", "plane.png", "mine.png", "leftKey.png", "rightKey.png", "downKey.png", "upKey.png","Soins.png", "radioButton.png", "nuages.png", "BarreObstacle.png", "Invincibility.png", "savesButton.png", "magnet.png", "Slow.png"};
+
+const std::string FONTS_LIST[] = {"score.ttf", "Beautiful_Heartbeat.otf", "The_Happy_Giraffe.ttf"};
+
+const std::string SOUNDS_LIST[] = {"coin.wav", "plane.wav", "explosion.wav", "crash.wav", "click.wav", "bonus.wav"};
+
+const std::string MUSIC_GAME_FILE = "Ressources/Default/Musics/arcade.ogg";
+
 const std::string MUSIC_MENU_FILE = "Ressources/Default/Musics/welcome_screen.ogg";
 
 const std::string PATTERNS_FILE = "Ressources/patternsList.xml";
@@ -40,23 +41,23 @@ enum text_effect{NOTHING, BREATH, FLASH};
 
 const int MODEL_SIZE_W = 1280;
 const int MODEL_SIZE_H = 720;
-const int FPS = 60;
+const int FPS = 60;         //La limite de FPS
 
-const unsigned int HUD_Z_INDEX = 10;
-const unsigned int MENU_Z_INDEX = 15;
+const unsigned int HUD_Z_INDEX = 10;    //ZIndex pour les éléments du HUD
+const unsigned int MENU_Z_INDEX = 15;   //zIndex pour les éléments du menu
 
 const unsigned int MAX_LIFE = 100;
-const unsigned int INVINCIBILITY_TIME_AFTER_HIT_MS = 2000;
-const unsigned int ROOF_HEIGHT = 630;
-const float GRAVITY = 0.15;
+const unsigned int INVINCIBILITY_TIME_AFTER_HIT_MS = 2000;      //Periode pendant laquelle le joueur se retrouve invincible après avoir été touché par un obstacle
+const unsigned int ROOF_HEIGHT = 630;       //Hauteur du sol en y
+const float GRAVITY = 0.15;                 //Ratio de gravité
 const float CHARACTER_MAX_SPEED = 5;
 const float ACCELERATION_CHARACTER = 0.2;
-const int CHARACTERSPEEDPERIOD = 10;
-const int STARTSPEEDPERIODGAME = 15;
+const int CHARACTERSPEEDPERIOD = 10;        //En quelque sorte la vitesse du joueur. C'est la période d'appel à la méthode move du joueur. A ceci s'ajoute CHARATER_MAX_SPEED qui définit la vitesse max mais en pixels par déplacement.
+const int STARTSPEEDPERIODGAME = 15;        //Période de mouvement au début du jeu (donc sa vitesse)
 const int PIXELPERBACKGROUNDMOVE = 3;
-const int ACCELERATION_PERIOD = 30;     //en secondes
+const int ACCELERATION_PERIOD = 30;     //Periode de l'accéleration du jeu en secondes
 
-const float MAGNET_RADIUS = 200.0;
+const float MAGNET_RADIUS = 200.0;      //Rayon d'action du bonus magnet en pixels
 const unsigned int UPGRADE_COST = 1000;
 const unsigned int SEC_PER_UPGRADE = 5;
 const unsigned int MAX_UPGRADE_SEC = 30;

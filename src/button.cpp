@@ -34,7 +34,7 @@ std::string Button::getClassName() const
 std::string Button::getText() const
 {
     std::string finalText = m_text;
-    if (m_type == button_type::SAVE_BUTTON)
+    if (m_type == button_type::SAVE_BUTTON) //Pour les boutons de selection du profil qui affichent une courte description du joueur
     {
         try
         {
