@@ -3,11 +3,11 @@
         <Active>1</Active>
         <NickName>Minestro</NickName>
         <Upgrade1>5000</Upgrade1>
-        <Upgrade2>5000</Upgrade2>
+        <Upgrade2>10000</Upgrade2>
         <Upgrade3>5000</Upgrade3>
         <Upgrade4/>
-        <BestScore>0</BestScore>
-        <Money>0</Money>
+        <BestScore>828959</BestScore>
+        <Money>48</Money>
     </Save>
     <Save id="1">
         <Active>0</Active>
