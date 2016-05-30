@@ -8,7 +8,7 @@ On Linux :
 On Windows :
 - Download SFML from the website : http://www.sfml-dev.org/download-fr.php
 - Create a folder in C:\ named "SFML" and put on it the unzipped files
-*Simply open the .pro file and compile it !
+- Simply open the .pro file and compile it !
 
 #Contact
 To report bug or make a suggestion, please contact us at jacquot.alexandre97@gmail.com or morganel.julien@gmail.com
